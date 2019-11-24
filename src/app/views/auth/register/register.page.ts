@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../user";
 
 @Component({
   selector: 'app-register',
@@ -30,6 +31,7 @@ export class RegisterPage implements OnInit {
         Validators.required,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).+$/),
         Validators.minLength(8)])),
+      terms: new FormControl('', Validators.requiredTrue)
     }, { validators: this.password.bind(this)
       });
   }
@@ -55,6 +57,9 @@ export class RegisterPage implements OnInit {
         { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
         { type: 'minlength', message: 'Mínimo 8 caracteres'}
       ],
+      'terms': [
+        { type: 'requiredtrue', message: 'Debes aceptar los Términos y Condiciones de Servicio'}
+      ]
     }
   }
 
@@ -65,6 +70,7 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
-    this.authService.register(this.registerForm.value);
+    this.authService.register(new User('',this.registerForm.controls['email'].value,
+        this.registerForm.controls['pass'].value,this.registerForm.controls['name'].value));
   }
 }

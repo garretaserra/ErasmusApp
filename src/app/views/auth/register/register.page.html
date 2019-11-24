@@ -58,8 +58,8 @@
               </div>
               <div class="formGroup">
                 <ion-item>
-                  <ion-label color="tertiary">Repetir Contraseña</ion-label>
-                  <ion-input name="confirm" type="password" formControlName="confirm" placeholder="Repetir Contraseña" required></ion-input>
+                  <ion-label color="tertiary">Confirmar Contraseña</ion-label>
+                  <ion-input name="confirm" type="password" formControlName="confirm" placeholder="Contraseña" required></ion-input>
                 </ion-item>
                 <div class="validation-errors">
                   <ng-container *ngFor="let validation of validation_messages.confirm" >
@@ -72,6 +72,21 @@
                   <div class="error-message" *ngIf="!registerForm.get('confirm').errors && registerForm.hasError('passwordNotMatch') && (registerForm.get('confirm').dirty || registerForm.get('confirm').touched)">
                     <ion-chip color="danger">Las contraseñas no coinciden</ion-chip>
                   </div>
+                </div>
+              </div>
+              <div class="formGroup">
+                  <ion-item lines="none">
+                      <ion-checkbox color="tertiary" formControlName="terms" checked="false" required></ion-checkbox>
+                      <ion-text color="tertiary" style="margin-left: 15px">Acepto los Términos y las Condiciones de Servicio</ion-text>
+                  </ion-item>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.terms" >
+                        <div *ngIf="registerForm.get('confirm').hasError(validation.type) && (registerForm.get('terms').dirty || registerForm.get('terms').touched)">
+                            <ion-chip color="danger">
+                                {{ validation.message }}
+                            </ion-chip>
+                        </div>
+                    </ng-container>
                 </div>
               </div>
             </div>
