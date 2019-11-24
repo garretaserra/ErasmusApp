@@ -19,32 +19,49 @@ export class RegisterPage implements OnInit {
         Validators.required,
         Validators.pattern(/^[A-Z]+(([',. -][A-Z ])?[a-zA-Z]*)*$/),
         Validators.minLength(2)])),
-      /*email: new FormControl('', Validators.compose([
-        Validators.required ])),
-      password: new FormControl('', Validators.compose([
-        Validators.required ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)])),
+      pass: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).+$/),
+        Validators.minLength(8)])),
       confirm: new FormControl('', Validators.compose([
-        Validators.required ])),*/
-    });
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).+$/),
+        Validators.minLength(8)])),
+    }, { validators: this.password.bind(this)
+      });
   }
 
   ngOnInit() {
     this.validation_messages = {
       'name': [
         { type: 'required', message: 'Campo obligatorio' },
-        { type: 'pattern', message: 'Debe empezar con mayúsculas y no contener números' },
+        { type: 'pattern', message: 'Debe empezar con mayúsculas y no contener ni números ni espacios' },
         { type: 'minlength', message: 'Demasiado corto'}
-      ]
-      /*'email': [
-        { type: 'required', message: 'Campo obligatorio.' }
       ],
-      'password': [
-        { type: 'required', message: 'Campo obligatorio.' }
+      'email': [
+        { type: 'required', message: 'Campo obligatorio.' },
+        { type: 'pattern', message: 'Debe ser un correo electrónico válido'}
+      ],
+      'pass': [
+        { type: 'required', message: 'Campo obligatorio.' },
+        { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
+        { type: 'minlength', message: 'Mínimo 8 caracteres'}
       ],
       'confirm': [
-        { type: 'required', message: 'Campo obligatorio.' }
-      ],*/
+        { type: 'required', message: 'Campo obligatorio.' },
+        { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
+        { type: 'minlength', message: 'Mínimo 8 caracteres'}
+      ],
     }
+  }
+
+  password(formGroup: FormGroup) {
+    const { value: pass } = formGroup.get('pass');
+    const { value: confirm } = formGroup.get('confirm');
+    return pass === confirm ? null : { passwordNotMatch: true };
   }
 
   register(){

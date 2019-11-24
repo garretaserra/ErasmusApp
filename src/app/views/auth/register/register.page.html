@@ -16,29 +16,65 @@
                   <ion-label color="tertiary">Nombre</ion-label>
                   <ion-input  name="name" type="text" formControlName="name" placeholder="Nombre" required></ion-input>
                 </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.name" >
+                    <div *ngIf="registerForm.get('name').hasError(validation.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+                      <ion-chip color="danger">
+                        {{ validation.message }}
+                      </ion-chip>
+                    </div>
+                  </ng-container>
+                </div>
               </div>
-              <div class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.name" >
-                  <div *ngIf="registerForm.get('name').hasError(validation.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
-                    <ion-chip color="danger">
-                      {{ validation.message }}
-                    </ion-chip>
-                  </div>
-                </ng-container>
-              </div>
+              <div class="formGroup">
                 <ion-item>
                   <ion-label color="tertiary">Correo electrónico</ion-label>
-                  <ion-input name="email" type="email" placeholder="tu@email.com" required></ion-input>
+                  <ion-input name="email" type="email" formControlName="email" placeholder="tu@email.com" required></ion-input>
                 </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.email" >
+                    <div *ngIf="registerForm.get('email').hasError(validation.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                      <ion-chip color="danger">
+                        {{ validation.message }}
+                      </ion-chip>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="formGroup">
                 <ion-item>
                   <ion-label color="tertiary">Contraseña</ion-label>
-                  <ion-input name="password" type="password" placeholder="Contraseña" required></ion-input>
+                  <ion-input name="pass" type="password" formControlName="pass" placeholder="Contraseña" required></ion-input>
                 </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.pass" >
+                    <div *ngIf="registerForm.get('pass').hasError(validation.type) && (registerForm.get('pass').dirty || registerForm.get('pass').touched)">
+                      <ion-chip color="danger">
+                        {{ validation.message }}
+                      </ion-chip>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="formGroup">
                 <ion-item>
                   <ion-label color="tertiary">Repetir Contraseña</ion-label>
-                  <ion-input name="confirm" type="password" placeholder="Repetir Contraseña" required></ion-input>
+                  <ion-input name="confirm" type="password" formControlName="confirm" placeholder="Repetir Contraseña" required></ion-input>
                 </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.confirm" >
+                    <div *ngIf="registerForm.get('confirm').hasError(validation.type) && (registerForm.get('confirm').dirty || registerForm.get('confirm').touched)">
+                      <ion-chip color="danger">
+                        {{ validation.message }}
+                      </ion-chip>
+                    </div>
+                  </ng-container>
+                  <div class="error-message" *ngIf="!registerForm.get('confirm').errors && registerForm.hasError('passwordNotMatch') && (registerForm.get('confirm').dirty || registerForm.get('confirm').touched)">
+                    <ion-chip color="danger">Las contraseñas no coinciden</ion-chip>
+                  </div>
+                </div>
               </div>
+            </div>
             <div class="ion-padding-vertical">
               <ion-button color="tertiary" size="large" type="submit" [disabled]="!registerForm.valid" expand="block">REGISTRARME</ion-button>
             </div>
