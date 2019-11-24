@@ -12,21 +12,28 @@
             </div>
             <div padding>
               <ion-item>
-                <ion-label color="tertiary">Name</ion-label>
+                <ion-label color="tertiary">Nombre</ion-label>
                 <ion-input  name="name" type="text" placeholder="Name" ngModel required></ion-input>
               </ion-item>
               <ion-item>
+                <ion-label color="tertiary">Correo electrónico</ion-label>
                 <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
               </ion-item>
               <ion-item>
+                <ion-label color="tertiary">Contraseña</ion-label>
                 <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
+                <ion-label color="tertiary">Repetir Contraseña</ion-label>
+                <ion-input name="confirm" type="password" placeholder="Repeat Password" ngModel required></ion-input>
               </ion-item>
+              <div padding>
+                  <ion-checkbox color="tertiary"></ion-checkbox>
+                  <ion-text class="ion-color-tertiary">Acepto las Condiciones y los Términos de Servicio</ion-text>
+              </div>
             </div>
-            <div padding>
-              <ion-button color="tertiary" size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+            <div>
+              <ion-button color="tertiary" size="large" type="submit" [disabled]="form.invalid" expand="block">REGISTRARME</ion-button>
             </div>
           </ion-col>
         </ion-row>
