@@ -1,0 +1,27 @@
+ion-card {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 100px;
+  --background: #fff;
+}
+h5 {
+  color: #7e57ff;
+}
+h3 {
+  padding-top: 15px;
+  color: #7e57ff;
+}
+ion-label {
+  margin-right: 15px;
+}
+ion-text {
+  margin-left: 15px;
+}
+ion-button {
+  margin-bottom: 15px;
+}
+ion-input, select, textarea{
+   color: #383a3e;
+ }
