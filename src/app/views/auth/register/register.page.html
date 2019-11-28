@@ -1,16 +1,15 @@
 <ion-content color="tertiary">
-  <ion-card>
+  <ion-card> <!--class="ion-padding"-->
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-grid>
         <ion-row class="ion-justify-content-center">
-          <ion-col class="ion-align-self-center" size-md="6" size-lg="10" size-xs="12">
-            <div class="ion-text-center">
+          <ion-col class="ion-align-self-center" size-lg="11" size-xs="12">
+            <div>
               <h3>Crea tu cuenta!</h3>
             </div>
-            <div class="ion-text-center">
+            <div>
               <h5>Haz amigos y encuentra planes para tu estancia en el extranjero</h5>
             </div>
-            <div class="ion-padding">
               <div class="formGroup">
                 <ion-item>
                   <ion-label color="tertiary">Nombre</ion-label>
@@ -89,7 +88,6 @@
                     </ng-container>
                 </div>
               </div>
-            </div>
             <div class="ion-padding-vertical">
               <ion-button color="tertiary" size="large" type="submit" [disabled]="!registerForm.valid" expand="block">REGISTRARME</ion-button>
             </div>

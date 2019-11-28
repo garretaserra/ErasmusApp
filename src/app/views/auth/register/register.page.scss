@@ -1,27 +1,82 @@
-ion-card {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 100px;
-  --background: #fff;
+*{
+  margin: 0;
+  padding: 0;
 }
-h5 {
-  color: #7e57ff;
+
+body, html{
+  background: #fff;
+  //font-size: 16px;
+  color: #000;
+  font-family: monospace;
+  width: 100%;
+  height: 100%;
 }
-h3 {
-  padding-top: 15px;
-  color: #7e57ff;
+
+ion-content{
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
-ion-label {
-  margin-right: 15px;
+
+/* Web development */
+@media (min-width: 37.5rem) {
+  ion-card {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 100px;
+    --background: #fff;
+  }
+  h5 {
+    color: #7e57ff;
+    text-align: center;
+  }
+  h3 {
+    color: #7e57ff;
+    text-align: center;
+  }
+  ion-label {
+    margin-right: 15px;
+  }
+  ion-text {
+    margin-left: 15px;
+  }
+  ion-button {
+    margin-bottom: 15px;
+  }
+  ion-input, select, textarea{
+    color: #383a3e;
+  }
 }
-ion-text {
-  margin-left: 15px;
+
+/* Narrow web and mobile development */
+@media (max-width: 37.5rem) {
+  ion-card {
+    width: 100%;
+    height: 100%;
+    //margin-left: 25%;
+    //margin-top: 5%;
+    --background: #fff;
+  }
+  h5 {
+    color: #7e57ff;
+  }
+  h3 {
+    //padding-top: 15px;
+    color: #7e57ff;
+  }
+  ion-label {
+    margin-right: 15px;
+  }
+  ion-text {
+    //margin-left: 15px;
+  }
+  ion-button {
+    //margin-bottom: 15px;
+  }
+  ion-input, select, textarea{
+    color: #383a3e;
+  }
 }
-ion-button {
-  margin-bottom: 15px;
-}
-ion-input, select, textarea{
-   color: #383a3e;
- }
+
