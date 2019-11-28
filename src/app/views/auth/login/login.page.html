@@ -11,6 +11,15 @@
                 <ion-label color="tertiary">Email</ion-label>
                 <ion-input name="email" type="email" formControlName="email" placeholder="your@email.com" ngModel required></ion-input>
               </ion-item>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email" >
+              <div *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                <ion-chip color="danger">
+                  {{ validation.message }}
+                </ion-chip>
+              </div>
+            </ng-container>
+          </div>
             <ion-item>
               <ion-label color="tertiary">Password</ion-label>
               <ion-input name="password" type="password" formControlName="password" placeholder="Password" ngModel required></ion-input>
