@@ -10,6 +10,7 @@
             <div>
               <h5>Haz amigos y encuentra planes para tu estancia en el extranjero</h5>
             </div>
+            <ion-list>
               <div class="formGroup">
                 <ion-item>
                   <ion-label color="tertiary">Nombre</ion-label>
@@ -23,6 +24,9 @@
                       </ion-chip>
                     </div>
                   </ng-container>
+                  <div *ngIf="registerForm.controls['name'].valid">
+                    <ion-chip color="success">Nombre válido!</ion-chip>
+                  </div>
                 </div>
               </div>
               <div class="formGroup">
@@ -38,6 +42,12 @@
                       </ion-chip>
                     </div>
                   </ng-container>
+                  <div class="error-message" *ngIf="!registerForm.get('email').errors && registerForm.hasError('emailNotValid') && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                    <ion-chip color="danger">Email existente, inténtelo con otro</ion-chip>
+                  </div>
+                  <div *ngIf="registerForm.controls['email'].valid">
+                    <ion-chip color="success">Correo electrónico válido!</ion-chip>
+                  </div>
                 </div>
               </div>
               <div class="formGroup">
@@ -53,6 +63,9 @@
                       </ion-chip>
                     </div>
                   </ng-container>
+                  <div *ngIf="registerForm.controls['pass'].valid">
+                    <ion-chip color="success">Contraseña válida!</ion-chip>
+                  </div>
                 </div>
               </div>
               <div class="formGroup">
@@ -71,12 +84,16 @@
                   <div class="error-message" *ngIf="!registerForm.get('confirm').errors && registerForm.hasError('passwordNotMatch') && (registerForm.get('confirm').dirty || registerForm.get('confirm').touched)">
                     <ion-chip color="danger">Las contraseñas no coinciden</ion-chip>
                   </div>
+                  <div *ngIf="registerForm.controls['confirm'].valid">
+                    <ion-chip color="success">Las contraseñas coinciden!</ion-chip>
+                  </div>
                 </div>
               </div>
+            </ion-list>
               <div class="formGroup">
-                  <ion-item lines="none">
+                  <ion-item lines="none" class="terms">
                       <ion-checkbox color="tertiary" formControlName="terms" checked="false" required></ion-checkbox>
-                      <ion-text color="tertiary" style="margin-left: 15px">Acepto los Términos y las Condiciones de Servicio</ion-text>
+                      <ion-text color="tertiary">Acepto los Términos y las Condiciones de Servicio</ion-text>
                   </ion-item>
                 <div class="validation-errors">
                     <ng-container *ngFor="let validation of validation_messages.terms" >

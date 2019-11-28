@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../user";
 
 @Component({
@@ -61,6 +61,21 @@ export class RegisterPage implements OnInit {
         { type: 'requiredtrue', message: 'Debes aceptar los Términos y Condiciones de Servicio'}
       ]
     }
+  }
+
+  email (formGroup: FormGroup) {
+    let email = formGroup.get('email');
+    setTimeout(() => {
+      if(email.value==='pepito@gmail.com') {
+        console.log('coinciden');
+        return null;
+      }
+      else{
+        console.log('no coinciden');
+        return { emailNotValid: true };
+      }
+    },2000);
+
   }
 
   password(formGroup: FormGroup) {
