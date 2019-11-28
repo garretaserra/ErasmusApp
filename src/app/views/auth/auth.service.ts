@@ -18,11 +18,9 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private storage: Storage) {}
 
 register(user: User) {
-    console.log('Previo post');
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/register`, user);
 }
 login(user: UserLogin) {
-    console.log('Previo login');
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user);
 }
 }

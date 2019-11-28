@@ -85,11 +85,9 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
-    console.log('Paso register');
-    console.log(this.registerForm.controls['email'].value, ': ?');
     this.authService.register(new User('',this.registerForm.controls['email'].value,
         this.registerForm.controls['pass'].value,this.registerForm.controls['name'].value)).subscribe(res => {
-          console.log(res);
+          console.log(res)
         },
         err => {
           console.log(err);
