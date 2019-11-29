@@ -23,20 +23,20 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() { this.validation_messages = {
-    'email': [
-      { type: 'required', message: 'Campo obligatorio.' },
-      { type: 'pattern', message: 'Debe ser un correo electrónico válido'}
-    ]
-  };
+  ngOnInit() {
+    this.validation_messages = {
+      'email': [
+        {type: 'required', message: 'Campo obligatorio.'},
+        {type: 'pattern', message: 'Debe ser un correo electrónico válido'}
+      ]
+    };
   }
 
   login() {
-    console.log('email: ', this.loginForm.controls.email.value);
-    console.log('email: ', this.loginForm.controls.password.value);
     this.authService.login(new UserLogin( this.loginForm.controls.email.value,
         this.loginForm.controls.password.value)).subscribe(res => {
           console.log(res);
+          this.router.navigateByUrl('/home');
         },
         err => {
           console.log(err);

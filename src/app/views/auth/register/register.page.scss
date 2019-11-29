@@ -57,7 +57,9 @@ body, html{
   }
   ion-card {
     width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     --background: #fff;
   }
   h3 {
@@ -106,11 +108,18 @@ body, html{
     flex-direction: column;
     text-align: center;
   }
+  h4 {
+    font-size: 13px;
+    text-align: left;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 3%;
+  }
   ion-input, select, textarea{
     color: #383a3e;
   }
   ion-list {
-    max-height: 350px;
+    max-height: 315px;
     overflow: hidden;
     overflow-y: auto;
     ::-webkit-scrollbar {

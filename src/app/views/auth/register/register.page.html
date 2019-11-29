@@ -1,5 +1,5 @@
 <ion-content class="ion-padding" color="tertiary">
-  <ion-card>
+  <ion-card class="item item-text-wrap">
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-grid>
         <ion-row class="ion-justify-content-center">
@@ -84,7 +84,7 @@
                   <div class="error-message" *ngIf="!registerForm.get('confirm').errors && registerForm.hasError('passwordNotMatch') && (registerForm.get('confirm').dirty || registerForm.get('confirm').touched)">
                     <ion-chip color="danger">Las contraseñas no coinciden</ion-chip>
                   </div>
-                  <div *ngIf="registerForm.controls['confirm'].valid">
+                  <div *ngIf="registerForm.controls['confirm'].valid && !registerForm.hasError('passwordNotMatch')">
                     <ion-chip color="success">Las contraseñas coinciden!</ion-chip>
                   </div>
                 </div>
@@ -105,10 +105,13 @@
                     </ng-container>
                 </div>
               </div>
-            <div class="ion-padding-vertical">
+            <div>
               <ion-button color="tertiary" size="large" type="submit" [disabled]="!registerForm.valid" expand="block">REGISTRARME</ion-button>
             </div>
           </ion-col>
+        </ion-row>
+        <ion-row color="tertiary">
+          <h4>Si ya dispones de una cuenta en Erasmus, <a routerLink='/login'>inicia sesión</a>!</h4>
         </ion-row>
       </ion-grid>
     </form>

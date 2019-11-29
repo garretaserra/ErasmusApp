@@ -1,15 +1,15 @@
-<ion-content color="tertiary" padding>
-  <ion-card>
+<ion-content class="ion-padding" color="tertiary">
+  <ion-card class="item item-text-wrap">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
     <ion-grid>
-      <ion-row color="tertiary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <h3>Login</h3>
+      <ion-row color="tertiary" class="ion-justify-content-center">
+        <ion-col class="ion-align-self-center" size-lg="11" size-xs="12">
+          <div>
+            <h3>Inicia sesión para entrar en Erasmus!</h3>
           </div>
-              <ion-item>
-                <ion-label color="tertiary">Email</ion-label>
-                <ion-input name="email" type="email" formControlName="email" placeholder="your@email.com" ngModel required></ion-input>
+              <ion-item class="ion-padding-bottom">
+                <ion-label color="tertiary">Correo electrónico</ion-label>
+                <ion-input name="email" type="email" formControlName="email" placeholder="tu@email.com" required></ion-input>
               </ion-item>
           <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.email" >
@@ -19,21 +19,21 @@
                 </ion-chip>
               </div>
             </ng-container>
+            <div *ngIf="loginForm.controls['email'].valid">
+              <ion-chip color="success">Correo electrónico válido!</ion-chip>
+            </div>
           </div>
-            <ion-item>
-              <ion-label color="tertiary">Password</ion-label>
-              <ion-input name="password" type="password" formControlName="password" placeholder="Password" ngModel required></ion-input>
+            <ion-item class="ion-padding-bottom">
+              <ion-label color="tertiary">Contraseña</ion-label>
+              <ion-input name="password" type="password" formControlName="password" placeholder="Password" required></ion-input>
             </ion-item>
-          <div padding>
-            <ion-button size="large" color="tertiary" type="submit" [disabled]="loginForm.invalid" expand="block">Login</ion-button>
+          <div>
+            <ion-button size="large" color="tertiary" type="submit" [disabled]="loginForm.invalid" expand="block">LOGIN</ion-button>
           </div>
         </ion-col>
       </ion-row>
       <ion-row color="tertiary">
-        <div text-center>
-          If you don't have an account, please <a routerLink='/register'>
-          register</a> first!
-        </div>
+        <h4>Si todavía no tienes una cuenta en Erasmus, <a routerLink='/register'>regístrate</a>!</h4>
       </ion-row>
     </ion-grid>
   </form>
