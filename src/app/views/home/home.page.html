@@ -9,19 +9,19 @@
       <ion-list>
         <ion-item>
           <ion-icon name="home" slot="start"></ion-icon>
-          <ion-label>Home</ion-label>
+          <ion-button (click)="openHomePage()">Home</ion-button>
         </ion-item>
         <ion-item>
           <ion-icon name="person" slot="start"></ion-icon>
-          <ion-label>Profile</ion-label>
+          <ion-button (click)="openProfilePage()">Profile</ion-button>
         </ion-item>
         <ion-item>
-          <ion-icon name="message" slot="start"></ion-icon>
-          <ion-label>Messages</ion-label>
+          <ion-icon name="chatboxes" slot="start"></ion-icon>
+          <ion-button (click)="openMessagePage()">Messages</ion-button>
         </ion-item>
         <ion-item>
           <ion-icon name="settings" slot="start"></ion-icon>
-          <ion-label>Settings</ion-label>
+          <ion-button (click)="openSettingPage()">Settings</ion-button>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -31,18 +31,18 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button type="submit" (click)="openMenu()"></ion-menu-button>
         </ion-buttons>
         <ion-title>Home</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <form [formGroup]="homeForm" (ngSubmit)="login()">
+      <form [formGroup]="homeForm" (ngSubmit)="sendPost()">
         <div>
           <ion-card class="vertical-margin border-top">
             <div>
               <ion-item class="textarea">
-                <ion-textarea placeholder="Write here..."></ion-textarea>
+                <ion-textarea name="post" type="post" formControlName="post" placeholder="Write here..." required></ion-textarea>
               </ion-item>
             </div>
             <div>
