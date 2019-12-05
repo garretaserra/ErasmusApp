@@ -56,17 +56,16 @@ export class HomePage implements OnInit {
     }
 
     sendPost() {
-        this.post = new Post('5de8f3d1b0bed650ac12c60d', '', this.homeForm.controls.post.value);
-        this.homeService.sendPost(this.post).subscribe(res => {
-            console.log(res);
-            this.router.navigateByUrl('/profile');
-        });
     }
     alert() {
         this.alertCtrl.create({
             header: 'TYPE',
             message: 'What type is the message?',
-            buttons: ['Event', 'Status']
+            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', '', this.homeForm.controls.post.value);
+                                                      this.homeService.sendPost(this.post).subscribe(res => {
+                     console.log(res);
+                     this.router.navigateByUrl('/profile');
+                    }); }}, {text: 'Status'}]
         }).then(alert => {
             alert.present();
         });
