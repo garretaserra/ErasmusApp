@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import {AngularMaterialModule} from '../../../../../ErasmusWeb/src/app/angular-material.module';
 
-
-
 @NgModule({
     imports: [
         CommonModule,

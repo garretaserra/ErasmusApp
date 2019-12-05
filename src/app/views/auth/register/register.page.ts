@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import {Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {User} from "../user";
+import {UserRegister} from '../../../User/userRegister';
+import {UserPost} from '../../../User/userPost';
+import {User} from '../../../User/user';
+import {UserService} from '../../../User/user.service';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +14,12 @@ import {User} from "../user";
 })
 export class RegisterPage implements OnInit {
 
+  userWithJWT: UserPost;
+  user: User;
   registerForm: FormGroup;
   validation_messages: any;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -85,9 +90,13 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
-    this.authService.register(new User('',this.registerForm.controls['email'].value,
+    this.authService.register(new UserRegister(this.registerForm.controls['email'].value,
         this.registerForm.controls['pass'].value,this.registerForm.controls['name'].value)).subscribe(res => {
-          console.log(res)
+          console.log(res);
+          this.userWithJWT = res as UserPost;
+          console.log('User post', this.userWithJWT);
+          this.user = this.userWithJWT.user;
+          this.userService.saveUser(this.user);
           this.router.navigateByUrl('/home');
         },
         err => {

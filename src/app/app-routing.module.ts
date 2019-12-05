@@ -11,10 +11,15 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./views/auth/login/login.module').then( m => m.LoginPageModule)
-  },  {
-    path: 'message',
-    loadChildren: () => import('./views/views/message/message.module').then( m => m.MessagePageModule)
   },
+  {
+    path: 'message',
+    loadChildren: () => import('./views/message/message.module').then( m => m.MessagePageModule)
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./views/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+
 
 ];
 

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService} from '../auth.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserLogin} from '../userLogin';
+import {UserLogin} from '../../../User/userLogin';
+import {UserService} from '../../../User/user.service';
+import {User} from '../../../User/user';
+import {UserPost} from '../../../User/userPost';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +16,9 @@ export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
   validation_messages: any;
-
-  constructor(private authService: AuthService, private router: Router,  private formBuilder: FormBuilder) {
+  user: User;
+  userWithJWT: UserPost;
+  constructor(private authService: AuthService, private userService: UserService, private router: Router,  private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -25,7 +29,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.validation_messages = {
-      'email': [
+      email: [
         {type: 'required', message: 'Campo obligatorio.'},
         {type: 'pattern', message: 'Debe ser un correo electrónico válido'}
       ]
@@ -33,9 +37,15 @@ export class LoginPage implements OnInit {
   }
 
   login() {
+    console.log('Email: ', this.loginForm.controls.email.value);
+    console.log('Pass;',  this.loginForm.controls.password.value );
     this.authService.login(new UserLogin( this.loginForm.controls.email.value,
         this.loginForm.controls.password.value)).subscribe(res => {
           console.log(res);
+          this.userWithJWT = res as UserPost;
+          console.log('User post', this.userWithJWT);
+          this.user = this.userWithJWT.user;
+          this.userService.saveUser(this.user);
           this.router.navigateByUrl('/home');
         },
         err => {

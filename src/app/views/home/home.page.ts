@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MenuController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {UserService} from '../../User/user.service';
+import {User} from '../../User/user';
 
 @Component({
   selector: 'app-home',
@@ -11,33 +13,45 @@ import {Router} from '@angular/router';
 
 export class HomePage implements OnInit {
 
-  homeForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private router: Router, public menuCtrl: MenuController) {}
+    homeForm: FormGroup;
+    user: User;
 
-  ngOnInit() {
-    this.homeForm = this.formBuilder.group({
-      post: new FormControl()
-    });
-  }
-  openMenu() {
-    this.menuCtrl.open();
-  }
-  openMessagePage() {
-    console.log('Funciona Message');
-    this.router.navigateByUrl('/login');
-  }
-  openProfilePage() {
-    console.log('Funciona Profile');
-    this.router.navigateByUrl('/login');
-  }
-  openSettingPage() {
-    console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
-  }
-  openHomePage() {
-    console.log('Funciona Home');
-    this.router.navigateByUrl('/home');
-  }
-  sendPost() { document.querySelector('ion-menu-controller')
-      .open(); }
+    constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, public menuCtrl: MenuController) {
+    }
+
+    ngOnInit() {
+        this.homeForm = this.formBuilder.group({
+            post: new FormControl()
+        });
+        this.user = this.userService.sendUser();
+        console.log('UserHome: ', this.user);
+    }
+
+    openMenu() {
+        this.menuCtrl.open();
+    }
+
+    openMessagePage() {
+        console.log('Funciona Message');
+        this.router.navigateByUrl('/message');
+    }
+
+    openProfilePage() {
+        console.log('Funciona Profile');
+        this.router.navigateByUrl('/profile');
+    }
+
+    openSettingPage() {
+        console.log('Funciona Setting');
+        this.router.navigateByUrl('/login');
+    }
+
+    openHomePage() {
+        console.log('Funciona Home');
+        this.router.navigateByUrl('/home');
+    }
+
+    sendPost() {
+        this.router.navigateByUrl('/profile');
+    }
 }
