@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../User/user';
+import {User} from '../../models/User/user';
 import {UserClient} from 'ionic/lib/user';
-import {UserService} from '../../User/user.service';
+import {UserService} from '../../models/User/user.service';
 
 @Component({
   selector: 'app-profile',

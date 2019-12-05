@@ -3,10 +3,10 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
-import { UserRegister } from '../../User/userRegister';
+import { UserRegister } from '../../models/User/userRegister';
 import { AuthResponse } from './auth-response';
-import {UserLogin} from '../../User/userLogin';
-import {User} from '../../User/user';
+import {UserLogin} from '../../models/User/userLogin';
+import {User} from '../../models/User/user';
 
 @Injectable({
   providedIn: 'root'

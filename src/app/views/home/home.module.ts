@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -21,6 +21,7 @@ import {AngularMaterialModule} from '../../../../../ErasmusWeb/src/app/angular-m
         ReactiveFormsModule,
         AngularMaterialModule,
     ],
-  declarations: [HomePage]
+    declarations: [HomePage],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class HomePageModule {}

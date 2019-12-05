@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../auth.service";
 import {Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserRegister} from '../../../User/userRegister';
-import {UserPost} from '../../../User/userPost';
-import {User} from '../../../User/user';
-import {UserService} from '../../../User/user.service';
+import {UserRegister} from '../../../models/User/userRegister';
+import {UserPost} from '../../../models/User/userPost';
+import {User} from '../../../models/User/user';
+import {UserService} from '../../../models/User/user.service';
 
 @Component({
   selector: 'app-register',

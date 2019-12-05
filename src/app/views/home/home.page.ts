@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {MenuController} from '@ionic/angular';
+import {AlertController, MenuController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {UserService} from '../../User/user.service';
-import {User} from '../../User/user';
+import {UserService} from '../../models/User/user.service';
+import {User} from '../../models/User/user';
+import {HomeService} from './home.service';
+import {Post} from '../../models/post';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +15,12 @@ import {User} from '../../User/user';
 
 export class HomePage implements OnInit {
 
+    controller = document.querySelector('ion-alert-controller');
     homeForm: FormGroup;
     user: User;
-
-    constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, public menuCtrl: MenuController) {
+    post: Post;
+    
+    constructor(private formBuilder: FormBuilder, private homeService: HomeService, private userService: UserService, private router: Router, public menuCtrl: MenuController, public alertCtrl: AlertController) {
     }
 
     ngOnInit() {
@@ -52,6 +56,19 @@ export class HomePage implements OnInit {
     }
 
     sendPost() {
-        this.router.navigateByUrl('/profile');
+        this.post = new Post('5de8f3d1b0bed650ac12c60d', '', this.homeForm.controls.post.value);
+        this.homeService.sendPost(this.post).subscribe(res => {
+            console.log(res);
+            this.router.navigateByUrl('/profile');
+        });
+    }
+    alert() {
+        this.alertCtrl.create({
+            header: 'TYPE',
+            message: 'What type is the message?',
+            buttons: ['Event', 'Status']
+        }).then(alert => {
+            alert.present();
+        });
     }
 }
