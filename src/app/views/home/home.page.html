@@ -54,8 +54,8 @@
             </div>
           </ion-card>
           <div>
-            <ion-card class="vertical-margin">
-              This is my wall here I can see what my friends are doing
+            <ion-card class="vertical-margin" *ngFor="let post of user.posts">
+              {{post.message}}
             </ion-card>
           </div>
         </div>

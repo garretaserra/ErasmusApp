@@ -1,3 +1,4 @@
+import {Post} from '../post';
 
 export class User {
     email: string;
@@ -6,9 +7,9 @@ export class User {
     profilePhoto: string;
     followers: string; // Gente que me sigue a mí
     following: string; // Gente a la que yo sigo
-    posts: string;
+    posts: [Post];
 
-    constructor( email = '', pass = '', name = '', profilePhoto = '', followers = '', following = '', posts = '') {
+    constructor( email = '', pass = '', name = '', profilePhoto = '', followers = '', following = '', posts = null) {
         this.email = email;
         this.password = pass;
         this.name = name;

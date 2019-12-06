@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
     homeForm: FormGroup;
     user: User;
     post: Post;
-    
+
     constructor(private formBuilder: FormBuilder, private homeService: HomeService, private userService: UserService, private router: Router, public menuCtrl: MenuController, public alertCtrl: AlertController) {
     }
 
@@ -61,11 +61,15 @@ export class HomePage implements OnInit {
         this.alertCtrl.create({
             header: 'TYPE',
             message: 'What type is the message?',
-            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', '', this.homeForm.controls.post.value);
+            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', 'X', this.homeForm.controls.post.value);
                                                       this.homeService.sendPost(this.post).subscribe(res => {
                      console.log(res);
                      this.router.navigateByUrl('/profile');
-                    }); }}, {text: 'Status'}]
+                    }); }}, {text: 'Status',  handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', 'Y', this.homeForm.controls.post.value);
+                                                              this.homeService.sendPost(this.post).subscribe(res => {
+                        console.log(res);
+                        this.router.navigateByUrl('/profile');
+                    }); }}]
         }).then(alert => {
             alert.present();
         });
