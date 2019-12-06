@@ -44,7 +44,14 @@ export class HomePage implements OnInit {
         console.log('Funciona Profile');
         this.router.navigateByUrl('/profile');
     }
-
+    openFriendsPage() {
+        console.log('Funciona Friends');
+        this.router.navigateByUrl('/friends');
+    }
+    openGlobePage() {
+        console.log('Funciona Globe');
+        this.router.navigateByUrl('/globe');
+    }
     openSettingPage() {
         console.log('Funciona Setting');
         this.router.navigateByUrl('/login');
@@ -55,8 +62,6 @@ export class HomePage implements OnInit {
         this.router.navigateByUrl('/home');
     }
 
-    sendPost() {
-    }
     alert() {
         this.alertCtrl.create({
             header: 'TYPE',

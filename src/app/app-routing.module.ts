@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./views/home/home.module').then(m => m.HomePageModule)},
   {
     path: 'register',
@@ -15,9 +15,18 @@ const routes: Routes = [
   {
     path: 'message',
     loadChildren: () => import('./views/message/message.module').then( m => m.MessagePageModule)
-  },  {
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./views/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'friends',
+    loadChildren: () => import('./views/friends/friends.module').then( m => m.FriendsPageModule)
+  },
+  {
+    path: 'globe',
+    loadChildren: () => import('./views/globe/globe.module').then( m => m.GlobePageModule)
   },
 
 

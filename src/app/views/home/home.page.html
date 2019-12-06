@@ -16,8 +16,16 @@
           <ion-button (click)="openProfilePage()">Profile</ion-button>
         </ion-item>
         <ion-item>
+          <ion-icon name="contact" slot="start"></ion-icon>
+          <ion-button (click)="openFriendsPage()">Friends</ion-button>
+        </ion-item>
+        <ion-item>
           <ion-icon name="chatboxes" slot="start"></ion-icon>
           <ion-button (click)="openMessagePage()">Messages</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="globe" slot="start"></ion-icon>
+          <ion-button (click)="openGlobePage()">Globe</ion-button>
         </ion-item>
         <ion-item>
           <ion-icon name="settings" slot="start"></ion-icon>
@@ -48,7 +56,7 @@
             <div>
               <ionalert>
                 <section>
-                  <ion-button type=submit (click)="alert()" expand="block">Post</ion-button>
+                  <ion-button (click)="alert()" expand="block">Post</ion-button>
                 </section>
               </ionalert>
             </div>
