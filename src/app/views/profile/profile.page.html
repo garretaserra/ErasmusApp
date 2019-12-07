@@ -11,16 +11,22 @@
               </div>
             </div>
               <ion-card-header *ngIf="user">
-                <ion-card-subtitle>{{user.name}}</ion-card-subtitle>
-                <ion-card-title>{{user.name}}</ion-card-title>
+                <ion-card-subtitle>{{user.email}}</ion-card-subtitle>
+                <ion-card-title>{{user.email}}</ion-card-title>
               </ion-card-header>
-              <ion-card-content *ngIf="user">
-                <div class="personal-item">
-                  <p class="personal-item-title">{{user.followers}}</p>
-                </div>
-                <div class="personal-item">
-                  <p class="personal-item-title">{{user.following}}</p>
-                </div>
-              </ion-card-content>
         </ion-card>
+    <ion-card class="vertical-margin">
+        <ion-card-content *ngIf="user">
+            <div class="personal-item">
+                <p class="personal-item-title">Posts: {{user.posts.length}}</p>
+            </div>
+            <div class="personal-item">
+                <p class="personal-item-title">Followers: {{user.followers}}</p>
+            </div>
+            <div class="personal-item">
+                <p class="personal-item-title">Following: {{user.following}}</p>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
 </ion-content>

@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>friends</ion-title>
+    <ion-title>Friends</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+            (ionChange)="buscar($event)">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content fullscreen>
+  <ion-list>
+    <ion-item *ngFor="let album of albumes | filtro:textobuscar: 'title'">
+        {{album.title}}
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -15,7 +15,6 @@ import {Post} from '../../models/post';
 
 export class HomePage implements OnInit {
 
-    controller = document.querySelector('ion-alert-controller');
     homeForm: FormGroup;
     user: User;
     post: Post;
@@ -66,12 +65,12 @@ export class HomePage implements OnInit {
         this.alertCtrl.create({
             header: 'TYPE',
             message: 'What type is the message?',
-            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', 'X', this.homeForm.controls.post.value);
-                                                      this.homeService.sendPost(this.post).subscribe(res => {
+            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post(this.user.email, 'X', this.homeForm.controls.post.value);
+                                                      this.homeService.sendPost(this.post, this.user).subscribe(res => {
                      console.log(res);
                      this.router.navigateByUrl('/profile');
                     }); }}, {text: 'Status',  handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', 'Y', this.homeForm.controls.post.value);
-                                                              this.homeService.sendPost(this.post).subscribe(res => {
+                                                              this.homeService.sendPost(this.post, this.user).subscribe(res => {
                         console.log(res);
                         this.router.navigateByUrl('/profile');
                     }); }}]
