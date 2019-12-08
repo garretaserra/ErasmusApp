@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="">
+  <ion-card class="vertical-margin">
+    <div style="background: #e44d3a; height: 50%">
+      <div class="personal-icon">
+        <ion-img class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"></ion-img>
+      </div>
+    </div>
+    <ion-card-header *ngIf="otherUser">
+      <ion-card-subtitle>{{otherUser.email}}</ion-card-subtitle>
+      <ion-card-title>{{otherUser.name}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card class="vertical-margin">
+    <ion-card-content *ngIf="otherUser">
+      <ion-toolbar color="primary">
+        <ion-title>Posts: {{otherUser.posts.length}}</ion-title>
+      </ion-toolbar>
+      <ion-toolbar color="secondary">
+        <ion-title>Followers: {{otherUser.followers}}</ion-title>
+      </ion-toolbar>
+      <ion-toolbar color="tertiary">
+        <ion-title>Following: {{otherUser.following}}</ion-title>
+      </ion-toolbar>
+      <ion-toolbar color="primary">
+        <ion-button size="large" color="tertiary" (click)="follow()" expand="block">Follow</ion-button>
+      </ion-toolbar>
+      <ion-toolbar color="secondary">
+        <ion-button size="large" color="tertiary" (click)="unfollow()" expand="block">UnFollow</ion-button>
+      </ion-toolbar>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

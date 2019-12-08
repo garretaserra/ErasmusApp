@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FriendsService} from './friends.service';
+import {UserName} from '../../models/User/userName';
+import {UserService} from '../../models/User/user.service';
+import {Router} from '@angular/router';
+import {User} from '../../models/User/user';
 
 @Component({
   selector: 'app-friends',
@@ -9,20 +13,30 @@ import {FriendsService} from './friends.service';
 export class FriendsPage implements OnInit {
   myInput: any;
   shouldShowCancel: any;
-  albumes: any[] = [];
+  users: UserName [];
   textobuscar = '';
-  constructor( private friendsService: FriendsService) {
+  otherUser: User;
+  constructor( private friendsService: FriendsService, private userService: UserService, private router: Router) {
   }
   ngOnInit() {
-      this.friendsService.getMenuOpts().subscribe(albumes => {
-          console.log(albumes);
-          this.albumes = albumes;
+      this.friendsService.getUsers().subscribe(users => {
+          console.log(users);
+          this.users = users;
       });
 
   }
-
   buscar(CustomEvent) {
     this.textobuscar = CustomEvent.detail.value;
+  }
+  change() {
+      this.router.navigateByUrl('/other-profile');
+  }
+   sendUser(id: string) {
+    this.userService.saveOtherUser(id).subscribe(res => {
+          console.log('pepe', res);
+          this.otherUser = res as User;
+          this.userService.saveOth(this.otherUser);
+      });
   }
   onCancel($event: CustomEvent) {
   }

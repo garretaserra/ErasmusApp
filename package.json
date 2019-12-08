@@ -34,7 +34,8 @@
     "ionic": "^5.4.7",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@ionic-native/geolocation": "latest"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",

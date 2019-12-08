@@ -1,0 +1,73 @@
+<ion-app>
+    <ion-menu side="start">
+        <ion-header>
+            <ion-toolbar translucent>
+                <ion-title>Menu</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="home" slot="start"></ion-icon>
+                    <ion-button (click)="openHomePage()">Home</ion-button>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="person" slot="start"></ion-icon>
+                    <ion-button (click)="openProfilePage()">Profile</ion-button>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="contact" slot="start"></ion-icon>
+                    <ion-button (click)="openFriendsPage()">Friends</ion-button>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="chatboxes" slot="start"></ion-icon>
+                    <ion-button (click)="openMessagePage()">Messages</ion-button>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="globe" slot="start"></ion-icon>
+                    <ion-button (click)="openGlobePage()">Globe</ion-button>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="settings" slot="start"></ion-icon>
+                    <ion-button (click)="openSettingPage()">Settings</ion-button>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <div class="ion-page" main>
+        <ion-header>
+          <ion-toolbar>
+              <ion-buttons slot="start">
+                  <ion-menu-button type="submit" (click)="openMenu()"></ion-menu-button>
+              </ion-buttons>
+            <ion-title>Profile</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content fullscreen="">
+                <ion-card class="vertical-margin">
+                    <div style="background: #e44d3a; height: 50%">
+                      <div class="personal-icon">
+                          <ion-img class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"></ion-img>
+                      </div>
+                    </div>
+                      <ion-card-header *ngIf="user">
+                        <ion-card-subtitle>{{user.email}}</ion-card-subtitle>
+                        <ion-card-title>{{user.name}}</ion-card-title>
+                      </ion-card-header>
+                </ion-card>
+            <ion-card class="vertical-margin">
+                <ion-card-content *ngIf="user">
+                    <ion-toolbar color="primary">
+                        <ion-button (click)="seeMyPosts()">Posts: {{user.posts.length}}</ion-button>
+                    </ion-toolbar>
+                    <ion-toolbar color="secondary">
+                        <ion-button (click)="seeMyFollowers()">Followers: {{user.followers.length}}</ion-button>
+                    </ion-toolbar>
+                    <ion-toolbar color="tertiary">
+                        <ion-button (click)="seeMyFollowing()">Following: {{user.following.length}}</ion-button>
+                    </ion-toolbar>
+                </ion-card-content>
+            </ion-card>
+        </ion-content>
+    </div>
+</ion-app>

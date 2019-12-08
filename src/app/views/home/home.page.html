@@ -62,8 +62,8 @@
             </div>
           </ion-card>
           <div>
-            <ion-card class="vertical-margin" *ngFor="let string of user.activity">
-              {{user.activity}}
+            <ion-card color="secondary" class="vertical-margin" *ngFor="let post of user.activity">
+              <ion-toolbar color="secondary"> {{post.owner}}: {{post.message}}</ion-toolbar>
             </ion-card>
           </div>
         </div>

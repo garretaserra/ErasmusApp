@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./views/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./views/profiles/profile/profile.module').then(m => m.ProfilePageModule)
   },
   {
     path: 'friends',
@@ -28,6 +28,29 @@ const routes: Routes = [
     path: 'globe',
     loadChildren: () => import('./views/globe/globe.module').then( m => m.GlobePageModule)
   },
+  {
+    path: 'geolocation',
+    loadChildren: () => import('./geolocation/geolocation.module').then( m => m.GeolocationPageModule)
+  },
+  {
+    path: 'other-profile',
+    loadChildren: () => import('./views/profiles/other-profile/other-profile.module').then( m => m.OtherProfilePageModule)
+  },
+  {
+    path: 'posts',
+    loadChildren: () => import('./views/posts/posts.module').then( m => m.PostsPageModule)
+  },  {
+    path: 'followers',
+    loadChildren: () => import('./views/followers/followers.module').then( m => m.FollowersPageModule)
+  },
+  {
+    path: 'following',
+    loadChildren: () => import('./views/following/following.module').then( m => m.FollowingPageModule)
+  },
+
+
+
+
 
 
 ];

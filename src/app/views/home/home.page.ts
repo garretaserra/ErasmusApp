@@ -31,6 +31,7 @@ export class HomePage implements OnInit {
     }
 
     openMenu() {
+        console.log('abrete perro');
         this.menuCtrl.open();
     }
 
@@ -65,12 +66,12 @@ export class HomePage implements OnInit {
         this.alertCtrl.create({
             header: 'TYPE',
             message: 'What type is the message?',
-            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post(this.user.email, 'X', this.homeForm.controls.post.value);
+            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post(this.user.email, 'Event', this.homeForm.controls.post.value);
                                                       this.homeService.sendPost(this.post, this.user).subscribe(res => {
                      console.log(res);
                      this.router.navigateByUrl('/profile');
-                    }); }}, {text: 'Status',  handler: () => {console.log('Hola'); this.post = new Post('5de8f3d1b0bed650ac12c60d', 'Y', this.homeForm.controls.post.value);
-                                                              this.homeService.sendPost(this.post, this.user).subscribe(res => {
+                    }); }}, {text: 'Post',  handler: () => {console.log('Hola'); this.post = new Post(this.user.email, 'Post', this.homeForm.controls.post.value);
+                                                            this.homeService.sendPost(this.post, this.user).subscribe(res => {
                         console.log(res);
                         this.router.navigateByUrl('/profile');
                     }); }}]

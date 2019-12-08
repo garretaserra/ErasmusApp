@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { UserRegister } from '../../models/User/userRegister';
 import {UserLogin} from '../../models/User/userLogin';
 import {User} from '../../models/User/user';
+import {UserName} from '../../models/User/userName';
 
 @Injectable({
     providedIn: 'root'
@@ -17,10 +18,7 @@ export class FriendsService {
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-    getUsers(){
-        return this.httpClient.get('https://jsonplaceholder.typecode.com/users');
-    }
-    getMenuOpts() {
-        return this.httpClient.get<any[]>('https://jsonplaceholder.typicode.com/albums');
+    getUsers() {
+        return this.httpClient.get<UserName[]>(`${this.FRIENDS_SERVER_ADDRESS}/usersName`);
     }
 }
