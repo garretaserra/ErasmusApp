@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import {GoogleMaps} from '@ionic-native/google-maps';
 import {AuthModule} from './views/auth/auth.module';
 import {HomePageModule} from './views/home/home.module';
 import {PipesModule} from './pipes/pipes.module';
@@ -20,6 +20,7 @@ import {PipesModule} from './pipes/pipes.module';
   providers: [
     StatusBar,
     SplashScreen,
+      GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

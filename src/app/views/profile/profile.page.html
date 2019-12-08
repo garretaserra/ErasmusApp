@@ -17,15 +17,15 @@
         </ion-card>
     <ion-card class="vertical-margin">
         <ion-card-content *ngIf="user">
-            <div class="personal-item">
-                <p class="personal-item-title">Posts: {{user.posts.length}}</p>
-            </div>
-            <div class="personal-item">
-                <p class="personal-item-title">Followers: {{user.followers}}</p>
-            </div>
-            <div class="personal-item">
-                <p class="personal-item-title">Following: {{user.following}}</p>
-            </div>
+            <ion-toolbar color="primary">
+                <ion-title>Posts: {{user.posts.length}}</ion-title>
+            </ion-toolbar>
+            <ion-toolbar color="secondary">
+                <ion-title>Followers: {{user.followers}}</ion-title>
+            </ion-toolbar>
+            <ion-toolbar color="tertiary">
+                <ion-title>Following: {{user.following}}</ion-title>
+            </ion-toolbar>
         </ion-card-content>
     </ion-card>
 
