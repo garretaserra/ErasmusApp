@@ -12,6 +12,7 @@ import {GoogleMaps} from '@ionic-native/google-maps';
 import {AuthModule} from './views/auth/auth.module';
 import {HomePageModule} from './views/home/home.module';
 import {PipesModule} from './pipes/pipes.module';
+import {ChatService} from './services/chat.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import {PipesModule} from './pipes/pipes.module';
   providers: [
     StatusBar,
     SplashScreen,
+    ChatService,
       GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
