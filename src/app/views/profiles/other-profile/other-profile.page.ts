@@ -15,11 +15,15 @@ export class OtherProfilePage implements OnInit {
 
   user: User;
   otherUser: User;
+  following: boolean;
+  followcheck: string;
+
   constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
 
   ngOnInit() {
     this.otherUser = this.userService.sendOtherUser();
     this.user = this.userService.sendUser();
+    this.checkFol();
     console.log('UserOther', this.otherUser);
     console.log('User', this.user);
 
@@ -46,5 +50,12 @@ export class OtherProfilePage implements OnInit {
   seeMyFollowing() {
     this.userService.saveFollowing(this.otherUser._id);
     this.router.navigateByUrl('/following');
+  }
+  checkFol() {
+    this.followcheck = this.profileService.checkFollow(this.user, this.otherUser);
+    console.log('check: ', this.followcheck);
+    if (this.followcheck === 'not') {
+      this.following = false;
+    } else { this.following = true; }
   }
 }

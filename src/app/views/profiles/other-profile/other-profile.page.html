@@ -30,9 +30,8 @@
         <ion-button size="large" color="tertiary" (click)="follow()" expand="block">Follow</ion-button>
       </ion-toolbar>
       <ion-toolbar color="secondary">
-        <ion-button size="large" color="tertiary" (click)="unfollow()" expand="block">UnFollow</ion-button>
+        <ion-button size="large" color="tertiary" (click)="unfollow()" [disabled]="!following" expand="block">UnFollow</ion-button>
       </ion-toolbar>
     </ion-card-content>
   </ion-card>
-
 </ion-content>
