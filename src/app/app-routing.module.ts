@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'following',
     loadChildren: () => import('./views/following/following.module').then( m => m.FollowingPageModule)
   },
+  {
+    path: 'conversation',
+    loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
+  },
 
 
 

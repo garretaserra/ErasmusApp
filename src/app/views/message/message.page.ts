@@ -4,6 +4,8 @@ import {ChatService} from '../../services/chat.service';
 import {FriendsService} from '../friends/friends.service';
 import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
+import {ConversationPage} from '../conversation/conversation.page';
+import {NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-message',
@@ -12,12 +14,14 @@ import {UserName} from '../../models/User/userName';
 })
 export class MessagePage implements OnInit {
 
+  conversationPage: ConversationPage;
   message: string;
   user: User;
   users: UserName[];
   userList: string[];
 
-  constructor(private userService: UserService, private chatService: ChatService, private friendsService: FriendsService) { }
+  constructor(public navCtrl: NavController, private userService: UserService,
+              private chatService: ChatService, private friendsService: FriendsService) { }
 
   ngOnInit() {
     this.user = this.userService.sendUser();
@@ -33,6 +37,11 @@ export class MessagePage implements OnInit {
       this.users = users;
     });
   }
+
+  viewConversation() {
+    this.navCtrl.navigateForward('/conversation');
+  }
+
 
   onKey(event: any) {
     this.message = event.target.value;

@@ -1,3 +1,7 @@
+<ion-app>
+  <ion-nav root="nav-home"></ion-nav>
+</ion-app>
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -12,7 +16,7 @@
     <ion-list-header>
       Online
     </ion-list-header>
-    <ion-item *ngFor="let userItem of userList">
+    <ion-item *ngFor="let userItem of userList" (click)="viewConversation()">
         <ion-avatar slot="start">
           <img src="../../../assets/img/default_user.png">
         </ion-avatar>
