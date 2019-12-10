@@ -35,6 +35,12 @@ export class HomePage implements OnInit {
         this.menuCtrl.open();
     }
 
+    closeMenu() {
+        console.log('cierrate perro');
+        this.menuCtrl.close();
+    }
+
+
     openMessagePage() {
         console.log('Funciona Message');
         this.router.navigateByUrl('/message');

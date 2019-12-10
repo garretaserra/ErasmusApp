@@ -18,13 +18,13 @@
   <ion-card class="vertical-margin">
     <ion-card-content *ngIf="otherUser">
       <ion-toolbar color="primary">
-        <ion-title>Posts: {{otherUser.posts.length}}</ion-title>
+        <ion-button (click)="seeMyPosts()">Posts: {{otherUser.posts.length}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="secondary">
-        <ion-title>Followers: {{otherUser.followers}}</ion-title>
+        <ion-button (click)="seeMyFollowers()">Followers: {{otherUser.followers.length}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="tertiary">
-        <ion-title>Following: {{otherUser.following}}</ion-title>
+        <ion-button (click)="seeMyFollowing()">Following: {{otherUser.following.length}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="primary">
         <ion-button size="large" color="tertiary" (click)="follow()" expand="block">Follow</ion-button>

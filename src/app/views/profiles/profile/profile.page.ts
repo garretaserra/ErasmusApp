@@ -18,7 +18,6 @@ export class ProfilePage implements OnInit {
   constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
 
   ngOnInit() {
-    this.menuCtrl.close();
     this.user = this.userService.sendUser();
     console.log('UserProfile: ', this.user);
   }
@@ -37,6 +36,11 @@ export class ProfilePage implements OnInit {
 
   openMenu() {
     this.menuCtrl.open();
+  }
+
+  closeMenu() {
+    console.log('cierrate perro');
+    this.menuCtrl.close();
   }
 
   openMessagePage() {
