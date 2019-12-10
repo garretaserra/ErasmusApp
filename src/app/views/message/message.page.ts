@@ -25,10 +25,11 @@ export class MessagePage implements OnInit {
     this.chatService.connectSocket(this.user.email);
     this.chatService.getList().subscribe((list: string[]) => {
       this.userList = list;
+      console.log('UserList:');
       console.log(this.userList);
     });
     this.friendsService.getUsers().subscribe(users => {
-      console.log(users);
+      console.log('Users:' + users);
       this.users = users;
     });
   }

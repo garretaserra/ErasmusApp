@@ -12,15 +12,15 @@
     <ion-list-header>
       Online
     </ion-list-header>
-    <ion-item *ngFor="let userItem of userList; let i = index">
-      <ion-avatar slot="start" *ngIf="userItem[i] != user.name">
-        <img src="../../../assets/img/default_user.png">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ userItem[i] }}</h2>
-        <h3>Online</h3>
-        <p>I just upgraded my X-Wing. Next time...</p>
-      </ion-label>
+    <ion-item *ngFor="let userItem of userList">
+        <ion-avatar slot="start">
+          <img src="../../../assets/img/default_user.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ userItem[0] }}</h2>
+          <h3>Online</h3>
+          <p>I just upgraded my X-Wing. Next time...</p>
+        </ion-label>
     </ion-item>
   </ion-list>
   <ion-list>
