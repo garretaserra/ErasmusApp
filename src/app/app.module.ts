@@ -8,16 +8,21 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import {GoogleMaps} from '@ionic-native/google-maps';
 import {AuthModule} from './views/auth/auth.module';
+import {HomePageModule} from './views/home/home.module';
+import {PipesModule} from './pipes/pipes.module';
+import {ChatService} from './services/chat.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AuthModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AuthModule, HomePageModule, PipesModule],
   providers: [
     StatusBar,
     SplashScreen,
+    ChatService,
+      GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

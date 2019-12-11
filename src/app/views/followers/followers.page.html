@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>followers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="vertical-margin" *ngFor="let user of followers">
+    <ion-toolbar>{{user.name}}</ion-toolbar>
+  </ion-card>
+</ion-content>

@@ -3,9 +3,10 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
-import { User } from './user';
+import { UserRegister } from '../../models/User/userRegister';
 import { AuthResponse } from './auth-response';
-import {UserLogin} from './userLogin';
+import {UserLogin} from '../../models/User/userLogin';
+import {User} from '../../models/User/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,13 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-register(user: User) {
+register(user: UserRegister) {
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/register`, user);
 }
 login(user: UserLogin) {
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user);
+}
+sendUserPages(user: User) {
+      return user;
 }
 }
