@@ -5,6 +5,7 @@ import {UserService} from '../../../models/User/user.service';
 import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
+import {Post} from '../../../models/post';
 
 @Component({
   selector: 'app-profile',
@@ -13,25 +14,26 @@ import {MenuController} from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
 
+  posts: Post[];
   user: User;
   profileForm: FormGroup;
   constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
 
   ngOnInit() {
     this.user = this.userService.sendUser();
+    this.userService.savePostsUsers(this.user._id);
+    this.userService.saveFollowers(this.user._id);
+    this.userService.saveFollowing(this.user._id);
     console.log('UserProfile: ', this.user);
   }
   seeMyPosts() {
-    this.userService.savePostsUsers(this.user._id);
-    this.router.navigateByUrl('/posts');
+    this.router.navigateByUrl('/myposts');
   }
   seeMyFollowers() {
-    this.userService.saveFollowers(this.user._id);
-    this.router.navigateByUrl('/followers');
+    this.router.navigateByUrl('/myfollowers');
   }
   seeMyFollowing() {
-    this.userService.saveFollowing(this.user._id);
-    this.router.navigateByUrl('/following');
+    this.router.navigateByUrl('/myfollowing');
   }
 
   openMenu() {

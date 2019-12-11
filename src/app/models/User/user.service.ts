@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Storage } from '@ionic/storage';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject} from 'rxjs';
 import {User} from './user';
-import {UserPost} from './userPost';
 import {Post} from '../post';
+import {UserName} from './userName';
 
 @Injectable({
     providedIn: 'root'
@@ -18,9 +16,12 @@ export class UserService {
     user: User;
     otherUser: User;
     posts: Post[];
-    followers: User[];
-    following: User[];
-    
+    postsOthUser: Post[];
+    followers: UserName[];
+    following: UserName[];
+    followersOth: UserName[];
+    followingOth: UserName[];
+
     constructor(private httpClient: HttpClient) {}
 
     saveUser(user: User) {
@@ -42,17 +43,23 @@ export class UserService {
     savePostsUsers(id: string) {
         this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`).subscribe(res => {
             console.log(res);
-            this.posts = res as Post[];
+            const response: any = res;
+            const posts: Post[] = response.posts;
+            console.log('Posts2: ', posts);
+            this.posts = posts;
+            console.log('posts3:', this.posts);
         });
     }
     sendPosts() {
+        console.log('this.posts: ', this.posts);
         return this.posts;
     }
-
     saveFollowers(id: string) {
         this.httpClient.get(`${this.USER_SERVER_ADDRESS}/followers/` + `${id}`).subscribe(res => {
             console.log(res);
-            this.followers = res as User[];
+            console.log(res);
+            const response: any = res;
+            this.followers = response.followers;
         });
     }
     sendFollowers() {
@@ -60,11 +67,44 @@ export class UserService {
     }
     saveFollowing(id: string) {
         this.httpClient.get(`${this.USER_SERVER_ADDRESS}/following/` + `${id}`).subscribe(res => {
-            console.log(res);
-            this.following = res as User[];
+            const response: any = res;
+            this.following = response.following;
         });
     }
     sendFollowing() {
         return this.following;
+    }
+    saveFollowersOth(id: string) {
+        this.httpClient.get(`${this.USER_SERVER_ADDRESS}/followers/` + `${id}`).subscribe(res => {
+            console.log(res);
+            console.log(res);
+            const response: any = res;
+            this.followersOth = response.followers;
+        });
+    }
+    sendFollowersOth() {
+        return this.followersOth;
+    }
+    saveFollowingOth(id: string) {
+        this.httpClient.get(`${this.USER_SERVER_ADDRESS}/following/` + `${id}`).subscribe(res => {
+            const response: any = res;
+            this.followingOth = response.following;
+        });
+    }
+    sendFollowingOth() {
+        return this.followingOth;
+    }
+    savePostsOth(id: string) {
+        this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`).subscribe(res => {
+        console.log(res);
+        const response: any = res;
+        const posts: Post[] = response.posts;
+        console.log('Posts2: ', posts);
+        this.postsOthUser = posts;
+        console.log('posts3:', this.posts);
+    });
+    }
+    sendPostOth(){
+        return this.postsOthUser;
     }
 }

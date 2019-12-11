@@ -22,7 +22,8 @@ export class FriendsPage implements OnInit {
   ngOnInit() {
       this.friendsService.getUsers().subscribe(users => {
           console.log(users);
-          this.users = users;
+          const response: any = users;
+          this.users = response.users;
       });
 
   }
@@ -35,7 +36,8 @@ export class FriendsPage implements OnInit {
    sendUser(id: string) {
     this.userService.saveOtherUser(id).subscribe(res => {
           console.log('pepe', res);
-          this.otherUser = res as User;
+          const response: any = res;
+          this.otherUser = response.profile;
           this.userService.saveOth(this.otherUser);
       });
   }

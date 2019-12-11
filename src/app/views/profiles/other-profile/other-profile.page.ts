@@ -23,6 +23,13 @@ export class OtherProfilePage implements OnInit {
   ngOnInit() {
     this.otherUser = this.userService.sendOtherUser();
     this.user = this.userService.sendUser();
+    this.userService.savePostsOth(this.otherUser._id);
+    this.userService.savePostsUsers(this.user._id);
+    this.userService.saveFollowers(this.user._id);
+    this.userService.saveFollowersOth(this.otherUser._id);
+    this.userService.saveFollowing(this.user._id);
+    this.userService.saveFollowingOth(this.otherUser._id);
+
     this.checkFol();
     console.log('UserOther', this.otherUser);
     console.log('User', this.user);
@@ -40,15 +47,12 @@ export class OtherProfilePage implements OnInit {
       this.router.navigateByUrl('/profile'); });
   }
   seeMyPosts() {
-    this.userService.savePostsUsers(this.otherUser._id);
     this.router.navigateByUrl('/posts');
   }
   seeMyFollowers() {
-    this.userService.saveFollowers(this.otherUser._id);
     this.router.navigateByUrl('/followers');
   }
   seeMyFollowing() {
-    this.userService.saveFollowing(this.otherUser._id);
     this.router.navigateByUrl('/following');
   }
   checkFol() {
@@ -57,5 +61,41 @@ export class OtherProfilePage implements OnInit {
     if (this.followcheck === 'not') {
       this.following = false;
     } else { this.following = true; }
+  }
+  openMenu() {
+    console.log('abrete perro');
+    this.menuCtrl.open();
+  }
+
+  closeMenu() {
+    console.log('cierrate perro');
+    this.menuCtrl.close();
+  }
+
+  openMessagePage() {
+    console.log('Funciona Message');
+    this.router.navigateByUrl('/message');
+  }
+
+  openProfilePage() {
+    console.log('Funciona Profile');
+    this.router.navigateByUrl('/profile');
+  }
+  openFriendsPage() {
+    console.log('Funciona Friends');
+    this.router.navigateByUrl('/friends');
+  }
+  openGlobePage() {
+    console.log('Funciona Globe');
+    this.router.navigateByUrl('/globe');
+  }
+  openSettingPage() {
+    console.log('Funciona Setting');
+    this.router.navigateByUrl('/login');
+  }
+
+  openHomePage() {
+    console.log('Funciona Home');
+    this.router.navigateByUrl('/home');
   }
 }
