@@ -1,4 +1,4 @@
-<ion-app>
+<ion-app class="mobile">
   <ion-menu side="start">
     <ion-header>
       <ion-toolbar translucent>
@@ -71,3 +71,145 @@
     </ion-content>
   </div>
 </ion-app>
+
+<div class="web">
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="background-primary">
+    <span class="margin-left-auto">Erasmus</span>
+    <form [formGroup]="form" class="search-form margin-right-auto">
+      <div>
+        <label class="search-input">
+          <input matInput (keyup)="updateSuggestions($event)" [matAutocomplete]="auto" placeholder="Search...">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let suggestion of suggestions" [value]="suggestion">{{suggestion}}</mat-option>
+          </mat-autocomplete>
+        </label>
+        <button type="submit" class="search-button">
+          <i class="material-icons search-icon">search</i>
+        </button>
+      </div>
+    </form>
+    <div class="toolbar-container margin-right-auto">
+      <div class="toolbar-buttons">
+        <div class="pointer" [routerLink]="'/home'">
+          <div>
+            <img width="20" height="20" src="../../../assets/img/home_white.png">
+          </div>
+          <div class="menu-title white-text">
+              Home
+          </div>
+        </div>
+        <div class="pointer" [routerLink]="'/friends'">
+          <div>
+            <img width="20" height="20" src="../../../assets/img/home_white.png">
+          </div>
+          <div class="menu-title white-text">
+            Friends
+          </div>
+        </div>
+        <div class="pointer" [routerLink]="'/home'">
+          <div>
+            <img width="20" height="20" src="../../../assets/img/home_white.png">
+          </div>
+          <div class="menu-title white-text">
+            Events
+          </div>
+        </div>
+        <div class="pointer" [routerLink]="'/home'">
+          <div>
+            <img width="20" height="20" src="../../../assets/img/home_white.png">
+          </div>
+          <div class="menu-title white-text">
+            Chat
+          </div>
+        </div>
+      </div>
+    </div>
+    <div routerLink="/login" class="pointer margin-right-auto" (click)="logOff()">Log Off</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!--Body of the Web Page-->
+<div class="container">
+  <div class="main-content">
+    <!--Left Column-->
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <mat-card class="vertical-margin no-padding">
+        <div style="height: 250px">
+          <div style="background: #e44d3a; height: 50%">
+            <div class="personal-icon">
+              <img class="image-contain" src="../../../assets/img/default_user.png"/>
+            </div>
+          </div>
+          <div style="height: 70%">
+            <div class="personal-info-container">
+              <div class="personal-name">
+                {{user.name}}
+              </div>
+              <div class="personal-status">
+                Status
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="personal-item">
+          <p class="personal-item-title">Followers</p>
+          {{user.followers.length}}
+        </div>
+        <div class="personal-item">
+          <p class="personal-item-title">Following</p>
+          {{user.following.length}}
+        </div>
+      </mat-card>
+    </div>
+    <!--Middle Column-->
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <!--Post Card-->
+      <div>
+        <mat-card class="vertical-margin border-top">
+          <div>
+            <mat-form-field class="textarea">
+                <textarea matInput
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="3"
+                          cdkAutosizeMaxRows="7"></textarea>
+
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button class="background-primary white-text">Post</button>
+          </div>
+        </mat-card>
+      </div>
+      <!--Wall Card-->
+      <div *ngFor="let post of user.posts">
+        <mat-card class="vertical-margin">
+          {{post.message}}
+        </mat-card>
+      </div>
+    </div>
+    <!--Right Column-->
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <mat-card class="vertical-margin">
+        <div class="vertical-margin">
+          FOLLOWING
+        </div>
+        <mat-divider></mat-divider>
+        <mat-list>
+          <div *ngFor="let follow of user.following">
+          <mat-list-item>
+            <div>
+<!--              {{follow.name}}-->
+            </div>
+            <div class="chat chat-unavailable">
+              <i class="material-icons">chat</i>
+            </div>
+          </mat-list-item>
+          </div>
+        </mat-list>
+      </mat-card>
+    </div>
+  </div>
+</div>
+</div>

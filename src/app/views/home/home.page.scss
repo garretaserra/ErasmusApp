@@ -1,3 +1,156 @@
+@media (min-width: 500px) {
+  .mobile{
+    display: none;
+  }
+  .web{
+    display: block;
+  }
+}
+
+@media (max-width: 500px) {
+  .mobile{
+    display: block;
+  }
+  .web{
+    display: none;
+  }
+}
+
 ion-toolbar{
   margin-left: 5%;
+}
+
+.margin-right-auto{
+  margin-right: auto;
+}
+.margin-left-auto{
+  margin-left: auto;
+}
+
+.background-primary{
+  background: #e44d3a;
+}
+
+.menu-title{
+  margin: -15px 10px 0 10px;
+}
+
+.toolbar-buttons{
+  display: flex;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.toolbar-container{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.white-text{
+  color: white;
+}
+
+.search-form{
+  margin: 0 30px 0 50px;
+  background: white;
+  color: #b2b2b2;
+  padding-left: 10px;
+  max-width: 250px;
+  min-width: 100px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.search-input{
+  margin-top: 8px;
+  float: left;
+}
+
+.search-button{
+  padding: 7px 7px;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.search-icon{
+  transform: rotate(90deg);
+  color: #e44d3a;
+}
+
+.main-content{
+  display: flex;
+  text-align: center;
+}
+
+.container{
+  padding-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.image-contain{
+  border: 5px solid white;
+  object-fit: contain;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.vertical-margin{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.border-top{
+  border-top: 4px solid #e44d3a;
+}
+
+.float-right{
+  float: right;
+}
+
+.textarea{
+  width: 100%;
+}
+
+.chat{
+  margin-left: auto;
+}
+
+.chat-unavailable{
+  color: red;
+}
+
+.personal-icon{
+  height: 120px;
+  width: 120px;
+  margin: 0 auto;
+  padding-top: 64px;
+}
+
+.no-padding{
+  padding: 0;
+}
+
+.personal-item{
+  padding: 15px 0;
+  border-top: 1px solid #f2f2f2;
+}
+
+.personal-item-title{
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #686868;
+}
+.personal-info-container{
+  margin-top: 22%;
+}
+.personal-name{
+  font-size: 24px;
+  margin: 65px 5px 5px;
+}
+.personal-status{
+  color: #686868;
+  margin: 5px;
 }

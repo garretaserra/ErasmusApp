@@ -19,7 +19,16 @@ export class HomePage implements OnInit {
     user: User;
     post: Post;
 
-    constructor(private formBuilder: FormBuilder, private homeService: HomeService, private userService: UserService, private router: Router, public menuCtrl: MenuController, public alertCtrl: AlertController) {
+    form: FormGroup = new FormGroup({});
+    suggestions: String[];
+    searchValue: string;
+
+    constructor(private formBuilder: FormBuilder,
+                private homeService: HomeService,
+                private userService: UserService,
+                private router: Router,
+                public menuCtrl: MenuController,
+                public alertCtrl: AlertController) {
     }
 
     ngOnInit() {
@@ -78,5 +87,17 @@ export class HomePage implements OnInit {
         }).then(alert => {
             alert.present();
         });
+    }
+
+    async updateSuggestions(event){
+        this.searchValue = event.target.value;
+        let users: User[] = await this.userService.search(this.searchValue).toPromise();
+        //Get emails of all users
+        this.suggestions = users.map(a => a.email);
+    }
+
+    //TODO: Implement log off functionality
+    logOff(){
+
     }
 }

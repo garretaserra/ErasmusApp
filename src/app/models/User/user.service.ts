@@ -67,4 +67,8 @@ export class UserService {
     sendFollowing() {
         return this.following;
     }
+
+    search(searchString){
+        return this.httpClient.get<User[]>(`${this.USER_SERVER_ADDRESS}/search?searchString=` + searchString);
+    }
 }
