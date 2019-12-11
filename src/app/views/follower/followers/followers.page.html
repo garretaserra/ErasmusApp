@@ -37,30 +37,20 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-
   <div class="ion-page" main>
-  <ion-header>
-  <ion-toolbar>
-    <ion-title>Friends</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button type="submit" (click)="openMenu()"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar
-            (ionChange)="buscar($event)">
-    </ion-searchbar>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button type="submit" (click)="openMenu()"></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Followers</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
-  <ion-list>
-    <ion-item *ngFor="let userName of users | filtro:textobuscar: 'name'">
-      <ion-row>
-      <ion-button size="large" color="tertiary" (click)="sendUser(userName._id)" expand="block">{{userName.name}}</ion-button>
-        <ion-button size="large" color="tertiary" (click)="change()" expand="block">ChangePage</ion-button>
-      </ion-row>
-    </ion-item>
-  </ion-list>
+
+<ion-content>
+  <ion-card class="vertical-margin" *ngFor="let user of followers">
+    <ion-toolbar>{{user.name}}</ion-toolbar>
+  </ion-card>
 </ion-content>
   </div>
 </ion-app>

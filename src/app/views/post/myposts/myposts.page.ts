@@ -1,45 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import {Post} from '../../../models/post';
 import {User} from '../../../models/User/user';
-import {UserClient} from 'ionic/lib/user';
 import {UserService} from '../../../models/User/user.service';
-import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
-import {Post} from '../../../models/post';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-myposts',
+  templateUrl: './myposts.page.html',
+  styleUrls: ['./myposts.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class MypostsPage implements OnInit {
 
   posts: Post[];
   user: User;
-  profileForm: FormGroup;
   constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
-
   ngOnInit() {
-    this.user = this.userService.sendUser();
-    this.userService.savePostsUsers(this.user._id);
-    this.userService.saveFollowers(this.user._id);
-    this.userService.saveFollowing(this.user._id);
-    console.log('UserProfile: ', this.user);
+    console.log('primero');
+    this.user = this.userService.user;
+    this.posts = this.userService.sendPosts();
+    console.log('post: ', this.posts);
   }
-  seeMyPosts() {
-    this.router.navigateByUrl('/myposts');
-  }
-  seeMyFollowers() {
-    this.router.navigateByUrl('/myfollowers');
-  }
-  seeMyFollowing() {
-    this.router.navigateByUrl('/myfollowing');
-  }
+  deletePost(id: string) {
 
+  }
   openMenu() {
+    console.log('abrete perro');
     this.menuCtrl.open();
   }
-
   closeMenu() {
     console.log('cierrate perro');
     this.menuCtrl.close();
@@ -52,7 +40,6 @@ export class ProfilePage implements OnInit {
 
   openProfilePage() {
     console.log('Funciona Profile');
-
     this.router.navigateByUrl('/profile');
   }
   openFriendsPage() {
@@ -72,7 +59,5 @@ export class ProfilePage implements OnInit {
     console.log('Funciona Home');
     this.router.navigateByUrl('/home');
   }
-
-
 
 }

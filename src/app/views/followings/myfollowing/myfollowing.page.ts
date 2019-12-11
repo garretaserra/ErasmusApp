@@ -1,45 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../models/User/user';
-import {UserClient} from 'ionic/lib/user';
 import {UserService} from '../../../models/User/user.service';
-import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
-import {Post} from '../../../models/post';
+import {User} from '../../../models/User/user';
+import {UserName} from '../../../models/User/userName';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-myfollowing',
+  templateUrl: './myfollowing.page.html',
+  styleUrls: ['./myfollowing.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class MyfollowingPage implements OnInit {
 
-  posts: Post[];
   user: User;
-  profileForm: FormGroup;
+  following: UserName[];
+
   constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
 
   ngOnInit() {
-    this.user = this.userService.sendUser();
-    this.userService.savePostsUsers(this.user._id);
-    this.userService.saveFollowers(this.user._id);
-    this.userService.saveFollowing(this.user._id);
-    console.log('UserProfile: ', this.user);
-  }
-  seeMyPosts() {
-    this.router.navigateByUrl('/myposts');
-  }
-  seeMyFollowers() {
-    this.router.navigateByUrl('/myfollowers');
-  }
-  seeMyFollowing() {
-    this.router.navigateByUrl('/myfollowing');
+    this.user = this.userService.user;
+    this.following = this.userService.sendFollowing();
+    console.log('following: ', this.following);
   }
 
   openMenu() {
+    console.log('abrete perro');
     this.menuCtrl.open();
   }
-
   closeMenu() {
     console.log('cierrate perro');
     this.menuCtrl.close();
@@ -52,7 +39,6 @@ export class ProfilePage implements OnInit {
 
   openProfilePage() {
     console.log('Funciona Profile');
-
     this.router.navigateByUrl('/profile');
   }
   openFriendsPage() {
@@ -72,7 +58,5 @@ export class ProfilePage implements OnInit {
     console.log('Funciona Home');
     this.router.navigateByUrl('/home');
   }
-
-
 
 }

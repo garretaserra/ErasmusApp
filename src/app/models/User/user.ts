@@ -1,4 +1,6 @@
 import {Post} from '../post';
+import {UserName} from './userName';
+import {Observable} from 'rxjs';
 
 export class User {
     _id: string;
@@ -6,12 +8,12 @@ export class User {
     name: string;
     password: string;
     profilePhoto: string;
-    followers: string; // Gente que me sigue a mí
-    following: string; // Gente a la que yo sigo
-    posts: [Post];
-    activity: [Post];
+    followers: UserName[]; // Gente que me sigue a mí
+    following: UserName[]; // Gente a la que yo sigo
+    posts: Post[];
+    activity: Post[];
 
-    constructor( _id = '', email = '', pass = '', name = '', profilePhoto = '', followers = '', following = '', posts = null, activity = null) {
+    constructor( _id = '', email = '', pass = '', name = '', profilePhoto = '', followers = null, following = null, posts = null, activity = null) {
         this._id = _id;
         this.email = email;
         this.password = pass;

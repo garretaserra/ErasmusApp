@@ -1,5 +1,48 @@
+<ion-app>
+  <ion-menu side="start">
+    <ion-header>
+      <ion-toolbar translucent>
+        <ion-item>
+          <ion-title>Menu</ion-title>
+          <ion-icon name="close" slot="end" (click)="closeMenu()"></ion-icon>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="home" slot="start"></ion-icon>
+          <ion-button (click)="openHomePage()">Home</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-button (click)="openProfilePage()">Profile</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="contact" slot="start"></ion-icon>
+          <ion-button (click)="openFriendsPage()">Friends</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="chatboxes" slot="start"></ion-icon>
+          <ion-button (click)="openMessagePage()">Messages</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="globe" slot="start"></ion-icon>
+          <ion-button (click)="openGlobePage()">Globe</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="settings" slot="start"></ion-icon>
+          <ion-button (click)="openSettingPage()">Settings</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" main>
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button type="submit" (click)="openMenu()"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,22 +60,25 @@
   </ion-card>
   <ion-card class="vertical-margin">
     <ion-card-content *ngIf="otherUser">
+      <div *ngIf="following">
       <ion-toolbar color="primary">
-        <ion-title>Posts: {{otherUser.posts.length}}</ion-title>
+        <ion-button (click)="seeMyPosts()">Posts: {{otherUser.posts}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="secondary">
-        <ion-title>Followers: {{otherUser.followers}}</ion-title>
+        <ion-button (click)="seeMyFollowers()">Followers: {{otherUser.followers}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="tertiary">
-        <ion-title>Following: {{otherUser.following}}</ion-title>
+        <ion-button (click)="seeMyFollowing()">Following: {{otherUser.following}}</ion-button>
       </ion-toolbar>
+      </div>
       <ion-toolbar color="primary">
-        <ion-button size="large" color="tertiary" (click)="follow()" expand="block">Follow</ion-button>
+        <ion-button size="large" color="tertiary" (click)="follow()" [disabled]="following" expand="block">Follow</ion-button>
       </ion-toolbar>
       <ion-toolbar color="secondary">
-        <ion-button size="large" color="tertiary" (click)="unfollow()" expand="block">UnFollow</ion-button>
+        <ion-button size="large" color="tertiary" (click)="unfollow()" [disabled]="!following" expand="block">UnFollow</ion-button>
       </ion-toolbar>
     </ion-card-content>
   </ion-card>
-
 </ion-content>
+  </div>
+</ion-app>

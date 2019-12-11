@@ -38,19 +38,37 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    loadChildren: () => import('./views/posts/posts.module').then( m => m.PostsPageModule)
-  },  {
+    loadChildren: () => import('./views/post/posts/posts.module').then(m => m.PostsPageModule)
+  },
+  {
     path: 'followers',
-    loadChildren: () => import('./views/followers/followers.module').then( m => m.FollowersPageModule)
+    loadChildren: () => import('./views/follower/followers/followers.module').then(m => m.FollowersPageModule)
   },
   {
     path: 'following',
-    loadChildren: () => import('./views/following/following.module').then( m => m.FollowingPageModule)
+    loadChildren: () => import('./views/followings/following/following.module').then(m => m.FollowingPageModule)
+  },
+  {
+    path: 'front',
+    loadChildren: () => import('./views/front/front.module').then( m => m.FrontPageModule)
+  },
+  {
+    path: 'myposts',
+    loadChildren: () => import('./views/post/myposts/myposts.module').then( m => m.MypostsPageModule)
+  },  {
+    path: 'myfollowing',
+    loadChildren: () => import('./views/followings/myfollowing/myfollowing.module').then( m => m.MyfollowingPageModule)
+  },
+  {
+    path: 'myfollowers',
+    loadChildren: () => import('./views/follower/myfollowers/myfollowers.module').then( m => m.MyfollowersPageModule)
   },
   {
     path: 'conversation',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
   },
+
+
 
 
 

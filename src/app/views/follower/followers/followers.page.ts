@@ -1,42 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User/user';
-import {UserClient} from 'ionic/lib/user';
 import {UserService} from '../../../models/User/user.service';
-import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
-import {Post} from '../../../models/post';
+import {UserName} from '../../../models/User/userName';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-followers',
+  templateUrl: './followers.page.html',
+  styleUrls: ['./followers.page.scss'],
 })
-export class ProfilePage implements OnInit {
-
-  posts: Post[];
-  user: User;
-  profileForm: FormGroup;
+export class FollowersPage implements OnInit {
+  followers: UserName [];
   constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
 
   ngOnInit() {
-    this.user = this.userService.sendUser();
-    this.userService.savePostsUsers(this.user._id);
-    this.userService.saveFollowers(this.user._id);
-    this.userService.saveFollowing(this.user._id);
-    console.log('UserProfile: ', this.user);
+    this.followers = this.userService.sendFollowersOth();
   }
-  seeMyPosts() {
-    this.router.navigateByUrl('/myposts');
-  }
-  seeMyFollowers() {
-    this.router.navigateByUrl('/myfollowers');
-  }
-  seeMyFollowing() {
-    this.router.navigateByUrl('/myfollowing');
-  }
-
   openMenu() {
+    console.log('abrete perro');
     this.menuCtrl.open();
   }
 
@@ -52,7 +34,6 @@ export class ProfilePage implements OnInit {
 
   openProfilePage() {
     console.log('Funciona Profile');
-
     this.router.navigateByUrl('/profile');
   }
   openFriendsPage() {
@@ -72,7 +53,4 @@ export class ProfilePage implements OnInit {
     console.log('Funciona Home');
     this.router.navigateByUrl('/home');
   }
-
-
-
 }
