@@ -53,6 +53,7 @@ export class UserService {
         this.httpClient.get(`${this.USER_SERVER_ADDRESS}/followers/` + `${id}`).subscribe(res => {
             console.log(res);
             this.followers = res as User[];
+            return res;
         });
     }
     sendFollowers() {

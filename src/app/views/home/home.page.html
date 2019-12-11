@@ -173,12 +173,12 @@
                           cdkTextareaAutosize
                           #autosize="cdkTextareaAutosize"
                           cdkAutosizeMinRows="3"
-                          cdkAutosizeMaxRows="7"></textarea>
-
+                          cdkAutosizeMaxRows="7"
+                          [(ngModel)]="postMessage"></textarea>
             </mat-form-field>
           </div>
           <div>
-            <button mat-raised-button class="background-primary white-text">Post</button>
+            <button mat-raised-button class="background-primary white-text" (click)="publishPost()">Post</button>
           </div>
         </mat-card>
       </div>

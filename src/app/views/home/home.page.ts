@@ -75,15 +75,20 @@ export class HomePage implements OnInit {
         this.alertCtrl.create({
             header: 'TYPE',
             message: 'What type is the message?',
-            buttons: [{text: 'Event', handler: () => {console.log('Hola'); this.post = new Post(this.user.email, 'Event', this.homeForm.controls.post.value);
-                                                      this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                     console.log(res);
-                     this.router.navigateByUrl('/profile');
-                    }); }}, {text: 'Post',  handler: () => {console.log('Hola'); this.post = new Post(this.user.email, 'Post', this.homeForm.controls.post.value);
-                                                            this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                        console.log(res);
+            buttons: [
+                {text: 'Event', handler: () => {
+                    this.post = new Post(this.user.email, 'Event', this.homeForm.controls.post.value);
+                    this.homeService.sendPost(this.post, this.user).subscribe(res => {
+                         this.router.navigateByUrl('/profile');
+                        });
+                    }},
+                {text: 'Post',  handler: () => {
+                    this.post = new Post(this.user.email, 'Post', this.homeForm.controls.post.value);
+                    this.homeService.sendPost(this.post, this.user).subscribe(res => {
                         this.router.navigateByUrl('/profile');
-                    }); }}]
+                    });
+                }}
+            ]
         }).then(alert => {
             alert.present();
         });
@@ -99,5 +104,18 @@ export class HomePage implements OnInit {
     //TODO: Implement log off functionality
     logOff(){
 
+    }
+
+    postMessage: string;
+    async publishPost(){
+        this.post = new Post(this.user.email, 'Post', this.postMessage);
+        this.homeService.sendPost(this.post, this.user).subscribe(res => {
+            this.user.posts.push(this.post);
+            this.updateUser();
+        });
+    }
+
+    async updateUser(){
+        let posts = await this.userService.savePostsUsers(this.user._id);
     }
 }
