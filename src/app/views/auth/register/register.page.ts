@@ -90,13 +90,11 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
-    this.authService.register(new UserRegister(this.registerForm.controls['email'].value,
-        this.registerForm.controls['pass'].value,this.registerForm.controls['name'].value)).subscribe(res => {
+    let user = new User(this.registerForm.controls['email'].value,
+        this.registerForm.controls['pass'].value,this.registerForm.controls['name'].value);
+    console.log(user);
+    this.authService.register(user).subscribe(res => {
           console.log(res);
-          this.userWithJWT = res as UserPost;
-          console.log('User post', this.userWithJWT);
-          this.user = this.userWithJWT.user;
-          this.userService.saveUser(this.user);
           this.router.navigateByUrl('/home');
         },
         err => {
