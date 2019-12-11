@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
 import {User} from './user';
-import {Post} from '../post';
+import {Post} from '../Posts/post';
 import {UserName} from './userName';
 
 @Injectable({
@@ -25,12 +25,14 @@ export class UserService {
     constructor(private httpClient: HttpClient) {}
 
     saveUser(user: User) {
-        console.log('User: ', user);
         this.user = user;
     }
     sendUser() {
         return this.user;
     }
+
+
+
     saveOtherUser(id: string) {
          return this.httpClient.get(`${this.USER_SERVER_ADDRESS}/profile/` + `${id}`);
     }
@@ -41,14 +43,7 @@ export class UserService {
         return this.otherUser;
     }
     savePostsUsers(id: string) {
-        this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`).subscribe(res => {
-            console.log(res);
-            const response: any = res;
-            const posts: Post[] = response.posts;
-            console.log('Posts2: ', posts);
-            this.posts = posts;
-            console.log('posts3:', this.posts);
-        });
+        return this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`);
     }
     sendPosts() {
         console.log('this.posts: ', this.posts);
@@ -104,7 +99,7 @@ export class UserService {
         console.log('posts3:', this.posts);
     });
     }
-    sendPostOth(){
+    sendPostOth() {
         return this.postsOthUser;
     }
 }

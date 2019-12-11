@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./views/message/message.module').then( m => m.MessagePageModule)
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     loadChildren: () => import('./views/profiles/profile/profile.module').then(m => m.ProfilePageModule)
   },
   {
@@ -55,7 +55,8 @@ const routes: Routes = [
   {
     path: 'myposts',
     loadChildren: () => import('./views/post/myposts/myposts.module').then( m => m.MypostsPageModule)
-  },  {
+  },
+  {
     path: 'myfollowing',
     loadChildren: () => import('./views/followings/myfollowing/myfollowing.module').then( m => m.MyfollowingPageModule)
   },
@@ -66,15 +67,7 @@ const routes: Routes = [
   {
     path: 'conversation',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
-  },
-
-
-
-
-
-
-
-
+  }
 ];
 
 @NgModule({

@@ -19,6 +19,10 @@ export class ProfileService {
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
+    getProfile( id: string ) {
+        return this.httpClient.get(`${this.PROFILE_SERVER_ADDRESS}/profile/` + `${id}`);
+    }
+
     follow(id: string, followedId: string) {
         return this.httpClient.put(`${this.PROFILE_SERVER_ADDRESS}/follow`, {
             userId: id,

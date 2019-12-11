@@ -3,7 +3,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
-import {Post} from '../../models/post';
+import {Post} from '../../models/Posts/post';
 import {User} from '../../models/User/user';
 import {posix} from 'path';
 
@@ -19,4 +19,7 @@ export class PostService {
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
+    getPosts(id: string) {
+        return this.httpClient.get(`${this.POST_SERVER_ADDRESS}/user/posts/` + `${id}`);
+    }
 }

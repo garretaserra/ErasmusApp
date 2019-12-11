@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../models/User/user.service';
-import {Post} from '../../../models/post';
+import {Post} from '../../../models/Posts/post';
 import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {User} from '../../../models/User/user';
