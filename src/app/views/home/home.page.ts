@@ -44,8 +44,8 @@ export class HomePage implements OnInit {
     async openMenu() {
         await this.menuCtrl.open();
     }
-    closeMenu() {
-        this.menuCtrl.close();
+    async closeMenu() {
+        await this.menuCtrl.close();
     }
     async openMessagePage() {
         await this.menuCtrl.close();
@@ -54,19 +54,19 @@ export class HomePage implements OnInit {
     }
     async openProfilePage() {
         await this.menuCtrl.toggle();
-        await this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+        await this.router.navigateByUrl('/profile');
     }
-    openFriendsPage() {
-        this.router.navigateByUrl('/friends');
+    async openFriendsPage() {
+        await this.router.navigateByUrl('/friends');
     }
-    openGlobePage() {
-        this.router.navigateByUrl('/globe');
+    async openGlobePage() {
+        await this.router.navigateByUrl('/globe');
     }
-    openSettingPage() {
-        this.router.navigateByUrl('/login');
+    async openSettingPage() {
+        await this.router.navigateByUrl('/login');
     }
-    openHomePage() {
-        this.router.navigateByUrl('/home');
+    async openHomePage() {
+        await this.router.navigateByUrl('/home');
     }
     async alert() {
         this.alertCtrl.create({

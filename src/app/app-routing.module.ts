@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./views/message/message.module').then( m => m.MessagePageModule)
   },
   {
-    path: 'profile/:id',
+    path: 'profile',
     loadChildren: () => import('./views/profiles/profile/profile.module').then(m => m.ProfilePageModule)
   },
   {

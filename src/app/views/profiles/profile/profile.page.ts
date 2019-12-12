@@ -23,12 +23,10 @@ export class ProfilePage implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
 
   async ngOnInit() {
-    console.log(this.route.snapshot.paramMap.get('id'));
-    this._id = this.route.snapshot.paramMap.get('id');
     await this.load();
   }
   async load() {
-      console.log('id: ', this._id);
+      this._id = this.userService.sendUser()._id;
       await this.profileService.getProfile(this._id).subscribe(res => {
       const response: any = res;
       console.log(res);
@@ -45,41 +43,29 @@ export class ProfilePage implements OnInit {
     await this.router.navigateByUrl('/myfollowing');
   }
 
-  openMenu() {
-    this.menuCtrl.open();
+  async openMenu() {
+    await this.menuCtrl.open();
   }
-
-  closeMenu() {
-    console.log('cierrate perro');
-    this.menuCtrl.close();
+  async closeMenu() {
+    await this.menuCtrl.close();
   }
-
-  openMessagePage() {
-    console.log('Funciona Message');
-    this.router.navigateByUrl('/message');
+  async openMessagePage() {
+    await this.router.navigateByUrl('/message');
   }
-
-  openProfilePage() {
-    console.log('Funciona Profile');
-
-    this.router.navigateByUrl('/profile');
+  async openProfilePage() {
+    await this.router.navigateByUrl('/profile');
   }
-  openFriendsPage() {
-    console.log('Funciona Friends');
-    this.router.navigateByUrl('/friends');
+  async openFriendsPage() {
+    await this.router.navigateByUrl('/friends');
   }
-  openGlobePage() {
-    console.log('Funciona Globe');
-    this.router.navigateByUrl('/globe');
+  async openGlobePage() {
+    await this.router.navigateByUrl('/globe');
   }
-  openSettingPage() {
-    console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
+  async openSettingPage() {
+    await this.router.navigateByUrl('/login');
   }
-
   async openHomePage() {
     await this.menuCtrl.close();
-    console.log('Funciona Home');
     this.router.navigateByUrl('/home');
   }
 

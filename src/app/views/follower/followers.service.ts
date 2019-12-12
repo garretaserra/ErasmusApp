@@ -10,7 +10,7 @@ import {User} from '../../models/User/user';
 })
 export class FollowersService {
 
-    FOLLOWERS_SERVER_ADDRESS = 'http://localhost:3000/post';
+    FOLLOWERS_SERVER_ADDRESS = 'http://localhost:3000/user';
     followersSubject = new BehaviorSubject(false);
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
