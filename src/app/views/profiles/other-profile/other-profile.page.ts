@@ -73,40 +73,28 @@ export class OtherProfilePage implements OnInit {
       this.following = false;
     } else { this.following = true; }
   }
-  openMenu() {
-    console.log('abrete perro');
-    this.menuCtrl.open();
+  async openMenu() {
+    await this.menuCtrl.open();
   }
-
-  closeMenu() {
-    console.log('cierrate perro');
-    this.menuCtrl.close();
+  async closeMenu() {
+    await this.menuCtrl.close();
   }
-
-  openMessagePage() {
-    console.log('Funciona Message');
-    this.router.navigateByUrl('/message');
+  async openMessagePage() {
+    await this.router.navigateByUrl('/message');
   }
-
-  openProfilePage() {
-    console.log('Funciona Profile');
-    this.router.navigateByUrl('/profile');
+  async openProfilePage() {
+    await this.router.navigateByUrl('/profile');
   }
-  openFriendsPage() {
-    console.log('Funciona Friends');
-    this.router.navigateByUrl('/friends');
+  async openFriendsPage() {
+    await this.router.navigateByUrl('/friends');
   }
-  openGlobePage() {
-    console.log('Funciona Globe');
-    this.router.navigateByUrl('/globe');
+  async openGlobePage() {
+    await this.router.navigateByUrl('/globe');
   }
-  openSettingPage() {
-    console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
+  async openSettingPage() {
+    await this.router.navigateByUrl('/login');
   }
-
-  openHomePage() {
-    console.log('Funciona Home');
-    this.router.navigateByUrl('/home');
+  async openHomePage() {
+    await this.router.navigateByUrl('/home');
   }
 }

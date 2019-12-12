@@ -42,38 +42,30 @@ export class HomePage implements OnInit {
        await this.userService.saveUser(this.user);
     }
     async openMenu() {
-        console.log('abrete perro' + await this.menuCtrl.isOpen() /*+ await this.menuCtrl.enable(true)*/);
         await this.menuCtrl.open();
     }
     closeMenu() {
-        console.log('cierrate perro');
         this.menuCtrl.close();
     }
     async openMessagePage() {
         await this.menuCtrl.close();
-        console.log('Funciona Message');
         await this.router.navigateByUrl('/message');
 
     }
     async openProfilePage() {
         await this.menuCtrl.toggle();
-        console.log('Funciona Profile');
         await this.router.navigateByUrl('/profile/' + `${this.user._id}`);
     }
     openFriendsPage() {
-        console.log('Funciona Friends');
         this.router.navigateByUrl('/friends');
     }
     openGlobePage() {
-        console.log('Funciona Globe');
         this.router.navigateByUrl('/globe');
     }
     openSettingPage() {
-        console.log('Funciona Setting');
         this.router.navigateByUrl('/login');
     }
     openHomePage() {
-        console.log('Funciona Home');
         this.router.navigateByUrl('/home');
     }
     async alert() {
@@ -83,7 +75,7 @@ export class HomePage implements OnInit {
             buttons: [{text: 'Event', handler: () => {
                 this.post = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
                 this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                     this.router.navigateByUrl('/profile');
+                    this.router.navigateByUrl('/profile/' + `${this.user._id}`);
                     }); }},
                 {text: 'Post',  handler: () => {
                     this.post = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);

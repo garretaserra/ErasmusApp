@@ -28,35 +28,27 @@ export class PostsPage implements OnInit {
     }, error => {console.log('error'); });
   }
   async openMenu() {
-    console.log('abrete perro');
     await this.menuCtrl.open();
   }
   async closeMenu() {
-    console.log('cierrate perro');
     await this.menuCtrl.close();
   }
   async openMessagePage() {
-    console.log('Funciona Message');
     await this.router.navigateByUrl('/message');
   }
   async openProfilePage() {
-    console.log('Funciona Profile');
     await this.router.navigateByUrl('/profile');
   }
   async openFriendsPage() {
-    console.log('Funciona Friends');
     await this.router.navigateByUrl('/friends');
   }
   async openGlobePage() {
-    console.log('Funciona Globe');
     await this.router.navigateByUrl('/globe');
   }
   async openSettingPage() {
-    console.log('Funciona Setting');
     await this.router.navigateByUrl('/login');
   }
   async openHomePage() {
-    console.log('Funciona Home');
     await this.router.navigateByUrl('/home');
   }
 }
