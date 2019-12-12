@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
       ]
     };
   }
-  login() {
+  async login() {
     this.authService.login(new UserLogin( this.loginForm.controls.email.value,
         this.loginForm.controls.password.value)).subscribe(res => {
             const response: any = res;

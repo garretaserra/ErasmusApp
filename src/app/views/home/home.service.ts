@@ -32,4 +32,10 @@ export class HomeService {
     getActivity(id: string) {
          return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}`, {});
     }
+    getProfile( id: string ) {
+        return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/profile/` + `${id}`);
+    }
+    getFollowers(_id: string) {
+        return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/followers/` + `${_id}`);
+    }
 }

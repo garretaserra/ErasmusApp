@@ -7,6 +7,8 @@ import {User} from '../../models/User/user';
 import {HomeService} from './home.service';
 import {Post} from '../../models/Posts/post';
 import {PostSend} from '../../models/Posts/postSend';
+import {UserProfile} from '../../models/User/userProfile';
+import {UserName} from '../../models/User/userName';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +20,14 @@ export class HomePage implements OnInit {
 
     homeForm: FormGroup;
     user: User;
-    post: PostSend;
-
+    postSend: PostSend;
+    post: Post;
+    userProfile: UserProfile;
+    userProfileTest: UserProfile;
     form: FormGroup = new FormGroup({});
     suggestions: String[];
     searchValue: string;
+    followers: UserName [];
 
     constructor(private formBuilder: FormBuilder,
                 private homeService: HomeService,
@@ -37,6 +42,23 @@ export class HomePage implements OnInit {
         });
         this.user = this.userService.sendUser();
         await this.getActivity();
+        await this.getProfile();
+        await this.getFollowers();
+        this.userProfileTest = this.userProfile;
+    }
+    async getProfile() {
+        await this.homeService.getProfile(this.user._id).subscribe(res => {
+            const response: any = res;
+            this.userProfile = response.profile;
+            console.log('this.userProfile: ', this.userProfile);
+        });
+    }
+    async getFollowers() {
+       await this.homeService.getFollowers(this.user._id).subscribe(res => {
+            const response: any = res;
+            this.followers = response.followers;
+            console.log('this.followers: ', this.followers);
+        });
     }
     async getActivity() {
        await this.homeService.getActivity(this.user._id).subscribe(res => {
@@ -78,12 +100,12 @@ export class HomePage implements OnInit {
             header: 'TYPE',
             message: 'What type is the message?',
             buttons: [{text: 'Event', handler: () => {
-                this.post = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
+                this.postSend = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
                 this.homeService.sendPost(this.post, this.user).subscribe(res => {
                     this.router.navigateByUrl('/profile/' + `${this.user._id}`);
                     }); }},
                 {text: 'Post',  handler: () => {
-                    this.post = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);
+                    this.postSend = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);
                     this.homeService.sendPost(this.post, this.user).subscribe(res => {
                         this.router.navigateByUrl('/profile/' + `${this.user._id}`);
                     }); }}]
@@ -91,7 +113,6 @@ export class HomePage implements OnInit {
              alert.present();
         });
     }
-
     async updateSuggestions(event){
         this.searchValue = event.target.value;
         let users: User[] = await this.userService.search(this.searchValue).toPromise();
