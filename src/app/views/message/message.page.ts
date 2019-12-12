@@ -36,6 +36,10 @@ export class MessagePage implements OnInit {
       console.log(list);
       this.users = list;
     });
+    this.chatService.getMessage().subscribe((data: {message, email}) => {
+      console.log('Incoming message:');
+      console.log(data);
+    });
   }
 
   viewConversation(data) {
