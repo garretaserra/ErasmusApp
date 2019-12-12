@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
+import {ProfileService} from '../../profiles/profile.service';
 
 @Component({
   selector: 'app-followers',
@@ -12,10 +13,19 @@ import {UserName} from '../../../models/User/userName';
 })
 export class FollowersPage implements OnInit {
   followers: UserName [];
-  constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
+  _id: string;
+  constructor(private userService: UserService, private route: ActivatedRoute, private profileService: ProfileService, private router: Router, public menuCtrl: MenuController) { }
 
-  ngOnInit() {
-    this.followers = this.userService.sendFollowersOth();
+  async ngOnInit() {
+    this.load();
+  }
+  async load() {
+    this._id = this.route.snapshot.paramMap.get('id');
+    await this.profileService.getFollowers(this._id).subscribe(res => {
+      const response: any = res;
+      console.log('res: ', res);
+      this.followers = response.followers;
+    }, error => {console.log('error'); });
   }
   openMenu() {
     console.log('abrete perro');

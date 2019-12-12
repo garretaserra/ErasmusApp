@@ -88,7 +88,7 @@ export class HomePage implements OnInit {
                 {text: 'Post',  handler: () => {
                     this.post = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);
                     this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                        this.router.navigateByUrl('/profile');
+                        this.router.navigateByUrl('/profile/' + `${this.user._id}`);
                     }); }}]
         }).then(alert => {
              alert.present();

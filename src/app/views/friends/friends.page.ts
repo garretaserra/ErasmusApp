@@ -17,6 +17,7 @@ export class FriendsPage implements OnInit {
   users: UserName [];
   textobuscar = '';
   otherUser: User;
+
   constructor( private friendsService: FriendsService, private userService: UserService, private router: Router, public menuCtrl: MenuController) {
   }
   ngOnInit() {
@@ -24,22 +25,14 @@ export class FriendsPage implements OnInit {
           console.log(users);
           const response: any = users;
           this.users = response.users;
+          console.log('this.users: ', this.users);
       });
-
   }
   buscar(CustomEvent) {
     this.textobuscar = CustomEvent.detail.value;
   }
-  change() {
-      this.router.navigateByUrl('/other-profile');
-  }
-   sendUser(id: string) {
-    this.userService.saveOtherUser(id).subscribe(res => {
-          console.log('pepe', res);
-          const response: any = res;
-          this.otherUser = response.profile;
-          this.userService.saveOth(this.otherUser);
-      });
+  async change(id: string) {
+     await this.router.navigateByUrl('/other-profile/' + `${id}`);
   }
   onCancel($event: CustomEvent) {
   }

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User/user';
 import {FormGroup} from '@angular/forms';
 import {UserService} from '../../../models/User/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {ProfileService} from '../profile.service';
+import {UserProfile} from '../../../models/User/userProfile';
+import {UserName} from '../../../models/User/userName';
 
 @Component({
   selector: 'app-other-profile',
@@ -14,50 +16,59 @@ import {ProfileService} from '../profile.service';
 export class OtherProfilePage implements OnInit {
 
   user: User;
-  otherUser: User;
+  userProfile: UserProfile;
+  otherUserProfile: UserProfile;
+  followers: UserName[];
   following: boolean;
   followcheck: string;
+  _id: string;
 
-  constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
 
-  ngOnInit() {
-    this.otherUser = this.userService.sendOtherUser();
-    this.user = this.userService.sendUser();
-    this.userService.savePostsOth(this.otherUser._id);
-    this.userService.savePostsUsers(this.user._id);
-    this.userService.saveFollowers(this.user._id);
-    this.userService.saveFollowersOth(this.otherUser._id);
-    this.userService.saveFollowing(this.user._id);
-    this.userService.saveFollowingOth(this.otherUser._id);
-
-    this.checkFol();
-    console.log('UserOther', this.otherUser);
-    console.log('User', this.user);
-
+  async ngOnInit() {
+    this.load();
   }
-  follow() {
-    this.profileService.follow(this.user._id, this.otherUser._id).subscribe(res => {
+  async load() {
+    this._id = this.route.snapshot.paramMap.get('id');
+    this.user = this.userService.sendUser();
+    console.log('this.user: ', this.user);
+    await this.profileService.getProfile(this._id).subscribe(res => {
+      const response: any = res;
       console.log(res);
-      this.router.navigateByUrl('/profile');
+      this.userProfile = response.profile;
+      this.otherUserProfile = this.userProfile;
+    }, error => {console.log('error'); });
+    await this.profileService.getFollowers(this._id).subscribe(res => {
+      const response: any = res;
+      console.log(res);
+      this.followers = response.followers;
+      console.log('this.followers: ', this.followers);
+      this.checkFol();
+    }, error => {console.log('error'); });
+  }
+  async follow() {
+    await this.profileService.follow(this.user._id, this.userProfile._id).subscribe(res => {
+      console.log(res);
+      this.router.navigateByUrl('/profile/' + `${this.user._id}`);
     });
   }
-  unfollow() {
-    this.profileService.unfollow(this.user._id, this.otherUser._id).subscribe(res => {
+  async unfollow() {
+    this.profileService.unfollow(this.user._id, this.userProfile._id).subscribe(res => {
       console.log(res);
-      this.router.navigateByUrl('/profile'); });
+      this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+    });
   }
-  seeMyPosts() {
-    this.router.navigateByUrl('/posts');
+  async seeMyPosts() {
+    await this.router.navigateByUrl('/posts/' + `${this._id}`);
   }
-  seeMyFollowers() {
-    this.router.navigateByUrl('/followers');
+  async seeMyFollowers() {
+    await this.router.navigateByUrl('/followers/' + `${this._id}`);
   }
-  seeMyFollowing() {
-    this.router.navigateByUrl('/following');
+  async seeMyFollowing() {
+    await this.router.navigateByUrl('/following/' + `${this._id}`);
   }
   checkFol() {
-    this.followcheck = this.profileService.checkFollow(this.user, this.otherUser);
-    console.log('check: ', this.followcheck);
+    this.followcheck = this.profileService.checkFollow(this.followers, this.user._id);
     if (this.followcheck === 'not') {
       this.following = false;
     } else { this.following = true; }

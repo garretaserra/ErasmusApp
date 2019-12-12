@@ -53,22 +53,22 @@
         <ion-img class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"></ion-img>
       </div>
     </div>
-    <ion-card-header *ngIf="otherUser">
-      <ion-card-subtitle>{{otherUser.email}}</ion-card-subtitle>
-      <ion-card-title>{{otherUser.name}}</ion-card-title>
+    <ion-card-header *ngIf="otherUserProfile">
+      <ion-card-subtitle>{{otherUserProfile.email}}</ion-card-subtitle>
+      <ion-card-title>{{otherUserProfile.name}}</ion-card-title>
     </ion-card-header>
   </ion-card>
   <ion-card class="vertical-margin">
-    <ion-card-content *ngIf="otherUser">
+    <ion-card-content *ngIf="otherUserProfile">
       <div *ngIf="following">
       <ion-toolbar color="primary">
-        <ion-button (click)="seeMyPosts()">Posts: {{otherUser.posts}}</ion-button>
+        <ion-button (click)="seeMyPosts()">Posts: {{otherUserProfile.posts}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="secondary">
-        <ion-button (click)="seeMyFollowers()">Followers: {{otherUser.followers}}</ion-button>
+        <ion-button (click)="seeMyFollowers()">Followers: {{otherUserProfile.followers}}</ion-button>
       </ion-toolbar>
       <ion-toolbar color="tertiary">
-        <ion-button (click)="seeMyFollowing()">Following: {{otherUser.following}}</ion-button>
+        <ion-button (click)="seeMyFollowing()">Following: {{otherUserProfile.following}}</ion-button>
       </ion-toolbar>
       </div>
       <ion-toolbar color="primary">

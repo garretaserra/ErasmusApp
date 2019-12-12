@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../models/User/user.service';
 import {Post} from '../../../models/Posts/post';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {User} from '../../../models/User/user';
+import {PostService} from '../post.service';
 
 @Component({
   selector: 'app-posts',
@@ -13,43 +14,49 @@ import {User} from '../../../models/User/user';
 export class PostsPage implements OnInit {
   posts: Post[];
   user: User;
-  constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
-  ngOnInit() {
-    console.log('primero');
-    this.user = this.userService.otherUser;
-    this.posts = this.userService.sendPostOth();
-    console.log('post: ', this.posts);
+  _id: string;
+  constructor(private userService: UserService, private postService: PostService, private route: ActivatedRoute, private router: Router, public menuCtrl: MenuController) { }
+  async ngOnInit() {
+   this.load();
   }
-  openMenu() {
+  async load() {
+    this._id = this.route.snapshot.paramMap.get('id');
+    await this.postService.getPosts(this._id).subscribe(res => {
+      const response: any = res;
+      console.log(res);
+      this.posts = response.posts;
+    }, error => {console.log('error'); });
+  }
+  async openMenu() {
     console.log('abrete perro');
-    this.menuCtrl.open();
+    await this.menuCtrl.open();
   }
-  closeMenu() {
+  async closeMenu() {
     console.log('cierrate perro');
-    this.menuCtrl.close();
+    await this.menuCtrl.close();
   }
-  openMessagePage() {
+  async openMessagePage() {
     console.log('Funciona Message');
-    this.router.navigateByUrl('/message');
+    await this.router.navigateByUrl('/message');
   }
-  openProfilePage() {
+  async openProfilePage() {
     console.log('Funciona Profile');
-    this.router.navigateByUrl('/profile');
+    await this.router.navigateByUrl('/profile');
   }
-  openFriendsPage() {
+  async openFriendsPage() {
     console.log('Funciona Friends');
-    this.router.navigateByUrl('/friends');
+    await this.router.navigateByUrl('/friends');
   }
-  openGlobePage() {
+  async openGlobePage() {
     console.log('Funciona Globe');
-    this.router.navigateByUrl('/globe');
+    await this.router.navigateByUrl('/globe');
   }
-  openSettingPage() {
+  async openSettingPage() {
     console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
+    await this.router.navigateByUrl('/login');
   }
-  openHomePage() {
+  async openHomePage() {
     console.log('Funciona Home');
-    this.router.navigateByUrl('/home');
+    await this.router.navigateByUrl('/home');
   }
 }

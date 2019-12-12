@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
+import {FollowingService} from '../following.service';
 
 @Component({
   selector: 'app-following',
@@ -12,45 +13,54 @@ import {UserName} from '../../../models/User/userName';
 })
 export class FollowingPage implements OnInit {
   following: UserName[];
-  constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
+  _id: string;
+  constructor(private userService: UserService, private route: ActivatedRoute, private followingService: FollowingService, private router: Router, public menuCtrl: MenuController) { }
 
-  ngOnInit() {
-    this.following = this.userService.sendFollowingOth();
+  async ngOnInit() {
+    this.load();
   }
-  openMenu() {
+  async load() {
+    this._id = this.route.snapshot.paramMap.get('id');
+    await this.followingService.getFollowing(this._id).subscribe(res => {
+      const response: any = res;
+      console.log(res);
+      this.following = response.following;
+    }, error => {console.log('error'); });
+  }
+  async openMenu() {
     console.log('abrete perro');
-    this.menuCtrl.open();
+    await this.menuCtrl.open();
   }
 
-  closeMenu() {
+  async closeMenu() {
     console.log('cierrate perro');
-    this.menuCtrl.close();
+    await this.menuCtrl.close();
   }
 
-  openMessagePage() {
+  async openMessagePage() {
     console.log('Funciona Message');
-    this.router.navigateByUrl('/message');
+    await this.router.navigateByUrl('/message');
   }
 
-  openProfilePage() {
+  async openProfilePage() {
     console.log('Funciona Profile');
-    this.router.navigateByUrl('/profile');
+    await this.router.navigateByUrl('/profile');
   }
-  openFriendsPage() {
+  async openFriendsPage() {
     console.log('Funciona Friends');
-    this.router.navigateByUrl('/friends');
+    await this.router.navigateByUrl('/friends');
   }
-  openGlobePage() {
+  async openGlobePage() {
     console.log('Funciona Globe');
-    this.router.navigateByUrl('/globe');
+    await this.router.navigateByUrl('/globe');
   }
-  openSettingPage() {
+  async openSettingPage() {
     console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
+    await this.router.navigateByUrl('/login');
   }
 
-  openHomePage() {
+  async openHomePage() {
     console.log('Funciona Home');
-    this.router.navigateByUrl('/home');
+    await this.router.navigateByUrl('/home');
   }
 }
