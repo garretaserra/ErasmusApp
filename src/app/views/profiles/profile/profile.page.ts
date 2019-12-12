@@ -20,8 +20,11 @@ export class ProfilePage implements OnInit {
   userTest: UserProfile;
   _id: string;
   profileForm: FormGroup;
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
-
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router,
+              public menuCtrl: MenuController,
+              private profileService: ProfileService) { }
   async ngOnInit() {
     await this.load();
   }
@@ -42,33 +45,4 @@ export class ProfilePage implements OnInit {
   async seeMyFollowing() {
     await this.router.navigateByUrl('/myfollowing');
   }
-
-  async openMenu() {
-    await this.menuCtrl.open();
-  }
-  async closeMenu() {
-    await this.menuCtrl.close();
-  }
-  async openMessagePage() {
-    await this.router.navigateByUrl('/message');
-  }
-  async openProfilePage() {
-    await this.router.navigateByUrl('/profile');
-  }
-  async openFriendsPage() {
-    await this.router.navigateByUrl('/friends');
-  }
-  async openGlobePage() {
-    await this.router.navigateByUrl('/globe');
-  }
-  async openSettingPage() {
-    await this.router.navigateByUrl('/login');
-  }
-  async openHomePage() {
-    await this.menuCtrl.close();
-    this.router.navigateByUrl('/home');
-  }
-
-
-
 }

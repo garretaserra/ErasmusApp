@@ -37,6 +37,7 @@ export class HomePage implements OnInit {
                 public alertCtrl: AlertController) {}
 
    async ngOnInit() {
+        console.log('dime que si papi');
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
@@ -68,46 +69,20 @@ export class HomePage implements OnInit {
        console.log('activity: ', this.user.activity);
        await this.userService.saveUser(this.user);
     }
-    async openMenu() {
-        await this.menuCtrl.open();
-    }
-    async closeMenu() {
-        await this.menuCtrl.close();
-    }
-    async openMessagePage() {
-        await this.menuCtrl.close();
-        await this.router.navigateByUrl('/message');
-
-    }
-    async openProfilePage() {
-        await this.menuCtrl.toggle();
-        await this.router.navigateByUrl('/profile');
-    }
-    async openFriendsPage() {
-        await this.router.navigateByUrl('/friends');
-    }
-    async openGlobePage() {
-        await this.router.navigateByUrl('/globe');
-    }
-    async openSettingPage() {
-        await this.router.navigateByUrl('/login');
-    }
-    async openHomePage() {
-        await this.router.navigateByUrl('/home');
-    }
     async alert() {
         this.alertCtrl.create({
             header: 'TYPE',
             message: 'What type is the message?',
             buttons: [{text: 'Event', handler: () => {
                 this.postSend = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
-                this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                    this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+                this.homeService.sendPost(this.postSend, this.user).subscribe(res => {
+                    this.router.navigateByUrl('/profile');
                     }); }},
                 {text: 'Post',  handler: () => {
+                    console.log('message: ', this.homeForm.controls.post.value);
                     this.postSend = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);
-                    this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                        this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+                    this.homeService.sendPost(this.postSend, this.user).subscribe(res => {
+                        this.router.navigateByUrl('/profile');
                     }); }}]
         }).then(alert => {
              alert.present();

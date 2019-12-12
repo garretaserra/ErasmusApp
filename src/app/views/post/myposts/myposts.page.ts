@@ -3,8 +3,9 @@ import {Post} from '../../../models/Posts/post';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
 import {Router} from '@angular/router';
-import {MenuController} from '@ionic/angular';
+import {AlertController, MenuController} from '@ionic/angular';
 import {PostService} from '../post.service';
+import {PostSend} from '../../../models/Posts/postSend';
 
 @Component({
   selector: 'app-myposts',
@@ -15,7 +16,11 @@ export class MypostsPage implements OnInit {
 
   user: User;
   userTest: User;
-  constructor(private userService: UserService, private postService: PostService, private router: Router, public menuCtrl: MenuController) { }
+  constructor(private userService: UserService,
+              private postService: PostService,
+              private router: Router,
+              public menuCtrl: MenuController,
+              public alertCtrl: AlertController) { }
   async ngOnInit() {
     this.load();
   }
@@ -29,43 +34,47 @@ export class MypostsPage implements OnInit {
       console.log('error');
     });
   }
-  deletePost(id: string) {
-
+  async deletePost(id: string) {
+    this.alertCtrl.create({
+      header: 'TYPE',
+      message: 'Are you sure that you want delete this message?',
+      buttons: [{text: 'Yes', handler: () => {
+          this.postService.deletePost(id).subscribe(res => {
+            console.log(res);
+            this.router.navigateByUrl('/profile');
+          }, error => {
+            console.log(error);
+          });
+           }},
+        {text: 'No',  handler: () => {
+            }}]
+    }).then(alert => {
+      alert.present();
+    });
   }
-  openMenu() {
-    console.log('abrete perro');
-    this.menuCtrl.open();
+  async openMenu() {
+    await this.menuCtrl.open();
   }
-  closeMenu() {
-    console.log('cierrate perro');
-    this.menuCtrl.close();
+  async closeMenu() {
+    await this.menuCtrl.close();
   }
-
-  openMessagePage() {
-    console.log('Funciona Message');
-    this.router.navigateByUrl('/message');
+  async openMessagePage() {
+    await this.router.navigateByUrl('/message');
   }
-
-  openProfilePage() {
-    console.log('Funciona Profile');
-    this.router.navigateByUrl('/profile');
+  async openProfilePage() {
+    await this.router.navigateByUrl('/profile');
   }
-  openFriendsPage() {
-    console.log('Funciona Friends');
-    this.router.navigateByUrl('/friends');
+  async openFriendsPage() {
+    await this.router.navigateByUrl('/friends');
   }
-  openGlobePage() {
-    console.log('Funciona Globe');
-    this.router.navigateByUrl('/globe');
+  async openGlobePage() {
+    await this.router.navigateByUrl('/globe');
   }
-  openSettingPage() {
-    console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
+  async openSettingPage() {
+    await this.router.navigateByUrl('/login');
   }
-
-  openHomePage() {
-    console.log('Funciona Home');
-    this.router.navigateByUrl('/home');
+  async openHomePage() {
+    await this.router.navigateByUrl('/home');
   }
 
 }
