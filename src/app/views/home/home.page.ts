@@ -7,7 +7,6 @@ import {User} from '../../models/User/user';
 import {HomeService} from './home.service';
 import {Post} from '../../models/Posts/post';
 import {PostSend} from '../../models/Posts/postSend';
-import {Post} from '../../models/post';
 import {StorageComponent} from "../../storage/storage.component";
 
 @Component({
@@ -22,6 +21,9 @@ export class HomePage implements OnInit {
     user: User;
     post: PostSend;
 
+    followers;
+    following;
+
     form: FormGroup = new FormGroup({});
     suggestions: String[];
     searchValue: string;
@@ -32,29 +34,30 @@ export class HomePage implements OnInit {
                 private router: Router,
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
-                public alertCtrl: AlertController,
                 public storage: StorageComponent) {
     }
 
-   async ngOnInit() {
+    async ngOnInit() {
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
         this.user = JSON.parse(this.storage.getUser());
-        console.log('UserHome: ', this.user);
 
         //If user is not present redirect to login
         if(!this.user){
           this.router.navigateByUrl('/login');
         }
+
+        this.followers = (await this.userService.getFollowers(this.user._id).toPromise()).followers;
+        this.following = (await this.userService.getFollowing(this.user._id).toPromise()).following;
     }
     async getActivity() {
-       await this.homeService.getActivity(this.user._id).subscribe(res => {
+        await this.homeService.getActivity(this.user._id).subscribe(res => {
             const response: any = res;
             this.user.activity = response.activity;
         });
-       console.log('activity: ', this.user.activity);
-       await this.userService.saveUser(this.user);
+        console.log('activity: ', this.user.activity);
+        await this.userService.saveUser(this.user);
     }
     async openMenu() {
         await this.menuCtrl.open();
@@ -87,9 +90,9 @@ export class HomePage implements OnInit {
             header: 'TYPE',
             message: 'What type is the message?',
             buttons: [{text: 'Event', handler: () => {
-                this.post = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
-                this.homeService.sendPost(this.post, this.user).subscribe(res => {
-                    this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+                    this.post = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
+                    this.homeService.sendPost(this.post, this.user).subscribe(res => {
+                        this.router.navigateByUrl('/profile/' + `${this.user._id}`);
                     }); }},
                 {text: 'Post',  handler: () => {
                     this.post = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);
@@ -97,7 +100,7 @@ export class HomePage implements OnInit {
                         this.router.navigateByUrl('/profile/' + `${this.user._id}`);
                     }); }}]
         }).then(alert => {
-             alert.present();
+            alert.present();
         });
     }
 
@@ -109,14 +112,15 @@ export class HomePage implements OnInit {
     }
 
     logOff(){
-      this.storage.clearStorage();
+        this.storage.clearStorage();
     }
 
     postMessage: string;
     async publishPost(){
-        this.post = new Post(this.user.email, 'Post', this.postMessage);
-        this.homeService.sendPost(this.post, this.user).subscribe(res => {
-            this.user.posts.push(this.post);
+        let post = new Post('', this.user.email, 'Post', this.postMessage);
+        let postSend = new PostSend(this.user.email, 'Post', this.postMessage);
+        this.homeService.sendPost(postSend, this.user).subscribe(res => {
+            this.user.posts.push(post);
             this.updateUser();
         });
     }

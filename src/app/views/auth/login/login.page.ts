@@ -5,7 +5,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserLogin} from '../../../models/User/userLogin';
 import {UserService} from '../../../models/User/user.service';
 import {User} from '../../../models/User/user';
-import {UserPost} from '../../../models/User/userPost';
 import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
@@ -18,7 +17,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   validation_messages: any;
   user: User;
-  userWithJWT: UserPost;
+
   constructor(
       private authService: AuthService,
       private userService: UserService,
@@ -43,6 +42,7 @@ export class LoginPage implements OnInit {
 
     this.user = JSON.parse(this.storage.getUser());
     //If user is not present redirect to home
+    console.log('user', !!this.user);
     if(this.user){
       this.router.navigateByUrl('/home');
     }

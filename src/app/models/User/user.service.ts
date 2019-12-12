@@ -49,23 +49,12 @@ export class UserService {
         console.log('this.posts: ', this.posts);
         return this.posts;
     }
-    saveFollowers(id: string) {
-        this.httpClient.get(`${this.USER_SERVER_ADDRESS}/followers/` + `${id}`).subscribe(res => {
-            console.log(res);
-            console.log(res);
-            const response: any = res;
-            this.followers = response.followers;
-            return response.followers;
-        });
+    getFollowers(id: string) {
+        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/followers/` + `${id}`);
     }
-    sendFollowers() {
-        return this.followers;
-    }
-    saveFollowing(id: string) {
-        this.httpClient.get(`${this.USER_SERVER_ADDRESS}/following/` + `${id}`).subscribe(res => {
-            const response: any = res;
-            this.following = response.following;
-        });
+
+    getFollowing(id: string) {
+        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/following/` + `${id}`);
     }
     sendFollowing() {
         return this.following;

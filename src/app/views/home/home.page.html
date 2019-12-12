@@ -138,7 +138,6 @@
     <!--Left Column-->
     <div class="col-lg-3 col-md-3 col-sm-3">
       <mat-card class="vertical-margin no-padding">
-        <div *ngIf="userProfileTest">
         <div style="height: 250px">
           <div style="background: #e44d3a; height: 50%">
             <div class="personal-icon">
@@ -148,7 +147,7 @@
           <div style="height: 70%">
             <div class="personal-info-container">
               <div class="personal-name">
-                {{userProfileTest.name}}
+                {{user.name}}
               </div>
               <div class="personal-status">
                 Status
@@ -156,14 +155,13 @@
             </div>
           </div>
         </div>
-        <div class="personal-item">
+        <div *ngIf="followers" class="personal-item">
           <p class="personal-item-title">Followers</p>
-          {{userProfileTest.followers}}
+          {{followers.length}}
         </div>
-        <div class="personal-item">
+        <div *ngIf="following" class="personal-item">
           <p class="personal-item-title">Following</p>
-          {{userProfileTest.following}}
-        </div>
+          {{following.length}}
         </div>
       </mat-card>
     </div>
@@ -188,7 +186,7 @@
         </mat-card>
       </div>
       <!--Wall Card-->
-      <div *ngFor="let post of user.activity">
+      <div *ngFor="let post of user.posts">
         <mat-card class="vertical-margin">
           {{post.message}}
         </mat-card>
@@ -202,7 +200,7 @@
         </div>
         <mat-divider></mat-divider>
         <mat-list>
-          <div *ngFor="let follow of this.followers">
+          <div *ngFor="let follow of user.following">
           <mat-list-item>
             <div>
 <!--              {{follow.name}}-->
