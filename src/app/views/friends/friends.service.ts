@@ -19,6 +19,6 @@ export class FriendsService {
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
     getUsers() {
-        return this.httpClient.get<UserName[]>(`${this.FRIENDS_SERVER_ADDRESS}/usersName`);
+        return this.httpClient.get<UserName[]>(`${this.FRIENDS_SERVER_ADDRESS}/all`);
     }
 }

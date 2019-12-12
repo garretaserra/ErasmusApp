@@ -14,7 +14,6 @@ import {NavController} from '@ionic/angular';
 })
 export class MessagePage implements OnInit {
 
-  conversationPage: ConversationPage;
   message: string;
   user: User;
   users: UserName[];
@@ -32,24 +31,16 @@ export class MessagePage implements OnInit {
       console.log('UserList:');
       console.log(this.userList);
     });
-    this.friendsService.getUsers().subscribe(users => {
-      console.log('Users:' + users);
-      this.users = users;
+    this.friendsService.getUsers().subscribe((list: UserName[]) => {
+      console.log('Users:');
+      console.log(list);
+      this.users = list;
     });
   }
 
-  viewConversation() {
-    this.navCtrl.navigateForward('/conversation');
-  }
-
-
-  onKey(event: any) {
-    this.message = event.target.value;
-  }
-
-  sendMessage() {
-    console.log(this.message);
-    this.chatService.sendMessage(this.message, 'Sheila');
+  viewConversation(data) {
+    console.log(data);
+    this.navCtrl.navigateForward('/conversation/' + `${data}`);
   }
 
 }

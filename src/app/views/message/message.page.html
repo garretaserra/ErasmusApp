@@ -1,7 +1,3 @@
-<ion-app>
-  <ion-nav root="nav-home"></ion-nav>
-</ion-app>
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -16,14 +12,13 @@
     <ion-list-header>
       Online
     </ion-list-header>
-    <ion-item *ngFor="let userItem of userList" (click)="viewConversation()">
+    <ion-item *ngFor="let userItem of userList" (click)="viewConversation(userItem[0])">
         <ion-avatar slot="start">
           <img src="../../../assets/img/default_user.png">
         </ion-avatar>
         <ion-label>
           <h2>{{ userItem[0] }}</h2>
           <h3>Online</h3>
-          <p>I just upgraded my X-Wing. Next time...</p>
         </ion-label>
     </ion-item>
   </ion-list>
@@ -31,13 +26,12 @@
     <ion-list-header>
       Everybody
     </ion-list-header>
-    <ion-item *ngFor="let userItem of users">
+    <ion-item *ngFor="let userItem of users" (click)="viewConversation(userItem.name)">
       <ion-avatar slot="start">
         <img src="../../../assets/img/default_user.png">
       </ion-avatar>
       <ion-label>
         <h2>{{ userItem.name }}</h2>
-        <p>I just upgraded my X-Wing. Next time...</p>
       </ion-label>
     </ion-item>
   </ion-list>
