@@ -47,20 +47,23 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/home');
     }
   }
-
   login() {
-    console.log('Email: ', this.loginForm.controls.email.value);
-    console.log('Pass;',  this.loginForm.controls.password.value );
     this.authService.login(new UserLogin( this.loginForm.controls.email.value,
-      this.loginForm.controls.password.value)).subscribe(res => {
-      this.userWithJWT = res as UserPost;
-      this.user = this.userWithJWT.user;
-      this.userService.saveUser(this.user);
+        this.loginForm.controls.password.value)).subscribe(res => {
+            const response: any = res;
+            this.user = response.user;
+            this.user.jwt = response.jwt;
+            this.userService.saveUser(this.user);
+            console.log('this.user:', this.user);
+            this.router.navigateByUrl('/home');
 
-      //Save info locally
-      this.storage.saveToken(this.userWithJWT.jwt);
-      this.storage.saveUser(JSON.stringify(this.user));
-      location.reload();
-    })
+            //Save info locally
+            this.storage.saveToken(this.user.jwt);
+            this.storage.saveUser(JSON.stringify(this.user));
+            location.reload();
+        },
+        err => {
+          console.log(err);
+        });
   }
 }

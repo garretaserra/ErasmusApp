@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../models/User/user';
-import {UserClient} from 'ionic/lib/user';
 import {UserService} from '../../../models/User/user.service';
 import {FormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
-import {Post} from '../../../models/post';
+import {Post} from '../../../models/Posts/post';
+import {ProfileService} from '../profile.service';
+import {UserProfile} from '../../../models/User/userProfile';
 
 @Component({
   selector: 'app-profile',
@@ -15,61 +16,56 @@ import {Post} from '../../../models/post';
 export class ProfilePage implements OnInit {
 
   posts: Post[];
-  user: User;
+  userProfile: UserProfile;
+  userTest: UserProfile;
+  _id: string;
   profileForm: FormGroup;
-  constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
 
-  ngOnInit() {
-    this.user = this.userService.sendUser();
-    this.userService.savePostsUsers(this.user._id);
-    this.userService.saveFollowers(this.user._id);
-    this.userService.saveFollowing(this.user._id);
-    console.log('UserProfile: ', this.user);
+  async ngOnInit() {
+    await this.load();
   }
-  seeMyPosts() {
-    this.router.navigateByUrl('/myposts');
+  async load() {
+      this._id = this.userService.sendUser()._id;
+      await this.profileService.getProfile(this._id).subscribe(res => {
+      const response: any = res;
+      console.log(res);
+      this.userTest = response.profile;
+    }, error => {console.log('error'); });
   }
-  seeMyFollowers() {
-    this.router.navigateByUrl('/myfollowers');
+  async seeMyPosts() {
+    await this.router.navigateByUrl('/myposts');
   }
-  seeMyFollowing() {
-    this.router.navigateByUrl('/myfollowing');
+  async seeMyFollowers() {
+    await this.router.navigateByUrl('/myfollowers');
   }
-
-  openMenu() {
-    this.menuCtrl.open();
-  }
-
-  closeMenu() {
-    console.log('cierrate perro');
-    this.menuCtrl.close();
+  async seeMyFollowing() {
+    await this.router.navigateByUrl('/myfollowing');
   }
 
-  openMessagePage() {
-    console.log('Funciona Message');
-    this.router.navigateByUrl('/message');
+  async openMenu() {
+    await this.menuCtrl.open();
   }
-
-  openProfilePage() {
-    console.log('Funciona Profile');
-
-    this.router.navigateByUrl('/profile');
+  async closeMenu() {
+    await this.menuCtrl.close();
   }
-  openFriendsPage() {
-    console.log('Funciona Friends');
-    this.router.navigateByUrl('/friends');
+  async openMessagePage() {
+    await this.router.navigateByUrl('/message');
   }
-  openGlobePage() {
-    console.log('Funciona Globe');
-    this.router.navigateByUrl('/globe');
+  async openProfilePage() {
+    await this.router.navigateByUrl('/profile');
   }
-  openSettingPage() {
-    console.log('Funciona Setting');
-    this.router.navigateByUrl('/login');
+  async openFriendsPage() {
+    await this.router.navigateByUrl('/friends');
   }
-
-  openHomePage() {
-    console.log('Funciona Home');
+  async openGlobePage() {
+    await this.router.navigateByUrl('/globe');
+  }
+  async openSettingPage() {
+    await this.router.navigateByUrl('/login');
+  }
+  async openHomePage() {
+    await this.menuCtrl.close();
     this.router.navigateByUrl('/home');
   }
 

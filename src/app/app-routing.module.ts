@@ -33,19 +33,19 @@ const routes: Routes = [
     loadChildren: () => import('./geolocation/geolocation.module').then( m => m.GeolocationPageModule)
   },
   {
-    path: 'other-profile',
+    path: 'other-profile/:id',
     loadChildren: () => import('./views/profiles/other-profile/other-profile.module').then( m => m.OtherProfilePageModule)
   },
   {
-    path: 'posts',
+    path: 'posts/:id',
     loadChildren: () => import('./views/post/posts/posts.module').then(m => m.PostsPageModule)
   },
   {
-    path: 'followers',
+    path: 'followers/:id',
     loadChildren: () => import('./views/follower/followers/followers.module').then(m => m.FollowersPageModule)
   },
   {
-    path: 'following',
+    path: 'following/:id',
     loadChildren: () => import('./views/followings/following/following.module').then(m => m.FollowingPageModule)
   },
   {
@@ -67,15 +67,7 @@ const routes: Routes = [
   {
     path: 'conversation',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
-  },
-
-
-
-
-
-
-
-
+  }
 ];
 
 @NgModule({

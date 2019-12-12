@@ -53,21 +53,21 @@
                           <ion-img class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"></ion-img>
                       </div>
                     </div>
-                      <ion-card-header *ngIf="user">
-                        <ion-card-subtitle>{{user.email}}</ion-card-subtitle>
-                        <ion-card-title>{{user.name}}</ion-card-title>
+                      <ion-card-header *ngIf="userTest">
+                        <ion-card-subtitle>{{userTest.email}}</ion-card-subtitle>
+                        <ion-card-title>{{userTest.name}}</ion-card-title>
                       </ion-card-header>
                 </ion-card>
             <ion-card class="vertical-margin">
-                <ion-card-content *ngIf="user">
+                <ion-card-content *ngIf="userTest">
                     <ion-toolbar color="primary">
-                        <ion-button (click)="seeMyPosts()">Posts: {{user.posts.length}}</ion-button>
+                        <ion-button (click)="seeMyPosts()">Posts: {{userTest.posts}}</ion-button>
                     </ion-toolbar>
                     <ion-toolbar color="secondary">
-                        <ion-button (click)="seeMyFollowers()">Followers: {{user.followers.length}}</ion-button>
+                        <ion-button (click)="seeMyFollowers()">Followers: {{userTest.followers}}</ion-button>
                     </ion-toolbar>
                     <ion-toolbar color="tertiary">
-                        <ion-button (click)="seeMyFollowing()">Following: {{user.following.length}}</ion-button>
+                        <ion-button (click)="seeMyFollowing()">Following: {{userTest.following}}</ion-button>
                     </ion-toolbar>
                 </ion-card-content>
             </ion-card>

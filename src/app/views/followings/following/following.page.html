@@ -43,13 +43,15 @@
         <ion-buttons slot="start">
           <ion-menu-button type="submit" (click)="openMenu()"></ion-menu-button>
         </ion-buttons>
-    <ion-title>following</ion-title>
+    <ion-title>Following</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card class="vertical-margin" *ngFor="let user of following">
-    <ion-toolbar>{{user.name}}</ion-toolbar>
+    <ion-toolbar>
+      <ion-button size="large" color="tertiary" (click)="change(user._id)" expand="block">{{user.name}}</ion-button>
+    </ion-toolbar>
   </ion-card>
 </ion-content>
   </div>

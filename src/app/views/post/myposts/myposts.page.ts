@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Post} from '../../../models/post';
+import {Post} from '../../../models/Posts/post';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
 import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
+import {PostService} from '../post.service';
 
 @Component({
   selector: 'app-myposts',
@@ -12,14 +13,21 @@ import {MenuController} from '@ionic/angular';
 })
 export class MypostsPage implements OnInit {
 
-  posts: Post[];
   user: User;
-  constructor(private userService: UserService, private router: Router, public menuCtrl: MenuController) { }
-  ngOnInit() {
-    console.log('primero');
-    this.user = this.userService.user;
-    this.posts = this.userService.sendPosts();
-    console.log('post: ', this.posts);
+  userTest: User;
+  constructor(private userService: UserService, private postService: PostService, private router: Router, public menuCtrl: MenuController) { }
+  async ngOnInit() {
+    this.load();
+  }
+  async load() {
+    this.user = this.userService.sendUser();
+    await this.postService.getPosts(this.user._id).subscribe(res => {
+      const response: any = res;
+      this.user.posts = response.posts;
+      this.userTest = this.user;
+    }, error => {
+      console.log('error');
+    });
   }
   deletePost(id: string) {
 

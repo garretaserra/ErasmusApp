@@ -17,6 +17,7 @@ export class FriendsPage implements OnInit {
   users: UserName [];
   textobuscar = '';
   otherUser: User;
+
   constructor( private friendsService: FriendsService, private userService: UserService, private router: Router, public menuCtrl: MenuController) {
   }
   ngOnInit() {
@@ -24,59 +25,39 @@ export class FriendsPage implements OnInit {
           console.log(users);
           const response: any = users;
           this.users = response.users;
+          console.log('this.users: ', this.users);
       });
-
   }
   buscar(CustomEvent) {
     this.textobuscar = CustomEvent.detail.value;
   }
-  change() {
-      this.router.navigateByUrl('/other-profile');
-  }
-   sendUser(id: string) {
-    this.userService.saveOtherUser(id).subscribe(res => {
-          console.log('pepe', res);
-          const response: any = res;
-          this.otherUser = response.profile;
-          this.userService.saveOth(this.otherUser);
-      });
+  async change(id: string) {
+     await this.router.navigateByUrl('/other-profile/' + `${id}`);
   }
   onCancel($event: CustomEvent) {
   }
-  openMenu() {
-        this.menuCtrl.open();
+  async openMenu() {
+       await this.menuCtrl.open();
   }
-
-    closeMenu() {
-        console.log('cierrate perro');
-        this.menuCtrl.close();
+  async closeMenu() {
+        await this.menuCtrl.close();
     }
-
-    openMessagePage() {
-        console.log('Funciona Message');
-        this.router.navigateByUrl('/message');
+  async openMessagePage() {
+        await this.router.navigateByUrl('/message');
     }
-
-    openProfilePage() {
-        console.log('Funciona Profile');
-
-        this.router.navigateByUrl('/profile');
+  async openProfilePage() {
+         await this.router.navigateByUrl('/profile');
     }
-    openFriendsPage() {
-        console.log('Funciona Friends');
-        this.router.navigateByUrl('/friends');
+  async openFriendsPage() {
+        await this.router.navigateByUrl('/friends');
     }
-    openGlobePage() {
-        console.log('Funciona Globe');
-        this.router.navigateByUrl('/globe');
+  async openGlobePage() {
+        await this.router.navigateByUrl('/globe');
     }
-    openSettingPage() {
-        console.log('Funciona Setting');
-        this.router.navigateByUrl('/login');
+  async openSettingPage() {
+        await this.router.navigateByUrl('/login');
     }
-
-    openHomePage() {
-        console.log('Funciona Home');
-        this.router.navigateByUrl('/home');
+  async openHomePage() {
+        await this.router.navigateByUrl('/home');
     }
 }

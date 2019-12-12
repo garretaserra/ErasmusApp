@@ -19,6 +19,9 @@ export class ProfileService {
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
+    getProfile( id: string ) {
+        return this.httpClient.get(`${this.PROFILE_SERVER_ADDRESS}/profile/` + `${id}`);
+    }
     follow(id: string, followedId: string) {
         return this.httpClient.put(`${this.PROFILE_SERVER_ADDRESS}/follow`, {
             userId: id,
@@ -31,18 +34,20 @@ export class ProfileService {
             followedId: followedId
         });
     }
-    checkFollow(user: User, otherUser: User) {
+    getFollowers(id: string) {
+        return this.httpClient.get(`${this.PROFILE_SERVER_ADDRESS}/followers/` + `${id}`);
+    }
+    checkFollow(followers: UserName[], userId: string) {
         this.val = 'not';
-        user.following.forEach(x => {
-                console.log('UserCheck: ', x);
-                console.log('checkid:', x._id);
-                console.log('otherUserId:', otherUser._id);
-                if (x._id === otherUser._id) {
-                    console.log('entra!');
-                    this.val = 'following';
+        if (followers.length === 0) {
+            return this.val;
+        } else {
+            followers.forEach(x => {
+                    if (x._id === userId) {
+                        return this.val = 'following';
+                    }
                 }
-            }
-        );
-        return this.val;
+            );
+        }
     }
 }
