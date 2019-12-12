@@ -13,11 +13,19 @@ import {AuthModule} from './views/auth/auth.module';
 import {HomePageModule} from './views/home/home.module';
 import {PipesModule} from './pipes/pipes.module';
 import {ChatService} from './services/chat.service';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AuthModule, HomePageModule, PipesModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AuthModule,
+    HomePageModule,
+    PipesModule],
   providers: [
     StatusBar,
     SplashScreen,

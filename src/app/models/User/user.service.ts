@@ -55,6 +55,7 @@ export class UserService {
             console.log(res);
             const response: any = res;
             this.followers = response.followers;
+            return response.followers;
         });
     }
     sendFollowers() {
@@ -101,5 +102,9 @@ export class UserService {
     }
     sendPostOth() {
         return this.postsOthUser;
+    }
+
+    search(searchString){
+        return this.httpClient.get<User[]>(`${this.USER_SERVER_ADDRESS}/search?searchString=` + searchString);
     }
 }

@@ -5,7 +5,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import {AngularMaterialModule} from '../../../../../ErasmusWeb/src/app/angular-material.module';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatCardModule} from "@angular/material/card";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
+import {TextFieldModule} from "@angular/cdk/text-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
     imports: [
@@ -19,7 +27,15 @@ import {AngularMaterialModule} from '../../../../../ErasmusWeb/src/app/angular-m
             }
         ]),
         ReactiveFormsModule,
-        AngularMaterialModule,
+        MatAutocompleteModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatDividerModule,
+        MatListModule,
+        TextFieldModule,
+        MatInputModule,
+        MatButtonModule,
     ],
     declarations: [HomePage],
     schemas: [NO_ERRORS_SCHEMA]
