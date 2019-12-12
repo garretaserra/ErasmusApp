@@ -6,6 +6,7 @@ import {UserService} from '../../models/User/user.service';
 import {User} from '../../models/User/user';
 import {HomeService} from './home.service';
 import {Post} from '../../models/post';
+import {StorageComponent} from "../../storage/storage.component";
 
 @Component({
   selector: 'app-home',
@@ -28,15 +29,21 @@ export class HomePage implements OnInit {
                 private userService: UserService,
                 private router: Router,
                 public menuCtrl: MenuController,
-                public alertCtrl: AlertController) {
+                public alertCtrl: AlertController,
+                public storage: StorageComponent) {
     }
 
     ngOnInit() {
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
-        this.user = this.userService.sendUser();
+        this.user = JSON.parse(this.storage.getUser());
         console.log('UserHome: ', this.user);
+
+        //If user is not present redirect to login
+        if(!this.user){
+          this.router.navigateByUrl('/login');
+        }
     }
      async getActivity() {
        await this.homeService.getActivity(this.user._id).subscribe(res => {
@@ -59,7 +66,6 @@ export class HomePage implements OnInit {
         this.menuCtrl.close();
         console.log('Funciona Message');
         this.router.navigateByUrl('/message');
-
     }
     openProfilePage() {
         console.log('Funciona Profile');
@@ -112,9 +118,8 @@ export class HomePage implements OnInit {
         this.suggestions = users.map(a => a.email);
     }
 
-    //TODO: Implement log off functionality
     logOff(){
-
+      this.storage.clearStorage();
     }
 
     postMessage: string;

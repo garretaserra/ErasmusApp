@@ -14,6 +14,8 @@ import {HomePageModule} from './views/home/home.module';
 import {PipesModule} from './pipes/pipes.module';
 import {ChatService} from './services/chat.service';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NativeStorage} from "@ionic-native/native-storage/ngx";
+import {StorageComponent} from "./storage/storage.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +32,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     StatusBar,
     SplashScreen,
     ChatService,
-      GoogleMaps,
+    NativeStorage,
+    StorageComponent,
+    GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
