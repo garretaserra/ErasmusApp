@@ -49,13 +49,13 @@ export class OtherProfilePage implements OnInit {
   async follow() {
     await this.profileService.follow(this.user._id, this.userProfile._id).subscribe(res => {
       console.log(res);
-      this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+      this.router.navigateByUrl('/profile');
     });
   }
   async unfollow() {
     this.profileService.unfollow(this.user._id, this.userProfile._id).subscribe(res => {
       console.log(res);
-      this.router.navigateByUrl('/profile/' + `${this.user._id}`);
+      this.router.navigateByUrl('/profile');
     });
   }
   async seeMyPosts() {
@@ -69,6 +69,7 @@ export class OtherProfilePage implements OnInit {
   }
   checkFol() {
     this.followcheck = this.profileService.checkFollow(this.followers, this.user._id);
+    console.log('followcheck: ', this.followcheck);
     if (this.followcheck === 'not') {
       this.following = false;
     } else { this.following = true; }

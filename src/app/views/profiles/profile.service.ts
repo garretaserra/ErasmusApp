@@ -22,7 +22,6 @@ export class ProfileService {
     getProfile( id: string ) {
         return this.httpClient.get(`${this.PROFILE_SERVER_ADDRESS}/profile/` + `${id}`);
     }
-
     follow(id: string, followedId: string) {
         return this.httpClient.put(`${this.PROFILE_SERVER_ADDRESS}/follow`, {
             userId: id,
@@ -38,12 +37,9 @@ export class ProfileService {
     getFollowers(id: string) {
         return this.httpClient.get(`${this.PROFILE_SERVER_ADDRESS}/followers/` + `${id}`);
     }
-
     checkFollow(followers: UserName[], userId: string) {
-        console.log('followers: ', followers);
-        console.log('userId: ', userId);
         this.val = 'not';
-        if (followers === undefined) {
+        if (followers.length === 0) {
             return this.val;
         } else {
             followers.forEach(x => {
