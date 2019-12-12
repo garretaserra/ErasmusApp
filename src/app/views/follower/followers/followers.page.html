@@ -49,7 +49,9 @@
 
 <ion-content>
   <ion-card class="vertical-margin" *ngFor="let user of followers">
-    <ion-toolbar>{{user.name}}</ion-toolbar>
+    <ion-toolbar>
+      <ion-button size="large" color="tertiary" (click)="change(user._id)" expand="block">{{user.name}}</ion-button>
+    </ion-toolbar>
   </ion-card>
 </ion-content>
   </div>

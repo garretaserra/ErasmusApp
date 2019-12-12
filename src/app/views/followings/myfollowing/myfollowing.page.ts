@@ -20,6 +20,9 @@ export class MyfollowingPage implements OnInit {
   async ngOnInit() {
     this.load();
   }
+  async change(id: string) {
+    await this.router.navigateByUrl('/other-profile/' + `${id}`);
+  }
   async load() {
     this._id = this.userService.sendUser()._id;
     this.followingService.getFollowing(this._id).subscribe(res => {

@@ -27,6 +27,14 @@ export class FollowingPage implements OnInit {
       this.following = response.following;
     }, error => {console.log('error'); });
   }
+  async change(id: string) {
+    if (id === this.userService.sendUser()._id) {
+      await this.router.navigateByUrl('/profile');
+
+    } else {
+      await this.router.navigateByUrl('/other-profile/' + `${id}`);
+    }
+  }
   async openMenu() {
     await this.menuCtrl.open();
   }

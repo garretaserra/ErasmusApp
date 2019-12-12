@@ -27,6 +27,9 @@ export class MyfollowersPage implements OnInit {
       this.followers = response.followers;
     }, error => {console.log('error'); });
   }
+  async change(id: string) {
+    await this.router.navigateByUrl('/other-profile/' + `${id}`);
+  }
   async openMenu() {
     await this.menuCtrl.open();
   }
