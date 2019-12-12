@@ -24,4 +24,13 @@ export class ChatService {
     this.socket.emit('message', { message, destination});
   }
 
+  public getMessage = () => {
+    return new Observable((observer) => {
+      this.socket.on('message', (data) => {
+        observer.next(data);
+      });
+    });
+  }
+
+
 }
