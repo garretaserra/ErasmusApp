@@ -138,6 +138,7 @@ export class HomePage implements OnInit {
     }
 
     async updateUser(){
-        let posts = await this.userService.savePostsUsers(this.user._id);
+        this.user.activity = (await this.userService.savePostsUsers(this.user._id).toPromise()).posts;
+        this.storage.saveUser(JSON.stringify(this.user));
     }
 }

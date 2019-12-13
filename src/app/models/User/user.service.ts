@@ -43,7 +43,7 @@ export class UserService {
         return this.otherUser;
     }
     savePostsUsers(id: string) {
-        return this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`);
+        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`);
     }
     sendPosts() {
         console.log('this.posts: ', this.posts);
