@@ -1,0 +1,20 @@
+<ion-app>
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Followers</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-card class="vertical-margin" *ngFor="let userName of this.followers">
+        <ion-toolbar>
+          <ion-button size="large" color="tertiary" (click)="change(userName._id)" expand="block">{{userName.name}}</ion-button>
+        </ion-toolbar>
+      </ion-card>
+    </ion-content>
+  </div>
+</ion-app>

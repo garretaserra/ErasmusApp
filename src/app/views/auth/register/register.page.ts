@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { AuthService } from "../auth.service";
-import {Form, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import {Form, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserRegister} from '../../../models/User/userRegister';
-import {UserPost} from '../../../models/User/userPost';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
 
@@ -14,7 +13,6 @@ import {UserService} from '../../../models/User/user.service';
 })
 export class RegisterPage implements OnInit {
 
-  userWithJWT: UserPost;
   user: User;
   registerForm: FormGroup;
   validation_messages: any;
@@ -43,43 +41,42 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.validation_messages = {
-      'name': [
+      name: [
         { type: 'required', message: 'Campo obligatorio' },
         { type: 'pattern', message: 'Debe empezar con mayúsculas y no contener ni números ni espacios' },
         { type: 'minlength', message: 'Demasiado corto'}
       ],
-      'email': [
+      email: [
         { type: 'required', message: 'Campo obligatorio.' },
         { type: 'pattern', message: 'Debe ser un correo electrónico válido'}
       ],
-      'pass': [
+      pass: [
         { type: 'required', message: 'Campo obligatorio.' },
         { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
         { type: 'minlength', message: 'Mínimo 8 caracteres'}
       ],
-      'confirm': [
+      confirm: [
         { type: 'required', message: 'Campo obligatorio.' },
         { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
         { type: 'minlength', message: 'Mínimo 8 caracteres'}
       ],
-      'terms': [
+      terms: [
         { type: 'requiredtrue', message: 'Debes aceptar los Términos y Condiciones de Servicio'}
       ]
-    }
+    };
   }
 
-  email (formGroup: FormGroup) {
-    let email = formGroup.get('email');
+  email(formGroup: FormGroup) {
+    const email = formGroup.get('email');
     setTimeout(() => {
-      if(email.value==='pepito@gmail.com') {
+      if (email.value === 'pepito@gmail.com') {
         console.log('coinciden');
         return null;
-      }
-      else{
+      } else {
         console.log('no coinciden');
         return { emailNotValid: true };
       }
-    },2000);
+    }, 2000);
 
   }
 
@@ -89,9 +86,9 @@ export class RegisterPage implements OnInit {
     return pass === confirm ? null : { passwordNotMatch: true };
   }
 
-  register(){
-    let user = new User(this.registerForm.controls['email'].value,
-        this.registerForm.controls['pass'].value,this.registerForm.controls['name'].value);
+  register() {
+    const user = new UserRegister(this.registerForm.controls.email.value,
+        this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
     console.log(user);
     this.authService.register(user).subscribe(res => {
           console.log(res);
@@ -100,5 +97,5 @@ export class RegisterPage implements OnInit {
         err => {
           console.log(err);
         });
-  }
+   }
 }

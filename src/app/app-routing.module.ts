@@ -33,31 +33,41 @@ const routes: Routes = [
     loadChildren: () => import('./geolocation/geolocation.module').then( m => m.GeolocationPageModule)
   },
   {
-    path: 'other-profile',
+    path: 'other-profile/:id',
     loadChildren: () => import('./views/profiles/other-profile/other-profile.module').then( m => m.OtherProfilePageModule)
   },
   {
-    path: 'posts',
-    loadChildren: () => import('./views/posts/posts.module').then( m => m.PostsPageModule)
+    path: 'posts/:id',
+    loadChildren: () => import('./views/post/posts/posts.module').then(m => m.PostsPageModule)
   },
   {
-    path: 'followers',
-    loadChildren: () => import('./views/followers/followers.module').then( m => m.FollowersPageModule)
+    path: 'followers/:id',
+    loadChildren: () => import('./views/follower/followers/followers.module').then(m => m.FollowersPageModule)
   },
   {
-    path: 'following',
-    loadChildren: () => import('./views/following/following.module').then( m => m.FollowingPageModule)
+    path: 'following/:id',
+    loadChildren: () => import('./views/followings/following/following.module').then(m => m.FollowingPageModule)
+  },
+  {
+    path: 'front',
+    loadChildren: () => import('./views/front/front.module').then( m => m.FrontPageModule)
+  },
+  {
+    path: 'myposts',
+    loadChildren: () => import('./views/post/myposts/myposts.module').then( m => m.MypostsPageModule)
+  },
+  {
+    path: 'myfollowing',
+    loadChildren: () => import('./views/followings/myfollowing/myfollowing.module').then( m => m.MyfollowingPageModule)
+  },
+  {
+    path: 'myfollowers',
+    loadChildren: () => import('./views/follower/myfollowers/myfollowers.module').then( m => m.MyfollowersPageModule)
   },
   {
     path: 'conversation/:name',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
   },
-
-
-
-
-
-
 ];
 
 @NgModule({

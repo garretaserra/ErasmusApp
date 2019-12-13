@@ -1,0 +1,20 @@
+<ion-app>
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Following</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="vertical-margin" *ngFor="let user of following">
+    <ion-toolbar>
+      <ion-button size="large" color="tertiary" (click)="change(user._id)" expand="block">{{user.name}}</ion-button>
+    </ion-toolbar>
+  </ion-card>
+</ion-content>
+  </div>
+</ion-app>

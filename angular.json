@@ -37,6 +37,12 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "node_modules/bootstrap/dist/css/bootstrap-grid.css"
+              },
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
               }
             ],
             "scripts": []
@@ -98,7 +104,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
+            "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap-grid.css"
+            ],
             "scripts": [],
             "assets": [
               {

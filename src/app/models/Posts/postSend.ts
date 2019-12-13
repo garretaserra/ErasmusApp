@@ -1,4 +1,4 @@
-export class Post {
+export class PostSend {
     owner: string;
     type: string;
     message: string;
@@ -7,4 +7,5 @@ export class Post {
         this.message = message;
         this.owner = owner;
     }
+
 }
