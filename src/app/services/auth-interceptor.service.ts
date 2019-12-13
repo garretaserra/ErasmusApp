@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class AuthInterceptorService implements HttpInterceptor {
 
     constructor(
-        private router: Router
+        private router: Router,
+        private snackBar: MatSnackBar
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,9 +28,9 @@ export class AuthInterceptorService implements HttpInterceptor {
         return next.handle(request).pipe(
             catchError((err: HttpErrorResponse) => {
                 if (err.status === 401) {
-                    sessionStorage.clear();
+                    localStorage.clear();
                     this.router.navigateByUrl('/login');
-                    //TODO: Add toast message informing the user that the session has expired
+                    this.snackBar.open('Session has expired, log in again');
                 }
                 return throwError( err );
             })

@@ -50,15 +50,12 @@ export class HomePage implements OnInit {
     async ionViewDidEnter(){
         let storageUser = this.storage.getUser();
 
-        console.log('storageUser', !!storageUser, storageUser);
-
         //If user is not present redirect to login
         if(!storageUser){
             console.log('goto login');
             await this.router.navigateByUrl('/login');
         }
         else{
-            console.log('storageuser', (storageUser));
             this.user = JSON.parse(storageUser);
             await this.storage.saveUser(storageUser);
 
