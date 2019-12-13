@@ -5,6 +5,7 @@ import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
 import {User} from '../../../models/User/user';
 import {FollowersService} from '../followers.service';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-myfollowers',
@@ -15,13 +16,17 @@ export class MyfollowersPage implements OnInit {
 
   followers: UserName [];
   user: User;
-  constructor(private userService: UserService, private followersService: FollowersService, private router: Router, public menuCtrl: MenuController) { }
+  constructor(private userService:UserService,
+              private followersService: FollowersService,
+              private router: Router,
+              private storage: StorageComponent,
+              public menuCtrl: MenuController) { }
 
   async ngOnInit() {
     this.load();
   }
   async load() {
-    this.user = this.userService.sendUser();
+    this.user = JSON.parse(this.storage.getUser());
     this.followersService.getFollowers(this.user._id).subscribe(res => {
       const response: any = res;
       this.followers = response.followers;

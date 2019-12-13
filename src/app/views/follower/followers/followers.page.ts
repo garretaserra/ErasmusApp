@@ -6,6 +6,7 @@ import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
 import {ProfileService} from '../../profiles/profile.service';
 import {FollowersService} from '../followers.service';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-followers',
@@ -18,6 +19,7 @@ export class FollowersPage implements OnInit {
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private followersService: FollowersService,
+              private storage: StorageComponent,
               private router: Router,
               public menuCtrl: MenuController) { }
 
@@ -33,7 +35,7 @@ export class FollowersPage implements OnInit {
     }, error => {console.log('error'); });
   }
   async change(id: string) {
-    if (id === this.userService.sendUser()._id) {
+    if (id === JSON.parse(this.storage.getUser())._id) {
       await this.router.navigateByUrl('/profile');
 
     } else {

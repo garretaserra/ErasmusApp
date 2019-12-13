@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AlertController, MenuController} from '@ionic/angular';
 import {PostService} from '../post.service';
 import {PostSend} from '../../../models/Posts/postSend';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-myposts',
@@ -16,13 +17,21 @@ export class MypostsPage implements OnInit {
 
   user: User;
   userTest: User;
-  constructor(private userService: UserService, private postService: PostService, private router: Router, public menuCtrl: MenuController,public alertCtrl: AlertController) { }
+  constructor(private userService: UserService,
+              private postService: PostService,
+              private router: Router,
+              public menuCtrl: MenuController,
+              public storage: StorageComponent,
+              public alertCtrl: AlertController) { }
   async ngOnInit() {
     this.load();
   }
   async load() {
-    this.user = this.userService.sendUser();
+      console.log('loading');
+    this.user = JSON.parse(this.storage.getUser());
+    console.log('this user', this.user);
     await this.postService.getPosts(this.user._id).subscribe(res => {
+        console.log('response', res);
       const response: any = res;
       this.user.posts = response.posts;
       this.userTest = this.user;

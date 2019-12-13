@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
 import {FollowingService} from '../following.service';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-following',
@@ -14,7 +15,12 @@ import {FollowingService} from '../following.service';
 export class FollowingPage implements OnInit {
   following: UserName[];
   _id: string;
-  constructor(private userService: UserService, private route: ActivatedRoute, private followingService: FollowingService, private router: Router, public menuCtrl: MenuController) { }
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private followingService: FollowingService,
+              private storage: StorageComponent,
+              private router: Router,
+              public menuCtrl: MenuController) { }
 
   async ngOnInit() {
     this.load();
@@ -28,7 +34,7 @@ export class FollowingPage implements OnInit {
     }, error => {console.log('error'); });
   }
   async change(id: string) {
-    if (id === this.userService.sendUser()._id) {
+    if (id === JSON.parse(this.storage.getUser())._id) {
       await this.router.navigateByUrl('/profile');
 
     } else {

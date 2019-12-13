@@ -24,7 +24,7 @@ export class FriendsPage implements OnInit {
       this.friendsService.getUsers().subscribe(users => {
           console.log(users);
           const response: any = users;
-          this.users = response.users;
+          this.users = response;
           console.log('this.users: ', this.users);
       });
   }

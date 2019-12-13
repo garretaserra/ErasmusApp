@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
 import {FollowingService} from '../following.service';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-myfollowing',
@@ -15,7 +16,11 @@ export class MyfollowingPage implements OnInit {
   _id: string;
   following: UserName[];
 
-  constructor(private userService: UserService, private followingService: FollowingService, private router: Router, public menuCtrl: MenuController) { }
+  constructor(private userService: UserService,
+              private followingService: FollowingService,
+              private storage: StorageComponent,
+              private router: Router,
+              public menuCtrl: MenuController) { }
 
   async ngOnInit() {
     this.load();
@@ -24,7 +29,7 @@ export class MyfollowingPage implements OnInit {
     await this.router.navigateByUrl('/other-profile/' + `${id}`);
   }
   async load() {
-    this._id = this.userService.sendUser()._id;
+    this._id = JSON.parse(this.storage.getUser())._id;
     this.followingService.getFollowing(this._id).subscribe(res => {
       const response: any = res;
       console.log(res);

@@ -7,6 +7,7 @@ import {MenuController} from '@ionic/angular';
 import {Post} from '../../../models/Posts/post';
 import {ProfileService} from '../profile.service';
 import {UserProfile} from '../../../models/User/userProfile';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-profile',
@@ -24,12 +25,13 @@ export class ProfilePage implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               public menuCtrl: MenuController,
+              public storage: StorageComponent,
               private profileService: ProfileService) { }
   async ngOnInit() {
     await this.load();
   }
   async load() {
-      this._id = this.userService.sendUser()._id;
+      this._id = JSON.parse(this.storage.getUser())._id;
       await this.profileService.getProfile(this._id).subscribe(res => {
       const response: any = res;
       console.log(res);

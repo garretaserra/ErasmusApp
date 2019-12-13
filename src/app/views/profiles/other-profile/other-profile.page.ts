@@ -7,6 +7,7 @@ import {MenuController} from '@ionic/angular';
 import {ProfileService} from '../profile.service';
 import {UserProfile} from '../../../models/User/userProfile';
 import {UserName} from '../../../models/User/userName';
+import {StorageComponent} from "../../../storage/storage.component";
 
 @Component({
   selector: 'app-other-profile',
@@ -23,14 +24,19 @@ export class OtherProfilePage implements OnInit {
   followcheck: string;
   _id: string;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, public menuCtrl: MenuController, private profileService: ProfileService) { }
+  constructor(private userService: UserService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private storage: StorageComponent,
+              public menuCtrl: MenuController,
+              private profileService: ProfileService) { }
 
   async ngOnInit() {
     this.load();
   }
   async load() {
     this._id = this.route.snapshot.paramMap.get('id');
-    this.user = this.userService.sendUser();
+    this.user = JSON.parse(this.storage.getUser());
     console.log('this.user: ', this.user);
     await this.profileService.getProfile(this._id).subscribe(res => {
       const response: any = res;
