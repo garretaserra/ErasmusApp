@@ -789,6 +789,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -796,7 +798,7 @@ __webpack_require__.r(__webpack_exports__);
 let UserService = class UserService {
     constructor(httpClient) {
         this.httpClient = httpClient;
-        this.USER_SERVER_ADDRESS = 'http://localhost:3000/user';
+        this.USER_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUri + '/user';
         this.userSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     saveUser(user) {

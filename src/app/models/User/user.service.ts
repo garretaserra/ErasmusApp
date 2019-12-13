@@ -4,13 +4,14 @@ import {BehaviorSubject} from 'rxjs';
 import {User} from './user';
 import {Post} from '../Posts/post';
 import {UserName} from './userName';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    USER_SERVER_ADDRESS = 'http://localhost:3000/user';
+    USER_SERVER_ADDRESS = environment.apiUri + '/user';
     userSubject = new BehaviorSubject(false);
 
     user: User;
