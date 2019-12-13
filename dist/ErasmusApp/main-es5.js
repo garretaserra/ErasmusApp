@@ -711,6 +711,7 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
                 _services_chat_service__WEBPACK_IMPORTED_MODULE_13__["ChatService"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_18__["HttpClientModule"],
                 _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_15__["NativeStorage"],
                 _storage_storage_component__WEBPACK_IMPORTED_MODULE_16__["StorageComponent"],
                 _ionic_native_google_maps__WEBPACK_IMPORTED_MODULE_9__["GoogleMaps"],

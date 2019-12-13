@@ -17,7 +17,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NativeStorage} from "@ionic-native/native-storage/ngx";
 import {StorageComponent} from "./storage/storage.component";
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +34,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
         StatusBar,
         SplashScreen,
         ChatService,
+        HttpClientModule,
         NativeStorage,
         StorageComponent,
         GoogleMaps,
