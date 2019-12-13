@@ -60,10 +60,11 @@ export class HomePage implements OnInit {
         else{
             console.log('storageuser', (storageUser));
             this.user = JSON.parse(storageUser);
-            this.storage.saveUser(storageUser);
+            await this.storage.saveUser(storageUser);
 
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
             // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
+            this.getActivity();
         }
     }
 
