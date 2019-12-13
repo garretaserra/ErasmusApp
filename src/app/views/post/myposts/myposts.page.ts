@@ -16,11 +16,7 @@ export class MypostsPage implements OnInit {
 
   user: User;
   userTest: User;
-  constructor(private userService: UserService,
-              private postService: PostService,
-              private router: Router,
-              public menuCtrl: MenuController,
-              public alertCtrl: AlertController) { }
+  constructor(private userService: UserService, private postService: PostService, private router: Router, public menuCtrl: MenuController,public alertCtrl: AlertController) { }
   async ngOnInit() {
     this.load();
   }
@@ -52,29 +48,4 @@ export class MypostsPage implements OnInit {
       alert.present();
     });
   }
-  async openMenu() {
-    await this.menuCtrl.open();
-  }
-  async closeMenu() {
-    await this.menuCtrl.close();
-  }
-  async openMessagePage() {
-    await this.router.navigateByUrl('/message');
-  }
-  async openProfilePage() {
-    await this.router.navigateByUrl('/profile');
-  }
-  async openFriendsPage() {
-    await this.router.navigateByUrl('/friends');
-  }
-  async openGlobePage() {
-    await this.router.navigateByUrl('/globe');
-  }
-  async openSettingPage() {
-    await this.router.navigateByUrl('/login');
-  }
-  async openHomePage() {
-    await this.router.navigateByUrl('/home');
-  }
-
 }

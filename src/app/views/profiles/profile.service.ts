@@ -38,16 +38,18 @@ export class ProfileService {
         return this.httpClient.get(`${this.PROFILE_SERVER_ADDRESS}/followers/` + `${id}`);
     }
     checkFollow(followers: UserName[], userId: string) {
+        console.log('followers: ', followers);
         this.val = 'not';
         if (followers.length === 0) {
-            return this.val;
         } else {
             followers.forEach(x => {
-                    if (x._id === userId) {
-                        return this.val = 'following';
-                    }
+                console.log('this.val:', this.val);
+                if (x._id === userId) {
+                         this.val = 'following';
                 }
-            );
+            });
         }
+        console.log('this.val:', this.val);
+        return this.val;
     }
 }
