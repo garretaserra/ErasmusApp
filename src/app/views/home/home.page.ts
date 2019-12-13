@@ -9,6 +9,7 @@ import {Post} from '../../models/Posts/post';
 import {PostSend} from '../../models/Posts/postSend';
 import {UserProfile} from '../../models/User/userProfile';
 import {UserName} from '../../models/User/userName';
+import {StorageComponent} from "../../storage/storage.component";
 
 @Component({
   selector: 'app-home',
@@ -24,50 +25,55 @@ export class HomePage implements OnInit {
     post: Post;
     userProfile: UserProfile;
     userProfileTest: UserProfile;
+
+    followers;
+    following;
     form: FormGroup = new FormGroup({});
     suggestions: String[];
     searchValue: string;
-    followers: UserName [];
 
     constructor(private formBuilder: FormBuilder,
                 private homeService: HomeService,
                 private userService: UserService,
                 private router: Router,
                 public menuCtrl: MenuController,
-                public alertCtrl: AlertController) {}
+                public alertCtrl: AlertController,
+                public storage: StorageComponent) {
+    }
 
-   async ngOnInit() {
-        console.log('dime que si papi');
+    async ngOnInit() {
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
-        this.user = this.userService.sendUser();
-        await this.getActivity();
-        await this.getProfile();
-        await this.getFollowers();
-        this.userProfileTest = this.userProfile;
     }
-    async getProfile() {
-        await this.homeService.getProfile(this.user._id).subscribe(res => {
-            const response: any = res;
-            this.userProfile = response.profile;
-            console.log('this.userProfile: ', this.userProfile);
-        });
+
+    async ionViewDidEnter(){
+        let storageUser = this.storage.getUser();
+
+        console.log('storageUser', !!storageUser, storageUser);
+
+        //If user is not present redirect to login
+        if(!storageUser){
+            console.log('goto login');
+            await this.router.navigateByUrl('/login');
+        }
+        else{
+            console.log('storageuser', (storageUser));
+            this.user = JSON.parse(storageUser);
+            this.storage.saveUser(storageUser);
+
+            this.followers = (await this.userService.getFollowers(this.user._id).toPromise()).followers;
+            this.following = (await this.userService.getFollowing(this.user._id).toPromise()).following;
+        }
     }
-    async getFollowers() {
-       await this.homeService.getFollowers(this.user._id).subscribe(res => {
-            const response: any = res;
-            this.followers = response.followers;
-            console.log('this.followers: ', this.followers);
-        });
-    }
+
     async getActivity() {
-       await this.homeService.getActivity(this.user._id).subscribe(res => {
+        await this.homeService.getActivity(this.user._id).subscribe(res => {
             const response: any = res;
             this.user.activity = response.activity;
         });
-       console.log('activity: ', this.user.activity);
-       await this.userService.saveUser(this.user);
+        console.log('activity: ', this.user.activity);
+        await this.userService.saveUser(this.user);
     }
     async alert() {
         this.alertCtrl.create({
@@ -85,9 +91,10 @@ export class HomePage implements OnInit {
                         this.router.navigateByUrl('/profile');
                     }); }}]
         }).then(alert => {
-             alert.present();
+            alert.present();
         });
     }
+
     async updateSuggestions(event){
         this.searchValue = event.target.value;
         let users: User[] = await this.userService.search(this.searchValue).toPromise();
@@ -95,21 +102,22 @@ export class HomePage implements OnInit {
         this.suggestions = users.map(a => a.email);
     }
 
-    //TODO: Implement log off functionality
     logOff(){
-
+        this.storage.clearStorage();
     }
 
     postMessage: string;
     async publishPost(){
-        this.post = new Post(this.user.email, 'Post', this.postMessage);
-        this.homeService.sendPost(this.post, this.user).subscribe(res => {
-            this.user.posts.push(this.post);
+        let post = new Post('', this.user.email, 'Post', this.postMessage);
+        let postSend = new PostSend(this.user.email, 'Post', this.postMessage);
+        this.homeService.sendPost(postSend, this.user).subscribe(res => {
+            this.user.activity.push(post);
             this.updateUser();
         });
     }
 
     async updateUser(){
-        let posts = await this.userService.savePostsUsers(this.user._id);
+        this.user.activity = (await this.userService.savePostsUsers(this.user._id).toPromise()).posts;
+        this.storage.saveUser(JSON.stringify(this.user));
     }
 }

@@ -25,7 +25,7 @@
               </ionalert>
             </div>
           </ion-card>
-          <div>
+          <div *ngIf="user" >
             <ion-card color="secondary" class="vertical-margin" *ngFor="let post of user.activity">
               <ion-toolbar color="secondary"> {{post.owner}}: {{post.message}}</ion-toolbar>
             </ion-card>
@@ -39,7 +39,7 @@
 <div class="web">
 <mat-toolbar color="primary">
   <mat-toolbar-row class="background-primary">
-    <span class="margin-left-auto">Erasmus</span>
+    <span class="margin-left-auto" style="color: white">Erasmus</span>
     <form [formGroup]="form" class="search-form margin-right-auto">
       <div>
         <label class="search-input">
@@ -89,7 +89,7 @@
         </div>
       </div>
     </div>
-    <div routerLink="/login" class="pointer margin-right-auto" (click)="logOff()">Log Off</div>
+    <div routerLink="/login" class="pointer margin-right-auto" style="color: white" (click)="logOff()">Log Off</div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -99,7 +99,6 @@
     <!--Left Column-->
     <div class="col-lg-3 col-md-3 col-sm-3">
       <mat-card class="vertical-margin no-padding">
-        <div *ngIf="userProfileTest">
         <div style="height: 250px">
           <div style="background: #e44d3a; height: 50%">
             <div class="personal-icon">
@@ -108,8 +107,8 @@
           </div>
           <div style="height: 70%">
             <div class="personal-info-container">
-              <div class="personal-name">
-                {{userProfileTest.name}}
+              <div *ngIf="user" class="personal-name">
+                {{user.name}}
               </div>
               <div class="personal-status">
                 Status
@@ -117,14 +116,13 @@
             </div>
           </div>
         </div>
-        <div class="personal-item">
+        <div *ngIf="followers" class="personal-item">
           <p class="personal-item-title">Followers</p>
-          {{userProfileTest.followers}}
+          {{followers.length}}
         </div>
-        <div class="personal-item">
+        <div *ngIf="following" class="personal-item">
           <p class="personal-item-title">Following</p>
-          {{userProfileTest.following}}
-        </div>
+          {{following.length}}
         </div>
       </mat-card>
     </div>
@@ -149,10 +147,12 @@
         </mat-card>
       </div>
       <!--Wall Card-->
-      <div *ngFor="let post of user.activity">
-        <mat-card class="vertical-margin">
-          {{post.message}}
-        </mat-card>
+      <div *ngIf="user">
+        <div *ngFor="let activity of user.activity">
+          <mat-card class="vertical-margin">
+            {{activity.message}}
+          </mat-card>
+        </div>
       </div>
     </div>
     <!--Right Column-->
@@ -162,8 +162,8 @@
           FOLLOWING
         </div>
         <mat-divider></mat-divider>
-        <mat-list>
-          <div *ngFor="let follow of this.followers">
+        <mat-list *ngIf="user">
+          <div *ngFor="let follow of user.following">
           <mat-list-item>
             <div>
 <!--              {{follow.name}}-->

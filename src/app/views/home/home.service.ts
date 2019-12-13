@@ -8,13 +8,15 @@ import {User} from '../../models/User/user';
 import {posix} from 'path';
 import {resolve} from '@angular-devkit/core';
 import {PostSend} from '../../models/Posts/postSend';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class HomeService {
 
-    HOME_SERVER_ADDRESS = 'http://localhost:3000/';
+    // HOME_SERVER_ADDRESS = 'http://localhost:3000/';
+    HOME_SERVER_ADDRESS = environment.apiUri;
     homeSubject = new BehaviorSubject(false);
 
     activity: Post[];

@@ -6,13 +6,14 @@ import { Storage } from '@ionic/storage';
 
 import {UserName} from '../../models/User/userName';
 import {User} from '../../models/User/user';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfileService {
 
-    PROFILE_SERVER_ADDRESS = 'http://localhost:3000/user';
+    PROFILE_SERVER_ADDRESS = environment.apiUri + '/user';
     authSubject = new BehaviorSubject(false);
 
     val: string;
