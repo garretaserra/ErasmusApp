@@ -18,6 +18,7 @@ import {NativeStorage} from "@ionic-native/native-storage/ngx";
 import {StorageComponent} from "./storage/storage.component";
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
         ChatService,
         HttpClientModule,
         NativeStorage,
+        MatSnackBar,
         StorageComponent,
         GoogleMaps,
         {
