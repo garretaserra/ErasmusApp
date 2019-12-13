@@ -13,7 +13,7 @@ import {environment} from "../../../environments/environment";
 })
 export class ProfileService {
 
-    PROFILE_SERVER_ADDRESS = environment.apiUri;
+    PROFILE_SERVER_ADDRESS = environment.apiUri + '/user';
     authSubject = new BehaviorSubject(false);
 
     val: string;

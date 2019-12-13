@@ -14,7 +14,7 @@ import {environment} from "../../../environments/environment";
 })
 export class FriendsService {
 
-    FRIENDS_SERVER_ADDRESS = environment.apiUri;
+    FRIENDS_SERVER_ADDRESS = environment.apiUri + '/user';
     authSubject = new BehaviorSubject(false);
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}

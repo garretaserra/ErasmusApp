@@ -430,7 +430,7 @@ var AuthService = /** @class */ (function () {
         this.httpClient = httpClient;
         this.storage = storage;
         // AUTH_SERVER_ADDRESS = environment.apiUri;
-        this.AUTH_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.AUTH_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     AuthService.prototype.register = function (user) {
@@ -485,7 +485,7 @@ var FollowersService = /** @class */ (function () {
     function FollowersService(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.FOLLOWERS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.FOLLOWERS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.followersSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     FollowersService.prototype.getFollowers = function (id) {
@@ -534,7 +534,7 @@ var FollowingService = /** @class */ (function () {
     function FollowingService(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.FOLLOWING_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.FOLLOWING_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.followingSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     FollowingService.prototype.getFollowing = function (id) {
@@ -583,7 +583,7 @@ var FriendsService = /** @class */ (function () {
     function FriendsService(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.FRIENDS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.FRIENDS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     FriendsService.prototype.getUsers = function () {
@@ -681,7 +681,7 @@ var ProfileService = /** @class */ (function () {
     function ProfileService(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.PROFILE_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.PROFILE_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     ProfileService.prototype.getProfile = function (id) {

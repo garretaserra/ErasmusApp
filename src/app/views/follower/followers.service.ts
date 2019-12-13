@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
 })
 export class FollowersService {
 
-    FOLLOWERS_SERVER_ADDRESS = environment.apiUri;
+    FOLLOWERS_SERVER_ADDRESS = environment.apiUri + '/user';
     followersSubject = new BehaviorSubject(false);
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}

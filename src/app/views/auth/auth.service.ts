@@ -15,7 +15,7 @@ import {environment} from "../../../environments/environment";
 export class AuthService {
 
   // AUTH_SERVER_ADDRESS = environment.apiUri;
-    AUTH_SERVER_ADDRESS = environment.apiUri;
+    AUTH_SERVER_ADDRESS = environment.apiUri + '/user';
   authSubject = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient, private storage: Storage) {}

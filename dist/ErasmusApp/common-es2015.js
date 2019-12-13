@@ -708,7 +708,7 @@ let AuthService = class AuthService {
         this.httpClient = httpClient;
         this.storage = storage;
         // AUTH_SERVER_ADDRESS = environment.apiUri;
-        this.AUTH_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.AUTH_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     register(user) {
@@ -762,7 +762,7 @@ let FollowersService = class FollowersService {
     constructor(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.FOLLOWERS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.FOLLOWERS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.followersSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     getFollowers(id) {
@@ -810,7 +810,7 @@ let FollowingService = class FollowingService {
     constructor(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.FOLLOWING_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.FOLLOWING_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.followingSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     getFollowing(id) {
@@ -858,7 +858,7 @@ let FriendsService = class FriendsService {
     constructor(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.FRIENDS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.FRIENDS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     getUsers() {
@@ -954,7 +954,7 @@ let ProfileService = class ProfileService {
     constructor(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        this.PROFILE_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
+        this.PROFILE_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     getProfile(id) {
