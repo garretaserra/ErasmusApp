@@ -62,8 +62,8 @@ export class HomePage implements OnInit {
             this.user = JSON.parse(storageUser);
             this.storage.saveUser(storageUser);
 
-            this.followers = (await this.userService.getFollowers(this.user._id).toPromise()).followers;
-            this.following = (await this.userService.getFollowing(this.user._id).toPromise()).following;
+            this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
+            // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
         }
     }
 

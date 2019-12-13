@@ -38,6 +38,6 @@ export class HomeService {
         return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/profile/` + `${id}`);
     }
     getFollowers(_id: string) {
-        return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/followers/` + `${_id}`);
+        return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/followers/` + `${_id}`);
     }
 }
