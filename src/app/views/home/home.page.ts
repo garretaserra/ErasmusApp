@@ -41,16 +41,28 @@ export class HomePage implements OnInit {
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
-        this.user = JSON.parse(this.storage.getUser());
+    }
+
+    async ionViewDidEnter(){
+        let storageUser = this.storage.getUser();
+
+        console.log('storageUser', !!storageUser, storageUser);
 
         //If user is not present redirect to login
-        if(!this.user){
-          this.router.navigateByUrl('/login');
+        if(!storageUser){
+            console.log('goto login');
+            await this.router.navigateByUrl('/login');
         }
+        else{
+            console.log('storageuser', (storageUser));
+            this.user = JSON.parse(storageUser);
+            this.storage.saveUser(storageUser);
 
-        this.followers = (await this.userService.getFollowers(this.user._id).toPromise()).followers;
-        this.following = (await this.userService.getFollowing(this.user._id).toPromise()).following;
+            this.followers = (await this.userService.getFollowers(this.user._id).toPromise()).followers;
+            this.following = (await this.userService.getFollowing(this.user._id).toPromise()).following;
+        }
     }
+
     async getActivity() {
         await this.homeService.getActivity(this.user._id).subscribe(res => {
             const response: any = res;
@@ -120,7 +132,7 @@ export class HomePage implements OnInit {
         let post = new Post('', this.user.email, 'Post', this.postMessage);
         let postSend = new PostSend(this.user.email, 'Post', this.postMessage);
         this.homeService.sendPost(postSend, this.user).subscribe(res => {
-            this.user.posts.push(post);
+            this.user.activity.push(post);
             this.updateUser();
         });
     }

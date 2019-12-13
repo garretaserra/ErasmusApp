@@ -64,7 +64,7 @@
               </ionalert>
             </div>
           </ion-card>
-          <div>
+          <div *ngIf="user" >
             <ion-card color="secondary" class="vertical-margin" *ngFor="let post of user.activity">
               <ion-toolbar color="secondary"> {{post.owner}}: {{post.message}}</ion-toolbar>
             </ion-card>
@@ -146,7 +146,7 @@
           </div>
           <div style="height: 70%">
             <div class="personal-info-container">
-              <div class="personal-name">
+              <div *ngIf="user" class="personal-name">
                 {{user.name}}
               </div>
               <div class="personal-status">
@@ -186,10 +186,12 @@
         </mat-card>
       </div>
       <!--Wall Card-->
-      <div *ngFor="let post of user.posts">
-        <mat-card class="vertical-margin">
-          {{post.message}}
-        </mat-card>
+      <div *ngIf="user">
+        <div *ngFor="let activity of user.activity">
+          <mat-card class="vertical-margin">
+            {{activity.message}}
+          </mat-card>
+        </div>
       </div>
     </div>
     <!--Right Column-->
@@ -199,7 +201,7 @@
           FOLLOWING
         </div>
         <mat-divider></mat-divider>
-        <mat-list>
+        <mat-list *ngIf="user">
           <div *ngFor="let follow of user.following">
           <mat-list-item>
             <div>

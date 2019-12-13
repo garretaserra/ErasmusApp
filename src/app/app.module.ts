@@ -16,6 +16,8 @@ import {ChatService} from './services/chat.service';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NativeStorage} from "@ionic-native/native-storage/ngx";
 import {StorageComponent} from "./storage/storage.component";
+import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,15 +30,23 @@ import {StorageComponent} from "./storage/storage.component";
     AuthModule,
     HomePageModule,
     PipesModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    ChatService,
-    NativeStorage,
-    StorageComponent,
-    GoogleMaps,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    providers: [
+        StatusBar,
+        SplashScreen,
+        ChatService,
+        NativeStorage,
+        StorageComponent,
+        GoogleMaps,
+        {
+            provide: RouteReuseStrategy,
+            useClass: IonicRouteStrategy
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

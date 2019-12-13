@@ -9,54 +9,30 @@ import {Platform} from "@ionic/angular";
 })
 export class StorageComponent implements OnInit {
 
-  constructor(private nativeStorage: NativeStorage,
-              public platform: Platform) {}
+    constructor(
+        private nativeStorage: NativeStorage,
+        public platform: Platform) {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 
-  saveToken(token){
-    if(this.platform.is('desktop')){
-      localStorage.setItem('token', token);
+    async saveToken(token){
+        localStorage.setItem('token', token);
     }
-    else{
-      this.nativeStorage.setItem('token', token)
-    }
-  }
 
-  getToken(){
-    if(this.platform.is('desktop')) {
-      return localStorage.getItem('token');
+    getToken(){
+        return localStorage.getItem('token');
     }
-    else{
-      return this.nativeStorage.getItem('token');
-    }
-  }
 
-  saveUser(user){
-    if(this.platform.is('desktop')) {
-      localStorage.setItem('user', user);
+    async saveUser(user){
+        localStorage.setItem('user', user);
     }
-    else{
-      this.nativeStorage.setItem('user', user)
-    }
-  }
 
-  getUser(){
-    if(this.platform.is('desktop')) {
-      return localStorage.getItem('user');
+    getUser(){
+        return localStorage.getItem('user');
     }
-    else{
-      this.nativeStorage.getItem('token');
-    }
-  }
 
-  clearStorage(){
-    if(this.platform.is('desktop')) {
-      return localStorage.clear();
+    clearStorage(){
+        return localStorage.clear();
     }
-    else{
-      this.nativeStorage.clear();
-    }
-  }
 
 }
