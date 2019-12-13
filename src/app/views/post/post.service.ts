@@ -6,13 +6,14 @@ import { Storage } from '@ionic/storage';
 import {Post} from '../../models/Posts/post';
 import {User} from '../../models/User/user';
 import {posix} from 'path';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PostService {
 
-    POST_SERVER_ADDRESS = 'http://localhost:3000/';
+    POST_SERVER_ADDRESS = environment.apiUri;
     homeSubject = new BehaviorSubject(false);
 
     activity: Post[];

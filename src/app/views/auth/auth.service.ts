@@ -7,13 +7,15 @@ import { UserRegister } from '../../models/User/userRegister';
 import { AuthResponse } from './auth-response';
 import {UserLogin} from '../../models/User/userLogin';
 import {User} from '../../models/User/user';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  AUTH_SERVER_ADDRESS = 'http://localhost:3000/user';
+  // AUTH_SERVER_ADDRESS = environment.apiUri;
+    AUTH_SERVER_ADDRESS = environment.apiUri;
   authSubject = new BehaviorSubject(false);
 
   constructor(private httpClient: HttpClient, private storage: Storage) {}

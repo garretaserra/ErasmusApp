@@ -11,52 +11,31 @@ module.exports = "<ion-content class=\"ion-padding\" color=\"tertiary\">\r\n  <i
 
 /***/ }),
 
-/***/ "./src/app/models/User/user.ts":
-/*!*************************************!*\
-  !*** ./src/app/models/User/user.ts ***!
-  \*************************************/
-/*! exports provided: User */
+/***/ "./src/app/models/User/userRegister.ts":
+/*!*********************************************!*\
+  !*** ./src/app/models/User/userRegister.ts ***!
+  \*********************************************/
+/*! exports provided: UserRegister */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
-var User = /** @class */ (function () {
-    function User(jwt, _id, email, pass, name, profilePhoto, followers, following, posts, activity) {
-        if (jwt === void 0) { jwt = ''; }
-        if (_id === void 0) { _id = ''; }
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserRegister", function() { return UserRegister; });
+var UserRegister = /** @class */ (function () {
+    function UserRegister(email, pass, name) {
         if (email === void 0) { email = ''; }
         if (pass === void 0) { pass = ''; }
         if (name === void 0) { name = ''; }
-        if (profilePhoto === void 0) { profilePhoto = ''; }
-        if (followers === void 0) { followers = null; }
-        if (following === void 0) { following = null; }
-        if (posts === void 0) { posts = null; }
-        if (activity === void 0) { activity = null; }
-        this._id = _id;
         this.email = email;
-        this.password = pass;
         this.name = name;
-        this.profilePhoto = profilePhoto;
-        this.followers = followers;
-        this.following = following;
-        this.posts = posts;
-        this.activity = activity;
-        this.jwt = jwt;
+        this.password = pass;
     }
-    User.ctorParameters = function () { return [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+    UserRegister.ctorParameters = function () { return [
         null,
         null,
         null
     ]; };
-    return User;
+    return UserRegister;
 }());
 
 
@@ -175,7 +154,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../auth.service */ "./src/app/views/auth/auth.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _models_User_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/User/user */ "./src/app/models/User/user.ts");
+/* harmony import */ var _models_User_userRegister__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/User/userRegister */ "./src/app/models/User/userRegister.ts");
 /* harmony import */ var _models_User_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/User/user.service */ "./src/app/models/User/user.service.ts");
 
 
@@ -260,7 +239,7 @@ var RegisterPage = /** @class */ (function () {
     };
     RegisterPage.prototype.register = function () {
         var _this = this;
-        var user = new _models_User_user__WEBPACK_IMPORTED_MODULE_5__["User"](this.registerForm.controls.email.value, this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
+        var user = new _models_User_userRegister__WEBPACK_IMPORTED_MODULE_5__["UserRegister"](this.registerForm.controls.email.value, this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
         console.log(user);
         this.authService.register(user).subscribe(function (res) {
             console.log(res);

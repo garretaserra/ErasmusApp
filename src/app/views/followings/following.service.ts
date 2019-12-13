@@ -7,13 +7,14 @@ import { UserRegister } from '../../models/User/userRegister';
 import {UserLogin} from '../../models/User/userLogin';
 import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FollowingService {
 
-  FOLLOWING_SERVER_ADDRESS = 'http://localhost:3000/user';
+  FOLLOWING_SERVER_ADDRESS = environment.apiUri;
     followingSubject = new BehaviorSubject(false);
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}

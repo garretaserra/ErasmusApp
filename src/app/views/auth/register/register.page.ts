@@ -87,7 +87,7 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    const user = new User(this.registerForm.controls.email.value,
+    const user = new UserRegister(this.registerForm.controls.email.value,
         this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
     console.log(user);
     this.authService.register(user).subscribe(res => {

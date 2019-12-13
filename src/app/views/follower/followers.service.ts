@@ -4,13 +4,14 @@ import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import {User} from '../../models/User/user';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FollowersService {
 
-    FOLLOWERS_SERVER_ADDRESS = 'http://localhost:3000/user';
+    FOLLOWERS_SERVER_ADDRESS = environment.apiUri;
     followersSubject = new BehaviorSubject(false);
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
