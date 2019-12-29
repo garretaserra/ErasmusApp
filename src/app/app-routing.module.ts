@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'event',
     loadChildren: () => import('./views/event/event.module').then( m => m.EventPageModule)
   },
+  {
+    path: 'add-members-event',
+    loadChildren: () => import('./views/add-members-event/add-members-event.module').then( m => m.AddMembersEventPageModule)
+  },
 
 ];
 
