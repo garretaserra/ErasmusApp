@@ -1,13 +1,11 @@
 export class PostSend {
     owner: string;
-    owner_id: string;
     type: string;
-    description: string;
-    constructor(owner = '', owner_id = '', type = '', message = '') {
+    message: string;
+    constructor(owner = '', type = '', message = '') {
         this.type = type;
-        this.description = message;
+        this.message = message;
         this.owner = owner;
-        this.owner_id = owner_id;
     }
 
 }

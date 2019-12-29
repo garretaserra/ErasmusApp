@@ -24,7 +24,7 @@ export class HomeService {
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
     sendPost(post: PostSend) {
-        console.log('post:', post.description);
+        console.log('post:', post.message);
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
             post
         });

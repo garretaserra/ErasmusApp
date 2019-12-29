@@ -70,7 +70,9 @@ export class HomePage implements OnInit {
     async getActivity() {
         await this.homeService.getActivity(this.user._id).subscribe(res => {
             if (res.status === 204) {
+                console.log('204');
             } else {
+                console.log('res: ', res);
                 const response: any = res;
                 this.activity = response.body.activity;
                 this.user.activity = this.activity;
@@ -89,7 +91,7 @@ export class HomePage implements OnInit {
                 }},
                 {text: 'Post',  handler: () => {
                     console.log('message: ', this.homeForm.controls.post.value);
-                    this.postSend = new PostSend( this.user.email, this.user._id, 'Post', this.homeForm.controls.post.value);
+                    this.postSend = new PostSend( this.user._id, 'Post', this.homeForm.controls.post.value);
                     this.homeService.sendPost(this.postSend).subscribe(res => {
                         this.router.navigateByUrl('/profile');
                     }); }}]
@@ -112,7 +114,7 @@ export class HomePage implements OnInit {
     postMessage: string;
     async publishPost(){
         let post = new Post('', this.user._id, 'Post', this.postMessage);
-        let postSend = new PostSend(this.user.email, this.user._id, 'Post', this.postMessage);
+        let postSend = new PostSend(this.user._id, 'Post', this.postMessage);
         this.homeService.sendPost(postSend).subscribe(res => {
             console.log('res: ', res);
             this.user.activity.push(post);
