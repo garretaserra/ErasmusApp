@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Home</ion-title>
+        <ion-title slot="start">Home</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
@@ -14,20 +14,22 @@
           <ion-card class="vertical-margin border-top">
             <div>
               <ion-item class="textarea">
-                <ion-textarea name="post" type="post" formControlName="post" placeholder="Write here..." required></ion-textarea>
+                <ion-textarea name="post" type="post" formControlName="post" placeholder="Write here if is a post and click button, if is a event, only click button." required></ion-textarea>
               </ion-item>
             </div>
             <div>
               <ionalert>
                 <section>
-                  <ion-button (click)="alert()" expand="block">Post</ion-button>
+                  <ion-button (click)="alert()" color="medium" expand="block">Post / Event</ion-button>
                 </section>
               </ionalert>
             </div>
           </ion-card>
           <div *ngIf="activity">
-            <ion-card color="light" class="vertical-margin" *ngFor="let thing of activity">
-              <ion-toolbar color="dark" *ngIf="thing.type == 'Post';else other_content"> {{thing.owner.name}}:{{thing.message}}</ion-toolbar>
+            <ion-card color="dark" class="vertical-margin" >
+              <ion-card-title>ACTIVITY</ion-card-title>
+              <div *ngFor="let thing of activity">
+                <ion-card color="medium"><ion-card-content  *ngIf="thing.type == 'Post';else other_content"> {{thing.owner.name}}:{{thing.message}}</ion-card-content></ion-card>
               <ng-template #other_content>
                 <ion-card color="medium">
                 <ion-card-content>
@@ -38,12 +40,13 @@
                     Location:{{thing.location}}
                   </ion-toolbar>
                   <ion-toolbar color="medium">
-                    <ion-button color="dark" slot="start">See event</ion-button>
+                    <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
                     <ion-button color="dark" slot="end">Asistir</ion-button>
                   </ion-toolbar>
                 </ion-card-content>
               </ion-card>
               </ng-template>
+              </div>
             </ion-card>
           </div>
         </div>

@@ -67,13 +67,18 @@ const routes: Routes = [
   {
     path: 'conversation/:name',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
-  },  {
+  },
+  {
     path: 'event',
     loadChildren: () => import('./views/event/event.module').then( m => m.EventPageModule)
   },
   {
     path: 'add-members-event',
     loadChildren: () => import('./views/add-members-event/add-members-event.module').then( m => m.AddMembersEventPageModule)
+  },
+  {
+    path: 'profile-event/:id',
+    loadChildren: () => import('./views/profile-event/profile-event.module').then( m => m.ProfileEventPageModule)
   },
 
 ];

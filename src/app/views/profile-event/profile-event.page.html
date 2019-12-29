@@ -1,0 +1,30 @@
+<ion-app class="mobile">
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Event</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+          <ion-card class="vertical-margin border-top" color="light" *ngIf="event">
+            <ion-card-content>
+              <ion-toolbar>
+                {{event.description}}
+              </ion-toolbar>
+              <ion-toolbar>
+                {{event.location}}
+              </ion-toolbar>
+              <ion-toolbar>
+                {{event.eventDate}}
+              </ion-toolbar>
+              <div>
+                <ion-button expand="block">Asistir</ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+    </ion-content>
+  </div>
+</ion-app>

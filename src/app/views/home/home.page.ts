@@ -85,7 +85,7 @@ export class HomePage implements OnInit {
     async alert() {
         this.alertCtrl.create({
             header: 'TYPE',
-            message: 'What type is the message?',
+            message: 'Post or event',
             buttons: [{text: 'Event', handler: () => {
                     this.router.navigateByUrl('/event');
                 }},
@@ -100,6 +100,9 @@ export class HomePage implements OnInit {
         });
     }
 
+    async seeEvent(id: string){
+        await this.router.navigateByUrl('/profile-event/' + `${id}`);
+    }
     async updateSuggestions(event){
         this.searchValue = event.target.value;
         let users: User[] = await this.userService.search(this.searchValue).toPromise();

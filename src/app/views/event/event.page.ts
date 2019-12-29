@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {AlertController, ToastController} from '@ionic/angular';
 import {EventService} from './event.service';
 import {PostSend} from '../../models/Posts/postSend';
-import {EventSend} from '../../models/User/eventSend';
+import {EventSend} from '../../models/eventSend';
 import {User} from '../../models/User/user';
 import {StorageComponent} from '../../storage/storage.component';
 import {Router} from '@angular/router';
@@ -29,7 +29,8 @@ export class EventPage implements OnInit {
   async ngOnInit() {
     this.eventForm = this.formBuilder.group({
       event: new FormControl(),
-      location: new FormControl()
+      location: new FormControl(),
+      eventDate: new FormControl()
     });
   }
   async ionViewDidEnter() {
@@ -43,12 +44,13 @@ export class EventPage implements OnInit {
       console.log('this.user: ', this.user);
       this.eventForm = this.formBuilder.group({
         event: new FormControl(),
-        location: new FormControl()
+        location: new FormControl(),
+        eventDate: new FormControl()
       });
       }
   }
   async event() {
-    this.eventSend = new EventSend(this.user._id, 'Event', this.eventForm.controls.event.value, this.eventForm.controls.location.value);
+    this.eventSend = new EventSend(this.user._id, 'Event', this.eventForm.controls.event.value, this.eventForm.controls.location.value, this.eventForm.controls.eventDate.value);
     await this.eventService.sendEvent(this.eventSend).subscribe(res => {
       console.log('res: ', res);
     });
