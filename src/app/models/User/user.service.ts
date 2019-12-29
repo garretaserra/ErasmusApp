@@ -27,7 +27,7 @@ export class UserService {
         return this.user;
     }
     savePostsUsers(id: string) {
-        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`);
+        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}` + `/0`);
     }
     search(searchString) {
         return this.httpClient.get<User[]>(`${this.USER_SERVER_ADDRESS}/search?searchString=` + searchString);

@@ -28,13 +28,13 @@ export class MypostsPage implements OnInit {
   }
   async load() {
       console.log('loading');
-    this.user = JSON.parse(this.storage.getUser());
-    console.log('this user', this.user);
-    await this.postService.getPosts(this.user._id).subscribe(res => {
+      this.user = JSON.parse(this.storage.getUser());
+      console.log('this user', this.user);
+      await this.postService.getPosts(this.user._id).subscribe(res => {
         console.log('response', res);
-      const response: any = res;
-      this.user.posts = response.posts;
-      this.userTest = this.user;
+        const response: any = res;
+        this.user.posts = response.posts;
+        this.userTest = this.user;
     }, error => {
       console.log('error');
     });

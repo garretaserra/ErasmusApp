@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
     userProfile: UserProfile;
     userProfileTest: UserProfile;
 
+    activity: any[];
     followers;
     following;
     form: FormGroup = new FormGroup({});
@@ -57,20 +58,26 @@ export class HomePage implements OnInit {
         }
         else{
             this.user = JSON.parse(storageUser);
+            console.log('this.user: ', this.user);
             await this.storage.saveUser(storageUser);
 
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
             // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
-            this.getActivity();
+            await this.getActivity();
         }
     }
 
     async getActivity() {
         await this.homeService.getActivity(this.user._id).subscribe(res => {
-            const response: any = res;
-            this.user.activity = response.activity;
+            if (res.status === 204) {
+            } else {
+                const response: any = res;
+                this.activity = response.body.activity;
+                this.user.activity = this.activity;
+            }
+        }, error => {
+            console.log('error', error);
         });
-        console.log('activity: ', this.user.activity);
         await this.userService.saveUser(this.user);
     }
     async alert() {
@@ -78,14 +85,12 @@ export class HomePage implements OnInit {
             header: 'TYPE',
             message: 'What type is the message?',
             buttons: [{text: 'Event', handler: () => {
-                this.postSend = new PostSend( this.user.email, 'Event', this.homeForm.controls.post.value);
-                this.homeService.sendPost(this.postSend, this.user).subscribe(res => {
-                    this.router.navigateByUrl('/profile');
-                    }); }},
+                    this.router.navigateByUrl('/event');
+                }},
                 {text: 'Post',  handler: () => {
                     console.log('message: ', this.homeForm.controls.post.value);
-                    this.postSend = new PostSend( this.user.email, 'Post', this.homeForm.controls.post.value);
-                    this.homeService.sendPost(this.postSend, this.user).subscribe(res => {
+                    this.postSend = new PostSend( this.user.email, this.user._id, 'Post', this.homeForm.controls.post.value);
+                    this.homeService.sendPost(this.postSend).subscribe(res => {
                         this.router.navigateByUrl('/profile');
                     }); }}]
         }).then(alert => {
@@ -106,9 +111,10 @@ export class HomePage implements OnInit {
 
     postMessage: string;
     async publishPost(){
-        let post = new Post('', this.user.email, 'Post', this.postMessage);
-        let postSend = new PostSend(this.user.email, 'Post', this.postMessage);
-        this.homeService.sendPost(postSend, this.user).subscribe(res => {
+        let post = new Post('', this.user._id, 'Post', this.postMessage);
+        let postSend = new PostSend(this.user.email, this.user._id, 'Post', this.postMessage);
+        this.homeService.sendPost(postSend).subscribe(res => {
+            console.log('res: ', res);
             this.user.activity.push(post);
             this.updateUser();
         });

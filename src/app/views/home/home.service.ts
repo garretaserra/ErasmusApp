@@ -23,16 +23,14 @@ export class HomeService {
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-    sendPost(post: PostSend, user: User) {
-        console.log('userid:', user._id);
-        console.log('post:', post.message);
+    sendPost(post: PostSend) {
+        console.log('post:', post.description);
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
-            userId: user._id,
             post
         });
     }
     getActivity(id: string) {
-         return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}`, {});
+         return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}` + `/0`, {}, {observe: 'response'});
     }
     getProfile( id: string ) {
         return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/profile/` + `${id}`);

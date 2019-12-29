@@ -25,9 +25,9 @@
               </ionalert>
             </div>
           </ion-card>
-          <div *ngIf="user" >
-            <ion-card color="secondary" class="vertical-margin" *ngFor="let post of user.activity">
-              <ion-toolbar color="secondary"> {{post.owner}}: {{post.message}}</ion-toolbar>
+          <div *ngIf="activity" >
+            <ion-card color="secondary" class="vertical-margin" *ngFor="let thing of activity">
+              <ion-toolbar color="secondary"> {{thing.owner_id}}: {{thing.description}}</ion-toolbar>
             </ion-card>
           </div>
         </div>
@@ -148,9 +148,9 @@
       </div>
       <!--Wall Card-->
       <div *ngIf="user">
-        <div *ngFor="let activity of user.activity">
+        <div *ngFor="let activity of activity">
           <mat-card class="vertical-margin">
-            {{activity.message}}
+            {{activity.description}}
           </mat-card>
         </div>
       </div>

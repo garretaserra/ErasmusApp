@@ -67,7 +67,11 @@ const routes: Routes = [
   {
     path: 'conversation/:name',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
+  },  {
+    path: 'event',
+    loadChildren: () => import('./views/event/event.module').then( m => m.EventPageModule)
   },
+
 ];
 
 @NgModule({
