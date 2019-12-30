@@ -149,8 +149,11 @@
       <!--Wall Card-->
       <div *ngIf="user">
         <div *ngFor="let activity of user.activity">
-          <mat-card class="vertical-margin">
-            {{activity.message}}
+          <mat-card class="vertical-margin middle-card">
+            <div>
+              {{activity.message}}
+            </div>
+            <i class="material-icons delete-icon" (click)="deleteEvent(activity)">delete_forever</i>
           </mat-card>
         </div>
       </div>

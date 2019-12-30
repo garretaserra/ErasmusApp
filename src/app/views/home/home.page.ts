@@ -10,6 +10,7 @@ import {PostSend} from '../../models/Posts/postSend';
 import {UserProfile} from '../../models/User/userProfile';
 import {UserName} from '../../models/User/userName';
 import {StorageComponent} from "../../storage/storage.component";
+import {PostService} from "../post/post.service";
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
     constructor(private formBuilder: FormBuilder,
                 private homeService: HomeService,
                 private userService: UserService,
+                private postService: PostService,
                 private router: Router,
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
@@ -117,5 +119,10 @@ export class HomePage implements OnInit {
     async updateUser(){
         this.user.activity = (await this.userService.savePostsUsers(this.user._id).toPromise()).posts;
         this.storage.saveUser(JSON.stringify(this.user));
+    }
+
+    async deleteEvent(activity) {
+        await this.postService.deletePost(activity._id).toPromise();
+        await this.getActivity();
     }
 }
