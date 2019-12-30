@@ -62,7 +62,7 @@ export class HomePage implements OnInit {
             await this.storage.saveUser(storageUser);
 
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
-            // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
+            this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             this.getActivity();
         }
     }
@@ -72,7 +72,6 @@ export class HomePage implements OnInit {
             const response: any = res;
             this.user.activity = response.activity;
         });
-        console.log('activity: ', this.user.activity);
         await this.userService.saveUser(this.user);
     }
     async alert() {

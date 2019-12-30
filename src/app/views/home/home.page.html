@@ -166,10 +166,10 @@
         </div>
         <mat-divider></mat-divider>
         <mat-list *ngIf="user">
-          <div *ngFor="let follow of user.following">
+          <div *ngFor="let follow of following">
           <mat-list-item>
             <div>
-<!--              {{follow.name}}-->
+              {{follow.name}}
             </div>
             <div class="chat chat-unavailable">
               <i class="material-icons">chat</i>
