@@ -143,7 +143,7 @@ export class HomePage implements OnInit {
     }
     async leave(eventId: string) {
         await this.homeService.leave(eventId, this.user._id).subscribe(res => {
-            this.router.navigateByUrl('/profile-event/' + `${eventId}`);
+            this.launchToast('You leave successfully');
             console.log(res);
         },  error => {
             if (error.status === 304) {

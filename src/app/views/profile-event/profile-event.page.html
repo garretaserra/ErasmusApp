@@ -30,9 +30,12 @@
                 </ion-card-content>
                 </div>
               </ion-card>
-              <div>
+              <div *ngIf="check === 'no'; else other">
                 <ion-button expand="block">Asistir</ion-button>
               </div>
+              <ng-template #other>
+                <ion-button expand="block">Leave</ion-button>
+              </ng-template>
             </ion-card-content>
           </ion-card>
     </ion-content>
