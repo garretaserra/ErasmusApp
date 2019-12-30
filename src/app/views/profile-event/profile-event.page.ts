@@ -30,9 +30,10 @@ export class ProfileEventPage implements OnInit {
   }
 
   async ngOnInit() {
+    let storageUser = this.storage.getUser();
+    this.user = JSON.parse(storageUser);
+    console.log('this.user: ', this.user);
     await this.getEvent();
-
-
   }
   async ionViewDidEnter() {
     let storageUser = this.storage.getUser();
@@ -56,10 +57,11 @@ export class ProfileEventPage implements OnInit {
   }
   async checkMember() {
         let count = 0;
+        console.log('this.event: ', this.event);
         if (this.event.members === null) {
           this.check = 'no';
         } else {
-          this.event.members.forEach(a => {
+            this.event.members.forEach(a => {
             if (a._id === this.user._id) {
               this.check = 'yes';
               count = 1;
@@ -69,5 +71,32 @@ export class ProfileEventPage implements OnInit {
             this.check = 'no';
           }
         }
+  }
+  async asistir() {
+    await this.profileEventService.asistir(this.event._id, this.user._id).subscribe(res => {
+      this.router.navigateByUrl('/profile-event/' + `${this.event._id}`);
+      console.log(res);
+    },  error => {
+      if (error.status === 304) {
+        this.launchToast('You are already in');
+      }
+    });
+  }
+  async leave() {
+    await this.profileEventService.leave(this.event._id, this.user._id).subscribe(res => {
+      this.launchToast('You leave successfully');
+      console.log(res);
+    },  error => {
+      if (error.status === 304) {
+        this.launchToast('You not are in');
+      }
+    });
+  }
+  async launchToast(message) {
+    let toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    await toast.present();
   }
 }

@@ -9,7 +9,8 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-          <ion-card class="vertical-margin border-top" color="light" *ngIf="event">
+        <div *ngIf="event">
+          <ion-card class="vertical-margin border-top" color="light" >
             <ion-card-content>
               <ion-toolbar>
                 {{event.description}}
@@ -25,19 +26,20 @@
                 <div *ngFor="let user of this.event.members">
                 <ion-card-content>
                   <ion-toolbar>
-                    {{user}}
+                    {{user.name}}
                   </ion-toolbar>
                 </ion-card-content>
                 </div>
               </ion-card>
               <div *ngIf="check === 'no'; else other">
-                <ion-button expand="block">Asistir</ion-button>
+                <ion-button expand="block" (click)="asistir()">Asistir</ion-button>
               </div>
               <ng-template #other>
-                <ion-button expand="block">Leave</ion-button>
+                <ion-button expand="block" (click)="leave()">Leave</ion-button>
               </ng-template>
             </ion-card-content>
           </ion-card>
+        </div>
     </ion-content>
   </div>
 </ion-app>
