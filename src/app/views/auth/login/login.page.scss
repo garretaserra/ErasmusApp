@@ -16,6 +16,7 @@ ion-content {
 }
 ion-card {
   width: 100%;
+  max-width: 400px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -62,4 +63,8 @@ ion-button {
 }
 ion-input, select, textarea{
   color: #383a3e;
+}
+
+.no-margin{
+  margin: 0;
 }
