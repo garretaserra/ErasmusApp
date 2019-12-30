@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {AlertController, MenuController} from '@ionic/angular';
+import {AlertController, MenuController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {UserService} from '../../models/User/user.service';
 import {User} from '../../models/User/user';
@@ -10,6 +10,8 @@ import {PostSend} from '../../models/Posts/postSend';
 import {UserProfile} from '../../models/User/userProfile';
 import {UserName} from '../../models/User/userName';
 import {StorageComponent} from "../../storage/storage.component";
+import {error} from 'util';
+import {CheckUser} from '../../models/User/checkUser';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +29,7 @@ export class HomePage implements OnInit {
     userProfileTest: UserProfile;
 
     activity: any[];
+    checklist: CheckUser[];
     followers;
     following;
     form: FormGroup = new FormGroup({});
@@ -39,13 +42,14 @@ export class HomePage implements OnInit {
                 private router: Router,
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
-                public storage: StorageComponent) {
-    }
+                public storage: StorageComponent,
+                private toastCtrl: ToastController) {}
 
     async ngOnInit() {
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
+        this.checklist = [];
     }
 
     async ionViewDidEnter(){
@@ -60,7 +64,7 @@ export class HomePage implements OnInit {
             this.user = JSON.parse(storageUser);
             console.log('this.user: ', this.user);
             await this.storage.saveUser(storageUser);
-
+            this.checklist = [];
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
             // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             await this.getActivity();
@@ -76,6 +80,8 @@ export class HomePage implements OnInit {
                 const response: any = res;
                 this.activity = response.body.activity;
                 this.user.activity = this.activity;
+                this.checkMember();
+
             }
         }, error => {
             console.log('error', error);
@@ -99,7 +105,6 @@ export class HomePage implements OnInit {
             alert.present();
         });
     }
-
     async seeEvent(id: string){
         await this.router.navigateByUrl('/profile-event/' + `${id}`);
     }
@@ -109,11 +114,9 @@ export class HomePage implements OnInit {
         //Get emails of all users
         this.suggestions = users.map(a => a.email);
     }
-
     logOff(){
         this.storage.clearStorage();
     }
-
     postMessage: string;
     async publishPost(){
         let post = new Post('', this.user._id, 'Post', this.postMessage);
@@ -124,9 +127,55 @@ export class HomePage implements OnInit {
             this.updateUser();
         });
     }
-
     async updateUser(){
         this.user.activity = (await this.userService.savePostsUsers(this.user._id).toPromise()).posts;
         this.storage.saveUser(JSON.stringify(this.user));
+    }
+    async asistir(eventId: string) {
+       await this.homeService.asistir(eventId, this.user._id).subscribe(res => {
+           this.router.navigateByUrl('/profile-event/' + `${eventId}`);
+           console.log(res);
+        },  error => {
+           if (error.status === 304) {
+               this.launchToast('You are already in');
+           }
+       });
+    }
+    async leave(eventId: string) {
+        await this.homeService.leave(eventId, this.user._id).subscribe(res => {
+            this.router.navigateByUrl('/profile-event/' + `${eventId}`);
+            console.log(res);
+        },  error => {
+            if (error.status === 304) {
+                this.launchToast('You not are in');
+            }
+        });
+    }
+    async launchToast(message) {
+        let toast = await this.toastCtrl.create({
+            message: message,
+            duration: 3000
+        });
+        await toast.present();
+    }
+    async checkMember() {
+        let count;
+        this.activity.forEach(x => {
+           if (x.type === 'Event') {
+               if (x.members === null) {
+                   this.checklist.push(new CheckUser('no', x._id));
+               } else {
+                   x.members.forEach(a => {
+                       if (a._id === this.user._id) {
+                           this.checklist.push(new CheckUser('yes', x._id));
+                           count = 1;
+                       }
+                   });
+                   if (count !== 1) {
+                       this.checklist.push(new CheckUser('no', x._id));
+                   }
+               }
+           }
+        });
     }
 }

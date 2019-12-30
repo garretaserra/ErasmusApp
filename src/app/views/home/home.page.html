@@ -29,22 +29,65 @@
             <ion-card color="dark" class="vertical-margin" >
               <ion-card-title>ACTIVITY</ion-card-title>
               <div *ngFor="let thing of activity">
-                <ion-card color="medium"><ion-card-content  *ngIf="thing.type == 'Post';else other_content"> {{thing.owner.name}}:{{thing.message}}</ion-card-content></ion-card>
-              <ng-template #other_content>
                 <ion-card color="medium">
+                  <ion-card-content  *ngIf="thing.type == 'Post';else other_content">
+                  {{thing.owner.name}}:{{thing.message}}
+                </ion-card-content>
+                </ion-card>
+              <ng-template #other_content>
+                <div *ngIf="thing.owner.name == this.user.email; else other_person">
+                <ion-card color="light">
                 <ion-card-content>
-                  <ion-toolbar color="medium">
+                  <ion-toolbar color="light">
                     {{thing.owner.name}}:{{thing.description}}
                   </ion-toolbar>
-                  <ion-toolbar color="medium">
+                  <ion-toolbar color="light">
                     Location:{{thing.location}}
                   </ion-toolbar>
-                  <ion-toolbar color="medium">
+                  <ion-toolbar color="light">
                     <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
-                    <ion-button color="dark" slot="end">Asistir</ion-button>
                   </ion-toolbar>
                 </ion-card-content>
               </ion-card>
+                </div>
+                <ng-template #other_person>
+                  <div *ngFor="let user of checklist">
+                    <div *ngIf="user.idEvent === thing._id">
+                      <div *ngIf="user.check === 'yes'; else other_thing" >
+                      <ion-card color="medium">
+                          <ion-card-content>
+                            <ion-toolbar color="medium">
+                              {{thing.owner.name}}:{{thing.description}}
+                            </ion-toolbar>
+                            <ion-toolbar color="medium">
+                              Location:{{thing.location}}
+                            </ion-toolbar>
+                            <ion-toolbar color="medium">
+                              <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
+                              <ion-button color="dark" (click)="leave(thing._id)" slot="end">Leave</ion-button>
+                            </ion-toolbar>
+                          </ion-card-content>
+                        </ion-card>
+                      </div>
+                    </div>
+                    <ng-template #other_thing>
+                      <ion-card color="medium">
+                        <ion-card-content>
+                          <ion-toolbar color="medium">
+                            {{thing.owner.name}}:{{thing.description}}
+                          </ion-toolbar>
+                          <ion-toolbar color="medium">
+                            Location:{{thing.location}}
+                          </ion-toolbar>
+                          <ion-toolbar color="medium">
+                            <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
+                            <ion-button color="dark" (click)="asistir(thing._id)" slot="end">Attend</ion-button>
+                          </ion-toolbar>
+                        </ion-card-content>
+                      </ion-card>
+                    </ng-template>
+                  </div>
+                  </ng-template>
               </ng-template>
               </div>
             </ion-card>

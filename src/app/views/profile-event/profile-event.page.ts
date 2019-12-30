@@ -5,7 +5,7 @@ import {AlertController, ToastController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StorageComponent} from '../../storage/storage.component';
 import {ProfileEventService} from './profile-event.service';
-import {Event} from '../../models/Event';
+import {Event} from '../../models/Events/Event';
 
 @Component({
   selector: 'app-profile-event',

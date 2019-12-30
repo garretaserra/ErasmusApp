@@ -20,6 +20,16 @@
               <ion-toolbar>
                 {{event.eventDate}}
               </ion-toolbar>
+              <ion-card >
+                <ion-card-title>Members</ion-card-title>
+                <div *ngFor="let user of this.event.members">
+                <ion-card-content>
+                  <ion-toolbar>
+                    {{user}}
+                  </ion-toolbar>
+                </ion-card-content>
+                </div>
+              </ion-card>
               <div>
                 <ion-button expand="block">Asistir</ion-button>
               </div>

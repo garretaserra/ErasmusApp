@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {AlertController, ToastController} from '@ionic/angular';
 import {EventService} from './event.service';
 import {PostSend} from '../../models/Posts/postSend';
-import {EventSend} from '../../models/eventSend';
+import {EventSend} from '../../models/Events/eventSend';
 import {User} from '../../models/User/user';
 import {StorageComponent} from '../../storage/storage.component';
 import {Router} from '@angular/router';

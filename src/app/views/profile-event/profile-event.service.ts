@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Post} from '../../models/Posts/post';
 import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
-import {EventSend} from '../../models/eventSend';
+import {EventSend} from '../../models/Events/eventSend';
 
 @Injectable({
   providedIn: 'root'
