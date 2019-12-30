@@ -3,19 +3,7 @@
 }
 
 @media (min-width: 500px) {
-  .mobile{
-    display: none;
-  }
-  .web{
-    display: block;
-  }
-}
-
-@media (max-width: 500px) {
-  .mobile{
-    display: block;
-  }
-  .web{
+  .mobile-menu{
     display: none;
   }
 }
