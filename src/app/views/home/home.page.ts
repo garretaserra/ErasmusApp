@@ -161,26 +161,23 @@ export class HomePage implements OnInit {
     async checkMember() {
         let count = 0;
         this.activity.forEach(x => {
-            console.log('x.type: ', x.type);
             if (x.type === 'Event') {
                if (x.members === null) {
                    this.checklist.push(new CheckUser('no', x._id));
                } else {
                    x.members.forEach(a => {
-                       console.log('entra');
                        if (a._id === this.user._id) {
-                           console.log('entra 2.');
                            this.checklist.push(new CheckUser('yes', x._id));
                            count = 1;
                        }
                    });
                    if (count !== 1) {
                        this.checklist.push(new CheckUser('no', x._id));
-                   }else {
+                   } else {
                        count = 0;
                    }
                }
-           } console.log('check: ', this.checklist);
+           }
         });
     }
 }

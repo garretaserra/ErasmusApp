@@ -1,0 +1,47 @@
+<ion-app class="mobile">
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title slot="start">Datos erasmus</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="erasmusForm">
+      <div>
+          <ion-card class="vertical-margin border-top">
+            <div>
+              <ion-item class="textarea">
+                <ion-textarea name="age" type="age" formControlName="age" placeholder="Edad" required></ion-textarea>
+              </ion-item>
+              <ion-item class="textarea">
+                <ion-textarea name="procedencia" type="procedencia" formControlName="procedencia" placeholder="Lugar de procedencia." required></ion-textarea>
+              </ion-item>
+              <ion-item class="textarea">
+                <ion-textarea name="universidad" type="universidad" formControlName="universidad" placeholder="Universidad actual." required></ion-textarea>
+              </ion-item>
+              <ion-item class="textarea">
+                <ion-textarea name="curso" type="curso" formControlName="curso" placeholder="Curso actual." required></ion-textarea>
+              </ion-item>
+              <ion-item class="textarea">
+                <ion-textarea name="destino" type="destino" formControlName="destino" placeholder="Lugar de destino." required></ion-textarea>
+              </ion-item>
+              <ion-item class="textarea">
+                <ion-textarea name="universidadDestino" type="universidadDestino" formControlName="universidadDestino" placeholder="Universidad de destino." required></ion-textarea>
+              </ion-item>
+            </div>
+            <div>
+              <ionalert>
+                <section>
+                  <ion-button (click)="alert()" color="medium" expand="block">Post / Event</ion-button>
+                </section>
+              </ionalert>
+            </div>
+          </ion-card>
+        </div>
+      </form>
+    </ion-content>
+  </div>
+</ion-app>
