@@ -7,6 +7,7 @@ import {AlertController, MenuController, ToastController} from '@ionic/angular';
 import {StorageComponent} from '../../storage/storage.component';
 import {DatosErasmusService} from './datos-erasmus.service';
 import {User} from '../../models/User/user';
+import {UserErasmus} from '../../models/User/userErasmus';
 
 @Component({
   selector: 'app-datos-erasmus',
@@ -47,5 +48,10 @@ export class DatosErasmusPage implements OnInit {
       console.log('this.user: ', this.user);
       await this.storage.saveUser(storageUser);
     }
+  }
+  async add() {
+    this.erasmusService.sendInformation(new UserErasmus(this.erasmusForm.controls.age.value, this.erasmusForm.controls.procedencia.value,
+        this.erasmusForm.controls.universidad.value, this.erasmusForm.controls.curso.value, this.erasmusForm.controls.destino.value,
+        this.erasmusForm.controls.universidadDestino.value));
   }
 }
