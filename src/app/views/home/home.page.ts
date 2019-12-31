@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {AlertController, MenuController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {UserService} from '../../models/User/user.service';
@@ -20,7 +20,6 @@ import {CheckUser} from '../../models/User/checkUser';
 })
 
 export class HomePage implements OnInit {
-
     homeForm: FormGroup;
     user: User;
     postSend: PostSend;
@@ -43,12 +42,13 @@ export class HomePage implements OnInit {
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
                 public storage: StorageComponent,
-                private toastCtrl: ToastController) {}
-
-    async ngOnInit() {
+                private toastCtrl: ToastController) {
         this.homeForm = this.formBuilder.group({
             post: new FormControl()
         });
+    }
+
+    async ngOnInit() {
         this.checklist = [];
     }
 
@@ -59,8 +59,7 @@ export class HomePage implements OnInit {
         if(!storageUser){
             console.log('goto login');
             await this.router.navigateByUrl('/login');
-        }
-        else{
+        } else {
             this.user = JSON.parse(storageUser);
             console.log('this.user: ', this.user);
             await this.storage.saveUser(storageUser);
@@ -179,5 +178,8 @@ export class HomePage implements OnInit {
                }
            }
         });
+    }
+    async changePageComments(idPost) {
+       await this.router.navigateByUrl('/comments/' + `${idPost}`);
     }
 }

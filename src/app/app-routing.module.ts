@@ -79,9 +79,14 @@ const routes: Routes = [
   {
     path: 'profile-event/:id',
     loadChildren: () => import('./views/profile-event/profile-event.module').then( m => m.ProfileEventPageModule)
-  },  {
+  },
+  {
     path: 'datos-erasmus',
     loadChildren: () => import('./views/datos-erasmus/datos-erasmus.module').then( m => m.DatosErasmusPageModule)
+  },
+  {
+    path: 'comments/:id',
+    loadChildren: () => import('./views/comments/comments.module').then( m => m.CommentsPageModule)
   },
 
 
