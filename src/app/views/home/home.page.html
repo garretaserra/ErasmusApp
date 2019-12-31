@@ -31,7 +31,13 @@
               <div *ngFor="let thing of activity">
                 <ion-card color="medium">
                   <ion-card-content  *ngIf="thing.type == 'Post';else other_content">
-                  {{thing.owner.name}}:{{thing.message}}
+                  <ion-toolbar color="medium">
+                    {{thing.owner.name}}:{{thing.message}}
+                  </ion-toolbar>
+                    <ion-toolbar color="medium">
+                      <ion-button color="dark" slot="start">Comment</ion-button>
+                      <ion-button color="dark" slot="end">View comments</ion-button>
+                    </ion-toolbar>
                 </ion-card-content>
                 </ion-card>
               <ng-template #other_content>
