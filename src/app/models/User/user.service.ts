@@ -35,4 +35,7 @@ export class UserService {
     editPhoto(photo: string , userId: string) {
         return this.httpClient.post(`${this.USER_SERVER_ADDRESS}/image/edit`, {id: userId, photo: photo});
     }
+    getPhoto(userId: string) {
+        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/image?id=` + userId);
+    }
 }
