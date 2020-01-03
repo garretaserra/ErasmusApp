@@ -125,6 +125,14 @@
           {{following.length}}
         </div>
       </mat-card>
+      <mat-card>
+        <input #imageInput
+               type = 'file'
+               accept="image/*"
+               (change) = "processPhoto(imageInput)">
+        <img mat-card-image src="{{this.photo}}">
+
+      </mat-card>
     </div>
     <!--Middle Column-->
     <div class="col-lg-5 col-md-5 col-sm-5">
