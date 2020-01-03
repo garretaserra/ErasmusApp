@@ -12,6 +12,7 @@ import {UserName} from '../../models/User/userName';
 import {StorageComponent} from "../../storage/storage.component";
 import {PostService} from "../post/post.service";
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -32,6 +33,7 @@ export class HomePage implements OnInit {
     form: FormGroup = new FormGroup({});
     suggestions: String[];
     searchValue: string;
+    private photo: any;
 
     constructor(private formBuilder: FormBuilder,
                 private homeService: HomeService,
@@ -123,5 +125,15 @@ export class HomePage implements OnInit {
     async deleteEvent(activity) {
         await this.postService.deletePost(activity._id).toPromise();
         await this.getActivity();
+    }
+
+    processPhoto(imageInput: HTMLInputElement) {
+        const file: File = imageInput.files[0];
+        const reader = new FileReader();
+        reader.addEventListener('load', async (event: any) => {
+            this.photo = event.target.result;
+            await this.userService.editPhoto(event.target.result, this.user._id).toPromise();
+        });
+        reader.readAsDataURL(file);
     }
 }
