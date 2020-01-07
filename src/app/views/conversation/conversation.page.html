@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list id="scroll-this" style="height: 80%; overflow-y: scroll;" (loadeddata)="scrollToBottom()">
     <ion-item *ngFor="let msg of messages">
       <p text-right *ngIf="msg.author === user.email" style="width: 100%"><span style="color: gray">Me: </span>{{msg.text}}</p>
       <p text-left *ngIf="msg.author !== user.email" style="width: 100%"><span style="color: gray">{{name}}: </span>{{msg.text}}</p>

@@ -2,6 +2,7 @@ import * as io from 'socket.io-client';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Message} from '../models/Message/message';
 
 export class ChatService {
   private url = environment.apiUri;
@@ -13,6 +14,10 @@ export class ChatService {
   public connectSocket(email: string) {
     this.email = email;
     this.socket = io(this.url, {query: 'email=' + email});
+  }
+
+  public getStoredMessages() {
+    return this.http.get<Message[]>(`${this.url}/user/messages/${this.email}`);
   }
 
   public getList = () => {
