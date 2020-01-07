@@ -1,14 +1,17 @@
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs';
-
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 export class ChatService {
-  private url = 'http://localhost:3000';
+  private url = environment.apiUri;
   private socket;
+  private email;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   public connectSocket(email: string) {
+    this.email = email;
     this.socket = io(this.url, {query: 'email=' + email});
   }
 
@@ -22,6 +25,8 @@ export class ChatService {
 
   public sendMessage(message, destination) {
     this.socket.emit('message', { message, destination});
+    const body = {author: this.email, destination, text: message};
+    this.http.post(`${this.url}/user/message/`, body).toPromise().catch((err) => console.log(err));
   }
 
   public getMessage = () => {
