@@ -6,7 +6,7 @@ import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
 import {ConversationPage} from '../conversation/conversation.page';
 import {NavController} from '@ionic/angular';
-import {StorageComponent} from "../../storage/storage.component";
+import {StorageComponent} from '../../storage/storage.component';
 
 @Component({
   selector: 'app-message',
