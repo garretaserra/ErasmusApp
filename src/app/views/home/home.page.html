@@ -100,9 +100,17 @@
     <div class="col-lg-3 col-md-3 col-sm-3">
       <mat-card class="vertical-margin no-padding">
         <div style="height: 250px">
-          <div style="background: #e44d3a; height: 50%">
+          <div style="background: #e44d3a; height: 50%; display: flex">
             <div class="personal-icon">
-              <img mat-card-image class="image-contain" src="{{this.photo}}"/>
+              <img class="image-contain" src="{{this.photo}}"/>
+            </div>
+            <div class="personal-icon" style="position: absolute; width: auto;">
+              <input #imageInput
+                     style="width: 100%; height: 100%;"
+                     class="image-input"
+                     type = 'file'
+                     accept="image/*"
+                     (change) = "processPhoto(imageInput)">
             </div>
           </div>
           <div style="height: 70%">
@@ -124,14 +132,6 @@
           <p class="personal-item-title">Following</p>
           {{following.length}}
         </div>
-      </mat-card>
-      <mat-card>
-        <input #imageInput
-               type = 'file'
-               accept="image/*"
-               (change) = "processPhoto(imageInput)">
-        <img mat-card-image src="{{this.photo}}">
-
       </mat-card>
     </div>
     <!--Middle Column-->
