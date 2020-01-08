@@ -8,6 +8,7 @@ import {ConversationPage} from '../conversation/conversation.page';
 import {NavController} from '@ionic/angular';
 import {StorageComponent} from '../../storage/storage.component';
 import {Message} from '../../models/Message/message';
+import {NotificationComponent} from '../../components/notification/notification.component';
 
 @Component({
   selector: 'app-message',
@@ -26,7 +27,8 @@ export class MessagePage implements OnInit {
               private userService: UserService,
               public storage: StorageComponent,
               public chatService: ChatService,
-              private friendsService: FriendsService) { }
+              private friendsService: FriendsService,
+              public notificationComponent: NotificationComponent) { }
 
    ngOnInit() {
     this.user = JSON.parse(this.storage.getUser());
@@ -38,10 +40,11 @@ export class MessagePage implements OnInit {
     this.friendsService.getUsers().subscribe((list: UserName[]) => {
         this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
     });
-    /*this.chatService.getMessage().subscribe((data: {message, email}) => {
+    this.chatService.getMessage().subscribe((data: {message, email}) => {
       console.log('Incoming message:');
       console.log(data);
-    });*/
+      this.notificationComponent.generateToast(data.email + ': ' + data.message).catch((err) => console.log(err));
+    });
   }
 
   viewConversation(data) {

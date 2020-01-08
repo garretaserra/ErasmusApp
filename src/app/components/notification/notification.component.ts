@@ -8,12 +8,16 @@ import { ToastController } from '@ionic/angular';
 })
 export class NotificationComponent implements OnInit {
 
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController) {}
 
-  async ngOnInit() {
+  ngOnInit() {}
+
+  async generateToast(message: string) {
     const toast = await this.toastController.create({
-      message: 'Lorem ipsum dolor sit amet',
-      duration: 4000
+      position: 'top',
+      message,
+      duration: 4000,
+      showCloseButton: true
     });
     toast.present().catch((err) => console.log(err));
   }

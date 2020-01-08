@@ -34,6 +34,7 @@ import {ToastController} from '@ionic/angular';
     HomePageModule,
     PipesModule],
     providers: [
+        NotificationComponent,
         ToastController,
         StatusBar,
         SplashScreen,
