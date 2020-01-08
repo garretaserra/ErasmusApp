@@ -27,12 +27,7 @@ export class ConversationPage implements OnInit {
               private chatService: ChatService,
               public storage: StorageComponent) {
     this.name = this.route.snapshot.paramMap.get('name');
-    setInterval(() => {
-      try {
-        const element = document.getElementById('scroll-this');
-        element.scrollTop = element.scrollHeight;
-      } catch (e) {}
-    }, 3000);
+    setInterval(() => this.scrollToBottom(), 500);
   }
 
   async ngOnInit() {
@@ -54,5 +49,13 @@ export class ConversationPage implements OnInit {
     console.log(this.message);
     this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), 0)); // TODO: Swap name email
     this.chatService.sendMessage(this.message, this.name); // TODO: noo
+    // this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    try {
+      const element = document.getElementById('scroll-this');
+      element.scrollTop = element.scrollHeight;
+    } catch (e) {}
   }
 }
