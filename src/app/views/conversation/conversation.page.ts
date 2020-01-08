@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import {UserService} from '../../models/User/user.service';
@@ -7,6 +7,9 @@ import {FriendsService} from '../friends/friends.service';
 import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
 import {NavController} from '@ionic/angular';
+import {StorageComponent} from '../../storage/storage.component';
+import {Message} from '../../models/Message/message';
+import {forEach} from '@angular-devkit/schematics';
 
 @Component({
   selector: 'app-conversation',
@@ -15,31 +18,41 @@ import {NavController} from '@ionic/angular';
 })
 export class ConversationPage implements OnInit {
 
+  user: User;
   name: string;
   message: string;
-  messages: string[] = [];
+  messages: Message[];
 
   constructor(private route: ActivatedRoute,
-              private chatService: ChatService) {
-    console.log(this.route.snapshot.paramMap.get('name'));
+              private chatService: ChatService,
+              public storage: StorageComponent) {
     this.name = this.route.snapshot.paramMap.get('name');
+    setInterval(() => {
+      try {
+        const element = document.getElementById('scroll-this');
+        element.scrollTop = element.scrollHeight;
+      } catch (e) {}
+    }, 3000);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.user = JSON.parse(this.storage.getUser());
+    await this.chatService.getStoredMessages().toPromise().then((data) => {
+       this.messages = data.filter((item) => item.author === this.name || item.destination === this.name);
+    });
     this.chatService.getMessage().subscribe((data: {message, email}) => {
-      console.log('Incoming message:');
-      console.log(data);
-      this.messages.push(data.email + ': ' + data.message);
+      this.messages.push(new Message('', data.email, this.name, data.message, new Date(), 0));
     });
   }
-  onKey(event: any) {
-    this.message = event.target.value;
+
+  onEnter(value: string) {
+    this.message = value;
+    this.sendMessage();
   }
 
   sendMessage() {
     console.log(this.message);
-    this.messages.push(this.name + ': ' + this.message);
-    this.chatService.sendMessage(this.message, this.name);
+    this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), 0)); // TODO: Swap name email
+    this.chatService.sendMessage(this.message, this.name); // TODO: noo
   }
-
 }

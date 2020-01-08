@@ -6,7 +6,8 @@ import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
 import {ConversationPage} from '../conversation/conversation.page';
 import {NavController} from '@ionic/angular';
-import {StorageComponent} from "../../storage/storage.component";
+import {StorageComponent} from '../../storage/storage.component';
+import {Message} from '../../models/Message/message';
 
 @Component({
   selector: 'app-message',
@@ -15,6 +16,7 @@ import {StorageComponent} from "../../storage/storage.component";
 })
 export class MessagePage implements OnInit {
 
+  storedMessages: Message[];
   message: string;
   user: User;
   users: UserName[];
@@ -23,27 +25,23 @@ export class MessagePage implements OnInit {
   constructor(public navCtrl: NavController,
               private userService: UserService,
               public storage: StorageComponent,
-              private chatService: ChatService,
+              public chatService: ChatService,
               private friendsService: FriendsService) { }
 
-  ngOnInit() {
+   ngOnInit() {
     this.user = JSON.parse(this.storage.getUser());
-    console.log(this.user.email);
     this.chatService.connectSocket(this.user.email);
+    // this.storedMessages = await this.chatService.getStoredMessages().toPromise();
     this.chatService.getList().subscribe((list: string[]) => {
-      this.userList = list;
-      console.log('UserList:');
-      console.log(this.userList);
+      this.userList = list.filter( item => item[0] !== this.user.email); // TODO: User esta mal, email sale name.
     });
-    this.friendsService.getUsers().subscribe(users => {
-        console.log(users);
-        const response: any = users;
-        this.users = response.users;
+    this.friendsService.getUsers().subscribe((list: UserName[]) => {
+        this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
     });
-    this.chatService.getMessage().subscribe((data: {message, email}) => {
+    /*this.chatService.getMessage().subscribe((data: {message, email}) => {
       console.log('Incoming message:');
       console.log(data);
-    });
+    });*/
   }
 
   viewConversation(data) {
