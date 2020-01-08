@@ -40,11 +40,7 @@ export class MessagePage implements OnInit {
     this.friendsService.getUsers().subscribe((list: UserName[]) => {
         this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
     });
-    this.chatService.getMessage().subscribe((data: {message, email}) => {
-      console.log('Incoming message:');
-      console.log(data);
-      this.notificationComponent.generateToast(data.email + ': ' + data.message).catch((err) => console.log(err));
-    });
+    this.chatService.forceGetList();
   }
 
   viewConversation(data) {

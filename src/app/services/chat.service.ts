@@ -9,11 +9,14 @@ export class ChatService {
   private socket;
   private email;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public connectSocket(email: string) {
-    this.email = email;
-    this.socket = io(this.url, {query: 'email=' + email});
+    if (!this.socket) {
+      this.email = email;
+      this.socket = io(this.url, {query: 'email=' + email});
+      console.log('connection');
+    }
   }
 
   public getStoredMessages() {
@@ -26,6 +29,10 @@ export class ChatService {
         observer.next(data);
       });
     });
+  }
+
+  public forceGetList() {
+    this.socket.emit('giveMeUserList');
   }
 
   public sendMessage(message, destination) {

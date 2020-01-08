@@ -11,7 +11,8 @@ import {UserProfile} from '../../models/User/userProfile';
 import {UserName} from '../../models/User/userName';
 import {StorageComponent} from "../../storage/storage.component";
 import {PostService} from "../post/post.service";
-
+import {ChatService} from '../../services/chat.service';
+import {NotificationComponent} from '../../components/notification/notification.component';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,9 @@ export class HomePage implements OnInit {
                 private router: Router,
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
-                public storage: StorageComponent) {
+                public storage: StorageComponent,
+                public chatService: ChatService,
+                public notificationComponent: NotificationComponent) {
     }
 
     async ngOnInit() {
@@ -67,6 +70,12 @@ export class HomePage implements OnInit {
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
             this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             this.getActivity();
+            this.chatService.connectSocket(this.user.email);
+            this.chatService.getMessage().subscribe((data: {message, email}) => {
+                console.log('Incoming message:');
+                console.log(data);
+                this.notificationComponent.generateToast(data.email + ' says: ' + data.message).catch((err) => console.log(err));
+            });
         }
     }
 
