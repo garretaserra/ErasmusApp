@@ -72,9 +72,11 @@ export class HomePage implements OnInit {
             this.getActivity();
             this.chatService.connectSocket(this.user.email);
             this.chatService.getMessage().subscribe((data: {message, email}) => {
-                console.log('Incoming message:');
                 console.log(data);
-                this.notificationComponent.generateToast(data.email + ' says: ' + data.message).catch((err) => console.log(err));
+                if (this.router.url !== ('/conversation/' + data.email)) {
+                    this.notificationComponent.generateToast(data.email + ' says: ' + data.message).catch((err) => console.log(err));
+                }
+                console.log(this.router.url);
             });
         }
     }
