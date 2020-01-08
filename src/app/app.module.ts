@@ -19,9 +19,11 @@ import {StorageComponent} from "./storage/storage.component";
 import {AuthInterceptorService} from "./services/auth-interceptor.service";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationComponent} from './components/notification/notification.component';
+import {ToastController} from '@ionic/angular';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotificationComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     HomePageModule,
     PipesModule],
     providers: [
+        ToastController,
         StatusBar,
         SplashScreen,
         ChatService,
