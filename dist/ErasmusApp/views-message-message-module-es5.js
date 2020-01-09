@@ -124,6 +124,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../friends/friends.service */ "./src/app/views/friends/friends.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../storage/storage.component */ "./src/app/storage/storage.component.ts");
+/* harmony import */ var _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/notification/notification.component */ "./src/app/components/notification/notification.component.ts");
+
 
 
 
@@ -132,32 +134,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MessagePage = /** @class */ (function () {
-    function MessagePage(navCtrl, userService, storage, chatService, friendsService) {
+    function MessagePage(navCtrl, userService, storage, chatService, friendsService, notificationComponent) {
         this.navCtrl = navCtrl;
         this.userService = userService;
         this.storage = storage;
         this.chatService = chatService;
         this.friendsService = friendsService;
+        this.notificationComponent = notificationComponent;
     }
     MessagePage.prototype.ngOnInit = function () {
         var _this = this;
         this.user = JSON.parse(this.storage.getUser());
-        console.log(this.user.email);
         this.chatService.connectSocket(this.user.email);
+        // this.storedMessages = await this.chatService.getStoredMessages().toPromise();
         this.chatService.getList().subscribe(function (list) {
-            _this.userList = list;
-            console.log('UserList:');
-            console.log(_this.userList);
+            _this.userList = list.filter(function (item) { return item[0] !== _this.user.email; }); // TODO: User esta mal, email sale name.
         });
-        this.friendsService.getUsers().subscribe(function (users) {
-            console.log(users);
-            var response = users;
-            _this.users = response.users;
+        this.friendsService.getUsers().subscribe(function (list) {
+            _this.users = list.filter(function (item) { return item.name !== _this.user.email; }); // TODO: User esta mal, email sale name.
         });
-        this.chatService.getMessage().subscribe(function (data) {
-            console.log('Incoming message:');
-            console.log(data);
-        });
+        this.chatService.forceGetList();
     };
     MessagePage.prototype.viewConversation = function (data) {
         console.log(data);
@@ -168,7 +164,8 @@ var MessagePage = /** @class */ (function () {
         { type: _models_User_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"] },
         { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__["StorageComponent"] },
         { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_3__["ChatService"] },
-        { type: _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__["FriendsService"] }
+        { type: _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__["FriendsService"] },
+        { type: _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_7__["NotificationComponent"] }
     ]; };
     MessagePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -180,7 +177,8 @@ var MessagePage = /** @class */ (function () {
             _models_User_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"],
             _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__["StorageComponent"],
             _services_chat_service__WEBPACK_IMPORTED_MODULE_3__["ChatService"],
-            _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__["FriendsService"]])
+            _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__["FriendsService"],
+            _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_7__["NotificationComponent"]])
     ], MessagePage);
     return MessagePage;
 }());
