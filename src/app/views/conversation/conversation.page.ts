@@ -36,7 +36,9 @@ export class ConversationPage implements OnInit {
        this.messages = data.filter((item) => item.author === this.name || item.destination === this.name);
     });
     this.chatService.getMessage().subscribe((data: {message, email}) => {
-      this.messages.push(new Message('', data.email, this.name, data.message, new Date(), 0));
+      if (data.email === this.name) {
+        this.messages.push(new Message('', data.email, this.name, data.message, new Date(), 0));
+      }
     });
   }
 
