@@ -35,6 +35,11 @@ export class AppComponent {
       title: 'Globe',
       url: '/globe',
       icon: 'globe'
+    },
+    {
+      title: 'Notifications',
+      url: '/notifications',
+      icon: 'notifications'
     }
   ];
   constructor(
