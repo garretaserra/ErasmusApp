@@ -25,7 +25,8 @@ export class ConversationPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private chatService: ChatService,
-              public storage: StorageComponent) {
+              public storage: StorageComponent,
+              public router: Router) {
     this.name = this.route.snapshot.paramMap.get('name');
     setInterval(() => this.scrollToBottom(), 500);
   }
@@ -39,7 +40,14 @@ export class ConversationPage implements OnInit {
     this.chatService.getMessage().subscribe((data: {message, email}) => {
       if (data.email === this.name) {
         this.messages.push(new Message('', data.email, this.name, data.message, new Date(), true, 0));
+        if (this.router.url === ('/conversation/' + this.name)) {
+          this.chatService.ackMsg(this.name);
+        }
       }
+    });
+    this.chatService.getACK().subscribe((data) => {
+      console.log('ACK received from ' + data);
+      this.messages.forEach(message => message.read = true);
     });
   }
 

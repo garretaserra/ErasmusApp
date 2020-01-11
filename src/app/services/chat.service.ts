@@ -1,5 +1,5 @@
 import * as io from 'socket.io-client';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Message} from '../models/Message/message';
@@ -43,7 +43,16 @@ export class ChatService {
 
   public ackMsg(sender: string) {
     this.socket.emit('ACK', sender);
+    this.http.put(`${this.url}/user/message/${sender}/${this.email}`, null).toPromise().catch((err) => console.log(err));
   }
+
+  public getACK = () => {
+    return new Observable((observer) => {
+      this.socket.on('ACK', (arg) => {
+        observer.next(arg);
+      });
+    });
+  };
 
   public getMessage = () => {
     return new Observable((observer) => {
