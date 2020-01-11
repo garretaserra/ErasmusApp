@@ -34,6 +34,7 @@ export class ConversationPage implements OnInit {
     this.user = JSON.parse(this.storage.getUser());
     await this.chatService.getStoredMessages().toPromise().then((data) => {
        this.messages = data.filter((item) => item.author === this.name || item.destination === this.name);
+       this.chatService.ackMsg(this.name);
     });
     this.chatService.getMessage().subscribe((data: {message, email}) => {
       if (data.email === this.name) {
@@ -52,6 +53,29 @@ export class ConversationPage implements OnInit {
     this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), false, 0)); // TODO: Swap name email
     this.chatService.sendMessage(this.message, this.name); // TODO: noo
     // this.scrollToBottom();
+  }
+
+  zeroPad(a: number) {
+    const s = a.toString();
+    if (s.length < 2) { return '0' + a; } else { return a; }
+  }
+
+  formatDate(timestamp: Date): string {
+    const date = new Date(timestamp);
+    const monthNames = [
+      'Jan', 'Feb', 'Mar',
+      'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sep', 'Oct',
+      'Nov', 'Dec'
+    ];
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const hour = this.zeroPad(date.getHours());
+    const min = this.zeroPad(date.getMinutes());
+    const sec = this.zeroPad(date.getSeconds());
+    return day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
   }
 
   scrollToBottom() {

@@ -10,12 +10,22 @@
 <ion-content>
   <ion-list id="scroll-this" style="height: 80%; overflow-y: scroll;" (loadeddata)="scrollToBottom()">
     <ion-item *ngFor="let msg of messages">
-      <p text-right *ngIf="msg.author === user.email" style="width: 100%"><span style="color: gray">Me: </span>{{msg.text}}</p>
-      <p text-left *ngIf="msg.author !== user.email" style="width: 100%"><span style="color: gray">{{name}}: </span>{{msg.text}}</p>
+      <p text-right *ngIf="msg.author === user.email" style="width: 100%">
+        <span style="color: gray">Me: </span>
+        {{msg.text}}
+        <br>
+        <span style="color: gray; font-size: x-small">{{formatDate(msg.timestamp)}}</span>
+      </p>
+      <p text-left *ngIf="msg.author !== user.email" style="width: 100%">
+        <span style="color: gray">{{name}}: </span>
+        {{msg.text}}
+        <br>
+        <span style="color: gray; font-size: x-small">{{formatDate(msg.timestamp)}}</span>
+      </p>
     </ion-item>
   </ion-list>
   <ion-row style="position: fixed; bottom: 0; width: 100%;">
-    <ion-col size="8">
+    <ion-col size="7">
       <ion-textarea #box placeholder="Type a message..."
                     (keyup.enter)="onEnter(box.value); box.value = '' ">
       </ion-textarea>
