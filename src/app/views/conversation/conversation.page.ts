@@ -1,21 +1,16 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import {UserService} from '../../models/User/user.service';
 import {ChatService} from '../../services/chat.service';
-import {FriendsService} from '../friends/friends.service';
 import {User} from '../../models/User/user';
-import {UserName} from '../../models/User/userName';
-import {NavController} from '@ionic/angular';
 import {StorageComponent} from '../../storage/storage.component';
 import {Message} from '../../models/Message/message';
-import {forEach} from '@angular-devkit/schematics';
 
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.page.html',
   styleUrls: ['./conversation.page.scss'],
 })
+
 export class ConversationPage implements OnInit {
 
   user: User;
@@ -28,7 +23,7 @@ export class ConversationPage implements OnInit {
               public storage: StorageComponent,
               public router: Router) {
     this.name = this.route.snapshot.paramMap.get('name');
-    setInterval(() => this.scrollToBottom(), 500);
+    setTimeout(() => this.scrollToBottom(), 500);
   }
 
   async ngOnInit() {
@@ -57,10 +52,11 @@ export class ConversationPage implements OnInit {
   }
 
   sendMessage() {
-    console.log(this.message);
-    this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), false, 0)); // TODO: Swap name email
-    this.chatService.sendMessage(this.message, this.name); // TODO: noo
-    // this.scrollToBottom();
+    if (this.message.replace(/\s/g, '').length) {
+      this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), false, 0)); // TODO: Swap name email
+      this.chatService.sendMessage(this.message, this.name); // TODO: noo
+      this.scrollToBottom();
+    }
   }
 
   zeroPad(a: number) {
@@ -89,7 +85,9 @@ export class ConversationPage implements OnInit {
   scrollToBottom() {
     try {
       const element = document.getElementById('scroll-this');
-      element.scrollTop = element.scrollHeight;
-    } catch (e) {}
+      element.scrollTop = element.scrollHeight + 75;
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

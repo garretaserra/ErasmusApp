@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-list id="scroll-this" class="messages_list" (loadeddata)="scrollToBottom()">
-    <div *ngFor="let msg of messages">
+  <ion-list id="scroll-this" class="messages_list">
+    <ion-item lines="none" *ngFor="let msg of messages">
       <div *ngIf="msg.author === user.email" class="message_bubble yours">
         <div class="message">
           <span class="faded">Me: </span>
@@ -28,7 +28,7 @@
           <span class="faded" style="font-size: x-small">{{formatDate(msg.timestamp)}}</span>
         </span>
       </div>
-    </div>
+    </ion-item>
   </ion-list>
   <ion-row class="send_form">
     <ion-col class="send_form_input">
