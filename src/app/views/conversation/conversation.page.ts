@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChatService} from '../../services/chat.service';
 import {User} from '../../models/User/user';
 import {StorageComponent} from '../../storage/storage.component';
 import {Message} from '../../models/Message/message';
+import {IonContent} from '@ionic/angular';
 
 @Component({
   selector: 'app-conversation',
@@ -12,6 +13,9 @@ import {Message} from '../../models/Message/message';
 })
 
 export class ConversationPage implements OnInit {
+
+  // @ts-ignore
+  @ViewChild(IonContent) myContent: IonContent;
 
   user: User;
   name: string;
@@ -82,12 +86,7 @@ export class ConversationPage implements OnInit {
     return day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
   }
 
-  scrollToBottom() {
-    try {
-      const element = document.getElementById('scroll-this');
-      element.scrollTop = element.scrollHeight + 75;
-    } catch (e) {
-      console.log(e);
-    }
+  async scrollToBottom() {
+    await this.myContent.scrollToBottom(500);
   }
 }

@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list id="scroll-this" class="messages_list">
+<ion-content id="scroll-this">
+  <ion-list class="messages_list">
     <ion-item lines="none" *ngFor="let msg of messages">
       <div *ngIf="msg.author === user.email" class="message_bubble yours">
         <div class="message">
@@ -30,17 +30,18 @@
       </div>
     </ion-item>
   </ion-list>
-  <ion-row class="send_form">
-    <ion-col class="send_form_input">
-      <ion-textarea #box placeholder="Type a message..."
-                    (keyup.enter)="onEnter(box.value); box.value = '' ">
-      </ion-textarea>
-    </ion-col>
-    <ion-col class="send_form_button">
-      <ion-button (click)="onEnter(box.value); box.value = '' ">
-        Send
-        <ion-icon slot="end" name="send" size="large"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>
+
+<ion-footer class="send_form">
+  <ion-col class="send_form_input">
+    <ion-textarea #box placeholder="Type a message..."
+                  (keyup.enter)="onEnter(box.value); box.value = '' ">
+    </ion-textarea>
+  </ion-col>
+  <ion-col class="send_form_button">
+    <ion-button (click)="onEnter(box.value); box.value = '' ">
+      Send
+      <ion-icon slot="end" name="send" size="large"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-footer>
