@@ -9,12 +9,16 @@ import {NavController, ToastController} from '@ionic/angular';
 export class NotificationComponent implements OnInit {
 
   sound: HTMLAudioElement;
+  innerSound: HTMLAudioElement;
 
   constructor(public toastController: ToastController,
               public navCtrl: NavController) {
     this.sound = new Audio();
     this.sound.src = '../../../assets/sounds/when.mp3';
     this.sound.load();
+    this.innerSound = new Audio();
+    this.innerSound.src = '../../../assets/sounds/clearly.mp3';
+    this.innerSound.load();
   }
 
   ngOnInit() {}
@@ -34,4 +38,9 @@ export class NotificationComponent implements OnInit {
       }
     });
   }
+
+  public playInnerSound() {
+    this.innerSound.play().catch((err) => console.log(err));
+  }
+
 }

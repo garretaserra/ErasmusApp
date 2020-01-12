@@ -9,6 +9,7 @@ import {NavController} from '@ionic/angular';
 import {StorageComponent} from '../../storage/storage.component';
 import {Message} from '../../models/Message/message';
 import {NotificationComponent} from '../../components/notification/notification.component';
+import {count} from 'rxjs/operators';
 
 @Component({
   selector: 'app-message',
@@ -30,10 +31,10 @@ export class MessagePage implements OnInit {
               private friendsService: FriendsService,
               public notificationComponent: NotificationComponent) { }
 
-   ngOnInit() {
+   async ngOnInit() {
     this.user = JSON.parse(this.storage.getUser());
     this.chatService.connectSocket(this.user.email);
-    // this.storedMessages = await this.chatService.getStoredMessages().toPromise();
+    this.storedMessages = await this.chatService.getStoredMessages().toPromise();
     this.chatService.getList().subscribe((list: string[]) => {
       this.userList = list.filter( item => item[0] !== this.user.email); // TODO: User esta mal, email sale name.
     });
@@ -43,9 +44,13 @@ export class MessagePage implements OnInit {
     this.chatService.forceGetList();
   }
 
-  viewConversation(data) {
-    console.log(data);
-    this.navCtrl.navigateForward('/conversation/' + `${data}`);
+  filterAndCount(name: string) {
+      return this.storedMessages.filter((item) => item.author === name && item.read === false).length;
+  }
+
+  viewConversation(name: string) {
+    this.navCtrl.navigateForward('/conversation/' + `${name}`);
+    this.storedMessages.filter((item) => item.author === name).forEach((msg) => msg.read = true);
   }
 
 }
