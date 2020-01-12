@@ -39,6 +39,7 @@ export class ConversationPage implements OnInit {
     this.chatService.getMessage().subscribe((data: {message, email}) => {
       if (data.email === this.name) {
         this.messages.push(new Message('', data.email, this.name, data.message, new Date(), true, 0));
+        setTimeout(() => this.scrollToBottom(), 50);
         if (this.router.url === ('/conversation/' + this.name)) {
           this.chatService.ackMsg(this.name);
         }
@@ -59,7 +60,7 @@ export class ConversationPage implements OnInit {
     if (this.message.replace(/\s/g, '').length) {
       this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), false, 0)); // TODO: Swap name email
       this.chatService.sendMessage(this.message, this.name); // TODO: noo
-      this.scrollToBottom();
+      setTimeout(() => this.scrollToBottom(), 50);
     }
   }
 

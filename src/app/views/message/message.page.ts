@@ -4,12 +4,10 @@ import {ChatService} from '../../services/chat.service';
 import {FriendsService} from '../friends/friends.service';
 import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
-import {ConversationPage} from '../conversation/conversation.page';
 import {NavController} from '@ionic/angular';
 import {StorageComponent} from '../../storage/storage.component';
 import {Message} from '../../models/Message/message';
 import {NotificationComponent} from '../../components/notification/notification.component';
-import {count} from 'rxjs/operators';
 
 @Component({
   selector: 'app-message',
@@ -42,10 +40,18 @@ export class MessagePage implements OnInit {
         this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
     });
     this.chatService.forceGetList();
+    this.chatService.getMessage().subscribe((data: {email, message}) => {
+        this.storedMessages.push(new Message('', data.email, this.user.email, data.message, new Date(), false, 0));
+    });
   }
 
   filterAndCount(name: string) {
       return this.storedMessages.filter((item) => item.author === name && item.read === false).length;
+  }
+
+  filterLast(name: string) {
+      const tmp = this.storedMessages.filter((item) => item.author === name || item.destination === name);
+      return tmp[tmp.length - 1];
   }
 
   viewConversation(name: string) {
