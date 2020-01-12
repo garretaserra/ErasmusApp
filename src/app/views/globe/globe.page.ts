@@ -13,7 +13,7 @@ export class GlobePage implements OnInit, AfterContentInit {
   @ViewChild('mapElement', {static: true}) mapElement;
 
   constructor() {
-    this.map.accessToken = 'pk.eyJ1IjoiaGFubGV5d29vZCIsImEiOiJZcVlldnlRIn0.BHYD98R8UQQoUBLsNd8ksg';
+    mapBox.accessToken = 'pk.eyJ1IjoiaGFubGV5d29vZCIsImEiOiJZcVlldnlRIn0.BHYD98R8UQQoUBLsNd8ksg';
   }
 
   ngOnInit() {
@@ -23,11 +23,11 @@ export class GlobePage implements OnInit, AfterContentInit {
     // This adds the map
     this.map = new mapBox.Map({
       // container id specified in the HTML
-      container: 'map',
+      container: 'mapElement',
       // style URL
-      style: 'mapbox://styles/mapbox/dark-v9',
+      style: 'mapbox://styles/mapbox/streets-v11',
       // initial position in [long, lat] format
-      center: [-3.7495759, 40.4379332],
+      center: [2.1734, 41.3851],
       // initial zoom
       zoom: 12,
       // scrollZoom: false

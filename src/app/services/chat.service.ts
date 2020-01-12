@@ -3,7 +3,11 @@ import {observable, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Message} from '../models/Message/message';
+import {Injectable} from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class ChatService {
   private url = environment.apiUri;
   private socket;
