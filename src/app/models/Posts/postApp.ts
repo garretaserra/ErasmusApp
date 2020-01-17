@@ -8,10 +8,14 @@ export class PostApp {
     };
     type: string;
     message: string;
-    comments: {
+    comments: [{
         _id: string;
+        owner: {
+            id: string;
+            name: string;
+        };
         message: string;
-    };
+    }];
     constructor(_id = '', owner = null, type = '', message = '', comments = null) {
         this.type = type;
         this.message = message;

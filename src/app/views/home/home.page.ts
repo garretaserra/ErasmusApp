@@ -78,7 +78,7 @@ export class HomePage implements OnInit {
             await this.getActivity().then();
             this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             this.getActivity();
-            this.chatService.connectSocket(this.user.email);
+            this.chatService.connectSocket(this.user.name);
             this.chatService.getMessage().subscribe((data: {message, email}) => {
                 console.log(data);
                 const goToUrl = '/conversation/' + data.email;
