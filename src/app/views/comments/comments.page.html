@@ -14,10 +14,14 @@
           <h2>Owner: {{post.owner.name}}</h2>
           <h2>Message: {{post.message}}</h2>
         </ion-card-header>
-        <ion-card-content *ngFor="let comment of post.comments">
-          <ion-toolbar>Owner: {{comment.owner}}</ion-toolbar>
-          <ion-toolbar>{{comment.message}}</ion-toolbar>
-        </ion-card-content>
+        <ion-list>
+          <ion-card-content *ngFor="let comment of post.comments">
+              <ion-item>
+                <ion-label color="tertiary">Owner: {{comment.owner.name}}</ion-label>
+                <ion-text>{{comment.message}}</ion-text>
+              </ion-item>
+          </ion-card-content>
+        </ion-list>
       </ion-card>
     </ion-content>
   </div>

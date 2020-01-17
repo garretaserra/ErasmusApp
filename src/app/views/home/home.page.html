@@ -34,15 +34,28 @@
                     <ion-toolbar color="medium">
                       {{thing.owner.name}}:{{thing.message}}
                     </ion-toolbar>
-                    <ion-toolbar color="medium">
-                      <ion-button color="dark" slot="start">Comment</ion-button>
-                      <ion-button color="dark" slot="end" (click)="changePageComments(thing._id)" >View comments</ion-button>
-                    </ion-toolbar>
+                    <ion-item color="light">
+                      <ion-col class="send_form_input">
+                        <ion-textarea #box placeholder="Write a comment..."
+                                      (keyup.enter)="onEnter(box.value,thing._id); box.value = '' ">
+                        </ion-textarea>
+                      </ion-col>
+                    </ion-item>
+                    <ion-item color="light">
+                      <ion-col class="send_form_button">
+                        <ion-button (click)="onEnter(box.value,thing._id); box.value = '' ">Comment
+                          <ion-icon slot="end" name="send" size="large"></ion-icon>
+                        </ion-button>
+                      </ion-col>
+                    </ion-item>
+                    <ion-item>
+                      <ion-button color="dark" slot="end" (click)="changePageComments(thing._id)" >View all comments {{'('+thing.comments.length+')'}}</ion-button>
+                    </ion-item>
                   </ion-card-content>
                 </ion-card>
                 <ng-template #other_content>
-                  <div *ngIf="thing.owner.id == this.user._id; else other_person">
-                    <ion-card color="light">
+                  <div *ngIf="thing.owner.name == this.user.name; else other_person">
+                  <ion-card color="light">
                       <ion-card-content>
                         <ion-toolbar color="light">
                           {{thing.owner.name}}:{{thing.description}}

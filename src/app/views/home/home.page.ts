@@ -15,6 +15,7 @@ import {ChatService} from '../../services/chat.service';
 import {NotificationComponent} from '../../components/notification/notification.component';
 import {error} from 'util';
 import {CheckUser} from '../../models/User/checkUser';
+import {Message} from "../../models/Message/message";
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,9 @@ export class HomePage implements OnInit {
     post: Post;
     userProfile: UserProfile;
     userProfileTest: UserProfile;
+
+    comment:string;
+    postId:string;
 
     activity: any[];
     checklist: CheckUser[];
@@ -163,16 +167,18 @@ export class HomePage implements OnInit {
            }
        });
     }
+
     async leave(eventId: string) {
         await this.homeService.leave(eventId, this.user._id).subscribe(res => {
             this.launchToast('You leave successfully');
             console.log(res);
-        },  error => {
+        }, error => {
             if (error.status === 304) {
                 this.launchToast('You not are in');
             }
         });
     }
+
     async launchToast(message) {
         let toast = await this.toastCtrl.create({
             message: message,
@@ -211,7 +217,7 @@ export class HomePage implements OnInit {
         await this.getActivity();
     }
 
-    processPhoto(imageInput: HTMLInputElement) {
+    async processPhoto(imageInput: HTMLInputElement) {
         const file: File = imageInput.files[0];
         const reader = new FileReader();
         reader.addEventListener('load', async (event: any) => {
@@ -219,5 +225,27 @@ export class HomePage implements OnInit {
             await this.userService.editPhoto(event.target.result, this.user._id).toPromise();
         });
         reader.readAsDataURL(file);
+    }
+
+    async onEnter(value: string, postId: string) {
+        this.comment = value;
+        this.postId = postId;
+        console.log(postId);
+        console.log(this.postId);
+        await this.sendComment();
+    }
+
+    async sendComment() {
+        if (this.comment.replace(/\s/g, '').length) {
+            /*let comment = {
+                postId: this.postId,
+                owner: this.user._id,
+                message: this.comment
+            };*/
+            console.log(this.comment);
+            await this.homeService.comment(this.comment,this.postId,this.user._id).subscribe(res => {
+                this.router.navigateByUrl('/comments/' + `${this.postId}`);
+            });
+        }
     }
 }

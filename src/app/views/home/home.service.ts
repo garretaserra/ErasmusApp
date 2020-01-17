@@ -35,12 +35,14 @@ export class HomeService {
     getFollowers(_id: string) {
         return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/followers/` + `${_id}`);
     }
+
     asistir(idEvent: string, idUser: string) {
         return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/event/join`, {
             eventId: idEvent,
             userId: idUser
         });
     }
+
     leave(idEvent: string, idUser: string) {
         return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/event/leave`, {
             eventId: idEvent,
@@ -50,5 +52,13 @@ export class HomeService {
 
     getFollowing(_id: string) {
         return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/following/` + `${_id}`);
+    }
+
+    comment(comment:string,postId:string,owner:string) {
+        return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/post/comment`,{
+            postId: postId,
+            owner: owner,
+            message:comment
+        });
     }
 }
