@@ -10,7 +10,7 @@
     </ion-header>
 
     <ion-content>
-      <ion-card class="vertical-margin" *ngFor="let post of this.user.posts">
+      <ion-card class="vertical-margin" *ngFor="let post of this.posts">
         <ion-toolbar>{{post.message}}
           <ion-item>
             <ion-button slot="end" class="home" (click)="deletePost(post._id)"><ion-icon name="close" slot="end"></ion-icon>

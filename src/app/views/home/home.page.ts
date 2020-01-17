@@ -72,11 +72,10 @@ export class HomePage implements OnInit {
             this.user = JSON.parse(storageUser);
             await this.storage.saveUser(storageUser);
             this.checklist = [];
-
             this.photo = (await this.userService.getPhoto(this.user._id).toPromise()).photo;
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
             // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
-            await this.getActivity();
+            await this.getActivity().then();
             this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             this.getActivity();
             this.chatService.connectSocket(this.user.email);
@@ -102,14 +101,13 @@ export class HomePage implements OnInit {
                 console.log('res: ', res);
                 const response: any = res;
                 this.activity = response.body.activity;
-                this.user.activity = this.activity;
                 this.checkMember();
 
             }
         }, error => {
             console.log('error', error);
         });
-        console.log('activity: ', this.user.activity);
+        console.log('activity: ', this.activity);
         await this.userService.saveUser(this.user);
     }
     async alert() {
@@ -145,19 +143,16 @@ export class HomePage implements OnInit {
 
     postMessage: string;
     async publishPost(){
-        let post = new Post('', this.user._id, 'Post', this.postMessage);
         let postSend = new PostSend(this.user._id, 'Post', this.postMessage);
         this.homeService.sendPost(postSend).subscribe(res => {
-            console.log('res: ', res);
-            this.user.activity.push(post);
-            this.updateUser();
+            this.getActivity();
         });
     }
 
     async updateUser(){
-        this.user.activity = (await this.userService.savePostsUsers(this.user._id).toPromise()).posts;
         this.storage.saveUser(JSON.stringify(this.user));
     }
+
     async asistir(eventId: string) {
        await this.homeService.asistir(eventId, this.user._id).subscribe(res => {
            this.router.navigateByUrl('/profile-event/' + `${eventId}`);

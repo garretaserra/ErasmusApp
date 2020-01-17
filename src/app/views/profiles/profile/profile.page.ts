@@ -31,6 +31,11 @@ export class ProfilePage implements OnInit {
   async ngOnInit() {
     await this.load();
   }
+
+  async ionViewEnter(){
+    await this.load();
+  }
+
   async load() {
       this._id = JSON.parse(this.storage.getUser())._id;
       await this.profileService.getProfile(this._id).subscribe(async res => {

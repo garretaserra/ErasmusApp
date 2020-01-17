@@ -36,7 +36,7 @@ export class MessagePage implements OnInit {
     this.chatService.getList().subscribe((list: string[]) => {
       this.userList = list.filter( item => item[0] !== this.user.email); // TODO: User esta mal, email sale name.
     });
-    this.friendsService.getUsers().subscribe((list: UserName[]) => {
+    this.friendsService.getUsers(new User(this.storage.getUser())._id).subscribe((list: UserName[]) => {
         this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
     });
     this.chatService.forceGetList();

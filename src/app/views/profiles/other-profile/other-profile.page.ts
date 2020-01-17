@@ -35,6 +35,11 @@ export class OtherProfilePage implements OnInit {
   async ngOnInit() {
     this.load();
   }
+
+  async ionViewDidEnter() {
+    this.load();
+  }
+
   async load() {
     this._id = this.route.snapshot.paramMap.get('id');
     this.user = JSON.parse(this.storage.getUser());

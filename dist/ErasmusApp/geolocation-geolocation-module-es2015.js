@@ -89,7 +89,7 @@ var Geolocation = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title> Geolocation</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n <div #mapElement class=\"map\"></div>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title> Geolocation</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n <div #mapElement class=\"map\"></div>\n</ion-content>\n"
 
 /***/ }),
 

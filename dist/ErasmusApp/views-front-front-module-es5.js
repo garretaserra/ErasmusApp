@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content fullscreen=\"\">\r\n  <ion-card margin-top>\r\n    <ion-card-content>\r\n    <ion-title color=\"primary\">ERASMUS city</ion-title>\r\n\r\n  </ion-card-content>\r\n  </ion-card>\r\n  <ion-card margin-bottom>\r\n    <ion-card-content>\r\n      <h4>Si ya dispones de una cuenta en Erasmus, <a routerLink='/login'>inicia sesión</a>!</h4>\r\n      <div></div>\r\n      <h4>Si todavía no tienes una cuenta en Erasmus, <a routerLink='/register'>regístrate</a>!</h4>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n"
+module.exports = "<ion-content fullscreen=\"\">\n  <ion-card margin-top>\n    <ion-card-content>\n    <ion-title color=\"primary\">ERASMUS city</ion-title>\n\n  </ion-card-content>\n  </ion-card>\n  <ion-card margin-bottom>\n    <ion-card-content>\n      <h4>Si ya dispones de una cuenta en Erasmus, <a routerLink='/login'>inicia sesión</a>!</h4>\n      <div></div>\n      <h4>Si todavía no tienes una cuenta en Erasmus, <a routerLink='/register'>regístrate</a>!</h4>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 

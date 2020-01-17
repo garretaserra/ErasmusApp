@@ -13,20 +13,18 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class AuthService {
-
-  // AUTH_SERVER_ADDRESS = environment.apiUri;
     AUTH_SERVER_ADDRESS = environment.apiUri + '/user';
-  authSubject = new BehaviorSubject(false);
+    authSubject = new BehaviorSubject(false);
 
-  constructor(private httpClient: HttpClient, private storage: Storage) {}
+    constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-register(user: UserRegister) {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/register`, user);
-}
-login(user: UserLogin) {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user);
-}
-sendUserPages(user: User) {
-      return user;
-}
+    register(user: UserRegister) {
+        return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/register`, user);
+    }
+    login(user: UserLogin) {
+        return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/login`, user);
+    }
+    sendUserPages(user: User) {
+          return user;
+    }
 }

@@ -681,6 +681,40 @@ const findCheckedOption = (el, tagName) => {
 
 /***/ }),
 
+/***/ "./src/app/models/Message/message.ts":
+/*!*******************************************!*\
+  !*** ./src/app/models/Message/message.ts ***!
+  \*******************************************/
+/*! exports provided: Message */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return Message; });
+class Message {
+    constructor(id, author, destination, text, timestamp, read, __v) {
+        this._id = id;
+        this.author = author;
+        this.destination = destination;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.read = read;
+        this.__v = __v;
+    }
+}
+Message.ctorParameters = () => [
+    { type: String },
+    { type: String },
+    { type: String },
+    { type: String },
+    { type: Date },
+    { type: Boolean },
+    { type: undefined }
+];
+
+
+/***/ }),
+
 /***/ "./src/app/views/auth/auth.service.ts":
 /*!********************************************!*\
   !*** ./src/app/views/auth/auth.service.ts ***!
@@ -707,7 +741,6 @@ let AuthService = class AuthService {
     constructor(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        // AUTH_SERVER_ADDRESS = environment.apiUri;
         this.AUTH_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
@@ -875,57 +908,6 @@ FriendsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
 ], FriendsService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/views/post/post.service.ts":
-/*!********************************************!*\
-  !*** ./src/app/views/post/post.service.ts ***!
-  \********************************************/
-/*! exports provided: PostService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostService", function() { return PostService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-
-
-let PostService = class PostService {
-    constructor(httpClient, storage) {
-        this.httpClient = httpClient;
-        this.storage = storage;
-        this.POST_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
-        this.homeSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
-    }
-    getPosts(id) {
-        return this.httpClient.get(`${this.POST_SERVER_ADDRESS}/user/posts/` + `${id}`);
-    }
-    deletePost(id) {
-        return this.httpClient.delete(`${this.POST_SERVER_ADDRESS}/post/` + `${id}`);
-    }
-};
-PostService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"] }
-];
-PostService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
-], PostService);
 
 
 

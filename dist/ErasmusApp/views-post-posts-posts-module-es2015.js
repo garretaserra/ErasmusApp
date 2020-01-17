@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n  <div class=\"ion-page\" main>\r\n<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Posts</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card class=\"vertical-margin\" *ngFor=\"let post of this.posts\">\r\n    <ion-toolbar>{{post.message}}</ion-toolbar>\r\n  </ion-card>\r\n</ion-content>\r\n  </div>\r\n</ion-app>\r\n"
+module.exports = "<ion-app>\n  <div class=\"ion-page\" main>\n<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Posts</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card class=\"vertical-margin\" *ngFor=\"let post of this.posts\">\n    <ion-toolbar>{{post.message}}</ion-toolbar>\n  </ion-card>\n</ion-content>\n  </div>\n</ion-app>\n"
 
 /***/ }),
 

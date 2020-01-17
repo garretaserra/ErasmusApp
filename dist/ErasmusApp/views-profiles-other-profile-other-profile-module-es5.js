@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n  <div class=\"ion-page\" main>\r\n<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Profile</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content fullscreen=\"\">\r\n  <ion-card class=\"vertical-margin\">\r\n    <div style=\"background: #e44d3a; height: 50%\">\r\n      <div class=\"personal-icon\">\r\n        <ion-img class=\"image-contain\" src=\"../../../assets/img/default_user.png\" style=\"width: 200px; height: 200px;\"></ion-img>\r\n      </div>\r\n    </div>\r\n    <ion-card-header *ngIf=\"otherUserProfile\">\r\n      <ion-card-subtitle>{{otherUserProfile.email}}</ion-card-subtitle>\r\n      <ion-card-title>{{otherUserProfile.name}}</ion-card-title>\r\n    </ion-card-header>\r\n  </ion-card>\r\n  <ion-card class=\"vertical-margin\">\r\n    <ion-card-content *ngIf=\"otherUserProfile\">\r\n      <div *ngIf=\"following\">\r\n      <ion-toolbar color=\"primary\">\r\n        <ion-button (click)=\"seeMyPosts()\">Posts: {{otherUserProfile.posts}}</ion-button>\r\n      </ion-toolbar>\r\n      <ion-toolbar color=\"secondary\">\r\n        <ion-button (click)=\"seeMyFollowers()\">Followers: {{otherUserProfile.followers}}</ion-button>\r\n      </ion-toolbar>\r\n      <ion-toolbar color=\"tertiary\">\r\n        <ion-button (click)=\"seeMyFollowing()\">Following: {{otherUserProfile.following}}</ion-button>\r\n      </ion-toolbar>\r\n      </div>\r\n      <ion-toolbar color=\"primary\">\r\n        <ion-button size=\"large\" color=\"tertiary\" (click)=\"follow()\" [disabled]=\"following\" expand=\"block\">Follow</ion-button>\r\n      </ion-toolbar>\r\n      <ion-toolbar color=\"secondary\">\r\n        <ion-button size=\"large\" color=\"tertiary\" (click)=\"unfollow()\" [disabled]=\"!following\" expand=\"block\">UnFollow</ion-button>\r\n      </ion-toolbar>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n  </div>\r\n</ion-app>\r\n"
+module.exports = "<ion-app>\n  <div class=\"ion-page\" main>\n<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Profile</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen=\"\">\n  <ion-card class=\"vertical-margin\">\n    <div style=\"background: #e44d3a; height: 50%\">\n      <div class=\"personal-icon\">\n        <img *ngIf=\"photo\" class=\"image-contain\" src=\"{{photo}}\" style=\"width: 200px; height: 200px;\"/>\n        <img *ngIf=\"!photo\" class=\"image-contain\" src=\"../../../assets/img/default_user.png\" style=\"width: 200px; height: 200px;\"/>\n      </div>\n    </div>\n    <ion-card-header *ngIf=\"otherUserProfile\">\n      <ion-card-subtitle>{{otherUserProfile.email}}</ion-card-subtitle>\n      <ion-card-title>{{otherUserProfile.name}}</ion-card-title>\n    </ion-card-header>\n  </ion-card>\n  <ion-card class=\"vertical-margin\">\n    <ion-card-content *ngIf=\"otherUserProfile\">\n      <div *ngIf=\"following\">\n      <ion-toolbar color=\"primary\">\n        <ion-button (click)=\"seeMyPosts()\">Posts: {{otherUserProfile.posts}}</ion-button>\n      </ion-toolbar>\n      <ion-toolbar color=\"secondary\">\n        <ion-button (click)=\"seeMyFollowers()\">Followers: {{otherUserProfile.followers}}</ion-button>\n      </ion-toolbar>\n      <ion-toolbar color=\"tertiary\">\n        <ion-button (click)=\"seeMyFollowing()\">Following: {{otherUserProfile.following}}</ion-button>\n      </ion-toolbar>\n      </div>\n      <ion-toolbar color=\"primary\">\n        <ion-button size=\"large\" color=\"tertiary\" (click)=\"follow()\" [disabled]=\"following\" expand=\"block\">Follow</ion-button>\n      </ion-toolbar>\n      <ion-toolbar color=\"secondary\">\n        <ion-button size=\"large\" color=\"tertiary\" (click)=\"unfollow()\" [disabled]=\"!following\" expand=\"block\">UnFollow</ion-button>\n      </ion-toolbar>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n  </div>\n</ion-app>\n"
 
 /***/ }),
 
@@ -157,20 +157,27 @@ var OtherProfilePage = /** @class */ (function () {
                     case 0:
                         this._id = this.route.snapshot.paramMap.get('id');
                         this.user = JSON.parse(this.storage.getUser());
-                        console.log('this.user: ', this.user);
-                        return [4 /*yield*/, this.profileService.getProfile(this._id).subscribe(function (res) {
-                                var response = res;
-                                console.log(res);
-                                _this.userProfile = response.profile;
-                                _this.otherUserProfile = _this.userProfile;
-                            }, function (error) { console.log('error'); })];
+                        return [4 /*yield*/, this.profileService.getProfile(this._id).subscribe(function (res) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                                var response, _a;
+                                return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                                    switch (_b.label) {
+                                        case 0:
+                                            response = res;
+                                            this.userProfile = response.profile;
+                                            this.otherUserProfile = this.userProfile;
+                                            _a = this;
+                                            return [4 /*yield*/, this.userService.getPhoto(this.otherUserProfile._id).toPromise()];
+                                        case 1:
+                                            _a.photo = (_b.sent()).photo;
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); }, function (error) { console.log('error'); })];
                     case 1:
                         _a.sent();
                         return [4 /*yield*/, this.profileService.getFollowers(this._id).subscribe(function (res) {
                                 var response = res;
-                                console.log(res);
                                 _this.followers = response.followers;
-                                console.log('this.followers: ', _this.followers);
                                 _this.checkFol();
                             }, function (error) { console.log('error'); })];
                     case 2:

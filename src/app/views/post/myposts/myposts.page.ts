@@ -7,6 +7,7 @@ import {AlertController, MenuController} from '@ionic/angular';
 import {PostService} from '../post.service';
 import {PostSend} from '../../../models/Posts/postSend';
 import {StorageComponent} from "../../../storage/storage.component";
+import {PostApp} from "../../../models/Posts/postApp";
 
 @Component({
   selector: 'app-myposts',
@@ -16,7 +17,8 @@ import {StorageComponent} from "../../../storage/storage.component";
 export class MypostsPage implements OnInit {
 
   user: User;
-  userTest: User;
+  posts:PostApp[];
+
   constructor(private userService: UserService,
               private postService: PostService,
               private router: Router,
@@ -33,8 +35,7 @@ export class MypostsPage implements OnInit {
       await this.postService.getPosts(this.user._id).subscribe(res => {
         console.log('response', res);
         const response: any = res;
-        this.user.posts = response.posts;
-        this.userTest = this.user;
+        this.posts = response.posts;
     }, error => {
       console.log('error');
     });

@@ -19,12 +19,9 @@ export class HomeService {
     HOME_SERVER_ADDRESS = environment.apiUri;
     homeSubject = new BehaviorSubject(false);
 
-    activity: Post[];
-
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
     sendPost(post: PostSend) {
-        console.log('post:', post.message);
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
             post
         });
