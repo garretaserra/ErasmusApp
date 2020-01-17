@@ -12,7 +12,9 @@
                 <ion-card class="vertical-margin">
                     <div style="background: #e44d3a; height: 50%">
                       <div class="personal-icon">
-                          <ion-img class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"></ion-img>
+<!--                          <ion-img class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"></ion-img>-->
+                        <img *ngIf="photo" class="image-contain" src="{{photo}}" style="width: 200px; height: 200px;"/>
+                        <img *ngIf="!photo" class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"/>
                       </div>
                     </div>
                       <ion-card-header *ngIf="userTest">

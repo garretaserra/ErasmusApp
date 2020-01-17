@@ -52,12 +52,12 @@ export class RegisterPage implements OnInit {
       ],
       pass: [
         { type: 'required', message: 'Campo obligatorio.' },
-        { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
+        { type: 'pattern', message: 'Debe contener almenos una minúsucla, mayúscula, un número y un carácter especial' },
         { type: 'minlength', message: 'Mínimo 8 caracteres'}
       ],
       confirm: [
         { type: 'required', message: 'Campo obligatorio.' },
-        { type: 'pattern', message: 'Debe contener almenos una mayúscula, un número y un carácter especial' },
+        { type: 'pattern', message: 'Debe contener almenos una minúsucla, mayúscula, un número y un carácter especial' },
         { type: 'minlength', message: 'Mínimo 8 caracteres'}
       ],
       terms: [

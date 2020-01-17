@@ -32,4 +32,10 @@ export class UserService {
     search(searchString) {
         return this.httpClient.get<User[]>(`${this.USER_SERVER_ADDRESS}/search?searchString=` + searchString);
     }
+    editPhoto(photo: string , userId: string) {
+        return this.httpClient.post(`${this.USER_SERVER_ADDRESS}/image/edit`, {id: userId, photo: photo});
+    }
+    getPhoto(userId: string) {
+        return this.httpClient.get<any>(`${this.USER_SERVER_ADDRESS}/image?id=` + userId);
+    }
 }

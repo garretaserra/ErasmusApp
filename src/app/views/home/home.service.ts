@@ -50,4 +50,8 @@ export class HomeService {
             userId: idUser
         });
     }
+
+    getFollowing(_id: string) {
+        return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/following/` + `${_id}`);
+    }
 }

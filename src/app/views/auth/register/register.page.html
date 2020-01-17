@@ -1,5 +1,5 @@
 <ion-content class="ion-padding" color="tertiary">
-  <ion-card class="item item-text-wrap">
+  <ion-card>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-grid>
         <ion-row class="ion-justify-content-center">
@@ -111,7 +111,7 @@
           </ion-col>
         </ion-row>
         <ion-row color="tertiary">
-          <h4>Si ya dispones de una cuenta en Erasmus, <a routerLink='/login'>inicia sesión</a>!</h4>
+          <h4 class="final-line">Si ya dispones de una cuenta en Erasmus, <a routerLink='/login'>inicia sesión</a>!</h4>
         </ion-row>
       </ion-grid>
     </form>

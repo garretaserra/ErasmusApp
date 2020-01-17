@@ -10,6 +10,9 @@ import {PostSend} from '../../models/Posts/postSend';
 import {UserProfile} from '../../models/User/userProfile';
 import {UserName} from '../../models/User/userName';
 import {StorageComponent} from "../../storage/storage.component";
+import {PostService} from "../post/post.service";
+import {ChatService} from '../../services/chat.service';
+import {NotificationComponent} from '../../components/notification/notification.component';
 import {error} from 'util';
 import {CheckUser} from '../../models/User/checkUser';
 
@@ -20,6 +23,7 @@ import {CheckUser} from '../../models/User/checkUser';
 })
 
 export class HomePage implements OnInit {
+
     homeForm: FormGroup;
     user: User;
     postSend: PostSend;
@@ -34,23 +38,29 @@ export class HomePage implements OnInit {
     form: FormGroup = new FormGroup({});
     suggestions: String[];
     searchValue: string;
+    private photo: any;
 
     constructor(private formBuilder: FormBuilder,
                 private homeService: HomeService,
                 private userService: UserService,
+                private postService: PostService,
                 private router: Router,
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
                 public storage: StorageComponent,
                 private toastCtrl: ToastController) {
-        this.homeForm = this.formBuilder.group({
-            post: new FormControl()
-        });
+                public storage: StorageComponent,
+                public chatService: ChatService,
+                public notificationComponent: NotificationComponent) {
     }
 
     async ngOnInit() {
-        this.checklist = [];
-    }
+        this.homeForm = this.formBuilder.group({
+            post: new FormControl()
+        });
+    this.checklist = [];
+
+}
 
     async ionViewDidEnter(){
         let storageUser = this.storage.getUser();
@@ -61,12 +71,27 @@ export class HomePage implements OnInit {
             await this.router.navigateByUrl('/login');
         } else {
             this.user = JSON.parse(storageUser);
-            console.log('this.user: ', this.user);
             await this.storage.saveUser(storageUser);
             this.checklist = [];
+
+            this.photo = (await this.userService.getPhoto(this.user._id).toPromise()).photo;
             this.followers = (await this.homeService.getFollowers(this.user._id).toPromise()).followers;
             // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             await this.getActivity();
+            this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
+            this.getActivity();
+            this.chatService.connectSocket(this.user.email);
+            this.chatService.getMessage().subscribe((data: {message, email}) => {
+                console.log(data);
+                const goToUrl = '/conversation/' + data.email;
+                const msg = data.email + ' says: ' + data.message;
+                if (this.router.url !== goToUrl) {
+                    this.notificationComponent.generateToast(msg, goToUrl).catch((err) => console.log(err));
+                } else {
+                    this.notificationComponent.playInnerSound();
+                }
+                console.log(this.router.url);
+            });
         }
     }
 
@@ -85,6 +110,7 @@ export class HomePage implements OnInit {
         }, error => {
             console.log('error', error);
         });
+        console.log('activity: ', this.user.activity);
         await this.userService.saveUser(this.user);
     }
     async alert() {
@@ -113,9 +139,11 @@ export class HomePage implements OnInit {
         //Get emails of all users
         this.suggestions = users.map(a => a.email);
     }
+
     logOff(){
         this.storage.clearStorage();
     }
+
     postMessage: string;
     async publishPost(){
         let post = new Post('', this.user._id, 'Post', this.postMessage);
@@ -126,6 +154,7 @@ export class HomePage implements OnInit {
             this.updateUser();
         });
     }
+
     async updateUser(){
         this.user.activity = (await this.userService.savePostsUsers(this.user._id).toPromise()).posts;
         this.storage.saveUser(JSON.stringify(this.user));
@@ -181,5 +210,20 @@ export class HomePage implements OnInit {
     }
     async changePageComments(idPost) {
        await this.router.navigateByUrl('/comments/' + `${idPost}`);
+    }
+
+    async deleteEvent(activity) {
+        await this.postService.deletePost(activity._id).toPromise();
+        await this.getActivity();
+    }
+
+    processPhoto(imageInput: HTMLInputElement) {
+        const file: File = imageInput.files[0];
+        const reader = new FileReader();
+        reader.addEventListener('load', async (event: any) => {
+            this.photo = event.target.result;
+            await this.userService.editPhoto(event.target.result, this.user._id).toPromise();
+        });
+        reader.readAsDataURL(file);
     }
 }

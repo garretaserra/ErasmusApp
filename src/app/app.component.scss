@@ -1,3 +1,9 @@
 .pointer {
   cursor: pointer;
 }
+
+@media (min-width: 500px) {
+  .mobile-menu{
+    display: none;
+  }
+}

@@ -96,6 +96,11 @@ ion-toolbar{
   border-radius: 50%;
 }
 
+.image-input{
+  display: inline-flex;
+  opacity: 0;
+}
+
 .vertical-margin{
   margin-top: 20px;
   margin-bottom: 20px;
@@ -153,4 +158,13 @@ ion-toolbar{
 .personal-status{
   color: #686868;
   margin: 5px;
+}
+
+.delete-icon{
+  color: red;
+  margin-left: auto;
+}
+
+.middle-card{
+  display: flex;
 }
