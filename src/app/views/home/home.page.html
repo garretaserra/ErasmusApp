@@ -102,7 +102,8 @@
         <div style="height: 250px">
           <div style="background: #e44d3a; height: 50%; display: flex">
             <div class="personal-icon">
-              <img class="image-contain" src="{{this.photo}}"/>
+              <img *ngIf="this.photo" class="image-contain" src="{{this.photo}}"/>
+              <img *ngIf="!this.photo" class="image-contain" src="../../../assets/img/default_user.png"/>
             </div>
             <div class="personal-icon" style="position: absolute; width: auto;">
               <input #imageInput
