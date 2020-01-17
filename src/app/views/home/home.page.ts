@@ -77,6 +77,8 @@ export class HomePage implements OnInit {
                 const msg = data.email + ' says: ' + data.message;
                 if (this.router.url !== goToUrl) {
                     this.notificationComponent.generateToast(msg, goToUrl).catch((err) => console.log(err));
+                } else {
+                    this.notificationComponent.playInnerSound();
                 }
                 console.log(this.router.url);
             });
