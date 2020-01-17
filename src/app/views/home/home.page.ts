@@ -47,8 +47,7 @@ export class HomePage implements OnInit {
                 private router: Router,
                 public menuCtrl: MenuController,
                 public alertCtrl: AlertController,
-                public storage: StorageComponent,
-                private toastCtrl: ToastController) {
+                private toastCtrl: ToastController,
                 public storage: StorageComponent,
                 public chatService: ChatService,
                 public notificationComponent: NotificationComponent) {
