@@ -29,20 +29,20 @@ export class MessagePage implements OnInit {
               private friendsService: FriendsService,
               public notificationComponent: NotificationComponent) { }
 
-   async ngOnInit() {
-    this.user = JSON.parse(this.storage.getUser());
-    this.chatService.connectSocket(this.user.email);
-    this.storedMessages = await this.chatService.getStoredMessages().toPromise();
-    this.chatService.getList().subscribe((list: string[]) => {
-      this.userList = list.filter( item => item[0] !== this.user.email); // TODO: User esta mal, email sale name.
-    });
-    this.friendsService.getUsers(new User(this.storage.getUser())._id).subscribe((list: UserName[]) => {
-        this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
-    });
-    this.chatService.forceGetList();
-    this.chatService.getMessage().subscribe((data: {email, message}) => {
-        this.storedMessages.push(new Message('', data.email, this.user.email, data.message, new Date(), false, 0));
-    });
+  async ngOnInit() {
+      this.user = JSON.parse(this.storage.getUser());
+      this.chatService.connectSocket(this.user.name);
+      this.storedMessages = await this.chatService.getStoredMessages().toPromise();
+      this.chatService.getList().subscribe((list: string[]) => {
+          this.userList = list.filter(item => item[0] !== this.user.name);
+      });
+      this.friendsService.getUsers(new User(this.storage.getUser())._id).subscribe((list: UserName[]) => {
+          this.users = list.filter(item => item.name !== this.user.name);
+      });
+      this.chatService.forceGetList();
+      this.chatService.getMessage().subscribe((data: { name, message }) => {
+          this.storedMessages.push(new Message('', data.name, this.user.name, data.message, new Date(), false, 0));
+      });
   }
 
   filterAndCount(name: string) {

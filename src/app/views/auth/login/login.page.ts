@@ -52,12 +52,12 @@ export class LoginPage implements OnInit {
 
 
   async login() {
-    this.authService.login(new UserLogin( this.loginForm.controls.email.value,
+    this.authService.login(new UserLogin(this.loginForm.controls.email.value,
         this.loginForm.controls.password.value)).subscribe(async res => {
             const response: any = res;
             this.user = response.user;
             this.user.jwt = response.jwt;
-
+            console.log(this.user);
             //Save info locally
             await this.storage.saveToken(this.user.jwt);
             await this.storage.saveUser(JSON.stringify(this.user));

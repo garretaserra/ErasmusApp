@@ -19,7 +19,7 @@
         <ion-label>
           <h2>{{ userItem[0] }}</h2>
           <h3>
-            <span *ngIf="filterLast(userItem[0]).author === user.email">
+            <span *ngIf="filterLast(userItem[0]).author === user.name">
               <b>You: </b>
             </span>
             {{filterLast(userItem[0]).text}}
@@ -39,7 +39,7 @@
       <ion-label>
         <h2>{{ userItem.name }}</h2>
         <h3 *ngIf="filterLast(userItem.name)">
-            <span *ngIf="filterLast(userItem.name).author === user.email">
+            <span *ngIf="filterLast(userItem.name).author === user.name">
               <b>You: </b>
             </span>
           {{filterLast(userItem.name).text}}

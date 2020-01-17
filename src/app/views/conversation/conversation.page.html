@@ -10,7 +10,7 @@
 <ion-content id="scroll-this">
   <ion-list class="messages_list">
     <ion-item lines="none" *ngFor="let msg of messages">
-      <div *ngIf="msg.author === user.email" class="message_bubble yours">
+      <div *ngIf="msg.author === user.name" class="message_bubble yours">
         <div class="message">
           <span class="faded">Me: </span>
           {{msg.text}}
@@ -20,7 +20,7 @@
           <span class="faded" style="font-size: x-small">{{formatDate(msg.timestamp)}}</span>
         </div>
       </div>
-      <div *ngIf="msg.author !== user.email" class="message_bubble mine">
+      <div *ngIf="msg.author !== user.name" class="message_bubble mine">
         <span class="message">
           <span class="faded">{{name}}: </span>
           {{msg.text}}
