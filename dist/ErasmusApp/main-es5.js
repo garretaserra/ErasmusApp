@@ -480,7 +480,7 @@ module.exports = "<p>\n  storage works!\n</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app class=\"mobile\">\n  <div class=\"ion-page\" main>\n    <ion-header>\n      <ion-toolbar>\n        <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-title slot=\"start\">Home</ion-title>\n      </ion-toolbar>\n    </ion-header>\n    <ion-content class=\"ion-padding\">\n      <form [formGroup]=\"homeForm\">\n        <div>\n          <ion-card class=\"vertical-margin border-top\">\n            <div>\n              <ion-item class=\"textarea\">\n                <ion-textarea name=\"post\" type=\"post\" formControlName=\"post\" placeholder=\"Write here if is a post and click button, if is a event, only click button.\" required></ion-textarea>\n              </ion-item>\n            </div>\n            <div>\n              <ionalert>\n                <section>\n                  <ion-button (click)=\"alert()\" color=\"medium\" expand=\"block\">Post / Event</ion-button>\n                </section>\n              </ionalert>\n            </div>\n          </ion-card>\n          <div *ngIf=\"activity\">\n            <ion-card color=\"dark\" class=\"vertical-margin\" >\n              <ion-card-title>ACTIVITY</ion-card-title>\n              <div *ngFor=\"let thing of activity\">\n                <ion-card color=\"medium\">\n                  <ion-card-content  *ngIf=\"thing.type == 'Post';else other_content\">\n                  <ion-toolbar color=\"medium\">\n                    {{thing.owner.name}}:{{thing.message}}\n                  </ion-toolbar>\n                    <ion-toolbar color=\"medium\">\n                      <ion-button color=\"dark\" slot=\"start\">Comment</ion-button>\n                      <ion-button color=\"dark\" slot=\"end\" (click)=\"changePageComments(thing._id)\" >View comments</ion-button>\n                    </ion-toolbar>\n                </ion-card-content>\n                </ion-card>\n              <ng-template #other_content>\n                <div *ngIf=\"thing.owner.name == this.user.email; else other_person\">\n                <ion-card color=\"light\">\n                <ion-card-content>\n                  <ion-toolbar color=\"light\">\n                    {{thing.owner.name}}:{{thing.description}}\n                  </ion-toolbar>\n                  <ion-toolbar color=\"light\">\n                    Location:{{thing.location}}\n                  </ion-toolbar>\n                  <ion-toolbar color=\"light\">\n                    <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                  </ion-toolbar>\n                </ion-card-content>\n              </ion-card>\n                </div>\n                <ng-template #other_person>\n                  <div *ngFor=\"let user of checklist\">\n                    <div *ngIf=\"user.idEvent === thing._id\">\n                      <div *ngIf=\"user.check === 'yes'; else other_thing\" >\n                      <ion-card color=\"medium\">\n                          <ion-card-content>\n                            <ion-toolbar color=\"medium\">\n                              {{thing.owner.name}}:{{thing.description}}\n                            </ion-toolbar>\n                            <ion-toolbar color=\"medium\">\n                              Location:{{thing.location}}\n                            </ion-toolbar>\n                            <ion-toolbar color=\"medium\">\n                              <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                              <ion-button color=\"dark\" (click)=\"leave(thing._id)\" slot=\"end\">Leave</ion-button>\n                            </ion-toolbar>\n                          </ion-card-content>\n                        </ion-card>\n                      </div>\n                    </div>\n                    <ng-template #other_thing>\n                      <ion-card color=\"medium\">\n                        <ion-card-content>\n                          <ion-toolbar color=\"medium\">\n                            {{thing.owner.name}}:{{thing.description}}\n                          </ion-toolbar>\n                          <ion-toolbar color=\"medium\">\n                            Location:{{thing.location}}\n                          </ion-toolbar>\n                          <ion-toolbar color=\"medium\">\n                            <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                            <ion-button color=\"dark\" (click)=\"asistir(thing._id)\" slot=\"end\">Attend</ion-button>\n                          </ion-toolbar>\n                        </ion-card-content>\n                      </ion-card>\n                    </ng-template>\n                  </div>\n                  </ng-template>\n              </ng-template>\n              </div>\n            </ion-card>\n          </div>\n        </div>\n      </form>\n    </ion-content>\n  </div>\n</ion-app>\n\n<div class=\"web\">\n<mat-toolbar color=\"primary\">\n  <mat-toolbar-row class=\"background-primary\">\n    <span class=\"margin-left-auto\" style=\"color: white\">Erasmus</span>\n    <form [formGroup]=\"form\" class=\"search-form margin-right-auto\">\n      <div>\n        <label class=\"search-input\">\n          <input matInput (keyup)=\"updateSuggestions($event)\" [matAutocomplete]=\"auto\" placeholder=\"Search...\">\n          <mat-autocomplete #auto=\"matAutocomplete\">\n            <mat-option *ngFor=\"let suggestion of suggestions\" [value]=\"suggestion\">{{suggestion}}</mat-option>\n          </mat-autocomplete>\n        </label>\n        <button type=\"submit\" class=\"search-button\">\n          <i class=\"material-icons search-icon\">search</i>\n        </button>\n      </div>\n    </form>\n    <div class=\"toolbar-container margin-right-auto\">\n      <div class=\"toolbar-buttons\">\n        <div class=\"pointer\" [routerLink]=\"'/home'\">\n          <div>\n            <i class=\"material-icons\">home</i>\n          </div>\n          <div class=\"menu-title white-text\">\n              Home\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/profile'\">\n          <div>\n            <i class=\"material-icons\">person</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Profile\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/friends'\">\n          <div>\n            <i class=\"material-icons\">group</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Friends\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/message'\">\n          <div>\n            <i class=\"material-icons\">chat</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Chat\n          </div>\n        </div>\n      </div>\n    </div>\n    <div routerLink=\"/login\" class=\"pointer margin-right-auto\" style=\"color: white\" (click)=\"logOff()\">Log Off</div>\n  </mat-toolbar-row>\n</mat-toolbar>\n\n<!--Body of the Web Page-->\n<div class=\"container\">\n  <div class=\"main-content\">\n    <!--Left Column-->\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\n      <mat-card class=\"vertical-margin no-padding\">\n        <div style=\"height: 250px\">\n          <div style=\"background: #e44d3a; height: 50%; display: flex\">\n            <div class=\"personal-icon\">\n              <img *ngIf=\"this.photo\" class=\"image-contain\" src=\"{{this.photo}}\"/>\n              <img *ngIf=\"!this.photo\" class=\"image-contain\" src=\"../../../assets/img/default_user.png\"/>\n            </div>\n            <div class=\"personal-icon\" style=\"position: absolute; width: auto;\">\n              <input #imageInput\n                     style=\"width: 100%; height: 100%;\"\n                     class=\"image-input\"\n                     type = 'file'\n                     accept=\"image/*\"\n                     (change) = \"processPhoto(imageInput)\">\n            </div>\n          </div>\n          <div style=\"height: 70%\">\n            <div class=\"personal-info-container\">\n              <div *ngIf=\"user\" class=\"personal-name\">\n                {{user.name}}\n              </div>\n              <div class=\"personal-status\">\n                Status\n              </div>\n            </div>\n          </div>\n        </div>\n        <div *ngIf=\"followers\" class=\"personal-item\">\n          <p class=\"personal-item-title\">Followers</p>\n          {{followers.length}}\n        </div>\n        <div *ngIf=\"following\" class=\"personal-item\">\n          <p class=\"personal-item-title\">Following</p>\n          {{following.length}}\n        </div>\n      </mat-card>\n    </div>\n    <!--Middle Column-->\n    <div class=\"col-lg-5 col-md-5 col-sm-5\">\n      <!--Post Card-->\n      <div>\n        <mat-card class=\"vertical-margin border-top\">\n          <div>\n            <mat-form-field class=\"textarea\">\n                <textarea matInput\n                          cdkTextareaAutosize\n                          #autosize=\"cdkTextareaAutosize\"\n                          cdkAutosizeMinRows=\"3\"\n                          cdkAutosizeMaxRows=\"7\"\n                          [(ngModel)]=\"postMessage\"></textarea>\n            </mat-form-field>\n          </div>\n          <div>\n            <button mat-raised-button class=\"background-primary white-text\" (click)=\"publishPost()\">Post</button>\n          </div>\n        </mat-card>\n      </div>\n      <!--Wall Card-->\n      <div *ngIf=\"user\">\n        <div *ngFor=\"let activity of user.activity\">\n          <mat-card class=\"vertical-margin middle-card\">\n            <div>\n              {{activity.message}}\n            </div>\n            <i class=\"material-icons delete-icon\" (click)=\"deleteEvent(activity)\">delete_forever</i>\n          </mat-card>\n        </div>\n      </div>\n    </div>\n    <!--Right Column-->\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\n      <mat-card class=\"vertical-margin\">\n        <div class=\"vertical-margin\">\n          FOLLOWING\n        </div>\n        <mat-divider></mat-divider>\n        <mat-list *ngIf=\"user\">\n          <div *ngFor=\"let follow of following\">\n          <mat-list-item>\n            <div>\n              {{follow.name}}\n            </div>\n            <div class=\"chat chat-unavailable\">\n              <i class=\"material-icons\">chat</i>\n            </div>\n          </mat-list-item>\n          </div>\n        </mat-list>\n      </mat-card>\n    </div>\n  </div>\n</div>\n</div>\n"
+module.exports = "<ion-app class=\"mobile\">\n  <div class=\"ion-page\" main>\n    <ion-header>\n      <ion-toolbar>\n        <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-title slot=\"start\">Home</ion-title>\n      </ion-toolbar>\n    </ion-header>\n    <ion-content class=\"ion-padding\">\n      <form [formGroup]=\"homeForm\">\n        <div>\n          <ion-card class=\"vertical-margin border-top\">\n            <div>\n              <ion-item class=\"textarea\">\n                <ion-textarea name=\"post\" type=\"post\" formControlName=\"post\" placeholder=\"Write here if is a post and click button, if is a event, only click button.\" required></ion-textarea>\n              </ion-item>\n            </div>\n            <div>\n              <ionalert>\n                <section>\n                  <ion-button (click)=\"alert()\" color=\"medium\" expand=\"block\">Post / Event</ion-button>\n                </section>\n              </ionalert>\n            </div>\n          </ion-card>\n          <div *ngIf=\"activity\">\n            <ion-card color=\"dark\" class=\"vertical-margin\" >\n              <ion-card-title>ACTIVITY</ion-card-title>\n              <div *ngFor=\"let thing of activity\">\n                <ion-card color=\"medium\">\n                  <ion-card-content  *ngIf=\"thing.type == 'Post';else other_content\">\n                    <ion-toolbar color=\"medium\">\n                      {{thing.owner.name}}:{{thing.message}}\n                    </ion-toolbar>\n                    <ion-item color=\"light\">\n                      <ion-col class=\"send_form_input\">\n                        <ion-textarea #box placeholder=\"Write a comment...\"\n                                      (keyup.enter)=\"onEnter(box.value,thing._id); box.value = '' \">\n                        </ion-textarea>\n                      </ion-col>\n                    </ion-item>\n                    <ion-item color=\"light\">\n                      <ion-col class=\"send_form_button\">\n                        <ion-button (click)=\"onEnter(box.value,thing._id); box.value = '' \">Comment\n                          <ion-icon slot=\"end\" name=\"send\" size=\"large\"></ion-icon>\n                        </ion-button>\n                      </ion-col>\n                    </ion-item>\n                    <ion-item>\n                      <ion-button color=\"dark\" slot=\"end\" (click)=\"changePageComments(thing._id)\" >View all comments {{'('+thing.comments.length+')'}}</ion-button>\n                    </ion-item>\n                  </ion-card-content>\n                </ion-card>\n                <ng-template #other_content>\n                  <div *ngIf=\"thing.owner.name == this.user.name; else other_person\">\n                  <ion-card color=\"light\">\n                      <ion-card-content>\n                        <ion-toolbar color=\"light\">\n                          {{thing.owner.name}}:{{thing.description}}\n                        </ion-toolbar>\n                        <ion-toolbar color=\"light\">\n                          Location:{{thing.location}}\n                        </ion-toolbar>\n                        <ion-toolbar color=\"light\">\n                          <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                        </ion-toolbar>\n                      </ion-card-content>\n                    </ion-card>\n                  </div>\n                  <ng-template #other_person>\n                    <div *ngFor=\"let user of checklist\">\n                      <div *ngIf=\"user.idEvent === thing._id\">\n                        <div *ngIf=\"user.check === 'yes'; else other_thing\" >\n                          <ion-card color=\"medium\">\n                            <ion-card-content>\n                              <ion-toolbar color=\"medium\">\n                                {{thing.owner.name}}:{{thing.description}}\n                              </ion-toolbar>\n                              <ion-toolbar color=\"medium\">\n                                Location:{{thing.location}}\n                              </ion-toolbar>\n                              <ion-toolbar color=\"medium\">\n                                <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                                <ion-button color=\"dark\" (click)=\"leave(thing._id)\" slot=\"end\">Leave</ion-button>\n                              </ion-toolbar>\n                            </ion-card-content>\n                          </ion-card>\n                        </div>\n                      </div>\n                      <ng-template #other_thing>\n                        <ion-card color=\"medium\">\n                          <ion-card-content>\n                            <ion-toolbar color=\"medium\">\n                              {{thing.owner.name}}:{{thing.description}}\n                            </ion-toolbar>\n                            <ion-toolbar color=\"medium\">\n                              Location:{{thing.location}}\n                            </ion-toolbar>\n                            <ion-toolbar color=\"medium\">\n                              <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                              <ion-button color=\"dark\" (click)=\"asistir(thing._id)\" slot=\"end\">Attend</ion-button>\n                            </ion-toolbar>\n                          </ion-card-content>\n                        </ion-card>\n                      </ng-template>\n                    </div>\n                  </ng-template>\n                </ng-template>\n              </div>\n            </ion-card>\n          </div>\n        </div>\n      </form>\n    </ion-content>\n  </div>\n</ion-app>\n\n<div class=\"web\">\n<mat-toolbar color=\"primary\">\n  <mat-toolbar-row class=\"background-primary\">\n    <span class=\"margin-left-auto\" style=\"color: white\">Erasmus</span>\n    <form [formGroup]=\"form\" class=\"search-form margin-right-auto\">\n      <div>\n        <label class=\"search-input\">\n          <input matInput (keyup)=\"updateSuggestions($event)\" [matAutocomplete]=\"auto\" placeholder=\"Search...\">\n          <mat-autocomplete #auto=\"matAutocomplete\">\n            <mat-option *ngFor=\"let suggestion of suggestions\" [value]=\"suggestion\">{{suggestion}}</mat-option>\n          </mat-autocomplete>\n        </label>\n        <button type=\"submit\" class=\"search-button\">\n          <i class=\"material-icons search-icon\">search</i>\n        </button>\n      </div>\n    </form>\n    <div class=\"toolbar-container margin-right-auto\">\n      <div class=\"toolbar-buttons\">\n        <div class=\"pointer\" [routerLink]=\"'/home'\">\n          <div>\n            <i class=\"material-icons\">home</i>\n          </div>\n          <div class=\"menu-title white-text\">\n              Home\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/profile'\">\n          <div>\n            <i class=\"material-icons\">person</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Profile\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/friends'\">\n          <div>\n            <i class=\"material-icons\">group</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Friends\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/message'\">\n          <div>\n            <i class=\"material-icons\">chat</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Chat\n          </div>\n        </div>\n      </div>\n    </div>\n    <div routerLink=\"/login\" class=\"pointer margin-right-auto\" style=\"color: white\" (click)=\"logOff()\">Log Off</div>\n  </mat-toolbar-row>\n</mat-toolbar>\n\n<!--Body of the Web Page-->\n<div class=\"container\">\n  <div class=\"main-content\">\n    <!--Left Column-->\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\n      <mat-card class=\"vertical-margin no-padding\">\n        <div style=\"height: 250px\">\n          <div style=\"background: #e44d3a; height: 50%; display: flex\">\n            <div class=\"personal-icon\">\n              <img *ngIf=\"this.photo\" class=\"image-contain\" src=\"{{this.photo}}\"/>\n              <img *ngIf=\"!this.photo\" class=\"image-contain\" src=\"../../../assets/img/default_user.png\"/>\n            </div>\n            <div class=\"personal-icon\" style=\"position: absolute; width: auto;\">\n              <input #imageInput\n                     style=\"width: 100%; height: 100%;\"\n                     class=\"image-input\"\n                     type = 'file'\n                     accept=\"image/*\"\n                     (change) = \"processPhoto(imageInput)\">\n            </div>\n          </div>\n          <div style=\"height: 70%\">\n            <div class=\"personal-info-container\">\n              <div *ngIf=\"user\" class=\"personal-name\">\n                {{user.name}}\n              </div>\n              <div class=\"personal-status\">\n                Status\n              </div>\n            </div>\n          </div>\n        </div>\n        <div *ngIf=\"followers\" class=\"personal-item\">\n          <p class=\"personal-item-title\">Followers</p>\n          {{followers.length}}\n        </div>\n        <div *ngIf=\"following\" class=\"personal-item\">\n          <p class=\"personal-item-title\">Following</p>\n          {{following.length}}\n        </div>\n      </mat-card>\n    </div>\n    <!--Middle Column-->\n    <div class=\"col-lg-5 col-md-5 col-sm-5\">\n      <!--Post Card-->\n      <div>\n        <mat-card class=\"vertical-margin border-top\">\n          <div>\n            <mat-form-field class=\"textarea\">\n                <textarea matInput\n                          cdkTextareaAutosize\n                          #autosize=\"cdkTextareaAutosize\"\n                          cdkAutosizeMinRows=\"3\"\n                          cdkAutosizeMaxRows=\"7\"\n                          [(ngModel)]=\"postMessage\"></textarea>\n            </mat-form-field>\n          </div>\n          <div>\n            <button mat-raised-button class=\"background-primary white-text\" (click)=\"publishPost()\">Post</button>\n          </div>\n        </mat-card>\n      </div>\n      <!--Wall Card-->\n      <div *ngIf=\"user\">\n        <div *ngFor=\"let thing of activity\">\n          <mat-card class=\"vertical-margin middle-card\">\n            <div>\n              {{thing.owner.name}}:{{thing.message}}\n            </div>\n            <i class=\"material-icons delete-icon\" (click)=\"deleteEvent(activity)\">delete_forever</i>\n          </mat-card>\n        </div>\n      </div>\n    </div>\n    <!--Right Column-->\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\n      <mat-card class=\"vertical-margin\">\n        <div class=\"vertical-margin\">\n          FOLLOWING\n        </div>\n        <mat-divider></mat-divider>\n        <mat-list *ngIf=\"user\">\n          <div *ngFor=\"let follow of following\">\n          <mat-list-item>\n            <div>\n              {{follow.name}}\n            </div>\n            <div class=\"chat chat-unavailable\">\n              <i class=\"material-icons\">chat</i>\n            </div>\n          </mat-list-item>\n          </div>\n        </mat-list>\n      </mat-card>\n    </div>\n  </div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -883,40 +883,6 @@ var NotificationComponent = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])
     ], NotificationComponent);
     return NotificationComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/models/Posts/post.ts":
-/*!**************************************!*\
-  !*** ./src/app/models/Posts/post.ts ***!
-  \**************************************/
-/*! exports provided: Post */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Post", function() { return Post; });
-var Post = /** @class */ (function () {
-    function Post(_id, owner_id, type, message) {
-        if (_id === void 0) { _id = ''; }
-        if (owner_id === void 0) { owner_id = ''; }
-        if (type === void 0) { type = ''; }
-        if (message === void 0) { message = ''; }
-        this.type = type;
-        this.message = message;
-        this.owner_id = owner_id;
-        this._id = _id;
-    }
-    Post.ctorParameters = function () { return [
-        null,
-        null,
-        null,
-        null
-    ]; };
-    return Post;
 }());
 
 
@@ -1496,14 +1462,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _models_User_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/User/user.service */ "./src/app/models/User/user.service.ts");
 /* harmony import */ var _home_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home.service */ "./src/app/views/home/home.service.ts");
-/* harmony import */ var _models_Posts_post__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../models/Posts/post */ "./src/app/models/Posts/post.ts");
-/* harmony import */ var _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../models/Posts/postSend */ "./src/app/models/Posts/postSend.ts");
-/* harmony import */ var _storage_storage_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../storage/storage.component */ "./src/app/storage/storage.component.ts");
-/* harmony import */ var _post_post_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../post/post.service */ "./src/app/views/post/post.service.ts");
-/* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/chat.service */ "./src/app/services/chat.service.ts");
-/* harmony import */ var _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/notification/notification.component */ "./src/app/components/notification/notification.component.ts");
-/* harmony import */ var _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../models/User/checkUser */ "./src/app/models/User/checkUser.ts");
-
+/* harmony import */ var _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../models/Posts/postSend */ "./src/app/models/Posts/postSend.ts");
+/* harmony import */ var _storage_storage_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../storage/storage.component */ "./src/app/storage/storage.component.ts");
+/* harmony import */ var _post_post_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../post/post.service */ "./src/app/views/post/post.service.ts");
+/* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/chat.service */ "./src/app/services/chat.service.ts");
+/* harmony import */ var _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/notification/notification.component */ "./src/app/components/notification/notification.component.ts");
+/* harmony import */ var _models_User_checkUser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../models/User/checkUser */ "./src/app/models/User/checkUser.ts");
 
 
 
@@ -1572,7 +1536,7 @@ var HomePage = /** @class */ (function () {
                     case 5:
                         _b.followers = (_d.sent()).followers;
                         // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
-                        return [4 /*yield*/, this.getActivity()];
+                        return [4 /*yield*/, this.getActivity().then()];
                     case 6:
                         // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
                         _d.sent();
@@ -1581,7 +1545,7 @@ var HomePage = /** @class */ (function () {
                     case 7:
                         _c.following = (_d.sent()).following;
                         this.getActivity();
-                        this.chatService.connectSocket(this.user.email);
+                        this.chatService.connectSocket(this.user.name);
                         this.chatService.getMessage().subscribe(function (data) {
                             console.log(data);
                             var goToUrl = '/conversation/' + data.email;
@@ -1613,7 +1577,6 @@ var HomePage = /** @class */ (function () {
                                 console.log('res: ', res);
                                 var response = res;
                                 _this.activity = response.body.activity;
-                                _this.user.activity = _this.activity;
                                 _this.checkMember();
                             }
                         }, function (error) {
@@ -1621,7 +1584,7 @@ var HomePage = /** @class */ (function () {
                         })];
                     case 1:
                         _a.sent();
-                        console.log('activity: ', this.user.activity);
+                        console.log('activity: ', this.activity);
                         return [4 /*yield*/, this.userService.saveUser(this.user)];
                     case 2:
                         _a.sent();
@@ -1642,7 +1605,7 @@ var HomePage = /** @class */ (function () {
                             } },
                         { text: 'Post', handler: function () {
                                 console.log('message: ', _this.homeForm.controls.post.value);
-                                _this.postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](_this.user._id, 'Post', _this.homeForm.controls.post.value);
+                                _this.postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_7__["PostSend"](_this.user._id, 'Post', _this.homeForm.controls.post.value);
                                 _this.homeService.sendPost(_this.postSend).subscribe(function (res) {
                                     _this.router.navigateByUrl('/profile');
                                 });
@@ -1688,15 +1651,12 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.publishPost = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var post, postSend;
+            var postSend;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                post = new _models_Posts_post__WEBPACK_IMPORTED_MODULE_7__["Post"]('', this.user._id, 'Post', this.postMessage);
-                postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](this.user._id, 'Post', this.postMessage);
+                postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_7__["PostSend"](this.user._id, 'Post', this.postMessage);
                 this.homeService.sendPost(postSend).subscribe(function (res) {
-                    console.log('res: ', res);
-                    _this.user.activity.push(post);
-                    _this.updateUser();
+                    _this.getActivity();
                 });
                 return [2 /*return*/];
             });
@@ -1704,17 +1664,9 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.updateUser = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _a;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this.user;
-                        return [4 /*yield*/, this.userService.savePostsUsers(this.user._id).toPromise()];
-                    case 1:
-                        _a.activity = (_b.sent()).posts;
-                        this.storage.saveUser(JSON.stringify(this.user));
-                        return [2 /*return*/];
-                }
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.storage.saveUser(JSON.stringify(this.user));
+                return [2 /*return*/];
             });
         });
     };
@@ -1786,17 +1738,17 @@ var HomePage = /** @class */ (function () {
                 this.activity.forEach(function (x) {
                     if (x.type === 'Event') {
                         if (x.members === null) {
-                            _this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__["CheckUser"]('no', x._id));
+                            _this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_12__["CheckUser"]('no', x._id));
                         }
                         else {
                             x.members.forEach(function (a) {
                                 if (a._id === _this.user._id) {
-                                    _this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__["CheckUser"]('yes', x._id));
+                                    _this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_12__["CheckUser"]('yes', x._id));
                                     count = 1;
                                 }
                             });
                             if (count !== 1) {
-                                _this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__["CheckUser"]('no', x._id));
+                                _this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_12__["CheckUser"]('no', x._id));
                             }
                             else {
                                 count = 0;
@@ -1836,35 +1788,82 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.processPhoto = function (imageInput) {
-        var _this = this;
-        var file = imageInput.files[0];
-        var reader = new FileReader();
-        reader.addEventListener('load', function (event) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var file, reader;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                file = imageInput.files[0];
+                reader = new FileReader();
+                reader.addEventListener('load', function (event) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                this.photo = event.target.result;
+                                return [4 /*yield*/, this.userService.editPhoto(event.target.result, this.user._id).toPromise()];
+                            case 1:
+                                _a.sent();
+                                return [2 /*return*/];
+                        }
+                    });
+                }); });
+                reader.readAsDataURL(file);
+                return [2 /*return*/];
+            });
+        });
+    };
+    HomePage.prototype.onEnter = function (value, postId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.photo = event.target.result;
-                        return [4 /*yield*/, this.userService.editPhoto(event.target.result, this.user._id).toPromise()];
+                        this.comment = value;
+                        this.postId = postId;
+                        console.log(postId);
+                        console.log(this.postId);
+                        return [4 /*yield*/, this.sendComment()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
                 }
             });
-        }); });
-        reader.readAsDataURL(file);
+        });
+    };
+    HomePage.prototype.sendComment = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.comment.replace(/\s/g, '').length) return [3 /*break*/, 2];
+                        /*let comment = {
+                            postId: this.postId,
+                            owner: this.user._id,
+                            message: this.comment
+                        };*/
+                        console.log(this.comment);
+                        return [4 /*yield*/, this.homeService.comment(this.comment, this.postId, this.user._id).subscribe(function (res) {
+                                _this.router.navigateByUrl('/comments/' + ("" + _this.postId));
+                            })];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
+                }
+            });
+        });
     };
     HomePage.ctorParameters = function () { return [
         { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
         { type: _home_service__WEBPACK_IMPORTED_MODULE_6__["HomeService"] },
         { type: _models_User_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
-        { type: _post_post_service__WEBPACK_IMPORTED_MODULE_10__["PostService"] },
+        { type: _post_post_service__WEBPACK_IMPORTED_MODULE_9__["PostService"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
-        { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_9__["StorageComponent"] },
-        { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_11__["ChatService"] },
-        { type: _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_12__["NotificationComponent"] }
+        { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_8__["StorageComponent"] },
+        { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_10__["ChatService"] },
+        { type: _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_11__["NotificationComponent"] }
     ]; };
     HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1875,14 +1874,14 @@ var HomePage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
             _home_service__WEBPACK_IMPORTED_MODULE_6__["HomeService"],
             _models_User_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"],
-            _post_post_service__WEBPACK_IMPORTED_MODULE_10__["PostService"],
+            _post_post_service__WEBPACK_IMPORTED_MODULE_9__["PostService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
-            _storage_storage_component__WEBPACK_IMPORTED_MODULE_9__["StorageComponent"],
-            _services_chat_service__WEBPACK_IMPORTED_MODULE_11__["ChatService"],
-            _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_12__["NotificationComponent"]])
+            _storage_storage_component__WEBPACK_IMPORTED_MODULE_8__["StorageComponent"],
+            _services_chat_service__WEBPACK_IMPORTED_MODULE_10__["ChatService"],
+            _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_11__["NotificationComponent"]])
     ], HomePage);
     return HomePage;
 }());
@@ -1922,7 +1921,6 @@ var HomeService = /** @class */ (function () {
         this.homeSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     HomeService.prototype.sendPost = function (post) {
-        console.log('post:', post.message);
         return this.httpClient.post(this.HOME_SERVER_ADDRESS + "/post", {
             post: post
         });
@@ -1950,6 +1948,13 @@ var HomeService = /** @class */ (function () {
     };
     HomeService.prototype.getFollowing = function (_id) {
         return this.httpClient.get(this.HOME_SERVER_ADDRESS + "/user/following/" + ("" + _id));
+    };
+    HomeService.prototype.comment = function (comment, postId, owner) {
+        return this.httpClient.put(this.HOME_SERVER_ADDRESS + "/post/comment", {
+            postId: postId,
+            owner: owner,
+            message: comment
+        });
     };
     HomeService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
@@ -2030,21 +2035,10 @@ var PostService = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    apiUri: 'http://147.83.7.156:3000'
+    apiUri: 'http://localhost:3000'
 };
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),

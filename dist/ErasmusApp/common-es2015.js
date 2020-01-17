@@ -894,8 +894,9 @@ let FriendsService = class FriendsService {
         this.FRIENDS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
-    getUsers() {
-        return this.httpClient.get(`${this.FRIENDS_SERVER_ADDRESS}/all`);
+    getUsers(id) {
+        console.log(id);
+        return this.httpClient.get(`${this.FRIENDS_SERVER_ADDRESS}/all/` + id);
     }
 };
 FriendsService.ctorParameters = () => [

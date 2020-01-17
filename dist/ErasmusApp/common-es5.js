@@ -621,8 +621,9 @@ var FriendsService = /** @class */ (function () {
         this.FRIENDS_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
-    FriendsService.prototype.getUsers = function () {
-        return this.httpClient.get(this.FRIENDS_SERVER_ADDRESS + "/all");
+    FriendsService.prototype.getUsers = function (id) {
+        console.log(id);
+        return this.httpClient.get(this.FRIENDS_SERVER_ADDRESS + "/all/" + id);
     };
     FriendsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },

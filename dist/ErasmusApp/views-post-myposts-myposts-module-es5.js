@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <div class=\"ion-page\" main>\n    <ion-header>\n      <ion-toolbar>\n        <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-title>Posts</ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-card class=\"vertical-margin\" *ngFor=\"let post of this.user.posts\">\n        <ion-toolbar>{{post.message}}\n          <ion-item>\n            <ion-button slot=\"end\" class=\"home\" (click)=\"deletePost(post._id)\"><ion-icon name=\"close\" slot=\"end\"></ion-icon>\n            </ion-button>\n          </ion-item>\n        </ion-toolbar>\n      </ion-card>\n    </ion-content>\n  </div>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <div class=\"ion-page\" main>\n    <ion-header>\n      <ion-toolbar>\n        <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-title>Posts</ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-card class=\"vertical-margin\" *ngFor=\"let post of this.posts\">\n        <ion-toolbar>{{post.message}}\n          <ion-item>\n            <ion-button slot=\"end\" class=\"home\" (click)=\"deletePost(post._id)\"><ion-icon name=\"close\" slot=\"end\"></ion-icon>\n            </ion-button>\n          </ion-item>\n        </ion-toolbar>\n      </ion-card>\n    </ion-content>\n  </div>\n</ion-app>\n"
 
 /***/ }),
 
@@ -160,8 +160,7 @@ var MypostsPage = /** @class */ (function () {
                         return [4 /*yield*/, this.postService.getPosts(this.user._id).subscribe(function (res) {
                                 console.log('response', res);
                                 var response = res;
-                                _this.user.posts = response.posts;
-                                _this.userTest = _this.user;
+                                _this.posts = response.posts;
                             }, function (error) {
                                 console.log('error');
                             })];

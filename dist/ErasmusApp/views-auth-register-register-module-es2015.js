@@ -145,6 +145,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _models_User_userRegister__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/User/userRegister */ "./src/app/models/User/userRegister.ts");
 /* harmony import */ var _models_User_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../models/User/user.service */ "./src/app/models/User/user.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -183,6 +185,7 @@ let RegisterPage = class RegisterPage {
         });
     }
     ngOnInit() {
+        console.log("ENVironment:" + _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiUri);
         this.validation_messages = {
             name: [
                 { type: 'required', message: 'Campo obligatorio' },

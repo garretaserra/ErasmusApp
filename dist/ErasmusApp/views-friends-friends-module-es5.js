@@ -126,6 +126,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_User_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/User/user.service */ "./src/app/models/User/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../storage/storage.component */ "./src/app/storage/storage.component.ts");
+
 
 
 
@@ -133,16 +135,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FriendsPage = /** @class */ (function () {
-    function FriendsPage(friendsService, userService, router, menuCtrl) {
+    function FriendsPage(friendsService, userService, router, menuCtrl, storage) {
         this.friendsService = friendsService;
         this.userService = userService;
         this.router = router;
         this.menuCtrl = menuCtrl;
+        this.storage = storage;
         this.textobuscar = '';
     }
     FriendsPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.friendsService.getUsers().subscribe(function (users) {
+        this.friendsService.getUsers(JSON.parse(this.storage.getUser())._id).subscribe(function (users) {
             console.log(users);
             var response = users;
             _this.users = response;
@@ -266,7 +269,8 @@ var FriendsPage = /** @class */ (function () {
         { type: _friends_service__WEBPACK_IMPORTED_MODULE_2__["FriendsService"] },
         { type: _models_User_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] },
+        { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__["StorageComponent"] }
     ]; };
     FriendsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -274,7 +278,11 @@ var FriendsPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./friends.page.html */ "./node_modules/raw-loader/index.js!./src/app/views/friends/friends.page.html"),
             styles: [__webpack_require__(/*! ./friends.page.scss */ "./src/app/views/friends/friends.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_friends_service__WEBPACK_IMPORTED_MODULE_2__["FriendsService"], _models_User_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_friends_service__WEBPACK_IMPORTED_MODULE_2__["FriendsService"],
+            _models_User_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"],
+            _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__["StorageComponent"]])
     ], FriendsPage);
     return FriendsPage;
 }());

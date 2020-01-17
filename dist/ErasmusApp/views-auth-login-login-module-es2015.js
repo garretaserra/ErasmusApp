@@ -192,6 +192,7 @@ let LoginPage = class LoginPage {
                 const response = res;
                 this.user = response.user;
                 this.user.jwt = response.jwt;
+                console.log(this.user);
                 //Save info locally
                 yield this.storage.saveToken(this.user.jwt);
                 yield this.storage.saveUser(JSON.stringify(this.user));

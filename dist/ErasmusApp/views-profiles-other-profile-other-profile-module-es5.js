@@ -149,6 +149,14 @@ var OtherProfilePage = /** @class */ (function () {
             });
         });
     };
+    OtherProfilePage.prototype.ionViewDidEnter = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.load();
+                return [2 /*return*/];
+            });
+        });
+    };
     OtherProfilePage.prototype.load = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;

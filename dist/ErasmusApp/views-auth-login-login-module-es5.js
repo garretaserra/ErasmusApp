@@ -219,6 +219,7 @@ var LoginPage = /** @class */ (function () {
                                 response = res;
                                 this.user = response.user;
                                 this.user.jwt = response.jwt;
+                                console.log(this.user);
                                 //Save info locally
                                 return [4 /*yield*/, this.storage.saveToken(this.user.jwt)];
                             case 1:

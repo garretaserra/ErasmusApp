@@ -140,6 +140,11 @@ let OtherProfilePage = class OtherProfilePage {
             this.load();
         });
     }
+    ionViewDidEnter() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.load();
+        });
+    }
     load() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             this._id = this.route.snapshot.paramMap.get('id');

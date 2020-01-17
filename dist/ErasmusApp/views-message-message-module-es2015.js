@@ -7,7 +7,43 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Messages</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>\n      Online\n    </ion-list-header>\n    <ion-item *ngFor=\"let userItem of userList\" (click)=\"viewConversation(userItem[0])\">\n        <ion-avatar slot=\"start\">\n          <img src=\"../../../assets/img/default_user.png\">\n        </ion-avatar>\n        <ion-label>\n          <h2>{{ userItem[0] }}</h2>\n          <h3>\n            <span *ngIf=\"filterLast(userItem[0]).author === user.email\">\n              <b>You: </b>\n            </span>\n            {{filterLast(userItem[0]).text}}\n          </h3>\n        </ion-label>\n      <ion-badge *ngIf=\"filterAndCount(userItem[0]) != 0\" slot=\"end\">{{filterAndCount(userItem[0])}}</ion-badge>\n    </ion-item>\n  </ion-list>\n  <ion-list>\n    <ion-list-header>\n      Everybody\n    </ion-list-header>\n    <ion-item *ngFor=\"let userItem of users\" (click)=\"viewConversation(userItem.name)\">\n      <ion-avatar slot=\"start\">\n        <img src=\"../../../assets/img/default_user.png\">\n      </ion-avatar>\n      <ion-label>\n        <h2>{{ userItem.name }}</h2>\n        <h3 *ngIf=\"filterLast(userItem.name)\">\n            <span *ngIf=\"filterLast(userItem.name).author === user.email\">\n              <b>You: </b>\n            </span>\n          {{filterLast(userItem.name).text}}\n        </h3>\n      </ion-label>\n      <ion-badge *ngIf=\"filterAndCount(userItem.name) != 0\" slot=\"end\">{{filterAndCount(userItem.name)}}</ion-badge>\n    </ion-item>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Messages</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>\n      Online\n    </ion-list-header>\n    <ion-item *ngFor=\"let userItem of userList\" (click)=\"viewConversation(userItem[0])\">\n        <ion-avatar slot=\"start\">\n          <img src=\"../../../assets/img/default_user.png\">\n        </ion-avatar>\n        <ion-label>\n          <h2>{{ userItem[0] }}</h2>\n          <h3>\n            <span *ngIf=\"filterLast(userItem[0]).author === user.name\">\n              <b>You: </b>\n            </span>\n            {{filterLast(userItem[0]).text}}\n          </h3>\n        </ion-label>\n      <ion-badge *ngIf=\"filterAndCount(userItem[0]) != 0\" slot=\"end\">{{filterAndCount(userItem[0])}}</ion-badge>\n    </ion-item>\n  </ion-list>\n  <ion-list>\n    <ion-list-header>\n      Everybody\n    </ion-list-header>\n    <ion-item *ngFor=\"let userItem of users\" (click)=\"viewConversation(userItem.name)\">\n      <ion-avatar slot=\"start\">\n        <img src=\"../../../assets/img/default_user.png\">\n      </ion-avatar>\n      <ion-label>\n        <h2>{{ userItem.name }}</h2>\n        <h3 *ngIf=\"filterLast(userItem.name)\">\n            <span *ngIf=\"filterLast(userItem.name).author === user.name\">\n              <b>You: </b>\n            </span>\n          {{filterLast(userItem.name).text}}\n        </h3>\n      </ion-label>\n      <ion-badge *ngIf=\"filterAndCount(userItem.name) != 0\" slot=\"end\">{{filterAndCount(userItem.name)}}</ion-badge>\n    </ion-item>\n  </ion-list>\n</ion-content>\n"
+
+/***/ }),
+
+/***/ "./src/app/models/User/user.ts":
+/*!*************************************!*\
+  !*** ./src/app/models/User/user.ts ***!
+  \*************************************/
+/*! exports provided: User */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
+class User {
+    constructor(jwt = '', _id = '', email = '', pass = '', name = '', profilePhoto = '', followers = null, following = null) {
+        this._id = _id;
+        this.email = email;
+        this.password = pass;
+        this.name = name;
+        this.profilePhoto = profilePhoto;
+        this.followers = followers;
+        this.following = following;
+        this.jwt = jwt;
+    }
+}
+User.ctorParameters = () => [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+];
+
 
 /***/ }),
 
@@ -116,10 +152,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_User_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/User/user.service */ "./src/app/models/User/user.service.ts");
 /* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/chat.service */ "./src/app/services/chat.service.ts");
 /* harmony import */ var _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../friends/friends.service */ "./src/app/views/friends/friends.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../storage/storage.component */ "./src/app/storage/storage.component.ts");
-/* harmony import */ var _models_Message_message__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../models/Message/message */ "./src/app/models/Message/message.ts");
-/* harmony import */ var _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/notification/notification.component */ "./src/app/components/notification/notification.component.ts");
+/* harmony import */ var _models_User_user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/User/user */ "./src/app/models/User/user.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _storage_storage_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../storage/storage.component */ "./src/app/storage/storage.component.ts");
+/* harmony import */ var _models_Message_message__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../models/Message/message */ "./src/app/models/Message/message.ts");
+/* harmony import */ var _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/notification/notification.component */ "./src/app/components/notification/notification.component.ts");
+
 
 
 
@@ -141,17 +179,17 @@ let MessagePage = class MessagePage {
     ngOnInit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             this.user = JSON.parse(this.storage.getUser());
-            this.chatService.connectSocket(this.user.email);
+            this.chatService.connectSocket(this.user.name);
             this.storedMessages = yield this.chatService.getStoredMessages().toPromise();
             this.chatService.getList().subscribe((list) => {
-                this.userList = list.filter(item => item[0] !== this.user.email); // TODO: User esta mal, email sale name.
+                this.userList = list.filter(item => item[0] !== this.user.name);
             });
-            this.friendsService.getUsers().subscribe((list) => {
-                this.users = list.filter(item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
+            this.friendsService.getUsers(new _models_User_user__WEBPACK_IMPORTED_MODULE_5__["User"](this.storage.getUser())._id).subscribe((list) => {
+                this.users = list.filter(item => item.name !== this.user.name);
             });
             this.chatService.forceGetList();
             this.chatService.getMessage().subscribe((data) => {
-                this.storedMessages.push(new _models_Message_message__WEBPACK_IMPORTED_MODULE_7__["Message"]('', data.email, this.user.email, data.message, new Date(), false, 0));
+                this.storedMessages.push(new _models_Message_message__WEBPACK_IMPORTED_MODULE_8__["Message"]('', data.name, this.user.name, data.message, new Date(), false, 0));
             });
         });
     }
@@ -168,12 +206,12 @@ let MessagePage = class MessagePage {
     }
 };
 MessagePage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] },
     { type: _models_User_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"] },
-    { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__["StorageComponent"] },
+    { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_7__["StorageComponent"] },
     { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_3__["ChatService"] },
     { type: _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__["FriendsService"] },
-    { type: _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_8__["NotificationComponent"] }
+    { type: _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_9__["NotificationComponent"] }
 ];
 MessagePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -181,12 +219,12 @@ MessagePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./message.page.html */ "./node_modules/raw-loader/index.js!./src/app/views/message/message.page.html"),
         styles: [__webpack_require__(/*! ./message.page.scss */ "./src/app/views/message/message.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"],
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"],
         _models_User_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"],
-        _storage_storage_component__WEBPACK_IMPORTED_MODULE_6__["StorageComponent"],
+        _storage_storage_component__WEBPACK_IMPORTED_MODULE_7__["StorageComponent"],
         _services_chat_service__WEBPACK_IMPORTED_MODULE_3__["ChatService"],
         _friends_friends_service__WEBPACK_IMPORTED_MODULE_4__["FriendsService"],
-        _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_8__["NotificationComponent"]])
+        _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_9__["NotificationComponent"]])
 ], MessagePage);
 
 
