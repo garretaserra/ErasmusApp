@@ -19,20 +19,15 @@ export class HomeService {
     HOME_SERVER_ADDRESS = environment.apiUri;
     homeSubject = new BehaviorSubject(false);
 
-    activity: Post[];
-
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-    sendPost(post: PostSend, user: User) {
-        console.log('userid:', user._id);
-        console.log('post:', post.message);
+    sendPost(post: PostSend) {
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
-            userId: user._id,
             post
         });
     }
     getActivity(id: string) {
-         return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}`, {});
+         return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}` + `/0`, {}, {observe: 'response'});
     }
     getProfile( id: string ) {
         return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/profile/` + `${id}`);
@@ -41,7 +36,29 @@ export class HomeService {
         return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/followers/` + `${_id}`);
     }
 
+    asistir(idEvent: string, idUser: string) {
+        return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/event/join`, {
+            eventId: idEvent,
+            userId: idUser
+        });
+    }
+
+    leave(idEvent: string, idUser: string) {
+        return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/event/leave`, {
+            eventId: idEvent,
+            userId: idUser
+        });
+    }
+
     getFollowing(_id: string) {
         return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/following/` + `${_id}`);
+    }
+
+    comment(comment:string,postId:string,owner:string) {
+        return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/post/comment`,{
+            postId: postId,
+            owner: owner,
+            message:comment
+        });
     }
 }

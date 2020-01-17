@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>Maps</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div #mapElement class=\"map\"></div>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Maps</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div #mapElement class=\"map\"></div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -103,7 +103,7 @@ var GlobePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".map {\n  height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvZ2xvYmUvQzpcXFVzZXJzXFxzZ2FsZVxcV2Vic3Rvcm1Qcm9qZWN0c1xcRXJhc211c0FwcC9zcmNcXGFwcFxcdmlld3NcXGdsb2JlXFxnbG9iZS5wYWdlLnNjc3MiLCJzcmMvYXBwL3ZpZXdzL2dsb2JlL2dsb2JlLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2dsb2JlL2dsb2JlLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXB7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcbiIsIi5tYXAge1xuICBoZWlnaHQ6IDEwMCU7XG59Il19 */"
+module.exports = ".map {\n  height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9jYXJsb2dhdHR1c28vR2l0SHViL0VyYXNtdXNBcHAvc3JjL2FwcC92aWV3cy9nbG9iZS9nbG9iZS5wYWdlLnNjc3MiLCJzcmMvYXBwL3ZpZXdzL2dsb2JlL2dsb2JlLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2dsb2JlL2dsb2JlLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXB7XG4gIGhlaWdodDogMTAwJTtcbn1cbiIsIi5tYXAge1xuICBoZWlnaHQ6IDEwMCU7XG59Il19 */"
 
 /***/ }),
 

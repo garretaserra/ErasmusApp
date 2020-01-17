@@ -1,0 +1,45 @@
+<ion-app class="mobile">
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Event</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+        <div *ngIf="event">
+          <ion-card class="vertical-margin border-top" color="light" >
+            <ion-card-content>
+              <ion-toolbar>
+                {{event.description}}
+              </ion-toolbar>
+              <ion-toolbar>
+                {{event.location}}
+              </ion-toolbar>
+              <ion-toolbar>
+                {{event.eventDate}}
+              </ion-toolbar>
+              <ion-card >
+                <ion-card-title>Members</ion-card-title>
+                <div *ngFor="let user of this.event.members">
+                <ion-card-content>
+                  <ion-toolbar>
+                    {{user.name}}
+                  </ion-toolbar>
+                </ion-card-content>
+                </div>
+              </ion-card>
+              <div *ngIf="check === 'no'; else other">
+                <ion-button expand="block" (click)="asistir()">Asistir</ion-button>
+              </div>
+              <ng-template #other>
+                <ion-button expand="block" (click)="leave()">Leave</ion-button>
+              </ng-template>
+            </ion-card-content>
+          </ion-card>
+        </div>
+    </ion-content>
+  </div>
+</ion-app>

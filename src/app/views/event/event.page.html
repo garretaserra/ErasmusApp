@@ -1,0 +1,49 @@
+<ion-app class="mobile">
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Event</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="eventForm">
+        <div>
+          <ion-card class="vertical-margin border-top" color="light">
+            <ion-card-content>
+              <ion-toolbar>
+                <div>
+                  <ion-item class="textarea">
+                    <ion-textarea name="event" type="event" formControlName="event" placeholder="Write here..." required></ion-textarea>
+                  </ion-item>
+                </div>
+              </ion-toolbar>
+              <ion-toolbar>
+                <div>
+                <ion-item class="textarea">
+                  <ion-textarea name="location" type="location" formControlName="location" placeholder="Location" required></ion-textarea>
+                </ion-item>
+                 </div>
+              </ion-toolbar>
+              <ion-toolbar>
+                <div>
+                  <ion-item class="textarea">
+                    <ion-textarea name="eventDate" type="eventDate" formControlName="eventDate" placeholder="eventDate" required></ion-textarea>
+                  </ion-item>
+                </div>
+              </ion-toolbar>
+              <div>
+                <ion-button (click)="aggregateMember()" expand="block">Aggregate members</ion-button>
+              </div>
+              <div>
+                <ion-button (click)="event()" expand="block">Event</ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </form>
+    </ion-content>
+  </div>
+</ion-app>

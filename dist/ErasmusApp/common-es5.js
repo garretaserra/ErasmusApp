@@ -403,6 +403,42 @@ var findCheckedOption = function (el, tagName) {
 
 /***/ }),
 
+/***/ "./src/app/models/Message/message.ts":
+/*!*******************************************!*\
+  !*** ./src/app/models/Message/message.ts ***!
+  \*******************************************/
+/*! exports provided: Message */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return Message; });
+var Message = /** @class */ (function () {
+    function Message(id, author, destination, text, timestamp, read, __v) {
+        this._id = id;
+        this.author = author;
+        this.destination = destination;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.read = read;
+        this.__v = __v;
+    }
+    Message.ctorParameters = function () { return [
+        { type: String },
+        { type: String },
+        { type: String },
+        { type: String },
+        { type: Date },
+        { type: Boolean },
+        { type: undefined }
+    ]; };
+    return Message;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/views/auth/auth.service.ts":
 /*!********************************************!*\
   !*** ./src/app/views/auth/auth.service.ts ***!
@@ -429,7 +465,6 @@ var AuthService = /** @class */ (function () {
     function AuthService(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
-        // AUTH_SERVER_ADDRESS = environment.apiUri;
         this.AUTH_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri + '/user';
         this.authSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }

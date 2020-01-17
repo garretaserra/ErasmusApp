@@ -1,0 +1,28 @@
+<ion-app class="mobile">
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title slot="start">Post: comments</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-card *ngIf="post">
+        <ion-card-header  color="light">
+          <h2>Owner: {{post.owner.name}}</h2>
+          <h2>Message: {{post.message}}</h2>
+        </ion-card-header>
+        <ion-list>
+          <ion-card-content *ngFor="let comment of post.comments">
+              <ion-item>
+                <ion-label color="tertiary">Owner: {{comment.owner.name}}</ion-label>
+                <ion-text>{{comment.message}}</ion-text>
+              </ion-item>
+          </ion-card-content>
+        </ion-list>
+      </ion-card>
+    </ion-content>
+  </div>
+</ion-app>

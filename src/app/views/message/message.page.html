@@ -18,8 +18,14 @@
         </ion-avatar>
         <ion-label>
           <h2>{{ userItem[0] }}</h2>
-          <h3>Online</h3>
+          <h3>
+            <span *ngIf="filterLast(userItem[0]).author === user.name">
+              <b>You: </b>
+            </span>
+            {{filterLast(userItem[0]).text}}
+          </h3>
         </ion-label>
+      <ion-badge *ngIf="filterAndCount(userItem[0]) != 0" slot="end">{{filterAndCount(userItem[0])}}</ion-badge>
     </ion-item>
   </ion-list>
   <ion-list>
@@ -32,7 +38,14 @@
       </ion-avatar>
       <ion-label>
         <h2>{{ userItem.name }}</h2>
+        <h3 *ngIf="filterLast(userItem.name)">
+            <span *ngIf="filterLast(userItem.name).author === user.name">
+              <b>You: </b>
+            </span>
+          {{filterLast(userItem.name).text}}
+        </h3>
       </ion-label>
+      <ion-badge *ngIf="filterAndCount(userItem.name) != 0" slot="end">{{filterAndCount(userItem.name)}}</ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

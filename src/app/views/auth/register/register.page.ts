@@ -5,6 +5,7 @@ import {Form, FormBuilder, FormControl, FormGroup, Validators} from '@angular/fo
 import {UserRegister} from '../../../models/User/userRegister';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-register',
@@ -40,6 +41,7 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("ENVironment:"+ environment.apiUri);
     this.validation_messages = {
       name: [
         { type: 'required', message: 'Campo obligatorio' },
@@ -77,7 +79,6 @@ export class RegisterPage implements OnInit {
         return { emailNotValid: true };
       }
     }, 2000);
-
   }
 
   password(formGroup: FormGroup) {

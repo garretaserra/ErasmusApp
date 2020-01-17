@@ -441,7 +441,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n    <app-notification></app-notification>\r\n    <ion-menu type=\"overlay\" class=\"mobile-menu\">\r\n      <ion-header>\r\n        <ion-toolbar>\r\n          <ion-title>Menu</ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-menu-toggle *ngFor=\"let p of appPages\">\r\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\r\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\r\n              <ion-label>\r\n                {{p.title}}\r\n              </ion-label>\r\n            </ion-item>\r\n          </ion-menu-toggle>\r\n        </ion-list>\r\n      </ion-content>\r\n    </ion-menu>\r\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\r\n</ion-app>\r\n"
+module.exports = "<ion-app>\n    <app-notification></app-notification>\n    <ion-menu type=\"overlay\" class=\"mobile-menu\">\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n</ion-app>\n"
 
 /***/ }),
 
@@ -452,7 +452,7 @@ module.exports = "<ion-app>\r\n    <app-notification></app-notification>\r\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n"
+module.exports = "\n"
 
 /***/ }),
 
@@ -463,7 +463,7 @@ module.exports = "\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  storage works!\r\n</p>\r\n"
+module.exports = "<p>\n  storage works!\n</p>\n"
 
 /***/ }),
 
@@ -474,7 +474,7 @@ module.exports = "<p>\r\n  storage works!\r\n</p>\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app class=\"mobile\">\r\n  <div class=\"ion-page\" main>\r\n    <ion-header>\r\n      <ion-toolbar>\r\n        <ion-buttons slot=\"start\">\r\n          <ion-menu-button></ion-menu-button>\r\n        </ion-buttons>\r\n        <ion-title>Home</ion-title>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content class=\"ion-padding\">\r\n      <form [formGroup]=\"homeForm\">\r\n        <div>\r\n          <ion-card class=\"vertical-margin border-top\">\r\n            <div>\r\n              <ion-item class=\"textarea\">\r\n                <ion-textarea name=\"post\" type=\"post\" formControlName=\"post\" placeholder=\"Write here...\" required></ion-textarea>\r\n              </ion-item>\r\n            </div>\r\n            <div>\r\n              <ionalert>\r\n                <section>\r\n                  <ion-button (click)=\"alert()\" expand=\"block\">Post</ion-button>\r\n                </section>\r\n              </ionalert>\r\n            </div>\r\n          </ion-card>\r\n          <div *ngIf=\"user\" >\r\n            <ion-card color=\"secondary\" class=\"vertical-margin\" *ngFor=\"let post of user.activity\">\r\n              <ion-toolbar color=\"secondary\"> {{post.owner}}: {{post.message}}</ion-toolbar>\r\n            </ion-card>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </ion-content>\r\n  </div>\r\n</ion-app>\r\n\r\n<div class=\"web\">\r\n<mat-toolbar color=\"primary\">\r\n  <mat-toolbar-row class=\"background-primary\">\r\n    <span class=\"margin-left-auto\" style=\"color: white\">Erasmus</span>\r\n    <form [formGroup]=\"form\" class=\"search-form margin-right-auto\">\r\n      <div>\r\n        <label class=\"search-input\">\r\n          <input matInput (keyup)=\"updateSuggestions($event)\" [matAutocomplete]=\"auto\" placeholder=\"Search...\">\r\n          <mat-autocomplete #auto=\"matAutocomplete\">\r\n            <mat-option *ngFor=\"let suggestion of suggestions\" [value]=\"suggestion\">{{suggestion}}</mat-option>\r\n          </mat-autocomplete>\r\n        </label>\r\n        <button type=\"submit\" class=\"search-button\">\r\n          <i class=\"material-icons search-icon\">search</i>\r\n        </button>\r\n      </div>\r\n    </form>\r\n    <div class=\"toolbar-container margin-right-auto\">\r\n      <div class=\"toolbar-buttons\">\r\n        <div class=\"pointer\" [routerLink]=\"'/home'\">\r\n          <div>\r\n            <i class=\"material-icons\">home</i>\r\n          </div>\r\n          <div class=\"menu-title white-text\">\r\n              Home\r\n          </div>\r\n        </div>\r\n        <div class=\"pointer\" [routerLink]=\"'/profile'\">\r\n          <div>\r\n            <i class=\"material-icons\">person</i>\r\n          </div>\r\n          <div class=\"menu-title white-text\">\r\n            Profile\r\n          </div>\r\n        </div>\r\n        <div class=\"pointer\" [routerLink]=\"'/friends'\">\r\n          <div>\r\n            <i class=\"material-icons\">group</i>\r\n          </div>\r\n          <div class=\"menu-title white-text\">\r\n            Friends\r\n          </div>\r\n        </div>\r\n        <div class=\"pointer\" [routerLink]=\"'/message'\">\r\n          <div>\r\n            <i class=\"material-icons\">chat</i>\r\n          </div>\r\n          <div class=\"menu-title white-text\">\r\n            Chat\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div routerLink=\"/login\" class=\"pointer margin-right-auto\" style=\"color: white\" (click)=\"logOff()\">Log Off</div>\r\n  </mat-toolbar-row>\r\n</mat-toolbar>\r\n\r\n<!--Body of the Web Page-->\r\n<div class=\"container\">\r\n  <div class=\"main-content\">\r\n    <!--Left Column-->\r\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\r\n      <mat-card class=\"vertical-margin no-padding\">\r\n        <div style=\"height: 250px\">\r\n          <div style=\"background: #e44d3a; height: 50%; display: flex\">\r\n            <div class=\"personal-icon\">\r\n              <img class=\"image-contain\" src=\"{{this.photo}}\"/>\r\n            </div>\r\n            <div class=\"personal-icon\" style=\"position: absolute; width: auto;\">\r\n              <input #imageInput\r\n                     style=\"width: 100%; height: 100%;\"\r\n                     class=\"image-input\"\r\n                     type = 'file'\r\n                     accept=\"image/*\"\r\n                     (change) = \"processPhoto(imageInput)\">\r\n            </div>\r\n          </div>\r\n          <div style=\"height: 70%\">\r\n            <div class=\"personal-info-container\">\r\n              <div *ngIf=\"user\" class=\"personal-name\">\r\n                {{user.name}}\r\n              </div>\r\n              <div class=\"personal-status\">\r\n                Status\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div *ngIf=\"followers\" class=\"personal-item\">\r\n          <p class=\"personal-item-title\">Followers</p>\r\n          {{followers.length}}\r\n        </div>\r\n        <div *ngIf=\"following\" class=\"personal-item\">\r\n          <p class=\"personal-item-title\">Following</p>\r\n          {{following.length}}\r\n        </div>\r\n      </mat-card>\r\n    </div>\r\n    <!--Middle Column-->\r\n    <div class=\"col-lg-5 col-md-5 col-sm-5\">\r\n      <!--Post Card-->\r\n      <div>\r\n        <mat-card class=\"vertical-margin border-top\">\r\n          <div>\r\n            <mat-form-field class=\"textarea\">\r\n                <textarea matInput\r\n                          cdkTextareaAutosize\r\n                          #autosize=\"cdkTextareaAutosize\"\r\n                          cdkAutosizeMinRows=\"3\"\r\n                          cdkAutosizeMaxRows=\"7\"\r\n                          [(ngModel)]=\"postMessage\"></textarea>\r\n            </mat-form-field>\r\n          </div>\r\n          <div>\r\n            <button mat-raised-button class=\"background-primary white-text\" (click)=\"publishPost()\">Post</button>\r\n          </div>\r\n        </mat-card>\r\n      </div>\r\n      <!--Wall Card-->\r\n      <div *ngIf=\"user\">\r\n        <div *ngFor=\"let activity of user.activity\">\r\n          <mat-card class=\"vertical-margin middle-card\">\r\n            <div>\r\n              {{activity.message}}\r\n            </div>\r\n            <i class=\"material-icons delete-icon\" (click)=\"deleteEvent(activity)\">delete_forever</i>\r\n          </mat-card>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!--Right Column-->\r\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\r\n      <mat-card class=\"vertical-margin\">\r\n        <div class=\"vertical-margin\">\r\n          FOLLOWING\r\n        </div>\r\n        <mat-divider></mat-divider>\r\n        <mat-list *ngIf=\"user\">\r\n          <div *ngFor=\"let follow of following\">\r\n          <mat-list-item>\r\n            <div>\r\n              {{follow.name}}\r\n            </div>\r\n            <div class=\"chat chat-unavailable\">\r\n              <i class=\"material-icons\">chat</i>\r\n            </div>\r\n          </mat-list-item>\r\n          </div>\r\n        </mat-list>\r\n      </mat-card>\r\n    </div>\r\n  </div>\r\n</div>\r\n</div>\r\n"
+module.exports = "<ion-app class=\"mobile\">\n  <div class=\"ion-page\" main>\n    <ion-header>\n      <ion-toolbar>\n        <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-title slot=\"start\">Home</ion-title>\n      </ion-toolbar>\n    </ion-header>\n    <ion-content class=\"ion-padding\">\n      <form [formGroup]=\"homeForm\">\n        <div>\n          <ion-card class=\"vertical-margin border-top\">\n            <div>\n              <ion-item class=\"textarea\">\n                <ion-textarea name=\"post\" type=\"post\" formControlName=\"post\" placeholder=\"Write here if is a post and click button, if is a event, only click button.\" required></ion-textarea>\n              </ion-item>\n            </div>\n            <div>\n              <ionalert>\n                <section>\n                  <ion-button (click)=\"alert()\" color=\"medium\" expand=\"block\">Post / Event</ion-button>\n                </section>\n              </ionalert>\n            </div>\n          </ion-card>\n          <div *ngIf=\"activity\">\n            <ion-card color=\"dark\" class=\"vertical-margin\" >\n              <ion-card-title>ACTIVITY</ion-card-title>\n              <div *ngFor=\"let thing of activity\">\n                <ion-card color=\"medium\">\n                  <ion-card-content  *ngIf=\"thing.type == 'Post';else other_content\">\n                  <ion-toolbar color=\"medium\">\n                    {{thing.owner.name}}:{{thing.message}}\n                  </ion-toolbar>\n                    <ion-toolbar color=\"medium\">\n                      <ion-button color=\"dark\" slot=\"start\">Comment</ion-button>\n                      <ion-button color=\"dark\" slot=\"end\" (click)=\"changePageComments(thing._id)\" >View comments</ion-button>\n                    </ion-toolbar>\n                </ion-card-content>\n                </ion-card>\n              <ng-template #other_content>\n                <div *ngIf=\"thing.owner.name == this.user.email; else other_person\">\n                <ion-card color=\"light\">\n                <ion-card-content>\n                  <ion-toolbar color=\"light\">\n                    {{thing.owner.name}}:{{thing.description}}\n                  </ion-toolbar>\n                  <ion-toolbar color=\"light\">\n                    Location:{{thing.location}}\n                  </ion-toolbar>\n                  <ion-toolbar color=\"light\">\n                    <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                  </ion-toolbar>\n                </ion-card-content>\n              </ion-card>\n                </div>\n                <ng-template #other_person>\n                  <div *ngFor=\"let user of checklist\">\n                    <div *ngIf=\"user.idEvent === thing._id\">\n                      <div *ngIf=\"user.check === 'yes'; else other_thing\" >\n                      <ion-card color=\"medium\">\n                          <ion-card-content>\n                            <ion-toolbar color=\"medium\">\n                              {{thing.owner.name}}:{{thing.description}}\n                            </ion-toolbar>\n                            <ion-toolbar color=\"medium\">\n                              Location:{{thing.location}}\n                            </ion-toolbar>\n                            <ion-toolbar color=\"medium\">\n                              <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                              <ion-button color=\"dark\" (click)=\"leave(thing._id)\" slot=\"end\">Leave</ion-button>\n                            </ion-toolbar>\n                          </ion-card-content>\n                        </ion-card>\n                      </div>\n                    </div>\n                    <ng-template #other_thing>\n                      <ion-card color=\"medium\">\n                        <ion-card-content>\n                          <ion-toolbar color=\"medium\">\n                            {{thing.owner.name}}:{{thing.description}}\n                          </ion-toolbar>\n                          <ion-toolbar color=\"medium\">\n                            Location:{{thing.location}}\n                          </ion-toolbar>\n                          <ion-toolbar color=\"medium\">\n                            <ion-button color=\"dark\" (click)=\"seeEvent(thing._id)\" slot=\"start\">See event</ion-button>\n                            <ion-button color=\"dark\" (click)=\"asistir(thing._id)\" slot=\"end\">Attend</ion-button>\n                          </ion-toolbar>\n                        </ion-card-content>\n                      </ion-card>\n                    </ng-template>\n                  </div>\n                  </ng-template>\n              </ng-template>\n              </div>\n            </ion-card>\n          </div>\n        </div>\n      </form>\n    </ion-content>\n  </div>\n</ion-app>\n\n<div class=\"web\">\n<mat-toolbar color=\"primary\">\n  <mat-toolbar-row class=\"background-primary\">\n    <span class=\"margin-left-auto\" style=\"color: white\">Erasmus</span>\n    <form [formGroup]=\"form\" class=\"search-form margin-right-auto\">\n      <div>\n        <label class=\"search-input\">\n          <input matInput (keyup)=\"updateSuggestions($event)\" [matAutocomplete]=\"auto\" placeholder=\"Search...\">\n          <mat-autocomplete #auto=\"matAutocomplete\">\n            <mat-option *ngFor=\"let suggestion of suggestions\" [value]=\"suggestion\">{{suggestion}}</mat-option>\n          </mat-autocomplete>\n        </label>\n        <button type=\"submit\" class=\"search-button\">\n          <i class=\"material-icons search-icon\">search</i>\n        </button>\n      </div>\n    </form>\n    <div class=\"toolbar-container margin-right-auto\">\n      <div class=\"toolbar-buttons\">\n        <div class=\"pointer\" [routerLink]=\"'/home'\">\n          <div>\n            <i class=\"material-icons\">home</i>\n          </div>\n          <div class=\"menu-title white-text\">\n              Home\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/profile'\">\n          <div>\n            <i class=\"material-icons\">person</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Profile\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/friends'\">\n          <div>\n            <i class=\"material-icons\">group</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Friends\n          </div>\n        </div>\n        <div class=\"pointer\" [routerLink]=\"'/message'\">\n          <div>\n            <i class=\"material-icons\">chat</i>\n          </div>\n          <div class=\"menu-title white-text\">\n            Chat\n          </div>\n        </div>\n      </div>\n    </div>\n    <div routerLink=\"/login\" class=\"pointer margin-right-auto\" style=\"color: white\" (click)=\"logOff()\">Log Off</div>\n  </mat-toolbar-row>\n</mat-toolbar>\n\n<!--Body of the Web Page-->\n<div class=\"container\">\n  <div class=\"main-content\">\n    <!--Left Column-->\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\n      <mat-card class=\"vertical-margin no-padding\">\n        <div style=\"height: 250px\">\n          <div style=\"background: #e44d3a; height: 50%; display: flex\">\n            <div class=\"personal-icon\">\n              <img *ngIf=\"this.photo\" class=\"image-contain\" src=\"{{this.photo}}\"/>\n              <img *ngIf=\"!this.photo\" class=\"image-contain\" src=\"../../../assets/img/default_user.png\"/>\n            </div>\n            <div class=\"personal-icon\" style=\"position: absolute; width: auto;\">\n              <input #imageInput\n                     style=\"width: 100%; height: 100%;\"\n                     class=\"image-input\"\n                     type = 'file'\n                     accept=\"image/*\"\n                     (change) = \"processPhoto(imageInput)\">\n            </div>\n          </div>\n          <div style=\"height: 70%\">\n            <div class=\"personal-info-container\">\n              <div *ngIf=\"user\" class=\"personal-name\">\n                {{user.name}}\n              </div>\n              <div class=\"personal-status\">\n                Status\n              </div>\n            </div>\n          </div>\n        </div>\n        <div *ngIf=\"followers\" class=\"personal-item\">\n          <p class=\"personal-item-title\">Followers</p>\n          {{followers.length}}\n        </div>\n        <div *ngIf=\"following\" class=\"personal-item\">\n          <p class=\"personal-item-title\">Following</p>\n          {{following.length}}\n        </div>\n      </mat-card>\n    </div>\n    <!--Middle Column-->\n    <div class=\"col-lg-5 col-md-5 col-sm-5\">\n      <!--Post Card-->\n      <div>\n        <mat-card class=\"vertical-margin border-top\">\n          <div>\n            <mat-form-field class=\"textarea\">\n                <textarea matInput\n                          cdkTextareaAutosize\n                          #autosize=\"cdkTextareaAutosize\"\n                          cdkAutosizeMinRows=\"3\"\n                          cdkAutosizeMaxRows=\"7\"\n                          [(ngModel)]=\"postMessage\"></textarea>\n            </mat-form-field>\n          </div>\n          <div>\n            <button mat-raised-button class=\"background-primary white-text\" (click)=\"publishPost()\">Post</button>\n          </div>\n        </mat-card>\n      </div>\n      <!--Wall Card-->\n      <div *ngIf=\"user\">\n        <div *ngFor=\"let activity of user.activity\">\n          <mat-card class=\"vertical-margin middle-card\">\n            <div>\n              {{activity.message}}\n            </div>\n            <i class=\"material-icons delete-icon\" (click)=\"deleteEvent(activity)\">delete_forever</i>\n          </mat-card>\n        </div>\n      </div>\n    </div>\n    <!--Right Column-->\n    <div class=\"col-lg-3 col-md-3 col-sm-3\">\n      <mat-card class=\"vertical-margin\">\n        <div class=\"vertical-margin\">\n          FOLLOWING\n        </div>\n        <mat-divider></mat-divider>\n        <mat-list *ngIf=\"user\">\n          <div *ngFor=\"let follow of following\">\n          <mat-list-item>\n            <div>\n              {{follow.name}}\n            </div>\n            <div class=\"chat chat-unavailable\">\n              <i class=\"material-icons\">chat</i>\n            </div>\n          </mat-list-item>\n          </div>\n        </mat-list>\n      </mat-card>\n    </div>\n  </div>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -559,7 +559,27 @@ const routes = [
     },
     {
         path: 'conversation/:name',
-        loadChildren: () => __webpack_require__.e(/*! import() | views-conversation-conversation-module */ "views-conversation-conversation-module").then(__webpack_require__.bind(null, /*! ./views/conversation/conversation.module */ "./src/app/views/conversation/conversation.module.ts")).then(m => m.ConversationPageModule)
+        loadChildren: () => Promise.all(/*! import() | views-conversation-conversation-module */[__webpack_require__.e("common"), __webpack_require__.e("views-conversation-conversation-module")]).then(__webpack_require__.bind(null, /*! ./views/conversation/conversation.module */ "./src/app/views/conversation/conversation.module.ts")).then(m => m.ConversationPageModule)
+    },
+    {
+        path: 'event',
+        loadChildren: () => __webpack_require__.e(/*! import() | views-event-event-module */ "views-event-event-module").then(__webpack_require__.bind(null, /*! ./views/event/event.module */ "./src/app/views/event/event.module.ts")).then(m => m.EventPageModule)
+    },
+    {
+        path: 'add-members-event',
+        loadChildren: () => __webpack_require__.e(/*! import() | views-add-members-event-add-members-event-module */ "views-add-members-event-add-members-event-module").then(__webpack_require__.bind(null, /*! ./views/add-members-event/add-members-event.module */ "./src/app/views/add-members-event/add-members-event.module.ts")).then(m => m.AddMembersEventPageModule)
+    },
+    {
+        path: 'profile-event/:id',
+        loadChildren: () => __webpack_require__.e(/*! import() | views-profile-event-profile-event-module */ "views-profile-event-profile-event-module").then(__webpack_require__.bind(null, /*! ./views/profile-event/profile-event.module */ "./src/app/views/profile-event/profile-event.module.ts")).then(m => m.ProfileEventPageModule)
+    },
+    {
+        path: 'datos-erasmus',
+        loadChildren: () => __webpack_require__.e(/*! import() | views-datos-erasmus-datos-erasmus-module */ "views-datos-erasmus-datos-erasmus-module").then(__webpack_require__.bind(null, /*! ./views/datos-erasmus/datos-erasmus.module */ "./src/app/views/datos-erasmus/datos-erasmus.module.ts")).then(m => m.DatosErasmusPageModule)
+    },
+    {
+        path: 'comments/:id',
+        loadChildren: () => __webpack_require__.e(/*! import() | views-comments-comments-module */ "views-comments-comments-module").then(__webpack_require__.bind(null, /*! ./views/comments/comments.module */ "./src/app/views/comments/comments.module.ts")).then(m => m.CommentsPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -584,7 +604,7 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".pointer {\n  cursor: pointer;\n}\n\n@media (min-width: 500px) {\n  .mobile-menu {\n    display: none;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXFVzZXJzXFxzZ2FsZVxcV2Vic3Rvcm1Qcm9qZWN0c1xcRXJhc211c0FwcC9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFBO0FDQ0Y7O0FERUE7RUFDRTtJQUNFLGFBQUE7RUNDRjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBvaW50ZXIge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuQG1lZGlhIChtaW4td2lkdGg6IDUwMHB4KSB7XHJcbiAgLm1vYmlsZS1tZW51e1xyXG4gICAgZGlzcGxheTogbm9uZTtcclxuICB9XHJcbn1cclxuIiwiLnBvaW50ZXIge1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbkBtZWRpYSAobWluLXdpZHRoOiA1MDBweCkge1xuICAubW9iaWxlLW1lbnUge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbn0iXX0= */"
+module.exports = ".pointer {\n  cursor: pointer;\n}\n\n@media (min-width: 500px) {\n  .mobile-menu {\n    display: none;\n  }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9jYXJsb2dhdHR1c28vR2l0SHViL0VyYXNtdXNBcHAvc3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGVBQUE7QUNDRjs7QURFQTtFQUNFO0lBQ0UsYUFBQTtFQ0NGO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucG9pbnRlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuQG1lZGlhIChtaW4td2lkdGg6IDUwMHB4KSB7XG4gIC5tb2JpbGUtbWVudXtcbiAgICBkaXNwbGF5OiBub25lO1xuICB9XG59XG4iLCIucG9pbnRlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuQG1lZGlhIChtaW4td2lkdGg6IDUwMHB4KSB7XG4gIC5tb2JpbGUtbWVudSB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgfVxufSJdfQ== */"
 
 /***/ }),
 
@@ -798,6 +818,12 @@ let NotificationComponent = class NotificationComponent {
     constructor(toastController, navCtrl) {
         this.toastController = toastController;
         this.navCtrl = navCtrl;
+        this.sound = new Audio();
+        this.sound.src = '../../../assets/sounds/when.mp3';
+        this.sound.load();
+        this.innerSound = new Audio();
+        this.innerSound.src = '../../../assets/sounds/clearly.mp3';
+        this.innerSound.load();
     }
     ngOnInit() { }
     generateToast(message, goToUrl) {
@@ -809,13 +835,16 @@ let NotificationComponent = class NotificationComponent {
                 showCloseButton: true,
                 closeButtonText: 'Show'
             });
-            toast.present().catch((err) => console.log(err));
+            toast.present().then(() => this.sound.play()).catch((err) => console.log(err));
             toast.onDidDismiss().then((arg) => {
                 if (arg.role === 'cancel') {
                     this.navCtrl.navigateForward(goToUrl);
                 }
             });
         });
+    }
+    playInnerSound() {
+        this.innerSound.play().catch((err) => console.log(err));
     }
 };
 NotificationComponent.ctorParameters = () => [
@@ -847,10 +876,10 @@ NotificationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Post", function() { return Post; });
 class Post {
-    constructor(_id = '', owner = '', type = '', message = '') {
+    constructor(_id = '', owner_id = '', type = '', message = '') {
         this.type = type;
         this.message = message;
-        this.owner = owner;
+        this.owner_id = owner_id;
         this._id = _id;
     }
 }
@@ -883,6 +912,30 @@ class PostSend {
 }
 PostSend.ctorParameters = () => [
     null,
+    null,
+    null
+];
+
+
+/***/ }),
+
+/***/ "./src/app/models/User/checkUser.ts":
+/*!******************************************!*\
+  !*** ./src/app/models/User/checkUser.ts ***!
+  \******************************************/
+/*! exports provided: CheckUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckUser", function() { return CheckUser; });
+class CheckUser {
+    constructor(check = '', _idEvent = '') {
+        this.check = check;
+        this.idEvent = _idEvent;
+    }
+}
+CheckUser.ctorParameters = () => [
     null,
     null
 ];
@@ -923,7 +976,7 @@ let UserService = class UserService {
         return this.user;
     }
     savePostsUsers(id) {
-        return this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}`);
+        return this.httpClient.get(`${this.USER_SERVER_ADDRESS}/posts/` + `${id}` + `/0`);
     }
     search(searchString) {
         return this.httpClient.get(`${this.USER_SERVER_ADDRESS}/search?searchString=` + searchString);
@@ -1087,28 +1140,39 @@ AuthInterceptorService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatService", function() { return ChatService; });
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 
 
 
 
-class ChatService {
+
+
+let ChatService = class ChatService {
     constructor(http) {
         this.http = http;
-        this.url = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUri;
+        this.url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUri;
         this.getList = () => {
-            return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"]((observer) => {
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
                 this.socket.on('userList', (data) => {
                     observer.next(data);
                 });
             });
         };
+        this.getACK = () => {
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
+                this.socket.on('ACK', (arg) => {
+                    observer.next(arg);
+                });
+            });
+        };
         this.getMessage = () => {
-            return new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"]((observer) => {
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
                 this.socket.on('message', (data) => {
                     observer.next(data);
                 });
@@ -1118,7 +1182,7 @@ class ChatService {
     connectSocket(email) {
         if (!this.socket) {
             this.email = email;
-            this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_0__(this.url, { query: 'email=' + email });
+            this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1__(this.url, { query: 'email=' + email });
             console.log('connection');
         }
     }
@@ -1133,10 +1197,21 @@ class ChatService {
         const body = { author: this.email, destination, text: message };
         this.http.post(`${this.url}/user/message/`, body).toPromise().catch((err) => console.log(err));
     }
-}
+    ackMsg(sender) {
+        this.socket.emit('ACK', sender);
+        this.http.put(`${this.url}/user/message/${sender}/${this.email}`, null).toPromise().catch((err) => console.log(err));
+    }
+};
 ChatService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
 ];
+ChatService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+], ChatService);
+
 
 
 /***/ }),
@@ -1337,7 +1412,7 @@ HomePageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "@media (min-width: 500px) {\n  .mobile {\n    display: none;\n  }\n\n  .web {\n    display: block;\n  }\n}\n@media (max-width: 500px) {\n  .mobile {\n    display: block;\n  }\n\n  .web {\n    display: none;\n  }\n}\nion-toolbar {\n  margin-left: 5%;\n}\n.margin-right-auto {\n  margin-right: auto;\n}\n.margin-left-auto {\n  margin-left: auto;\n}\n.background-primary {\n  background: #e44d3a;\n}\n.menu-title {\n  margin: -15px 10px 0 10px;\n}\n.toolbar-buttons {\n  display: -webkit-box;\n  display: flex;\n  text-align: center;\n  margin-right: 20px;\n}\n.toolbar-container {\n  margin-right: auto;\n  margin-left: auto;\n}\n.white-text {\n  color: white;\n}\n.search-form {\n  margin: 0 30px 0 50px;\n  background: white;\n  color: #b2b2b2;\n  padding-left: 10px;\n  max-width: 250px;\n  min-width: 100px;\n  border-bottom-left-radius: 10px;\n  border-top-left-radius: 10px;\n}\n.search-input {\n  margin-top: 8px;\n  float: left;\n}\n.search-button {\n  padding: 7px 7px;\n  border: none;\n  border-top-right-radius: 10px;\n  border-bottom-right-radius: 10px;\n}\n.search-icon {\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n  color: #e44d3a;\n}\n.main-content {\n  display: -webkit-box;\n  display: flex;\n  text-align: center;\n}\n.container {\n  padding-top: 30px;\n  margin-right: auto;\n  margin-left: auto;\n}\n.image-contain {\n  border: 5px solid white;\n  -o-object-fit: contain;\n     object-fit: contain;\n  width: 100%;\n  border-radius: 50%;\n}\n.image-input {\n  display: -webkit-inline-box;\n  display: inline-flex;\n  opacity: 0;\n}\n.vertical-margin {\n  margin-top: 20px;\n  margin-bottom: 20px;\n}\n.border-top {\n  border-top: 4px solid #e44d3a;\n}\n.float-right {\n  float: right;\n}\n.textarea {\n  width: 100%;\n}\n.chat {\n  margin-left: auto;\n}\n.chat-unavailable {\n  color: red;\n}\n.personal-icon {\n  height: 120px;\n  width: 120px;\n  margin: 0 auto;\n  padding-top: 64px;\n}\n.no-padding {\n  padding: 0;\n}\n.personal-item {\n  padding: 15px 0;\n  border-top: 1px solid #f2f2f2;\n}\n.personal-item-title {\n  margin-top: 0;\n  margin-bottom: 5px;\n  font-size: 20px;\n  color: #686868;\n}\n.personal-info-container {\n  margin-top: 22%;\n}\n.personal-name {\n  font-size: 2vw;\n  margin: 65px 5px 5px;\n}\n.personal-status {\n  color: #686868;\n  margin: 5px;\n}\n.delete-icon {\n  color: red;\n  margin-left: auto;\n}\n.middle-card {\n  display: -webkit-box;\n  display: flex;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvaG9tZS9DOlxcVXNlcnNcXHNnYWxlXFxXZWJzdG9ybVByb2plY3RzXFxFcmFzbXVzQXBwL3NyY1xcYXBwXFx2aWV3c1xcaG9tZVxcaG9tZS5wYWdlLnNjc3MiLCJzcmMvYXBwL3ZpZXdzL2hvbWUvaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtJQUNFLGFBQUE7RUNDRjs7RURDQTtJQUNFLGNBQUE7RUNFRjtBQUNGO0FEQ0E7RUFDRTtJQUNFLGNBQUE7RUNDRjs7RURDQTtJQUNFLGFBQUE7RUNFRjtBQUNGO0FEQ0E7RUFDRSxlQUFBO0FDQ0Y7QURFQTtFQUNFLGtCQUFBO0FDQ0Y7QURDQTtFQUNFLGlCQUFBO0FDRUY7QURDQTtFQUNFLG1CQUFBO0FDRUY7QURDQTtFQUNFLHlCQUFBO0FDRUY7QURDQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGtCQUFBO0VBQ0Esa0JBQUE7QUNFRjtBRENBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtBQ0VGO0FEQ0E7RUFDRSxZQUFBO0FDRUY7QURDQTtFQUNFLHFCQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGdCQUFBO0VBQ0EsK0JBQUE7RUFDQSw0QkFBQTtBQ0VGO0FEQ0E7RUFDRSxlQUFBO0VBQ0EsV0FBQTtBQ0VGO0FEQ0E7RUFDRSxnQkFBQTtFQUNBLFlBQUE7RUFDQSw2QkFBQTtFQUNBLGdDQUFBO0FDRUY7QURDQTtFQUNFLGdDQUFBO1VBQUEsd0JBQUE7RUFDQSxjQUFBO0FDRUY7QURDQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLGtCQUFBO0FDRUY7QURDQTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxpQkFBQTtBQ0VGO0FEQ0E7RUFDRSx1QkFBQTtFQUNBLHNCQUFBO0tBQUEsbUJBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7QUNFRjtBRENBO0VBQ0UsMkJBQUE7RUFBQSxvQkFBQTtFQUNBLFVBQUE7QUNFRjtBRENBO0VBQ0UsZ0JBQUE7RUFDQSxtQkFBQTtBQ0VGO0FEQ0E7RUFDRSw2QkFBQTtBQ0VGO0FEQ0E7RUFDRSxZQUFBO0FDRUY7QURDQTtFQUNFLFdBQUE7QUNFRjtBRENBO0VBQ0UsaUJBQUE7QUNFRjtBRENBO0VBQ0UsVUFBQTtBQ0VGO0FEQ0E7RUFDRSxhQUFBO0VBQ0EsWUFBQTtFQUNBLGNBQUE7RUFDQSxpQkFBQTtBQ0VGO0FEQ0E7RUFDRSxVQUFBO0FDRUY7QURDQTtFQUNFLGVBQUE7RUFDQSw2QkFBQTtBQ0VGO0FEQ0E7RUFDRSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSxlQUFBO0VBQ0EsY0FBQTtBQ0VGO0FEQUE7RUFDRSxlQUFBO0FDR0Y7QUREQTtFQUNFLGNBQUE7RUFDQSxvQkFBQTtBQ0lGO0FERkE7RUFDRSxjQUFBO0VBQ0EsV0FBQTtBQ0tGO0FERkE7RUFDRSxVQUFBO0VBQ0EsaUJBQUE7QUNLRjtBREZBO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0FDS0YiLCJmaWxlIjoic3JjL2FwcC92aWV3cy9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQG1lZGlhIChtaW4td2lkdGg6IDUwMHB4KSB7XHJcbiAgLm1vYmlsZXtcclxuICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgfVxyXG4gIC53ZWJ7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICB9XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA1MDBweCkge1xyXG4gIC5tb2JpbGV7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICB9XHJcbiAgLndlYntcclxuICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgfVxyXG59XHJcblxyXG5pb24tdG9vbGJhcntcclxuICBtYXJnaW4tbGVmdDogNSU7XHJcbn1cclxuXHJcbi5tYXJnaW4tcmlnaHQtYXV0b3tcclxuICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbn1cclxuLm1hcmdpbi1sZWZ0LWF1dG97XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbn1cclxuXHJcbi5iYWNrZ3JvdW5kLXByaW1hcnl7XHJcbiAgYmFja2dyb3VuZDogI2U0NGQzYTtcclxufVxyXG5cclxuLm1lbnUtdGl0bGV7XHJcbiAgbWFyZ2luOiAtMTVweCAxMHB4IDAgMTBweDtcclxufVxyXG5cclxuLnRvb2xiYXItYnV0dG9uc3tcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBtYXJnaW4tcmlnaHQ6IDIwcHg7XHJcbn1cclxuXHJcbi50b29sYmFyLWNvbnRhaW5lcntcclxuICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbn1cclxuXHJcbi53aGl0ZS10ZXh0e1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG5cclxuLnNlYXJjaC1mb3Jte1xyXG4gIG1hcmdpbjogMCAzMHB4IDAgNTBweDtcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICBjb2xvcjogI2IyYjJiMjtcclxuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbiAgbWF4LXdpZHRoOiAyNTBweDtcclxuICBtaW4td2lkdGg6IDEwMHB4O1xyXG4gIGJvcmRlci1ib3R0b20tbGVmdC1yYWRpdXM6IDEwcHg7XHJcbiAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogMTBweDtcclxufVxyXG5cclxuLnNlYXJjaC1pbnB1dHtcclxuICBtYXJnaW4tdG9wOiA4cHg7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbn1cclxuXHJcbi5zZWFyY2gtYnV0dG9ue1xyXG4gIHBhZGRpbmc6IDdweCA3cHg7XHJcbiAgYm9yZGVyOiBub25lO1xyXG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAxMHB4O1xyXG4gIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAxMHB4O1xyXG59XHJcblxyXG4uc2VhcmNoLWljb257XHJcbiAgdHJhbnNmb3JtOiByb3RhdGUoOTBkZWcpO1xyXG4gIGNvbG9yOiAjZTQ0ZDNhO1xyXG59XHJcblxyXG4ubWFpbi1jb250ZW50e1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcblxyXG4uY29udGFpbmVye1xyXG4gIHBhZGRpbmctdG9wOiAzMHB4O1xyXG4gIG1hcmdpbi1yaWdodDogYXV0bztcclxuICBtYXJnaW4tbGVmdDogYXV0bztcclxufVxyXG5cclxuLmltYWdlLWNvbnRhaW57XHJcbiAgYm9yZGVyOiA1cHggc29saWQgd2hpdGU7XHJcbiAgb2JqZWN0LWZpdDogY29udGFpbjtcclxuICB3aWR0aDogMTAwJTtcclxuICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbn1cclxuXHJcbi5pbWFnZS1pbnB1dHtcclxuICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcclxuICBvcGFjaXR5OiAwO1xyXG59XHJcblxyXG4udmVydGljYWwtbWFyZ2lue1xyXG4gIG1hcmdpbi10b3A6IDIwcHg7XHJcbiAgbWFyZ2luLWJvdHRvbTogMjBweDtcclxufVxyXG5cclxuLmJvcmRlci10b3B7XHJcbiAgYm9yZGVyLXRvcDogNHB4IHNvbGlkICNlNDRkM2E7XHJcbn1cclxuXHJcbi5mbG9hdC1yaWdodHtcclxuICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuXHJcbi50ZXh0YXJlYXtcclxuICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuLmNoYXR7XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbn1cclxuXHJcbi5jaGF0LXVuYXZhaWxhYmxle1xyXG4gIGNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbi5wZXJzb25hbC1pY29ue1xyXG4gIGhlaWdodDogMTIwcHg7XHJcbiAgd2lkdGg6IDEyMHB4O1xyXG4gIG1hcmdpbjogMCBhdXRvO1xyXG4gIHBhZGRpbmctdG9wOiA2NHB4O1xyXG59XHJcblxyXG4ubm8tcGFkZGluZ3tcclxuICBwYWRkaW5nOiAwO1xyXG59XHJcblxyXG4ucGVyc29uYWwtaXRlbXtcclxuICBwYWRkaW5nOiAxNXB4IDA7XHJcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICNmMmYyZjI7XHJcbn1cclxuXHJcbi5wZXJzb25hbC1pdGVtLXRpdGxle1xyXG4gIG1hcmdpbi10b3A6IDA7XHJcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xyXG4gIGZvbnQtc2l6ZTogMjBweDtcclxuICBjb2xvcjogIzY4Njg2ODtcclxufVxyXG4ucGVyc29uYWwtaW5mby1jb250YWluZXJ7XHJcbiAgbWFyZ2luLXRvcDogMjIlO1xyXG59XHJcbi5wZXJzb25hbC1uYW1le1xyXG4gIGZvbnQtc2l6ZTogMnZ3O1xyXG4gIG1hcmdpbjogNjVweCA1cHggNXB4O1xyXG59XHJcbi5wZXJzb25hbC1zdGF0dXN7XHJcbiAgY29sb3I6ICM2ODY4Njg7XHJcbiAgbWFyZ2luOiA1cHg7XHJcbn1cclxuXHJcbi5kZWxldGUtaWNvbntcclxuICBjb2xvcjogcmVkO1xyXG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xyXG59XHJcblxyXG4ubWlkZGxlLWNhcmR7XHJcbiAgZGlzcGxheTogZmxleDtcclxufVxyXG4iLCJAbWVkaWEgKG1pbi13aWR0aDogNTAwcHgpIHtcbiAgLm1vYmlsZSB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgfVxuXG4gIC53ZWIge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICB9XG59XG5AbWVkaWEgKG1heC13aWR0aDogNTAwcHgpIHtcbiAgLm1vYmlsZSB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cblxuICAud2ViIHtcbiAgICBkaXNwbGF5OiBub25lO1xuICB9XG59XG5pb24tdG9vbGJhciB7XG4gIG1hcmdpbi1sZWZ0OiA1JTtcbn1cblxuLm1hcmdpbi1yaWdodC1hdXRvIHtcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4ubWFyZ2luLWxlZnQtYXV0byB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4uYmFja2dyb3VuZC1wcmltYXJ5IHtcbiAgYmFja2dyb3VuZDogI2U0NGQzYTtcbn1cblxuLm1lbnUtdGl0bGUge1xuICBtYXJnaW46IC0xNXB4IDEwcHggMCAxMHB4O1xufVxuXG4udG9vbGJhci1idXR0b25zIHtcbiAgZGlzcGxheTogZmxleDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBtYXJnaW4tcmlnaHQ6IDIwcHg7XG59XG5cbi50b29sYmFyLWNvbnRhaW5lciB7XG4gIG1hcmdpbi1yaWdodDogYXV0bztcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG5cbi53aGl0ZS10ZXh0IHtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4uc2VhcmNoLWZvcm0ge1xuICBtYXJnaW46IDAgMzBweCAwIDUwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBjb2xvcjogI2IyYjJiMjtcbiAgcGFkZGluZy1sZWZ0OiAxMHB4O1xuICBtYXgtd2lkdGg6IDI1MHB4O1xuICBtaW4td2lkdGg6IDEwMHB4O1xuICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAxMHB4O1xuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAxMHB4O1xufVxuXG4uc2VhcmNoLWlucHV0IHtcbiAgbWFyZ2luLXRvcDogOHB4O1xuICBmbG9hdDogbGVmdDtcbn1cblxuLnNlYXJjaC1idXR0b24ge1xuICBwYWRkaW5nOiA3cHggN3B4O1xuICBib3JkZXI6IG5vbmU7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAxMHB4O1xuICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMTBweDtcbn1cblxuLnNlYXJjaC1pY29uIHtcbiAgdHJhbnNmb3JtOiByb3RhdGUoOTBkZWcpO1xuICBjb2xvcjogI2U0NGQzYTtcbn1cblxuLm1haW4tY29udGVudCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLmNvbnRhaW5lciB7XG4gIHBhZGRpbmctdG9wOiAzMHB4O1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4uaW1hZ2UtY29udGFpbiB7XG4gIGJvcmRlcjogNXB4IHNvbGlkIHdoaXRlO1xuICBvYmplY3QtZml0OiBjb250YWluO1xuICB3aWR0aDogMTAwJTtcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xufVxuXG4uaW1hZ2UtaW5wdXQge1xuICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcbiAgb3BhY2l0eTogMDtcbn1cblxuLnZlcnRpY2FsLW1hcmdpbiB7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XG59XG5cbi5ib3JkZXItdG9wIHtcbiAgYm9yZGVyLXRvcDogNHB4IHNvbGlkICNlNDRkM2E7XG59XG5cbi5mbG9hdC1yaWdodCB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLnRleHRhcmVhIHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5jaGF0IHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG5cbi5jaGF0LXVuYXZhaWxhYmxlIHtcbiAgY29sb3I6IHJlZDtcbn1cblxuLnBlcnNvbmFsLWljb24ge1xuICBoZWlnaHQ6IDEyMHB4O1xuICB3aWR0aDogMTIwcHg7XG4gIG1hcmdpbjogMCBhdXRvO1xuICBwYWRkaW5nLXRvcDogNjRweDtcbn1cblxuLm5vLXBhZGRpbmcge1xuICBwYWRkaW5nOiAwO1xufVxuXG4ucGVyc29uYWwtaXRlbSB7XG4gIHBhZGRpbmc6IDE1cHggMDtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICNmMmYyZjI7XG59XG5cbi5wZXJzb25hbC1pdGVtLXRpdGxlIHtcbiAgbWFyZ2luLXRvcDogMDtcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xuICBmb250LXNpemU6IDIwcHg7XG4gIGNvbG9yOiAjNjg2ODY4O1xufVxuXG4ucGVyc29uYWwtaW5mby1jb250YWluZXIge1xuICBtYXJnaW4tdG9wOiAyMiU7XG59XG5cbi5wZXJzb25hbC1uYW1lIHtcbiAgZm9udC1zaXplOiAydnc7XG4gIG1hcmdpbjogNjVweCA1cHggNXB4O1xufVxuXG4ucGVyc29uYWwtc3RhdHVzIHtcbiAgY29sb3I6ICM2ODY4Njg7XG4gIG1hcmdpbjogNXB4O1xufVxuXG4uZGVsZXRlLWljb24ge1xuICBjb2xvcjogcmVkO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbn1cblxuLm1pZGRsZS1jYXJkIHtcbiAgZGlzcGxheTogZmxleDtcbn0iXX0= */"
+module.exports = "@media (min-width: 500px) {\n  .mobile {\n    display: none;\n  }\n\n  .web {\n    display: block;\n  }\n}\n@media (max-width: 500px) {\n  .mobile {\n    display: block;\n  }\n\n  .web {\n    display: none;\n  }\n}\nion-toolbar {\n  margin-left: 5%;\n}\n.margin-right-auto {\n  margin-right: auto;\n}\n.margin-left-auto {\n  margin-left: auto;\n}\n.background-primary {\n  background: #e44d3a;\n}\n.menu-title {\n  margin: -15px 10px 0 10px;\n}\n.toolbar-buttons {\n  display: -webkit-box;\n  display: flex;\n  text-align: center;\n  margin-right: 20px;\n}\n.toolbar-container {\n  margin-right: auto;\n  margin-left: auto;\n}\n.white-text {\n  color: white;\n}\n.search-form {\n  margin: 0 30px 0 50px;\n  background: white;\n  color: #b2b2b2;\n  padding-left: 10px;\n  max-width: 250px;\n  min-width: 100px;\n  border-bottom-left-radius: 10px;\n  border-top-left-radius: 10px;\n}\n.search-input {\n  margin-top: 8px;\n  float: left;\n}\n.search-button {\n  padding: 7px 7px;\n  border: none;\n  border-top-right-radius: 10px;\n  border-bottom-right-radius: 10px;\n}\n.search-icon {\n  -webkit-transform: rotate(90deg);\n          transform: rotate(90deg);\n  color: #e44d3a;\n}\n.main-content {\n  display: -webkit-box;\n  display: flex;\n  text-align: center;\n}\n.container {\n  padding-top: 30px;\n  margin-right: auto;\n  margin-left: auto;\n}\n.image-contain {\n  border: 5px solid white;\n  -o-object-fit: contain;\n     object-fit: contain;\n  width: 100%;\n  border-radius: 50%;\n}\n.image-input {\n  display: -webkit-inline-box;\n  display: inline-flex;\n  opacity: 0;\n}\n.vertical-margin {\n  margin-top: 20px;\n  margin-bottom: 20px;\n}\n.border-top {\n  border-top: 4px solid #e44d3a;\n}\n.float-right {\n  float: right;\n}\n.textarea {\n  width: 100%;\n}\n.chat {\n  margin-left: auto;\n}\n.chat-unavailable {\n  color: red;\n}\n.personal-icon {\n  height: 120px;\n  width: 120px;\n  margin: 0 auto;\n  padding-top: 64px;\n}\n.no-padding {\n  padding: 0;\n}\n.personal-item {\n  padding: 15px 0;\n  border-top: 1px solid #f2f2f2;\n}\n.personal-item-title {\n  margin-top: 0;\n  margin-bottom: 5px;\n  font-size: 20px;\n  color: #686868;\n}\n.personal-info-container {\n  margin-top: 22%;\n}\n.personal-name {\n  font-size: 2vw;\n  margin: 65px 5px 5px;\n}\n.personal-status {\n  color: #686868;\n  margin: 5px;\n}\n.delete-icon {\n  color: red;\n  margin-left: auto;\n}\n.middle-card {\n  display: -webkit-box;\n  display: flex;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9jYXJsb2dhdHR1c28vR2l0SHViL0VyYXNtdXNBcHAvc3JjL2FwcC92aWV3cy9ob21lL2hvbWUucGFnZS5zY3NzIiwic3JjL2FwcC92aWV3cy9ob21lL2hvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7SUFDRSxhQUFBO0VDQ0Y7O0VEQ0E7SUFDRSxjQUFBO0VDRUY7QUFDRjtBRENBO0VBQ0U7SUFDRSxjQUFBO0VDQ0Y7O0VEQ0E7SUFDRSxhQUFBO0VDRUY7QUFDRjtBRENBO0VBQ0UsZUFBQTtBQ0NGO0FERUE7RUFDRSxrQkFBQTtBQ0NGO0FEQ0E7RUFDRSxpQkFBQTtBQ0VGO0FEQ0E7RUFDRSxtQkFBQTtBQ0VGO0FEQ0E7RUFDRSx5QkFBQTtBQ0VGO0FEQ0E7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxrQkFBQTtFQUNBLGtCQUFBO0FDRUY7QURDQTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7QUNFRjtBRENBO0VBQ0UsWUFBQTtBQ0VGO0FEQ0E7RUFDRSxxQkFBQTtFQUNBLGlCQUFBO0VBQ0EsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLCtCQUFBO0VBQ0EsNEJBQUE7QUNFRjtBRENBO0VBQ0UsZUFBQTtFQUNBLFdBQUE7QUNFRjtBRENBO0VBQ0UsZ0JBQUE7RUFDQSxZQUFBO0VBQ0EsNkJBQUE7RUFDQSxnQ0FBQTtBQ0VGO0FEQ0E7RUFDRSxnQ0FBQTtVQUFBLHdCQUFBO0VBQ0EsY0FBQTtBQ0VGO0FEQ0E7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxrQkFBQTtBQ0VGO0FEQ0E7RUFDRSxpQkFBQTtFQUNBLGtCQUFBO0VBQ0EsaUJBQUE7QUNFRjtBRENBO0VBQ0UsdUJBQUE7RUFDQSxzQkFBQTtLQUFBLG1CQUFBO0VBQ0EsV0FBQTtFQUNBLGtCQUFBO0FDRUY7QURDQTtFQUNFLDJCQUFBO0VBQUEsb0JBQUE7RUFDQSxVQUFBO0FDRUY7QURDQTtFQUNFLGdCQUFBO0VBQ0EsbUJBQUE7QUNFRjtBRENBO0VBQ0UsNkJBQUE7QUNFRjtBRENBO0VBQ0UsWUFBQTtBQ0VGO0FEQ0E7RUFDRSxXQUFBO0FDRUY7QURDQTtFQUNFLGlCQUFBO0FDRUY7QURDQTtFQUNFLFVBQUE7QUNFRjtBRENBO0VBQ0UsYUFBQTtFQUNBLFlBQUE7RUFDQSxjQUFBO0VBQ0EsaUJBQUE7QUNFRjtBRENBO0VBQ0UsVUFBQTtBQ0VGO0FEQ0E7RUFDRSxlQUFBO0VBQ0EsNkJBQUE7QUNFRjtBRENBO0VBQ0UsYUFBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtFQUNBLGNBQUE7QUNFRjtBREFBO0VBQ0UsZUFBQTtBQ0dGO0FEREE7RUFDRSxjQUFBO0VBQ0Esb0JBQUE7QUNJRjtBREZBO0VBQ0UsY0FBQTtFQUNBLFdBQUE7QUNLRjtBREZBO0VBQ0UsVUFBQTtFQUNBLGlCQUFBO0FDS0Y7QURGQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtBQ0tGIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBtZWRpYSAobWluLXdpZHRoOiA1MDBweCkge1xuICAubW9iaWxle1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbiAgLndlYntcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxufVxuXG5AbWVkaWEgKG1heC13aWR0aDogNTAwcHgpIHtcbiAgLm1vYmlsZXtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxuICAud2Vie1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbn1cblxuaW9uLXRvb2xiYXJ7XG4gIG1hcmdpbi1sZWZ0OiA1JTtcbn1cblxuLm1hcmdpbi1yaWdodC1hdXRve1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG59XG4ubWFyZ2luLWxlZnQtYXV0b3tcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG5cbi5iYWNrZ3JvdW5kLXByaW1hcnl7XG4gIGJhY2tncm91bmQ6ICNlNDRkM2E7XG59XG5cbi5tZW51LXRpdGxle1xuICBtYXJnaW46IC0xNXB4IDEwcHggMCAxMHB4O1xufVxuXG4udG9vbGJhci1idXR0b25ze1xuICBkaXNwbGF5OiBmbGV4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIG1hcmdpbi1yaWdodDogMjBweDtcbn1cblxuLnRvb2xiYXItY29udGFpbmVye1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4ud2hpdGUtdGV4dHtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4uc2VhcmNoLWZvcm17XG4gIG1hcmdpbjogMCAzMHB4IDAgNTBweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIGNvbG9yOiAjYjJiMmIyO1xuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gIG1heC13aWR0aDogMjUwcHg7XG4gIG1pbi13aWR0aDogMTAwcHg7XG4gIGJvcmRlci1ib3R0b20tbGVmdC1yYWRpdXM6IDEwcHg7XG4gIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDEwcHg7XG59XG5cbi5zZWFyY2gtaW5wdXR7XG4gIG1hcmdpbi10b3A6IDhweDtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5zZWFyY2gtYnV0dG9ue1xuICBwYWRkaW5nOiA3cHggN3B4O1xuICBib3JkZXI6IG5vbmU7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAxMHB4O1xuICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMTBweDtcbn1cblxuLnNlYXJjaC1pY29ue1xuICB0cmFuc2Zvcm06IHJvdGF0ZSg5MGRlZyk7XG4gIGNvbG9yOiAjZTQ0ZDNhO1xufVxuXG4ubWFpbi1jb250ZW50e1xuICBkaXNwbGF5OiBmbGV4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5jb250YWluZXJ7XG4gIHBhZGRpbmctdG9wOiAzMHB4O1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4uaW1hZ2UtY29udGFpbntcbiAgYm9yZGVyOiA1cHggc29saWQgd2hpdGU7XG4gIG9iamVjdC1maXQ6IGNvbnRhaW47XG4gIHdpZHRoOiAxMDAlO1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG59XG5cbi5pbWFnZS1pbnB1dHtcbiAgZGlzcGxheTogaW5saW5lLWZsZXg7XG4gIG9wYWNpdHk6IDA7XG59XG5cbi52ZXJ0aWNhbC1tYXJnaW57XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XG59XG5cbi5ib3JkZXItdG9we1xuICBib3JkZXItdG9wOiA0cHggc29saWQgI2U0NGQzYTtcbn1cblxuLmZsb2F0LXJpZ2h0e1xuICBmbG9hdDogcmlnaHQ7XG59XG5cbi50ZXh0YXJlYXtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5jaGF0e1xuICBtYXJnaW4tbGVmdDogYXV0bztcbn1cblxuLmNoYXQtdW5hdmFpbGFibGV7XG4gIGNvbG9yOiByZWQ7XG59XG5cbi5wZXJzb25hbC1pY29ue1xuICBoZWlnaHQ6IDEyMHB4O1xuICB3aWR0aDogMTIwcHg7XG4gIG1hcmdpbjogMCBhdXRvO1xuICBwYWRkaW5nLXRvcDogNjRweDtcbn1cblxuLm5vLXBhZGRpbmd7XG4gIHBhZGRpbmc6IDA7XG59XG5cbi5wZXJzb25hbC1pdGVte1xuICBwYWRkaW5nOiAxNXB4IDA7XG4gIGJvcmRlci10b3A6IDFweCBzb2xpZCAjZjJmMmYyO1xufVxuXG4ucGVyc29uYWwtaXRlbS10aXRsZXtcbiAgbWFyZ2luLXRvcDogMDtcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xuICBmb250LXNpemU6IDIwcHg7XG4gIGNvbG9yOiAjNjg2ODY4O1xufVxuLnBlcnNvbmFsLWluZm8tY29udGFpbmVye1xuICBtYXJnaW4tdG9wOiAyMiU7XG59XG4ucGVyc29uYWwtbmFtZXtcbiAgZm9udC1zaXplOiAydnc7XG4gIG1hcmdpbjogNjVweCA1cHggNXB4O1xufVxuLnBlcnNvbmFsLXN0YXR1c3tcbiAgY29sb3I6ICM2ODY4Njg7XG4gIG1hcmdpbjogNXB4O1xufVxuXG4uZGVsZXRlLWljb257XG4gIGNvbG9yOiByZWQ7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4ubWlkZGxlLWNhcmR7XG4gIGRpc3BsYXk6IGZsZXg7XG59XG4iLCJAbWVkaWEgKG1pbi13aWR0aDogNTAwcHgpIHtcbiAgLm1vYmlsZSB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgfVxuXG4gIC53ZWIge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICB9XG59XG5AbWVkaWEgKG1heC13aWR0aDogNTAwcHgpIHtcbiAgLm1vYmlsZSB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cblxuICAud2ViIHtcbiAgICBkaXNwbGF5OiBub25lO1xuICB9XG59XG5pb24tdG9vbGJhciB7XG4gIG1hcmdpbi1sZWZ0OiA1JTtcbn1cblxuLm1hcmdpbi1yaWdodC1hdXRvIHtcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4ubWFyZ2luLWxlZnQtYXV0byB7XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4uYmFja2dyb3VuZC1wcmltYXJ5IHtcbiAgYmFja2dyb3VuZDogI2U0NGQzYTtcbn1cblxuLm1lbnUtdGl0bGUge1xuICBtYXJnaW46IC0xNXB4IDEwcHggMCAxMHB4O1xufVxuXG4udG9vbGJhci1idXR0b25zIHtcbiAgZGlzcGxheTogZmxleDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBtYXJnaW4tcmlnaHQ6IDIwcHg7XG59XG5cbi50b29sYmFyLWNvbnRhaW5lciB7XG4gIG1hcmdpbi1yaWdodDogYXV0bztcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG5cbi53aGl0ZS10ZXh0IHtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4uc2VhcmNoLWZvcm0ge1xuICBtYXJnaW46IDAgMzBweCAwIDUwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBjb2xvcjogI2IyYjJiMjtcbiAgcGFkZGluZy1sZWZ0OiAxMHB4O1xuICBtYXgtd2lkdGg6IDI1MHB4O1xuICBtaW4td2lkdGg6IDEwMHB4O1xuICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAxMHB4O1xuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAxMHB4O1xufVxuXG4uc2VhcmNoLWlucHV0IHtcbiAgbWFyZ2luLXRvcDogOHB4O1xuICBmbG9hdDogbGVmdDtcbn1cblxuLnNlYXJjaC1idXR0b24ge1xuICBwYWRkaW5nOiA3cHggN3B4O1xuICBib3JkZXI6IG5vbmU7XG4gIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAxMHB4O1xuICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMTBweDtcbn1cblxuLnNlYXJjaC1pY29uIHtcbiAgdHJhbnNmb3JtOiByb3RhdGUoOTBkZWcpO1xuICBjb2xvcjogI2U0NGQzYTtcbn1cblxuLm1haW4tY29udGVudCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLmNvbnRhaW5lciB7XG4gIHBhZGRpbmctdG9wOiAzMHB4O1xuICBtYXJnaW4tcmlnaHQ6IGF1dG87XG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xufVxuXG4uaW1hZ2UtY29udGFpbiB7XG4gIGJvcmRlcjogNXB4IHNvbGlkIHdoaXRlO1xuICBvYmplY3QtZml0OiBjb250YWluO1xuICB3aWR0aDogMTAwJTtcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xufVxuXG4uaW1hZ2UtaW5wdXQge1xuICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcbiAgb3BhY2l0eTogMDtcbn1cblxuLnZlcnRpY2FsLW1hcmdpbiB7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XG59XG5cbi5ib3JkZXItdG9wIHtcbiAgYm9yZGVyLXRvcDogNHB4IHNvbGlkICNlNDRkM2E7XG59XG5cbi5mbG9hdC1yaWdodCB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLnRleHRhcmVhIHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi5jaGF0IHtcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XG59XG5cbi5jaGF0LXVuYXZhaWxhYmxlIHtcbiAgY29sb3I6IHJlZDtcbn1cblxuLnBlcnNvbmFsLWljb24ge1xuICBoZWlnaHQ6IDEyMHB4O1xuICB3aWR0aDogMTIwcHg7XG4gIG1hcmdpbjogMCBhdXRvO1xuICBwYWRkaW5nLXRvcDogNjRweDtcbn1cblxuLm5vLXBhZGRpbmcge1xuICBwYWRkaW5nOiAwO1xufVxuXG4ucGVyc29uYWwtaXRlbSB7XG4gIHBhZGRpbmc6IDE1cHggMDtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICNmMmYyZjI7XG59XG5cbi5wZXJzb25hbC1pdGVtLXRpdGxlIHtcbiAgbWFyZ2luLXRvcDogMDtcbiAgbWFyZ2luLWJvdHRvbTogNXB4O1xuICBmb250LXNpemU6IDIwcHg7XG4gIGNvbG9yOiAjNjg2ODY4O1xufVxuXG4ucGVyc29uYWwtaW5mby1jb250YWluZXIge1xuICBtYXJnaW4tdG9wOiAyMiU7XG59XG5cbi5wZXJzb25hbC1uYW1lIHtcbiAgZm9udC1zaXplOiAydnc7XG4gIG1hcmdpbjogNjVweCA1cHggNXB4O1xufVxuXG4ucGVyc29uYWwtc3RhdHVzIHtcbiAgY29sb3I6ICM2ODY4Njg7XG4gIG1hcmdpbjogNXB4O1xufVxuXG4uZGVsZXRlLWljb24ge1xuICBjb2xvcjogcmVkO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbn1cblxuLm1pZGRsZS1jYXJkIHtcbiAgZGlzcGxheTogZmxleDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -1364,6 +1439,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _post_post_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../post/post.service */ "./src/app/views/post/post.service.ts");
 /* harmony import */ var _services_chat_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/chat.service */ "./src/app/services/chat.service.ts");
 /* harmony import */ var _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/notification/notification.component */ "./src/app/components/notification/notification.component.ts");
+/* harmony import */ var _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../models/User/checkUser */ "./src/app/models/User/checkUser.ts");
+
 
 
 
@@ -1378,7 +1455,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HomePage = class HomePage {
-    constructor(formBuilder, homeService, userService, postService, router, menuCtrl, alertCtrl, storage, chatService, notificationComponent) {
+    constructor(formBuilder, homeService, userService, postService, router, menuCtrl, alertCtrl, toastCtrl, storage, chatService, notificationComponent) {
         this.formBuilder = formBuilder;
         this.homeService = homeService;
         this.userService = userService;
@@ -1386,6 +1463,7 @@ let HomePage = class HomePage {
         this.router = router;
         this.menuCtrl = menuCtrl;
         this.alertCtrl = alertCtrl;
+        this.toastCtrl = toastCtrl;
         this.storage = storage;
         this.chatService = chatService;
         this.notificationComponent = notificationComponent;
@@ -1396,6 +1474,7 @@ let HomePage = class HomePage {
             this.homeForm = this.formBuilder.group({
                 post: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]()
             });
+            this.checklist = [];
         });
     }
     ionViewDidEnter() {
@@ -1409,8 +1488,11 @@ let HomePage = class HomePage {
             else {
                 this.user = JSON.parse(storageUser);
                 yield this.storage.saveUser(storageUser);
+                this.checklist = [];
                 this.photo = (yield this.userService.getPhoto(this.user._id).toPromise()).photo;
                 this.followers = (yield this.homeService.getFollowers(this.user._id).toPromise()).followers;
+                // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
+                yield this.getActivity();
                 this.following = (yield this.homeService.getFollowing(this.user._id).toPromise()).following;
                 this.getActivity();
                 this.chatService.connectSocket(this.user.email);
@@ -1421,6 +1503,9 @@ let HomePage = class HomePage {
                     if (this.router.url !== goToUrl) {
                         this.notificationComponent.generateToast(msg, goToUrl).catch((err) => console.log(err));
                     }
+                    else {
+                        this.notificationComponent.playInnerSound();
+                    }
                     console.log(this.router.url);
                 });
             }
@@ -1429,9 +1514,20 @@ let HomePage = class HomePage {
     getActivity() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             yield this.homeService.getActivity(this.user._id).subscribe(res => {
-                const response = res;
-                this.user.activity = response.activity;
+                if (res.status === 204) {
+                    console.log('204');
+                }
+                else {
+                    console.log('res: ', res);
+                    const response = res;
+                    this.activity = response.body.activity;
+                    this.user.activity = this.activity;
+                    this.checkMember();
+                }
+            }, error => {
+                console.log('error', error);
             });
+            console.log('activity: ', this.user.activity);
             yield this.userService.saveUser(this.user);
         });
     }
@@ -1439,23 +1535,25 @@ let HomePage = class HomePage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             this.alertCtrl.create({
                 header: 'TYPE',
-                message: 'What type is the message?',
+                message: 'Post or event',
                 buttons: [{ text: 'Event', handler: () => {
-                            this.postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](this.user.email, 'Event', this.homeForm.controls.post.value);
-                            this.homeService.sendPost(this.postSend, this.user).subscribe(res => {
-                                this.router.navigateByUrl('/profile');
-                            });
+                            this.router.navigateByUrl('/event');
                         } },
                     { text: 'Post', handler: () => {
                             console.log('message: ', this.homeForm.controls.post.value);
-                            this.postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](this.user.email, 'Post', this.homeForm.controls.post.value);
-                            this.homeService.sendPost(this.postSend, this.user).subscribe(res => {
+                            this.postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](this.user._id, 'Post', this.homeForm.controls.post.value);
+                            this.homeService.sendPost(this.postSend).subscribe(res => {
                                 this.router.navigateByUrl('/profile');
                             });
                         } }]
             }).then(alert => {
                 alert.present();
             });
+        });
+    }
+    seeEvent(id) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.router.navigateByUrl('/profile-event/' + `${id}`);
         });
     }
     updateSuggestions(event) {
@@ -1471,9 +1569,10 @@ let HomePage = class HomePage {
     }
     publishPost() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let post = new _models_Posts_post__WEBPACK_IMPORTED_MODULE_7__["Post"]('', this.user.email, 'Post', this.postMessage);
-            let postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](this.user.email, 'Post', this.postMessage);
-            this.homeService.sendPost(postSend, this.user).subscribe(res => {
+            let post = new _models_Posts_post__WEBPACK_IMPORTED_MODULE_7__["Post"]('', this.user._id, 'Post', this.postMessage);
+            let postSend = new _models_Posts_postSend__WEBPACK_IMPORTED_MODULE_8__["PostSend"](this.user._id, 'Post', this.postMessage);
+            this.homeService.sendPost(postSend).subscribe(res => {
+                console.log('res: ', res);
                 this.user.activity.push(post);
                 this.updateUser();
             });
@@ -1483,6 +1582,70 @@ let HomePage = class HomePage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             this.user.activity = (yield this.userService.savePostsUsers(this.user._id).toPromise()).posts;
             this.storage.saveUser(JSON.stringify(this.user));
+        });
+    }
+    asistir(eventId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.homeService.asistir(eventId, this.user._id).subscribe(res => {
+                this.router.navigateByUrl('/profile-event/' + `${eventId}`);
+                console.log(res);
+            }, error => {
+                if (error.status === 304) {
+                    this.launchToast('You are already in');
+                }
+            });
+        });
+    }
+    leave(eventId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.homeService.leave(eventId, this.user._id).subscribe(res => {
+                this.launchToast('You leave successfully');
+                console.log(res);
+            }, error => {
+                if (error.status === 304) {
+                    this.launchToast('You not are in');
+                }
+            });
+        });
+    }
+    launchToast(message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let toast = yield this.toastCtrl.create({
+                message: message,
+                duration: 3000
+            });
+            yield toast.present();
+        });
+    }
+    checkMember() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let count = 0;
+            this.activity.forEach(x => {
+                if (x.type === 'Event') {
+                    if (x.members === null) {
+                        this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__["CheckUser"]('no', x._id));
+                    }
+                    else {
+                        x.members.forEach(a => {
+                            if (a._id === this.user._id) {
+                                this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__["CheckUser"]('yes', x._id));
+                                count = 1;
+                            }
+                        });
+                        if (count !== 1) {
+                            this.checklist.push(new _models_User_checkUser__WEBPACK_IMPORTED_MODULE_13__["CheckUser"]('no', x._id));
+                        }
+                        else {
+                            count = 0;
+                        }
+                    }
+                }
+            });
+        });
+    }
+    changePageComments(idPost) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.router.navigateByUrl('/comments/' + `${idPost}`);
         });
     }
     deleteEvent(activity) {
@@ -1509,6 +1672,7 @@ HomePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
     { type: _storage_storage_component__WEBPACK_IMPORTED_MODULE_9__["StorageComponent"] },
     { type: _services_chat_service__WEBPACK_IMPORTED_MODULE_11__["ChatService"] },
     { type: _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_12__["NotificationComponent"] }
@@ -1526,6 +1690,7 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
         _storage_storage_component__WEBPACK_IMPORTED_MODULE_9__["StorageComponent"],
         _services_chat_service__WEBPACK_IMPORTED_MODULE_11__["ChatService"],
         _components_notification_notification_component__WEBPACK_IMPORTED_MODULE_12__["NotificationComponent"]])
@@ -1565,22 +1730,32 @@ let HomeService = class HomeService {
         this.HOME_SERVER_ADDRESS = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUri;
         this.homeSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
-    sendPost(post, user) {
-        console.log('userid:', user._id);
+    sendPost(post) {
         console.log('post:', post.message);
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
-            userId: user._id,
             post
         });
     }
     getActivity(id) {
-        return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}`, {});
+        return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/user/activity/` + `${id}` + `/0`, {}, { observe: 'response' });
     }
     getProfile(id) {
         return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/profile/` + `${id}`);
     }
     getFollowers(_id) {
         return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/followers/` + `${_id}`);
+    }
+    asistir(idEvent, idUser) {
+        return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/event/join`, {
+            eventId: idEvent,
+            userId: idUser
+        });
+    }
+    leave(idEvent, idUser) {
+        return this.httpClient.put(`${this.HOME_SERVER_ADDRESS}/event/leave`, {
+            eventId: idEvent,
+            userId: idUser
+        });
     }
     getFollowing(_id) {
         return this.httpClient.get(`${this.HOME_SERVER_ADDRESS}/user/following/` + `${_id}`);
@@ -1631,7 +1806,7 @@ let PostService = class PostService {
         this.homeSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
     }
     getPosts(id) {
-        return this.httpClient.get(`${this.POST_SERVER_ADDRESS}/user/posts/` + `${id}`);
+        return this.httpClient.get(`${this.POST_SERVER_ADDRESS}/user/posts/` + `${id}` + `/0`);
     }
     deletePost(id) {
         return this.httpClient.delete(`${this.POST_SERVER_ADDRESS}/post/` + `${id}`);
@@ -1714,7 +1889,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\sgale\WebstormProjects\ErasmusApp\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/carlogattuso/GitHub/ErasmusApp/src/main.ts */"./src/main.ts");
 
 
 /***/ }),

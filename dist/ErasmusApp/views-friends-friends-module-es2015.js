@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\r\n  <div class=\"ion-page\" main>\r\n  <ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Friends</ion-title>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n  <ion-toolbar>\r\n    <ion-searchbar\r\n            (ionChange)=\"buscar($event)\">\r\n    </ion-searchbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content fullscreen>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let userName of users | filtro:textobuscar: 'name'\">\r\n      <ion-row>\r\n      <ion-button size=\"large\" color=\"tertiary\" (click)=\"change(userName._id)\" expand=\"block\">{{userName.name}}</ion-button>\r\n      </ion-row>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-content>\r\n  </div>\r\n</ion-app>\r\n"
+module.exports = "<ion-app>\n  <div class=\"ion-page\" main>\n  <ion-header>\n  <ion-toolbar>\n    <ion-title>Friends</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-toolbar>\n    <ion-searchbar\n            (ionChange)=\"buscar($event)\">\n    </ion-searchbar>\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <ion-list>\n    <ion-item *ngFor=\"let userName of users | filtro:textobuscar: 'name'\">\n      <ion-row>\n      <ion-button size=\"large\" color=\"tertiary\" (click)=\"change(userName._id)\" expand=\"block\">{{userName.name}}</ion-button>\n      </ion-row>\n    </ion-item>\n  </ion-list>\n</ion-content>\n  </div>\n</ion-app>\n"
 
 /***/ }),
 

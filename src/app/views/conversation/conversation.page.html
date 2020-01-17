@@ -7,24 +7,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list id="scroll-this" style="height: 80%; overflow-y: scroll;" (loadeddata)="scrollToBottom()">
-    <ion-item *ngFor="let msg of messages">
-      <p text-right *ngIf="msg.author === user.email" style="width: 100%"><span style="color: gray">Me: </span>{{msg.text}}</p>
-      <p text-left *ngIf="msg.author !== user.email" style="width: 100%"><span style="color: gray">{{name}}: </span>{{msg.text}}</p>
+<ion-content id="scroll-this">
+  <ion-list class="messages_list">
+    <ion-item lines="none" *ngFor="let msg of messages">
+      <div *ngIf="msg.author === user.name" class="message_bubble yours">
+        <div class="message">
+          <span class="faded">Me: </span>
+          {{msg.text}}
+          <br>
+          <ion-icon *ngIf="msg.read == false" color="primary" name="checkmark"></ion-icon>
+          <ion-icon *ngIf="msg.read == true" color="success" name="done-all"></ion-icon>
+          <span class="faded" style="font-size: x-small">{{formatDate(msg.timestamp)}}</span>
+        </div>
+      </div>
+      <div *ngIf="msg.author !== user.name" class="message_bubble mine">
+        <span class="message">
+          <span class="faded">{{name}}: </span>
+          {{msg.text}}
+          <br>
+          <span class="faded" style="font-size: x-small">{{formatDate(msg.timestamp)}}</span>
+        </span>
+      </div>
     </ion-item>
   </ion-list>
-  <ion-row style="position: fixed; bottom: 0; width: 100%;">
-    <ion-col size="8">
-      <ion-textarea #box placeholder="Type a message..."
-                    (keyup.enter)="onEnter(box.value); box.value = '' ">
-      </ion-textarea>
-    </ion-col>
-    <ion-col>
-      <ion-button (click)="onEnter(box.value); box.value = '' ">
-        Send
-        <ion-icon slot="end" name="send" size="large"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
 </ion-content>
+
+<ion-footer class="send_form">
+  <ion-col class="send_form_input">
+    <ion-textarea #box placeholder="Type a message..."
+                  (keyup.enter)="onEnter(box.value); box.value = '' ">
+    </ion-textarea>
+  </ion-col>
+  <ion-col class="send_form_button">
+    <ion-button (click)="onEnter(box.value); box.value = '' ">
+      Send
+      <ion-icon slot="end" name="send" size="large"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-footer>
