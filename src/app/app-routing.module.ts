@@ -88,8 +88,6 @@ const routes: Routes = [
     path: 'comments/:id',
     loadChildren: () => import('./views/comments/comments.module').then( m => m.CommentsPageModule)
   },
-
-
 ];
 
 @NgModule({
