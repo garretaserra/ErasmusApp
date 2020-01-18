@@ -75,7 +75,7 @@ export class GlobePage implements OnInit, AfterContentInit {
       });
     });
 
-    this.events.features.forEach((marker) => {
+    this.events.features.forEach((marker, i) => {
       // create a HTML element for each feature
       const el = document.createElement('img');
       el.className = 'marker';
@@ -90,6 +90,16 @@ export class GlobePage implements OnInit, AfterContentInit {
         this.flyToMarker(marker);
         // 2. Close all other popups and display popup for clicked store
         this.createPopUp(marker);
+        // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+        const activeItem = document.getElementsByClassName('active');
+
+        e.stopPropagation();
+        if (activeItem[0]) {
+          activeItem[0].classList.remove('active');
+        }
+
+        const listing = document.getElementById('listing-' + i);
+        listing.classList.add('active');
       });
 
     });
@@ -129,6 +139,25 @@ export class GlobePage implements OnInit, AfterContentInit {
       center: this.map.center,
       zoom: 12
     });
+  }
+
+  onItemListClick($event) {
+    // Update the currentFeature to the store associated with the clicked link
+    const clickedListing = this.events.features[$event.target.id.split('-')[1]];
+
+    // 1. Fly to the point
+    this.flyToMarker(clickedListing);
+
+    // 2. Close all other popups and display popup for clicked store
+    this.createPopUp(clickedListing);
+
+    // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+    const activeItem = document.getElementsByClassName('active');
+
+    if (activeItem[0]) {
+      activeItem[0].classList.remove('active');
+    }
+    $event.target.classList.add('active');
   }
 
 }

@@ -10,7 +10,7 @@
 <ion-content>
   <div id="mapElement" class="map"></div>
   <ion-list>
-    <ion-item *ngFor="let event of events.features">
+    <ion-item *ngFor="let event of events.features; let i = index" id="listing-{{i}}" (click)="onItemListClick($event)">
       <p>{{ event.properties.title }}</p>
     </ion-item>
   </ion-list>
