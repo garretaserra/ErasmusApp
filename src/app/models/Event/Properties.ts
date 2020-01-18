@@ -1,6 +1,7 @@
 import {UserName} from '../User/userName';
 
 export class Properties {
+    _id: string;
     title: string;
     type: string;
     date: Date;
@@ -8,7 +9,8 @@ export class Properties {
     owner: UserName;
     members: UserName[];
 
-    constructor(title: string, type: string, date: Date, location: string, owner: UserName, members: UserName[]) {
+    constructor(id: string, title: string, type: string, date: Date, location: string, owner: UserName, members: UserName[]) {
+        this._id = id;
         this.title = title;
         this.type = type;
         this.date = date;

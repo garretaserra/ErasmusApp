@@ -42,6 +42,7 @@ export class GlobePage implements OnInit, AfterContentInit {
             ]
           },
           properties: {
+            _id: item._id,
             title: item.description,
             type: item.type,
             date: item.eventDate,
@@ -125,6 +126,7 @@ export class GlobePage implements OnInit, AfterContentInit {
     const popup = new mapboxgl.Popup({closeOnClick: false})
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML('<h3>' + currentFeature.properties.title + '</h3>' +
+            '<a href="/profile-event/' + currentFeature.properties._id + '">Go to event profile page</a>' +
             '<div>Type: ' + currentFeature.properties.type + '</div>' +
             '<div>Description: ' + currentFeature.properties.title + '</div>' +
             '<div>Date: ' + this.formatDate(currentFeature.properties.date) + '</div>' +
