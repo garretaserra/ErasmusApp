@@ -40,8 +40,12 @@ export class GlobePage implements OnInit, AfterContentInit {
             ]
           },
           properties: {
-            name: item.description,
-            title: item.description
+            title: item.description,
+            type: item.type,
+            date: item.eventDate,
+            location: item.location,
+            owner: item.owner,
+            members: item.members
           }
         };
         features.push(feature);
@@ -91,15 +95,14 @@ export class GlobePage implements OnInit, AfterContentInit {
         // 2. Close all other popups and display popup for clicked store
         this.createPopUp(marker);
         // 3. Highlight listing in sidebar (and remove highlight for all other listings)
-        const activeItem = document.getElementsByClassName('active');
-
+        const activeItem = document.querySelectorAll('[color=primary]');
         e.stopPropagation();
         if (activeItem[0]) {
-          activeItem[0].classList.remove('active');
+          activeItem[0].removeAttribute('color');
         }
 
         const listing = document.getElementById('listing-' + i);
-        listing.classList.add('active');
+        listing.setAttribute('color', 'primary');
       });
 
     });
@@ -108,6 +111,7 @@ export class GlobePage implements OnInit, AfterContentInit {
   flyToMarker(marker: mapboxgl.Marker): void {
     this.map.flyTo({
       center: marker.geometry.coordinates,
+      offset: [0, -100],
       zoom: 14
     });
   }
@@ -118,13 +122,15 @@ export class GlobePage implements OnInit, AfterContentInit {
 
     const popup = new mapboxgl.Popup({closeOnClick: false})
         .setLngLat(currentFeature.geometry.coordinates)
-        .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
-            '<div class="item i_age">Edad: <strong>' + currentFeature.properties.age + '</strong></div>' +
-            '<div class="item i_title">' + currentFeature.properties.title + '</div>' +
-            '<div class="item i_phone">Teléfono: <strong>' + currentFeature.properties.phone + '</strong></div>' +
-            '<div class="item i_more"><a href="' + currentFeature.properties.profile + '" target="_blank">Ver perfil</a>' +
+        .setHTML('<h3>' + currentFeature.properties.title + '</h3>' +
+            '<div>Type: <strong>' + currentFeature.properties.type + '</strong></div>' +
+            '<div>Description: ' + currentFeature.properties.title + '</div>' +
+            '<div>Date: <strong>' + this.formatDate(currentFeature.properties.date) + '</strong></div>' +
+            '<div>Coordinates:' + currentFeature.properties.location + '</div>' +
+            '<div>Owner: '  + currentFeature.properties.owner.name + '</div>' +
+            '<div>Members: ' + currentFeature.properties.members.length + '</div>' +
             // tslint:disable-next-line:max-line-length
-            '<a href="//maps.google.com/?ll=' + currentFeature.properties.lat + ',' + currentFeature.properties.long + '" target="_blank">Abrir mapa</a></div>'
+            '<a href="//google.com/maps/search/' + currentFeature.geometry.coordinates[1] + ',' + currentFeature.geometry.coordinates[0] + '" target="_blank">View in Google Maps</a></div>'
 
         )
         .addTo(this.map);
@@ -152,12 +158,33 @@ export class GlobePage implements OnInit, AfterContentInit {
     this.createPopUp(clickedListing);
 
     // 3. Highlight listing in sidebar (and remove highlight for all other listings)
-    const activeItem = document.getElementsByClassName('active');
+    const activeItem = document.querySelectorAll('[color=primary]');
 
     if (activeItem[0]) {
-      activeItem[0].classList.remove('active');
+      activeItem[0].removeAttribute('color');
     }
-    $event.target.classList.add('active');
+    $event.target.setAttribute('color', 'primary');
   }
 
+  zeroPad(a: number) {
+    const s = a.toString();
+    if (s.length < 2) { return '0' + a; } else { return a; }
+  }
+
+  formatDate(timestamp: Date): string {
+    const date = new Date(timestamp);
+    const monthNames = [
+      'Jan', 'Feb', 'Mar',
+      'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sep', 'Oct',
+      'Nov', 'Dec'
+    ];
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const hour = this.zeroPad(date.getHours());
+    const min = this.zeroPad(date.getMinutes());
+    return day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour + ':' + min;
+  }
 }
