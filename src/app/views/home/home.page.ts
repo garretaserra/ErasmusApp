@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {AlertController, MenuController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {UserService} from '../../models/User/user.service';
@@ -7,15 +7,11 @@ import {User} from '../../models/User/user';
 import {HomeService} from './home.service';
 import {Post} from '../../models/Posts/post';
 import {PostSend} from '../../models/Posts/postSend';
-import {UserProfile} from '../../models/User/userProfile';
-import {UserName} from '../../models/User/userName';
 import {StorageComponent} from "../../storage/storage.component";
 import {PostService} from "../post/post.service";
 import {ChatService} from '../../services/chat.service';
 import {NotificationComponent} from '../../components/notification/notification.component';
-import {error} from 'util';
 import {CheckUser} from '../../models/User/checkUser';
-import {Message} from "../../models/Message/message";
 
 @Component({
   selector: 'app-home',
@@ -29,8 +25,6 @@ export class HomePage implements OnInit {
     user: User;
     postSend: PostSend;
     post: Post;
-    userProfile: UserProfile;
-    userProfileTest: UserProfile;
 
     comment:string;
     postId:string;
@@ -42,7 +36,7 @@ export class HomePage implements OnInit {
     form: FormGroup = new FormGroup({});
     suggestions: String[];
     searchValue: string;
-    private photo: any;
+    photo: any;
 
     constructor(private formBuilder: FormBuilder,
                 private homeService: HomeService,

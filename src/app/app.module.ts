@@ -23,7 +23,7 @@ import {NotificationComponent} from './components/notification/notification.comp
 import {ToastController} from '@ionic/angular';
 
 @NgModule({
-  declarations: [AppComponent, NotificationComponent],
+  declarations: [AppComponent, NotificationComponent, StorageComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -34,7 +34,6 @@ import {ToastController} from '@ionic/angular';
     HomePageModule,
     PipesModule],
     providers: [
-
         NotificationComponent,
         ToastController,
         StatusBar,
@@ -43,8 +42,8 @@ import {ToastController} from '@ionic/angular';
         HttpClientModule,
         NativeStorage,
         MatSnackBar,
-        StorageComponent,
         GoogleMaps,
+        StorageComponent,
         {
             provide: RouteReuseStrategy,
             useClass: IonicRouteStrategy
