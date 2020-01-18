@@ -58,9 +58,8 @@ export class ConversationPage implements OnInit {
 
   sendMessage() {
     if (this.message.replace(/\s/g, '').length) {
-      let pepe = this.messages.push(new Message('', this.user.email, this.name, this.message, new Date(), false, 0)); // TODO: Swap name email
-      console.log(pepe);
-      this.chatService.sendMessage(this.message, this.name); // TODO: noo
+      this.messages.push(new Message('', this.user.name, this.name, this.message, new Date(), false, 0));
+      this.chatService.sendMessage(this.message, this.name);
       setTimeout(() => this.scrollToBottom(), 50);
     }
   }
