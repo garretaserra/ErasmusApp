@@ -77,15 +77,26 @@ export class GlobePage implements OnInit, AfterContentInit {
 
     this.events.features.forEach((marker) => {
       // create a HTML element for each feature
-      const markr = document.createElement('img');
-      markr.className = 'marker';
-      markr.style.width = '20px';
-      markr.src = '../../../assets/icon/flag.svg';
+      const el = document.createElement('img');
+      el.className = 'marker';
+      el.style.width = '20px';
+      el.src = '../../../assets/icon/flag.svg';
       // make a marker for each feature and add to the map
-      new mapboxgl.Marker(markr)
+      new mapboxgl.Marker(el, {offset: [0, -23]})
           .setLngLat(marker.geometry.coordinates)
           .addTo(this.map);
+      el.addEventListener('click', (e) => {
+        // 1. Fly to the point
+        this.flyToMarker(marker);
+      });
+
+    });
+  }
+
+  flyToMarker(marker: mapboxgl.Marker) {
+    this.map.flyTo({
+      center: marker.geometry.coordinates,
+      zoom: 14
     });
   }
 }
-
