@@ -24,17 +24,17 @@
         }
       }
       
-      .yours {
+      .mine {
         align-items: flex-start;
       }
       
-      .yours .message {
+      .mine .message {
         margin-right: 25%;
         background-color: #eee;
         position: relative;
       }
       
-      .yours .message:before {
+      .mine .message:before {
         content: "";
         position: absolute;
         z-index: 0;
@@ -45,7 +45,7 @@
         background: #eee;
         border-bottom-right-radius: 15px;
       }
-      .yours .message:after {
+      .mine .message:after {
         content: "";
         position: absolute;
         z-index: 1;
@@ -57,11 +57,11 @@
         border-bottom-right-radius: 10px;
       }
       
-      .mine {
+      .yours {
         align-items: flex-end;
       }
       
-      .mine .message {
+      .yours .message {
         color: white;
         margin-left: 25%;
         background: #3880ff;
@@ -69,7 +69,7 @@
         position: relative;
       }
       
-      .mine .message:before {
+      .yours .message:before {
         content: "";
         position: absolute;
         z-index: 0;
@@ -82,7 +82,7 @@
         border-bottom-left-radius: 15px;
       }
       
-      .mine .message:after {
+      .yours .message:after {
         content: "";
         position: absolute;
         z-index: 1;

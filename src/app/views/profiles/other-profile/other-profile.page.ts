@@ -57,15 +57,12 @@ export class OtherProfilePage implements OnInit {
   }
   async follow() {
     await this.profileService.follow(this.user._id, this.userProfile._id).subscribe(res => {
-      console.log(res);
-      this.router.navigateByUrl('/profile');
+      this.load();
     });
   }
   async unfollow() {
-    this.profileService.unfollow(this.user._id, this.userProfile._id).subscribe(res => {
-      console.log(res);
-      this.router.navigateByUrl('/profile');
-    });
+    this.profileService.unfollow(this.user._id, this.userProfile._id).toPromise();
+    await this.router.navigateByUrl('/profile');
   }
   async seeMyPosts() {
     await this.router.navigateByUrl('/posts/' + `${this._id}`);

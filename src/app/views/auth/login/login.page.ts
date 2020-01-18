@@ -6,6 +6,7 @@ import {UserLogin} from '../../../models/User/userLogin';
 import {UserService} from '../../../models/User/user.service';
 import {User} from '../../../models/User/user';
 import {StorageComponent} from "../../../storage/storage.component";
+import {ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginPage implements OnInit {
     constructor(
       private authService: AuthService,
       private userService: UserService,
+      public toastController: ToastController,
       private router: Router,
       private formBuilder: FormBuilder,
       public storage: StorageComponent) {
@@ -63,8 +65,14 @@ export class LoginPage implements OnInit {
             await this.storage.saveUser(JSON.stringify(this.user));
             await this.router.navigateByUrl('/home');
         },
-        err => {
-          console.log(err);
+        async err => {
+          const toast = await this.toastController.create({
+            message: 'Bad username or password',
+            position: 'top',
+            duration: 2000,
+            showCloseButton: true, color: 'dark'
+          });
+          await toast.present();
         });
   }
 }

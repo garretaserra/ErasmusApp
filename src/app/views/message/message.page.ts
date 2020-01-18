@@ -38,7 +38,12 @@ export class MessagePage implements OnInit {
       });
       this.friendsService.getUsers(new User(this.storage.getUser())._id).subscribe((list: UserName[]) => {
           this.users = list.filter(item => item.name !== this.user.name);
-      });
+          this.users.forEach( user => {
+            this.userService.getPhoto(user._id).toPromise().then(result => {
+              user.photo = result.photo;
+            })
+          });
+        });
       this.chatService.forceGetList();
       this.chatService.getMessage().subscribe((data: { name, message }) => {
           this.storedMessages.push(new Message('', data.name, this.user.name, data.message, new Date(), false, 0));
