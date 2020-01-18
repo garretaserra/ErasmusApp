@@ -1,0 +1,42 @@
+.image-contain{
+  object-fit: contain;
+  width: 50%;
+  border-radius: 50%;
+  margin: 15px auto auto;
+  border: solid #0cd1e8;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.square-button{
+  width: 40%;
+  height: auto;
+  margin: 5%;
+}
+
+.number{
+  width: 10px;
+  height: 10px;
+  background: red;
+  padding: 6px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -25px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.button-title{
+  margin: 0
+}
+
+.button-icon{
+  font-size: 64px;
+}
+

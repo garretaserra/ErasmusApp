@@ -40,7 +40,6 @@ export class ProfilePage implements OnInit {
       this._id = JSON.parse(this.storage.getUser())._id;
       await this.profileService.getProfile(this._id).subscribe(async res => {
       const response: any = res;
-      console.log(res);
       this.userTest = response.profile;
       this.photo = (await this.userService.getPhoto(this.userTest._id).toPromise()).photo;
     }, error => {console.log('error'); });
@@ -53,5 +52,12 @@ export class ProfilePage implements OnInit {
   }
   async seeMyFollowing() {
     await this.router.navigateByUrl('/myfollowing');
+  }
+
+  sendEmail(email: string) {
+    if(confirm('Estas seguro que quieres enviar un mensaje a '+email)){
+      window.open("mailto:"+email, "_blank");
+    }
+
   }
 }
