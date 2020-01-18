@@ -7,6 +7,8 @@ import {User} from '../../models/User/user';
 import {Event} from '../../models/Event/event';
 import {EventMap} from '../../models/Event/EventMap';
 import {Feature} from '../../models/Event/Feature';
+import {Properties} from '../../models/Event/Properties';
+import {UserName} from '../../models/User/userName';
 
 @Component({
   selector: 'app-globe',
@@ -44,9 +46,9 @@ export class GlobePage implements OnInit, AfterContentInit {
             type: item.type,
             date: item.eventDate,
             location: item.location,
-            owner: item.owner,
-            members: item.members
-          }
+            owner: item.owner as UserName,
+            members: item.members as UserName[]
+          } as Properties
         };
         features.push(feature);
       });
@@ -123,11 +125,11 @@ export class GlobePage implements OnInit, AfterContentInit {
     const popup = new mapboxgl.Popup({closeOnClick: false})
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML('<h3>' + currentFeature.properties.title + '</h3>' +
-            '<div>Type: <strong>' + currentFeature.properties.type + '</strong></div>' +
+            '<div>Type: ' + currentFeature.properties.type + '</div>' +
             '<div>Description: ' + currentFeature.properties.title + '</div>' +
-            '<div>Date: <strong>' + this.formatDate(currentFeature.properties.date) + '</strong></div>' +
-            '<div>Coordinates:' + currentFeature.properties.location + '</div>' +
-            '<div>Owner: '  + currentFeature.properties.owner.name + '</div>' +
+            '<div>Date: ' + this.formatDate(currentFeature.properties.date) + '</div>' +
+            // tslint:disable-next-line:max-line-length
+            '<div>Owner: <a href="/other-profile/' + currentFeature.properties.owner._id + '"> '  + currentFeature.properties.owner.name + '</a></div>' +
             '<div>Members: ' + currentFeature.properties.members.length + '</div>' +
             // tslint:disable-next-line:max-line-length
             '<a href="//google.com/maps/search/' + currentFeature.geometry.coordinates[1] + ',' + currentFeature.geometry.coordinates[0] + '" target="_blank">View in Google Maps</a></div>'
