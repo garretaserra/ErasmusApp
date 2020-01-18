@@ -8,7 +8,6 @@ import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-
 export class ChatService {
   private url = environment.apiUri;
   private socket;
