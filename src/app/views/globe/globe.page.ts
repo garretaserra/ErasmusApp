@@ -88,15 +88,47 @@ export class GlobePage implements OnInit, AfterContentInit {
       el.addEventListener('click', (e) => {
         // 1. Fly to the point
         this.flyToMarker(marker);
+        // 2. Close all other popups and display popup for clicked store
+        this.createPopUp(marker);
       });
 
     });
   }
 
-  flyToMarker(marker: mapboxgl.Marker) {
+  flyToMarker(marker: mapboxgl.Marker): void {
     this.map.flyTo({
       center: marker.geometry.coordinates,
       zoom: 14
     });
   }
+
+  createPopUp(currentFeature: mapboxgl.Marker): void {
+    const popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) { popUps[0].remove(); }
+
+    const popup = new mapboxgl.Popup({closeOnClick: false})
+        .setLngLat(currentFeature.geometry.coordinates)
+        .setHTML('<h3>' + currentFeature.properties.name + '</h3>' +
+            '<div class="item i_age">Edad: <strong>' + currentFeature.properties.age + '</strong></div>' +
+            '<div class="item i_title">' + currentFeature.properties.title + '</div>' +
+            '<div class="item i_phone">Teléfono: <strong>' + currentFeature.properties.phone + '</strong></div>' +
+            '<div class="item i_more"><a href="' + currentFeature.properties.profile + '" target="_blank">Ver perfil</a>' +
+            // tslint:disable-next-line:max-line-length
+            '<a href="//maps.google.com/?ll=' + currentFeature.properties.lat + ',' + currentFeature.properties.long + '" target="_blank">Abrir mapa</a></div>'
+
+        )
+        .addTo(this.map);
+
+    popup.on('close', (e) => {
+      this.flyDownClose();
+    });
+  }
+
+  flyDownClose(): void {
+    this.map.flyTo({
+      center: this.map.center,
+      zoom: 12
+    });
+  }
+
 }
