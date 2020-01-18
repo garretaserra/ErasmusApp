@@ -34,7 +34,8 @@
     </ion-list-header>
     <ion-item *ngFor="let userItem of users" (click)="viewConversation(userItem.name)">
       <ion-avatar slot="start">
-        <img src="../../../assets/img/default_user.png">
+        <img *ngIf="userItem.photo" src="{{userItem.photo}}"/>
+        <img *ngIf="!userItem.photo" src="../../../assets/img/default_user.png"/>
       </ion-avatar>
       <ion-label>
         <h2>{{ userItem.name }}</h2>
