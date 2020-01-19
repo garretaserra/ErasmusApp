@@ -16,8 +16,15 @@
   }
 }
 
-ion-toolbar{
-  margin-left: 5%;
+ion-item.main-content{
+  text-align: center;
+  img{
+    display:block;
+    margin:auto;
+  }
+}
+ion-toolbar.main-content{
+  margin-bottom: 5%;
 }
 
 .margin-right-auto{

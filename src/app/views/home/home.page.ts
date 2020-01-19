@@ -75,7 +75,6 @@ export class HomePage implements OnInit {
             // this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             await this.getActivity().then();
             this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
-            this.getActivity();
             this.chatService.connectSocket(this.user.name);
             this.chatService.getMessage().subscribe((data: {message, email}) => {
                 console.log(data);
@@ -184,10 +183,13 @@ export class HomePage implements OnInit {
         let count = 0;
         this.activity.forEach(x => {
             if (x.type === 'Event') {
-               if (x.members === null) {
+                console.log('owner', x.owner.name);
+
+                if (x.members === null) {
                    this.checklist.push(new CheckUser('no', x._id));
                } else {
                    x.members.forEach(a => {
+                       console.log(a.name);
                        if (a._id === this.user._id) {
                            this.checklist.push(new CheckUser('yes', x._id));
                            count = 1;
@@ -199,6 +201,7 @@ export class HomePage implements OnInit {
                        count = 0;
                    }
                }
+               console.log('separacion');
            }
         });
     }

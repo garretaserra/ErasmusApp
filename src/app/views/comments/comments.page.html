@@ -10,18 +10,18 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-card *ngIf="post">
-        <ion-card-header  color="light">
-          <h2>Owner: {{post.owner.name}}</h2>
-          <h2>Message: {{post.message}}</h2>
+        <ion-card-header color="light" class="ion-text-center">
+         <ion-card-title class="text-center">{{post.message}}</ion-card-title>
+        <ion-card-subtitle class="text-center" style="text-transform: inherit; font-size: 18px">{{post.owner.name}}</ion-card-subtitle>
         </ion-card-header>
-        <ion-list>
-          <ion-card-content *ngFor="let comment of post.comments">
-              <ion-item>
-                <ion-label color="tertiary">Owner: {{comment.owner.name}}</ion-label>
-                <ion-text>{{comment.message}}</ion-text>
-              </ion-item>
+        <ion-card-content *ngFor="let comment of post.comments">
+            <ion-list>
+            <ion-item>
+              <ion-label color="tertiary">{{comment.owner.name}}</ion-label>
+              <ion-text>{{comment.message}}</ion-text>
+            </ion-item>
+            </ion-list>
           </ion-card-content>
-        </ion-list>
       </ion-card>
     </ion-content>
   </div>

@@ -11,7 +11,7 @@
     <ion-content class="ion-padding">
       <form [formGroup]="homeForm">
         <div>
-          <ion-card class="vertical-margin border-top">
+          <ion-card class="vertical-margin ">
             <div>
               <ion-item class="textarea">
                 <ion-textarea name="post" type="post" formControlName="post" placeholder="Write here if is a post and click button, if is a event, only click button." required></ion-textarea>
@@ -26,14 +26,26 @@
             </div>
           </ion-card>
           <div *ngIf="activity">
-            <ion-card color="dark" class="vertical-margin" >
-              <ion-card-title>ACTIVITY</ion-card-title>
+            <ion-card color="light" class="vertical-margin" >
+              <ion-card-title class="ion-text-center">ACTIVITY</ion-card-title>
               <div *ngFor="let thing of activity">
                 <ion-card color="medium">
                   <ion-card-content  *ngIf="thing.type == 'Post';else other_content">
-                    <ion-toolbar color="medium">
-                      {{thing.owner.name}}:{{thing.message}}
+                    <ion-toolbar class="main-content" color="light">
+                      <ion-item color="light" class="main-content">
+                      <ion-avatar >
+                        <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}"/>
+                      </ion-avatar>
+                        <ion-label>
+                          <h3>{{thing.owner.name}}</h3>
+                        </ion-label>
+                      </ion-item>
                     </ion-toolbar>
+                    <ion-item >
+                      <ion-label class="ion-text-center">
+                      <h4>{{thing.message}}</h4>
+                      </ion-label>
+                    </ion-item>
                     <ion-item color="light">
                       <ion-col class="send_form_input">
                         <ion-textarea #box placeholder="Write a comment..."
@@ -41,15 +53,11 @@
                         </ion-textarea>
                       </ion-col>
                     </ion-item>
-                    <ion-item color="light">
-                      <ion-col class="send_form_button">
+                    <ion-item color="medium">
                         <ion-button (click)="onEnter(box.value,thing._id); box.value = '' ">Comment
-                          <ion-icon slot="end" name="send" size="large"></ion-icon>
+                          <ion-icon slot="start" name="send" size="large"></ion-icon>
                         </ion-button>
-                      </ion-col>
-                    </ion-item>
-                    <ion-item>
-                      <ion-button color="dark" slot="end" (click)="changePageComments(thing._id)" >View all comments {{'('+thing.comments.length+')'}}</ion-button>
+                        <ion-button color="secondary" slot="end" (click)="changePageComments(thing._id)" >View all comments {{'('+thing.comments.length+')'}}</ion-button>
                     </ion-item>
                   </ion-card-content>
                 </ion-card>
@@ -57,14 +65,27 @@
                   <div *ngIf="thing.owner.name == this.user.name; else other_person">
                   <ion-card color="light">
                       <ion-card-content>
-                        <ion-toolbar color="light">
-                          {{thing.owner.name}}:{{thing.description}}
+                        <ion-toolbar class="main-content" color="medium">
+                          <ion-item color="medium">
+                            <ion-avatar slot="start">
+                              <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}" />
+                            </ion-avatar>
+                            <ion-label>
+                              <h3>{{thing.owner.name}}</h3>
+                            </ion-label>
+                          </ion-item>
+                        </ion-toolbar>
+                        <ion-item >
+                          <ion-label class="ion-text-center">
+                            <h4>{{thing.description}}</h4>
+                          </ion-label>
+                        </ion-item>
+                        <ion-toolbar color="light" class="ion-text-center">
+
+                          <h4><ion-icon name="pin"></ion-icon> Location: {{thing.location}}</h4>
                         </ion-toolbar>
                         <ion-toolbar color="light">
-                          Location:{{thing.location}}
-                        </ion-toolbar>
-                        <ion-toolbar color="light">
-                          <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
+                          <ion-button color="secondary" class="middle-card" size="small" (click)="seeEvent(thing._id)" >See event</ion-button>
                         </ion-toolbar>
                       </ion-card-content>
                     </ion-card>
@@ -73,34 +94,59 @@
                     <div *ngFor="let user of checklist">
                       <div *ngIf="user.idEvent === thing._id">
                         <div *ngIf="user.check === 'yes'; else other_thing" >
-                          <ion-card color="medium">
+                          <ion-card color="light">
                             <ion-card-content>
-                              <ion-toolbar color="medium">
-                                {{thing.owner.name}}:{{thing.description}}
+                              <ion-toolbar class="main-content" color="medium">
+                                <ion-item color="medium">
+                                  <ion-avatar slot="start">
+                                    <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}"/>
+                                  </ion-avatar>
+                                  <ion-label>
+                                    <h3>{{thing.owner.name}}</h3>
+                                  </ion-label>
+                                </ion-item>
                               </ion-toolbar>
-                              <ion-toolbar color="medium">
-                                Location:{{thing.location}}
+                              <ion-item>
+                                <ion-label class="ion-text-center">
+                                  <h4>{{thing.description}}</h4>
+                                </ion-label>
+                              </ion-item>
+                              <ion-toolbar color="light" class="ion-text-center">
+                                <h4><ion-icon name="pin"></ion-icon> Location: {{thing.location}}</h4>
                               </ion-toolbar>
-                              <ion-toolbar color="medium">
-                                <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
-                                <ion-button color="dark" (click)="leave(thing._id)" slot="end">Leave</ion-button>
+                              <ion-toolbar color="light">
+                                <ion-button color="secondary" size="small" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
+                                <ion-button color="secondary" size="small" (click)="leave(thing._id)" slot="end">Leave</ion-button>
                               </ion-toolbar>
                             </ion-card-content>
                           </ion-card>
                         </div>
                       </div>
                       <ng-template #other_thing>
-                        <ion-card color="medium">
+                        <ion-card color="light">
                           <ion-card-content>
-                            <ion-toolbar color="medium">
-                              {{thing.owner.name}}:{{thing.description}}
+                            <ion-toolbar class="main-content" color="medium">
+                              <ion-item color="medium">
+                                <ion-avatar slot="start">
+                                  <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}"/>
+                                </ion-avatar>
+                                <ion-label>
+                                  <h3>{{thing.owner.name}}</h3>
+                                </ion-label>
+                              </ion-item>
                             </ion-toolbar>
-                            <ion-toolbar color="medium">
-                              Location:{{thing.location}}
+                            <ion-item >
+                              <ion-label class="ion-text-center">
+                                <h4>{{thing.description}}</h4>
+                              </ion-label>
+                            </ion-item>
+                            <ion-toolbar color="light" class="ion-text-center">
+
+                              <h4><ion-icon name="pin"></ion-icon> Location: {{thing.location}}</h4>
                             </ion-toolbar>
-                            <ion-toolbar color="medium">
-                              <ion-button color="dark" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
-                              <ion-button color="dark" (click)="asistir(thing._id)" slot="end">Attend</ion-button>
+                            <ion-toolbar color="light">
+                              <ion-button color="secondary" size="small" (click)="seeEvent(thing._id)" slot="start">See event</ion-button>
+                              <ion-button color="secondary" size="small" (click)="asistir(thing._id)" slot="end">Attend</ion-button>
                             </ion-toolbar>
                           </ion-card-content>
                         </ion-card>

@@ -28,7 +28,10 @@ export class MypostsPage implements OnInit {
   async ngOnInit() {
     this.load();
   }
-  async load() {
+  async ionViewDidEnter() {
+      this.load();
+  }
+        async load() {
       console.log('loading');
       this.user = JSON.parse(this.storage.getUser());
       console.log('this user', this.user);
@@ -58,4 +61,7 @@ export class MypostsPage implements OnInit {
       alert.present();
     });
   }
+    async changePageComments(idPost) {
+        await this.router.navigateByUrl('/comments/' + `${idPost}`);
+    }
 }

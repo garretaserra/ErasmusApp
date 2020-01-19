@@ -10,22 +10,22 @@
     </ion-header>
     <ion-content class="ion-padding">
         <div *ngIf="event">
-          <ion-card class="vertical-margin border-top" color="light" >
+          <ion-card class="vertical-margin border-top" color="medium">
             <ion-card-content>
-              <ion-toolbar>
-                {{event.description}}
+              <ion-toolbar class="ion-text-center" color="light">
+                <h2><strong>{{event.description}}</strong></h2>
               </ion-toolbar>
-              <ion-toolbar>
-                {{event.location}}
+              <ion-toolbar class="ion-text-center" color="light">
+                <ion-icon name="pin"></ion-icon>{{event.location}}
               </ion-toolbar>
-              <ion-toolbar>
+              <ion-toolbar class="ion-text-center" color="light">
                 {{event.eventDate}}
               </ion-toolbar>
-              <ion-card >
-                <ion-card-title>Members</ion-card-title>
+              <ion-card color="light">
+                <ion-card-title class="ion-text-center"> Members</ion-card-title>
                 <div *ngFor="let user of this.event.members">
                 <ion-card-content>
-                  <ion-toolbar>
+                  <ion-toolbar class="ion-text-center">
                     {{user.name}}
                   </ion-toolbar>
                 </ion-card-content>
