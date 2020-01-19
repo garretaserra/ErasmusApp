@@ -1,17 +1,17 @@
 export class UserErasmus {
     age: string;
-    lprocedencia: string;
-    uniprocedencia: string;
-    curso: string;
-    ldestino: string;
-    unidestino: string;
+    course: string;
+    homeCountry: string;
+    homeUniversity: string;
+    destCountry: string;
+    destUniversity: string;
 
-    constructor( age = '', lprocendencia = '', uniprocedencia = '', curso = '', ldestino = '', unidestino = '') {
-       this.age = age;
-       this.lprocedencia = lprocendencia;
-       this.uniprocedencia = uniprocedencia;
-       this.curso = curso;
-       this.ldestino = ldestino;
-       this.unidestino = unidestino;
+    constructor(age: string, course: string, homeCountry: string, homeUniversity: string, destCountry: string, destUniversity: string) {
+        this.age = age;
+        this.course = course;
+        this.homeCountry = homeCountry;
+        this.homeUniversity = homeUniversity;
+        this.destCountry = destCountry;
+        this.destUniversity = destUniversity;
     }
 }

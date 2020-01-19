@@ -18,6 +18,14 @@ export class DatosErasmusPage implements OnInit {
 
   erasmusForm: FormGroup;
   user: User;
+  homeCountry: string;
+  homeUniversity: string;
+  destCountry: string;
+  destUniversity: string;
+  countries: string[];
+  languages: string[];
+  selectedCountry: string;
+  selectedLanguages: string[];
 
   constructor(private formBuilder: FormBuilder,
               private erasmusService: DatosErasmusService,
@@ -30,13 +38,26 @@ export class DatosErasmusPage implements OnInit {
   ngOnInit() {
     this.erasmusForm = this.formBuilder.group({
       age: new FormControl(),
-      procedencia: new FormControl(),
-      universidad: new FormControl(),
-      curso: new FormControl(),
-      destino: new FormControl(),
-      universidadDestino: new FormControl()
+      course: new FormControl(),
+      languages: new FormControl(),
+      country: new FormControl()
     });
+
+    this.countries = [
+        'Spain',
+        'France',
+        'Italy',
+        'Germany',
+    ];
+
+    this.languages = [
+      'Spanish',
+      'French',
+      'Italian',
+      'German',
+    ];
   }
+
   async ionViewDidEnter() {
     let storageUser = this.storage.getUser();
 
@@ -50,8 +71,17 @@ export class DatosErasmusPage implements OnInit {
     }
   }
   async add() {
-    this.erasmusService.sendInformation(new UserErasmus(this.erasmusForm.controls.age.value, this.erasmusForm.controls.procedencia.value,
-        this.erasmusForm.controls.universidad.value, this.erasmusForm.controls.curso.value, this.erasmusForm.controls.destino.value,
-        this.erasmusForm.controls.universidadDestino.value));
+    console.log("Selected country: "+this.erasmusForm.controls.country.value);
+    console.log("Selected Languages: "+this.erasmusForm.controls.languages.value);
+    this.homeUniversity = "UPC Barcelona";
+    this.homeCountry = "Catalunya";
+    this.destUniversity = "UP Berlin";
+    this.destCountry = "Alemania";
+    await this.erasmusService.sendInformation(this.user._id, new UserErasmus(this.erasmusForm.controls.age.value,
+        this.erasmusForm.controls.course.value,
+        this.homeCountry,
+        this.homeUniversity,
+        this.destCountry,
+        this.destUniversity)).subscribe(res => console.log(res));
   }
 }

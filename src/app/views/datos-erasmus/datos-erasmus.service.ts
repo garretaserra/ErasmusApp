@@ -13,11 +13,9 @@ export class DatosErasmusService {
 
   DATOS_SERVER_ADDRESS = environment.apiUri;
   homeSubject = new BehaviorSubject(false);
-
-  activity: Post[];
-
   constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-  sendInformation(userErasmus: UserErasmus) {
+  sendInformation(userId:string, userErasmus: UserErasmus) {
+    return this.httpClient.put<any>(`${this.DATOS_SERVER_ADDRESS}/user/erasmusInfo/` + `${userId}`, {info:userErasmus}, {observe: 'response'});
   }
 }

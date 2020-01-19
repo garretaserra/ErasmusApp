@@ -12,26 +12,24 @@
       <form [formGroup]="erasmusForm">
       <div>
           <ion-card class="vertical-margin border-top">
-            <div>
               <ion-item class="textarea">
-                <ion-textarea name="age" type="age" formControlName="age" placeholder="Edad" required></ion-textarea>
+                <ion-textarea name="age" type="text" formControlName="age" placeholder="Edad" required></ion-textarea>
               </ion-item>
               <ion-item class="textarea">
-                <ion-textarea name="procedencia" type="procedencia" formControlName="procedencia" placeholder="Lugar de procedencia." required></ion-textarea>
+                <ion-textarea name="course" type="text" formControlName="course" placeholder="Curso actua." required></ion-textarea>
               </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="universidad" type="universidad" formControlName="universidad" placeholder="Universidad actual." required></ion-textarea>
+              <ion-item>
+                <ion-label>Country</ion-label>
+                <ion-select formControlName="country" multiple="false" cancelText="Nah" okText="Okay!">
+                  <ion-select-option *ngFor="let country of countries">{{country.valueOf()}}</ion-select-option>
+                </ion-select>
               </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="curso" type="curso" formControlName="curso" placeholder="Curso actual." required></ion-textarea>
+              <ion-item>
+                <ion-label>Languages</ion-label>
+                <ion-select formControlName="languages" multiple="true" cancelText="Nah" okText="Okay!">
+                  <ion-select-option *ngFor="let language of languages">{{language.valueOf()}}</ion-select-option>
+                </ion-select>
               </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="destino" type="destino" formControlName="destino" placeholder="Lugar de destino." required></ion-textarea>
-              </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="universidadDestino" type="universidadDestino" formControlName="universidadDestino" placeholder="Universidad de destino." required></ion-textarea>
-              </ion-item>
-            </div>
             <div>
                   <ion-button (click)="add()" color="medium" expand="block">Add</ion-button>
             </div>
