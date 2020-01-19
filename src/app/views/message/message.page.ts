@@ -45,8 +45,8 @@ export class MessagePage implements OnInit {
           });
         });
       this.chatService.forceGetList();
-      this.chatService.getMessage().subscribe((data: { name, message }) => {
-          this.storedMessages.push(new Message('', data.name, this.user.name, data.message, new Date(), false, 0));
+      this.chatService.getMessage().subscribe((data: { email, message }) => {
+          this.storedMessages.push(new Message('', data.email, this.user.name, data.message, new Date(), false, 0));
       });
   }
 
