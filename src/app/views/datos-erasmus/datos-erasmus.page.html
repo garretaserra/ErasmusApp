@@ -5,10 +5,11 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title slot="start">Datos erasmus</ion-title>
+        <ion-title slot="start">Erasmus Info</ion-title>
       </ion-toolbar>
+        <ion-text class="toolbar-buttons">Hi! To enjoy the full experience of Erasmus, you should fill these fields to improve people search...</ion-text>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content>
       <form [formGroup]="erasmusForm">
         <div>
           <ion-card class="vertical-margin border-top">
@@ -20,22 +21,31 @@
               </ion-item>
               <ion-item>
                 <ion-label>Home University</ion-label>
-                <ion-select formControlName="homeUniversity" multiple="false" cancelText="Cancel" okText="Okay!" required>
+                <ion-select [interfaceOptions]="customAlertHomeOptions" interface="alert" class="ion-text-lg-wrap" formControlName="homeUniversity"
+                            multiple="false" cancelText="Cancel" okText="Okay!" required placeholder="Select One">
                   <ion-select-option *ngFor="let university of universities">{{university.name+','+university.country}}</ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
                   <ion-label>Destination University</ion-label>
-                  <ion-select formControlName="destUniversity" multiple="false" cancelText="Cancel" okText="Okay!" required>
-                      <div *ngFor="let university of universities">
-                          <ion-select-option *ngIf="university.name!==this.homeUniversity">{{university.name+','+university.country}}</ion-select-option>
+                  <ion-select [interfaceOptions]="customAlertDestOptions" interface="alert" class="ion-text-lg-wrap" formControlName="destUniversity"
+                              multiple="false" cancelText="Cancel" okText="Okay!" placeholder="Select One">
+                      <div *ngIf="homeUniversity;else noHomeUniversity">
+                          <div *ngFor="let university of universities">
+                              <ion-select-option *ngIf="university.name!==this.homeUniversity" >
+                                  {{university.name}}
+                              </ion-select-option>
+                          </div>
                       </div>
+                      <ng-template #noHomeUniversity>
+                          <ion-text>Select first home university</ion-text>
+                      </ng-template>
                   </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label>Languages</ion-label>
-                <ion-select formControlName="languages" multiple="true" cancelText="Nah" okText="Okay!">
-                  <ion-select-option *ngFor="let language of languages">{{language.valueOf()}}</ion-select-option>
+                <ion-select formControlName="languages" multiple="true" cancelText="Cancel" okText="Okay!" required>
+                  <ion-select-option *ngFor="let language of languages">{{language}}</ion-select-option>
                 </ion-select>
               </ion-item>
             <div>

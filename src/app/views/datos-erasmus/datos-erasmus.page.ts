@@ -19,13 +19,27 @@ import {Language} from "../../models/language";
 
 export class DatosErasmusPage implements OnInit {
 
+
   erasmusForm: FormGroup;
   user: User;
   homeUniversity: string;
   destUniversity: string;
-  destCountry: string;
   languages: string[];
   universities: any[];
+
+  customAlertHomeOptions: any = {
+    header: 'Home university',
+    subHeader: 'Select your home university',
+    message: '',
+    translucent: true
+  };
+
+  customAlertDestOptions: any = {
+    header: 'Destination university',
+    subHeader: 'Select your destination university',
+    message: 'It is not mandatory if you are not abroad yet!',
+    translucent: true
+  };
 
   constructor(private formBuilder: FormBuilder,
               private erasmusService: DatosErasmusService,
@@ -43,23 +57,14 @@ export class DatosErasmusPage implements OnInit {
       destUniversity: new FormControl(),
       languages: new FormControl()
     });
-    await this.erasmusService.getUniversities().subscribe(res => {
-          this.universities = res.universities;
-          console.log(this.universities);
-        }
-    );
-    this.languages = [
-      'Spanish',
-      'French',
-      'Italian',
-      'German',
-      'English'
-    ];
-
-    this.onChanges();
+    this.load();
   }
 
   async ionViewDidEnter() {
+    this.load();
+  }
+
+  async load() {
     let storageUser = this.storage.getUser();
 
     if (!storageUser) {
@@ -71,17 +76,33 @@ export class DatosErasmusPage implements OnInit {
       await this.storage.saveUser(storageUser);
     }
 
+    await this.erasmusService.getUniversities().subscribe(res => {
+          this.universities = res.universities;
+        }
+    );
+
+    this.languages = [
+      'Spanish',
+      'French',
+      'Italian',
+      'German',
+      'English'
+    ];
+
     this.onChanges();
   }
 
   async add() {
     this.languages = this.erasmusForm.controls.languages.value;
-    console.log(this.languages);
-        //.split(',').forEach(language => {console.log(language)});
+    let spokenLanguages = [];
+    this.languages.forEach(language => {spokenLanguages.push(new Language(language))});
+    console.log(spokenLanguages);
+    if(this.erasmusForm.controls.destUniversity.value) this.destUniversity = this.erasmusForm.controls.destUniversity.value.split(',')[0];
     await this.erasmusService.sendInformation(this.user._id, new UserErasmus(this.erasmusForm.controls.age.value,
         this.erasmusForm.controls.course.value,
         this.homeUniversity,
-        this.destUniversity)).subscribe(res => console.log(res));
+        this.destUniversity,
+        spokenLanguages)).subscribe(res => console.log(res));
   }
 
   onChanges(): void {

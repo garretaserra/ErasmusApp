@@ -81,7 +81,7 @@ const routes: Routes = [
     loadChildren: () => import('./views/profile-event/profile-event.module').then( m => m.ProfileEventPageModule)
   },
   {
-    path: 'datos-erasmus',
+    path: 'erasmus-info',
     loadChildren: () => import('./views/datos-erasmus/datos-erasmus.module').then( m => m.DatosErasmusPageModule)
   },
   {

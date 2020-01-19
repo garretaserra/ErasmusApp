@@ -1,7 +1,7 @@
 export class Language {
     name: string;
 
-    constructor(key = '') {
+    constructor(name: string) {
         this.name = name;
     }
 }
