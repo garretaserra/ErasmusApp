@@ -16,6 +16,6 @@ export class NotificationsService {
   constructor(private http: HttpClient, public storage: StorageComponent) { }
 
   public getNotifications() {
-    return this.http.get<Notification[]>(`${this.url}/user/notifications/${this.user.email}`);
+    return this.http.get<Notification[]>(`${this.url}/user/notifications/${this.user.name}`);
   }
 }
