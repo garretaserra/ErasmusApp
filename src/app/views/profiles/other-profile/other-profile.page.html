@@ -24,40 +24,64 @@
       <div style="width: 100%">
         <ion-button class="square-button" (click)="seeMyPosts()">
           <div>
-            <i class="material-icons button-icon">post_add</i>
-            <h3 class="button-title">Posts</h3>
-          </div>
-          <div class="number">
-            {{otherUserProfile.posts}}
+            <div style="display: flex">
+              <div>
+                <i style="margin-right: -15%" class="material-icons button-icon">post_add</i>
+              </div>
+              <div class="number">
+                {{otherUserProfile.posts}}
+              </div>
+            </div>
+            <div>
+              <h3 class="button-title">Posts</h3>
+            </div>
           </div>
         </ion-button>
         <ion-button class="square-button" (click)="seeMyPosts()">
           <div>
-            <i class="material-icons button-icon">event</i>
-            <h3 class="button-title">Events</h3>
-          </div>
-          <div class="number">
-            {{otherUserProfile.events}}
+            <div style="display: flex">
+              <div>
+                <i class="material-icons button-icon">event</i>
+              </div>
+              <div class="number">
+                {{otherUserProfile.events}}
+              </div>
+            </div>
+            <div>
+              <h3 class="button-title">Events</h3>
+            </div>
           </div>
         </ion-button>
       </div>
       <div style="width: 100%">
         <ion-button class="square-button" (click)="seeMyFollowers()">
           <div>
-            <i class="material-icons button-icon">people_alt</i>
-            <h3 class="button-title">Followers</h3>
-          </div>
-          <div class="number">
-            {{otherUserProfile.followers}}
+            <div style="display: flex">
+              <div>
+                <i class="material-icons button-icon">people_alt</i>
+              </div>
+              <div class="number">
+                {{otherUserProfile.followers}}
+              </div>
+            </div>
+            <div>
+              <h3 class="button-title">Followers</h3>
+            </div>
           </div>
         </ion-button>
         <ion-button class="square-button" (click)="seeMyFollowing()">
           <div>
-            <i class="material-icons button-icon">group_add</i>
-            <h3 class="button-title">Following</h3>
-          </div>
-          <div class="number">
-            {{otherUserProfile.following}}
+            <div style="display: flex">
+              <div>
+                <i class="material-icons button-icon">group_add</i>
+              </div>
+              <div class="number">
+                {{otherUserProfile.following}}
+              </div>
+            </div>
+            <div>
+              <h3 class="button-title">Following</h3>
+            </div>
           </div>
         </ion-button>
       </div>
