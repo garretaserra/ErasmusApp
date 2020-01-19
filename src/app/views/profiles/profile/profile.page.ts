@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
 import {FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,16 +17,16 @@ export class ProfilePage implements OnInit {
 
   posts: Post[];
   photo: string;
-  userProfile: UserProfile;
   userTest: UserProfile;
   _id: string;
-  profileForm: FormGroup;
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
               public menuCtrl: MenuController,
               public storage: StorageComponent,
-              private profileService: ProfileService) { }
+              private profileService: ProfileService
+  ) { }
+
   async ngOnInit() {
     await this.load();
   }
@@ -58,6 +57,15 @@ export class ProfilePage implements OnInit {
     if(confirm('Estas seguro que quieres enviar un mensaje a '+email)){
       window.open("mailto:"+email, "_blank");
     }
+  }
 
+  async processPhoto(imageInput: HTMLInputElement) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', async (event: any) => {
+      this.photo = event.target.result;
+      await this.userService.editPhoto(event.target.result, this.userTest._id).toPromise();
+    });
+    reader.readAsDataURL(file);
   }
 }
