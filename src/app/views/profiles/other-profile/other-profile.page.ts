@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User/user';
-import {FormGroup} from '@angular/forms';
 import {UserService} from '../../../models/User/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
@@ -75,7 +74,6 @@ export class OtherProfilePage implements OnInit {
   }
   checkFol() {
     this.followcheck = this.profileService.checkFollow(this.followers, this.user._id);
-    console.log('followcheck: ', this.followcheck);
     if (this.followcheck === 'not') {
       this.following = false;
     } else { this.following = true; }
