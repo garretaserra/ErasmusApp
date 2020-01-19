@@ -9,38 +9,76 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen="">
-  <ion-card class="vertical-margin">
-    <div style="background: #e44d3a; height: 50%">
+  <ion-card class="vertical-margin" style="height: 90vh">
+    <div style="height: 200px">
       <div class="personal-icon">
         <img *ngIf="photo" class="image-contain" src="{{photo}}" style="width: 200px; height: 200px;"/>
         <img *ngIf="!photo" class="image-contain" src="../../../assets/img/default_user.png" style="width: 200px; height: 200px;"/>
       </div>
     </div>
     <ion-card-header *ngIf="otherUserProfile">
-      <ion-card-subtitle>{{otherUserProfile.email}}</ion-card-subtitle>
-      <ion-card-title>{{otherUserProfile.name}}</ion-card-title>
+      <ion-card-title class="text-center">{{otherUserProfile.name}}</ion-card-title>
+      <ion-card-subtitle class="text-center" style="text-transform: inherit; font-size: 18px" (click)="sendEmail(otherUserProfile.email)">{{otherUserProfile.email}}</ion-card-subtitle>
     </ion-card-header>
-  </ion-card>
-  <ion-card class="vertical-margin">
-    <ion-card-content *ngIf="otherUserProfile">
-      <div *ngIf="following">
-      <ion-toolbar color="primary">
-        <ion-button (click)="seeMyPosts()">Posts: {{otherUserProfile.posts}}</ion-button>
-      </ion-toolbar>
-      <ion-toolbar color="secondary">
-        <ion-button (click)="seeMyFollowers()">Followers: {{otherUserProfile.followers}}</ion-button>
-      </ion-toolbar>
-      <ion-toolbar color="tertiary">
-        <ion-button (click)="seeMyFollowing()">Following: {{otherUserProfile.following}}</ion-button>
-      </ion-toolbar>
+    <div *ngIf="otherUserProfile&&following" class="vertical-margin">
+      <div style="width: 100%">
+        <ion-button class="square-button" (click)="seeMyPosts()">
+          <div>
+            <i class="material-icons button-icon">post_add</i>
+            <h3 class="button-title">Posts</h3>
+          </div>
+          <div class="number">
+            {{otherUserProfile.posts}}
+          </div>
+        </ion-button>
+        <ion-button class="square-button" (click)="seeMyPosts()">
+          <div>
+            <i class="material-icons button-icon">event</i>
+            <h3 class="button-title">Events</h3>
+          </div>
+          <div class="number">
+            {{otherUserProfile.events}}
+          </div>
+        </ion-button>
       </div>
-      <ion-toolbar color="primary">
-        <ion-button size="large" color="tertiary" (click)="follow()" [disabled]="following" expand="block">Follow</ion-button>
-      </ion-toolbar>
-      <ion-toolbar color="secondary">
-        <ion-button size="large" color="tertiary" (click)="unfollow()" [disabled]="!following" expand="block">UnFollow</ion-button>
-      </ion-toolbar>
-    </ion-card-content>
+      <div style="width: 100%">
+        <ion-button class="square-button" (click)="seeMyFollowers()">
+          <div>
+            <i class="material-icons button-icon">people_alt</i>
+            <h3 class="button-title">Followers</h3>
+          </div>
+          <div class="number">
+            {{otherUserProfile.followers}}
+          </div>
+        </ion-button>
+        <ion-button class="square-button" (click)="seeMyFollowing()">
+          <div>
+            <i class="material-icons button-icon">group_add</i>
+            <h3 class="button-title">Following</h3>
+          </div>
+          <div class="number">
+            {{otherUserProfile.following}}
+          </div>
+        </ion-button>
+      </div>
+    </div>
+<!--  User is not being followed-->
+    <div *ngIf="!following" style="display: flex; height: 50vh">
+      <ion-button class="square-button" style="margin: auto" (click)="follow()">
+        <div>
+          <i class="material-icons button-icon">person_add</i>
+          <h3 class="button-title">Follow</h3>
+        </div>
+      </ion-button>
+    </div>
+    <div *ngIf="following" style="display: flex">
+      <ion-button class="square-button" style="margin: 20px auto" (click)="unfollow()">
+        <div>
+          <i class="material-icons button-icon">person_add_disabled</i>
+          <h3 class="button-title">Unfollow</h3>
+        </div>
+      </ion-button>
+    </div>
   </ion-card>
 </ion-content>
   </div>

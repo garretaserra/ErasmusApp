@@ -62,7 +62,7 @@ export class OtherProfilePage implements OnInit {
   }
   async unfollow() {
     this.profileService.unfollow(this.user._id, this.userProfile._id).toPromise();
-    await this.router.navigateByUrl('/profile');
+    this.following = false;
   }
   async seeMyPosts() {
     await this.router.navigateByUrl('/posts/' + `${this._id}`);
@@ -79,5 +79,11 @@ export class OtherProfilePage implements OnInit {
     if (this.followcheck === 'not') {
       this.following = false;
     } else { this.following = true; }
+  }
+
+  sendEmail(email: string) {
+    if(confirm('Estas seguro que quieres enviar un mensaje a '+email)){
+      window.open("mailto:"+email, "_blank");
+    }
   }
 }
