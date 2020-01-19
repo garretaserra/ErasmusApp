@@ -8,8 +8,18 @@ import {NavController, ToastController} from '@ionic/angular';
 })
 export class NotificationComponent implements OnInit {
 
+  sound: HTMLAudioElement;
+  innerSound: HTMLAudioElement;
+
   constructor(public toastController: ToastController,
-              public navCtrl: NavController) {}
+              public navCtrl: NavController) {
+    this.sound = new Audio();
+    this.sound.src = '../../../assets/sounds/when.mp3';
+    this.sound.load();
+    this.innerSound = new Audio();
+    this.innerSound.src = '../../../assets/sounds/clearly.mp3';
+    this.innerSound.load();
+  }
 
   ngOnInit() {}
 
@@ -21,11 +31,16 @@ export class NotificationComponent implements OnInit {
       showCloseButton: true,
       closeButtonText: 'Show'
     });
-    toast.present().catch((err) => console.log(err));
+    toast.present().then(() => this.sound.play()).catch((err) => console.log(err));
     toast.onDidDismiss().then((arg) => {
       if (arg.role === 'cancel') {
         this.navCtrl.navigateForward(goToUrl);
       }
     });
   }
+
+  public playInnerSound() {
+    this.innerSound.play().catch((err) => console.log(err));
+  }
+
 }

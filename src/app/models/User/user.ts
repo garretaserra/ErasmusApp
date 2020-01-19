@@ -11,10 +11,8 @@ export class User {
     profilePhoto: string;
     followers: UserName[]; // Gente que me sigue a mí
     following: UserName[]; // Gente a la que yo sigo
-    posts: Post[];
-    activity: Post[];
 
-    constructor( jwt = '', _id = '', email = '', pass = '', name = '', profilePhoto = '', followers = null, following = null, posts = null, activity = null) {
+    constructor( jwt = '', _id = '', email = '', pass = '', name = '', profilePhoto = '', followers = null, following = null) {
         this._id = _id;
         this.email = email;
         this.password = pass;
@@ -22,8 +20,6 @@ export class User {
         this.profilePhoto = profilePhoto;
         this.followers = followers;
         this.following = following;
-        this.posts = posts;
-        this.activity = activity;
         this.jwt=jwt;
     }
 }

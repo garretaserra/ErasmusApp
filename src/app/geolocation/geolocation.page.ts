@@ -10,7 +10,9 @@ export class GeolocationPage implements OnInit, AfterContentInit {
   latitude: any;
   longitude: any;
   @ViewChild('mapElement', {static: false}) mapNativeElement: ElementRef;
-  constructor(private geolocation: Geolocation) { }
+  constructor(
+      // private geolocation: Geolocation
+  ) { }
 
   ngOnInit() {
   }

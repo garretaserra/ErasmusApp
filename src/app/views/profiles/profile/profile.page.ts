@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
 import {FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -17,25 +16,31 @@ import {StorageComponent} from "../../../storage/storage.component";
 export class ProfilePage implements OnInit {
 
   posts: Post[];
-  userProfile: UserProfile;
+  photo: string;
   userTest: UserProfile;
   _id: string;
-  profileForm: FormGroup;
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
               public menuCtrl: MenuController,
               public storage: StorageComponent,
-              private profileService: ProfileService) { }
+              private profileService: ProfileService
+  ) { }
+
   async ngOnInit() {
     await this.load();
   }
+
+  async ionViewEnter(){
+    await this.load();
+  }
+
   async load() {
       this._id = JSON.parse(this.storage.getUser())._id;
-      await this.profileService.getProfile(this._id).subscribe(res => {
+      await this.profileService.getProfile(this._id).subscribe(async res => {
       const response: any = res;
-      console.log(res);
       this.userTest = response.profile;
+      this.photo = (await this.userService.getPhoto(this.userTest._id).toPromise()).photo;
     }, error => {console.log('error'); });
   }
   async seeMyPosts() {
@@ -46,5 +51,21 @@ export class ProfilePage implements OnInit {
   }
   async seeMyFollowing() {
     await this.router.navigateByUrl('/myfollowing');
+  }
+
+  sendEmail(email: string) {
+    if(confirm('Estas seguro que quieres enviar un mensaje a '+email)){
+      window.open("mailto:"+email, "_blank");
+    }
+  }
+
+  async processPhoto(imageInput: HTMLInputElement) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', async (event: any) => {
+      this.photo = event.target.result;
+      await this.userService.editPhoto(event.target.result, this.userTest._id).toPromise();
+    });
+    reader.readAsDataURL(file);
   }
 }

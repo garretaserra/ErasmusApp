@@ -5,6 +5,8 @@ import {Form, FormBuilder, FormControl, FormGroup, Validators} from '@angular/fo
 import {UserRegister} from '../../../models/User/userRegister';
 import {User} from '../../../models/User/user';
 import {UserService} from '../../../models/User/user.service';
+import {environment} from "../../../../environments/environment";
+import {ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,13 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   validation_messages: any;
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(
+      private authService: AuthService,
+      private userService: UserService,
+      private router: Router,
+      private formBuilder: FormBuilder,
+      public toastController: ToastController
+  ) {
     this.registerForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -40,6 +48,7 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("ENVironment:"+ environment.apiUri);
     this.validation_messages = {
       name: [
         { type: 'required', message: 'Campo obligatorio' },
@@ -77,7 +86,6 @@ export class RegisterPage implements OnInit {
         return { emailNotValid: true };
       }
     }, 2000);
-
   }
 
   password(formGroup: FormGroup) {
@@ -88,14 +96,22 @@ export class RegisterPage implements OnInit {
 
   register() {
     const user = new UserRegister(this.registerForm.controls.email.value,
-        this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
-    console.log(user);
-    this.authService.register(user).subscribe(res => {
-          console.log(res);
-          this.router.navigateByUrl('/home');
-        },
-        err => {
-          console.log(err);
-        });
+      this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
+      this.authService.register(user).subscribe(res => {
+        console.log(res);
+        this.router.navigateByUrl('/home');
+      },
+      async err => {
+        console.log(err);
+        if(err.error.message == 'Existent User'){
+          const toast = await this.toastController.create({
+            message: 'Usuario con este correo ya existe',
+            position: 'top',
+            duration: 2000,
+            showCloseButton: true, color: 'dark'
+          });
+          await toast.present();
+        }
+      });
    }
 }

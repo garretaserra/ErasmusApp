@@ -38,7 +38,8 @@
     "cordova-plugin-ionic": "^5.0.0",
     "cordova-plugin-nativestorage": "^2.3.2",
     "core-js": "^2.5.4",
-    "ionic": "^5.4.7",
+    "ionic": "^5.4.15",
+    "mapbox-gl": "^1.6.1",
     "material-design-icons": "^3.0.1",
     "rxjs": "~6.5.1",
     "socket.io-client": "^2.3.0",
@@ -47,7 +48,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "^0.801.3",
+    "@angular-devkit/build-angular": "^0.803.23",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "~8.1.2",

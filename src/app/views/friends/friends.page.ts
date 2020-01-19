@@ -5,6 +5,7 @@ import {UserService} from '../../models/User/user.service';
 import {Router} from '@angular/router';
 import {User} from '../../models/User/user';
 import {MenuController} from '@ionic/angular';
+import {StorageComponent} from "../../storage/storage.component";
 
 @Component({
   selector: 'app-friends',
@@ -17,17 +18,24 @@ export class FriendsPage implements OnInit {
   users: UserName [];
   textobuscar = '';
   otherUser: User;
+  user: User;
 
-  constructor( private friendsService: FriendsService, private userService: UserService, private router: Router, public menuCtrl: MenuController) {
+  constructor( private friendsService: FriendsService,
+               private userService: UserService,
+               private router: Router,
+               public menuCtrl: MenuController,
+               public storage: StorageComponent) {
   }
+
   ngOnInit() {
-      this.friendsService.getUsers().subscribe(users => {
+      this.friendsService.getUsers(JSON.parse(this.storage.getUser())._id).subscribe(users => {
           console.log(users);
           const response: any = users;
           this.users = response;
           console.log('this.users: ', this.users);
       });
   }
+
   buscar(CustomEvent) {
     this.textobuscar = CustomEvent.detail.value;
   }

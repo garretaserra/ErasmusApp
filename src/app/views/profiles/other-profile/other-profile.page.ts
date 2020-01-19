@@ -23,6 +23,7 @@ export class OtherProfilePage implements OnInit {
   following: boolean;
   followcheck: string;
   _id: string;
+  photo: string;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -34,35 +35,34 @@ export class OtherProfilePage implements OnInit {
   async ngOnInit() {
     this.load();
   }
+
+  async ionViewDidEnter() {
+    this.load();
+  }
+
   async load() {
     this._id = this.route.snapshot.paramMap.get('id');
     this.user = JSON.parse(this.storage.getUser());
-    console.log('this.user: ', this.user);
-    await this.profileService.getProfile(this._id).subscribe(res => {
-      const response: any = res;
-      console.log(res);
-      this.userProfile = response.profile;
-      this.otherUserProfile = this.userProfile;
+    await this.profileService.getProfile(this._id).subscribe(async res => {
+        const response: any = res;
+        this.userProfile = response.profile;
+        this.otherUserProfile = this.userProfile;
+        this.photo = (await this.userService.getPhoto(this.otherUserProfile._id).toPromise()).photo;
     }, error => {console.log('error'); });
     await this.profileService.getFollowers(this._id).subscribe(res => {
       const response: any = res;
-      console.log(res);
       this.followers = response.followers;
-      console.log('this.followers: ', this.followers);
       this.checkFol();
     }, error => {console.log('error'); });
   }
   async follow() {
     await this.profileService.follow(this.user._id, this.userProfile._id).subscribe(res => {
-      console.log(res);
-      this.router.navigateByUrl('/profile');
+      this.load();
     });
   }
   async unfollow() {
-    this.profileService.unfollow(this.user._id, this.userProfile._id).subscribe(res => {
-      console.log(res);
-      this.router.navigateByUrl('/profile');
-    });
+    this.profileService.unfollow(this.user._id, this.userProfile._id).toPromise();
+    await this.router.navigateByUrl('/profile');
   }
   async seeMyPosts() {
     await this.router.navigateByUrl('/posts/' + `${this._id}`);

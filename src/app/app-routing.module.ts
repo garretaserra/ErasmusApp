@@ -67,11 +67,31 @@ const routes: Routes = [
   {
     path: 'conversation/:name',
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
-  },  {
+  },
+  {
     path: 'notifications',
     loadChildren: () => import('./views/notifications/notifications.module').then( m => m.NotificationsPageModule)
   },
-
+  {
+    path: 'event',
+    loadChildren: () => import('./views/event/event.module').then( m => m.EventPageModule)
+  },
+  {
+    path: 'add-members-event',
+    loadChildren: () => import('./views/add-members-event/add-members-event.module').then( m => m.AddMembersEventPageModule)
+  },
+  {
+    path: 'profile-event/:id',
+    loadChildren: () => import('./views/profile-event/profile-event.module').then( m => m.ProfileEventPageModule)
+  },
+  {
+    path: 'datos-erasmus',
+    loadChildren: () => import('./views/datos-erasmus/datos-erasmus.module').then( m => m.DatosErasmusPageModule)
+  },
+  {
+    path: 'comments/:id',
+    loadChildren: () => import('./views/comments/comments.module').then( m => m.CommentsPageModule)
+  },
 ];
 
 @NgModule({

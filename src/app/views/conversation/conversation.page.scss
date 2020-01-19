@@ -1,0 +1,112 @@
+.messages_list {
+
+    .item {
+        border: 0!important;
+        border-color: transparent!important;
+    }
+
+    .message_bubble {
+        width: 100%;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .message {
+        border-radius: 10px;
+        padding: 8px 15px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+        color: #333;
+        .faded {
+            opacity: 0.5;
+        }
+      }
+      
+      .mine {
+        align-items: flex-start;
+      }
+      
+      .mine .message {
+        margin-right: 25%;
+        background-color: #eee;
+        position: relative;
+      }
+      
+      .mine .message:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        bottom: 0;
+        left: -7px;
+        height: 20px;
+        width: 20px;
+        background: #eee;
+        border-bottom-right-radius: 15px;
+      }
+      .mine .message:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: -10px;
+        width: 10px;
+        height: 20px;
+        background: white;
+        border-bottom-right-radius: 10px;
+      }
+      
+      .yours {
+        align-items: flex-end;
+      }
+      
+      .yours .message {
+        color: white;
+        margin-left: 25%;
+        background: #3880ff;
+        background-attachment: fixed;
+        position: relative;
+      }
+      
+      .yours .message:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        bottom: 0;
+        right: -8px;
+        height: 20px;
+        width: 20px;
+        background: #3880ff;
+        background-attachment: fixed;
+        border-bottom-left-radius: 15px;
+      }
+      
+      .yours .message:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        right: -10px;
+        width: 10px;
+        height: 20px;
+        background: white;
+        border-bottom-left-radius: 10px;
+      }
+      
+    
+
+}
+.send_form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
+}
+.send_form_input {
+    flex: 1;
+}
+.send_form_button {
+    text-align: right;
+    max-width: 120px;
+}

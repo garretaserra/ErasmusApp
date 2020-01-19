@@ -4,7 +4,6 @@ import {ChatService} from '../../services/chat.service';
 import {FriendsService} from '../friends/friends.service';
 import {User} from '../../models/User/user';
 import {UserName} from '../../models/User/userName';
-import {ConversationPage} from '../conversation/conversation.page';
 import {NavController} from '@ionic/angular';
 import {StorageComponent} from '../../storage/storage.component';
 import {Message} from '../../models/Message/message';
@@ -30,22 +29,39 @@ export class MessagePage implements OnInit {
               private friendsService: FriendsService,
               public notificationComponent: NotificationComponent) { }
 
-   ngOnInit() {
-    this.user = JSON.parse(this.storage.getUser());
-    this.chatService.connectSocket(this.user.email);
-    // this.storedMessages = await this.chatService.getStoredMessages().toPromise();
-    this.chatService.getList().subscribe((list: string[]) => {
-      this.userList = list.filter( item => item[0] !== this.user.email); // TODO: User esta mal, email sale name.
-    });
-    this.friendsService.getUsers().subscribe((list: UserName[]) => {
-        this.users = list.filter( item => item.name !== this.user.email); // TODO: User esta mal, email sale name.
-    });
-    this.chatService.forceGetList();
+  async ngOnInit() {
+      this.user = JSON.parse(this.storage.getUser());
+      this.chatService.connectSocket(this.user.name);
+      this.storedMessages = await this.chatService.getStoredMessages().toPromise();
+      this.chatService.getList().subscribe((list: string[]) => {
+          this.userList = list.filter(item => item[0] !== this.user.name);
+      });
+      this.friendsService.getUsers(new User(this.storage.getUser())._id).subscribe((list: UserName[]) => {
+          this.users = list.filter(item => item.name !== this.user.name);
+          this.users.forEach( user => {
+            this.userService.getPhoto(user._id).toPromise().then(result => {
+              user.photo = result.photo;
+            })
+          });
+        });
+      this.chatService.forceGetList();
+      this.chatService.getMessage().subscribe((data: { name, message }) => {
+          this.storedMessages.push(new Message('', data.name, this.user.name, data.message, new Date(), false, 0));
+      });
   }
 
-  viewConversation(data) {
-    console.log(data);
-    this.navCtrl.navigateForward('/conversation/' + `${data}`);
+  filterAndCount(name: string) {
+      return this.storedMessages.filter((item) => item.author === name && item.read === false).length;
+  }
+
+  filterLast(name: string) {
+      const tmp = this.storedMessages.filter((item) => item.author === name || item.destination === name);
+      return tmp[tmp.length - 1];
+  }
+
+  viewConversation(name: string) {
+    this.navCtrl.navigateForward('/conversation/' + `${name}`);
+    this.storedMessages.filter((item) => item.author === name).forEach((msg) => msg.read = true);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {NativeStorage} from "@ionic-native/native-storage/ngx";
 import {Platform} from "@ionic/angular";
 

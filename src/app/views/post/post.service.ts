@@ -21,7 +21,7 @@ export class PostService {
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
     getPosts(id: string) {
-        return this.httpClient.get(`${this.POST_SERVER_ADDRESS}/user/posts/` + `${id}`);
+        return this.httpClient.get(`${this.POST_SERVER_ADDRESS}/user/posts/` + `${id}` + `/0`);
     }
     deletePost(id: string) {
         return this.httpClient.delete(`${this.POST_SERVER_ADDRESS}/post/` + `${id}`);
