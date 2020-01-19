@@ -10,7 +10,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <form [formGroup]="erasmusForm">
-      <div>
+        <div>
           <ion-card class="vertical-margin border-top">
               <ion-item class="textarea">
                 <ion-textarea name="age" type="text" formControlName="age" placeholder="Edad" required></ion-textarea>
@@ -19,10 +19,18 @@
                 <ion-textarea name="course" type="text" formControlName="course" placeholder="Curso actua." required></ion-textarea>
               </ion-item>
               <ion-item>
-                <ion-label>Country</ion-label>
-                <ion-select formControlName="country" multiple="false" cancelText="Nah" okText="Okay!">
-                  <ion-select-option *ngFor="let country of countries">{{country.valueOf()}}</ion-select-option>
+                <ion-label>Home University</ion-label>
+                <ion-select formControlName="homeUniversity" multiple="false" cancelText="Cancel" okText="Okay!" required>
+                  <ion-select-option *ngFor="let university of universities">{{university.name+','+university.country}}</ion-select-option>
                 </ion-select>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Destination University</ion-label>
+                  <ion-select formControlName="destUniversity" multiple="false" cancelText="Cancel" okText="Okay!" required>
+                      <div *ngFor="let university of universities">
+                          <ion-select-option *ngIf="university.name!==this.homeUniversity">{{university.name+','+university.country}}</ion-select-option>
+                      </div>
+                  </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label>Languages</ion-label>
@@ -31,7 +39,7 @@
                 </ion-select>
               </ion-item>
             <div>
-                  <ion-button (click)="add()" color="medium" expand="block">Add</ion-button>
+              <ion-button [disabled]="!erasmusForm.valid" (click)="add()" color="medium" expand="block">Add</ion-button>
             </div>
           </ion-card>
         </div>

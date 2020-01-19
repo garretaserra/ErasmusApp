@@ -1,17 +1,17 @@
+import {Language} from "../language";
+
 export class UserErasmus {
     age: string;
     course: string;
-    homeCountry: string;
     homeUniversity: string;
-    destCountry: string;
     destUniversity: string;
+    languages: Language[];
 
-    constructor(age: string, course: string, homeCountry: string, homeUniversity: string, destCountry: string, destUniversity: string) {
+    constructor(age: string, course: string, homeUniversity: string, destUniversity: string, /*languages: Language[]*/) {
         this.age = age;
         this.course = course;
-        this.homeCountry = homeCountry;
         this.homeUniversity = homeUniversity;
-        this.destCountry = destCountry;
         this.destUniversity = destUniversity;
+        //this.languages = languages;
     }
 }

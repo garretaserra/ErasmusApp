@@ -18,4 +18,8 @@ export class DatosErasmusService {
   sendInformation(userId:string, userErasmus: UserErasmus) {
     return this.httpClient.put<any>(`${this.DATOS_SERVER_ADDRESS}/user/erasmusInfo/` + `${userId}`, {info:userErasmus}, {observe: 'response'});
   }
+
+  getUniversities() {
+    return this.httpClient.get<any>(`${this.DATOS_SERVER_ADDRESS}/university/all`);
+  }
 }

@@ -8,24 +8,24 @@ import {StorageComponent} from '../../storage/storage.component';
 import {DatosErasmusService} from './datos-erasmus.service';
 import {User} from '../../models/User/user';
 import {UserErasmus} from '../../models/User/userErasmus';
+import {University} from "../../models/university";
+import {Language} from "../../models/language";
 
 @Component({
   selector: 'app-datos-erasmus',
   templateUrl: './datos-erasmus.page.html',
   styleUrls: ['./datos-erasmus.page.scss'],
 })
+
 export class DatosErasmusPage implements OnInit {
 
   erasmusForm: FormGroup;
   user: User;
-  homeCountry: string;
   homeUniversity: string;
-  destCountry: string;
   destUniversity: string;
-  countries: string[];
+  destCountry: string;
   languages: string[];
-  selectedCountry: string;
-  selectedLanguages: string[];
+  universities: any[];
 
   constructor(private formBuilder: FormBuilder,
               private erasmusService: DatosErasmusService,
@@ -35,27 +35,28 @@ export class DatosErasmusPage implements OnInit {
               public storage: StorageComponent,
               private toastCtrl: ToastController) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.erasmusForm = this.formBuilder.group({
       age: new FormControl(),
       course: new FormControl(),
-      languages: new FormControl(),
-      country: new FormControl()
+      homeUniversity: new FormControl(),
+      destUniversity: new FormControl(),
+      languages: new FormControl()
     });
-
-    this.countries = [
-        'Spain',
-        'France',
-        'Italy',
-        'Germany',
-    ];
-
+    await this.erasmusService.getUniversities().subscribe(res => {
+          this.universities = res.universities;
+          console.log(this.universities);
+        }
+    );
     this.languages = [
       'Spanish',
       'French',
       'Italian',
       'German',
+      'English'
     ];
+
+    this.onChanges();
   }
 
   async ionViewDidEnter() {
@@ -69,19 +70,23 @@ export class DatosErasmusPage implements OnInit {
       console.log('this.user: ', this.user);
       await this.storage.saveUser(storageUser);
     }
+
+    this.onChanges();
   }
+
   async add() {
-    console.log("Selected country: "+this.erasmusForm.controls.country.value);
-    console.log("Selected Languages: "+this.erasmusForm.controls.languages.value);
-    this.homeUniversity = "UPC Barcelona";
-    this.homeCountry = "Catalunya";
-    this.destUniversity = "UP Berlin";
-    this.destCountry = "Alemania";
+    this.languages = this.erasmusForm.controls.languages.value;
+    console.log(this.languages);
+        //.split(',').forEach(language => {console.log(language)});
     await this.erasmusService.sendInformation(this.user._id, new UserErasmus(this.erasmusForm.controls.age.value,
         this.erasmusForm.controls.course.value,
-        this.homeCountry,
         this.homeUniversity,
-        this.destCountry,
         this.destUniversity)).subscribe(res => console.log(res));
+  }
+
+  onChanges(): void {
+    this.erasmusForm.get('homeUniversity').valueChanges.subscribe(val => {
+      this.homeUniversity = val.split(',')[0];
+    });
   }
 }
