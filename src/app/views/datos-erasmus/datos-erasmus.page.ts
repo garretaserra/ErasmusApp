@@ -19,7 +19,6 @@ import {Language} from "../../models/language";
 
 export class DatosErasmusPage implements OnInit {
 
-
   erasmusForm: FormGroup;
   user: User;
   homeUniversity: string;
