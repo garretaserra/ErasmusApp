@@ -32,7 +32,7 @@
                 <ion-card color="medium">
                   <ion-card-content  *ngIf="thing.type == 'Post';else other_content">
                     <ion-toolbar class="main-content" color="light">
-                      <ion-item color="light" class="main-content">
+                      <ion-item color="light" >
                       <ion-avatar >
                         <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}"/>
                       </ion-avatar>
@@ -66,7 +66,7 @@
                   <ion-card color="light">
                       <ion-card-content>
                         <ion-toolbar class="main-content" color="medium">
-                          <ion-item color="medium" class="main-content">
+                          <ion-item color="medium" >
                             <ion-avatar slot="start">
                               <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}" />
                             </ion-avatar>
@@ -96,7 +96,7 @@
                           <ion-card color="light">
                             <ion-card-content>
                               <ion-toolbar class="main-content" color="medium">
-                                <ion-item color="medium" class="main-content">
+                                <ion-item color="medium">
                                   <ion-avatar>
                                     <img *ngIf="thing.owner.profilePhoto" src="{{thing.owner.profilePhoto}}"/>
                                   </ion-avatar>
