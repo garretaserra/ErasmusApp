@@ -88,6 +88,11 @@ const routes: Routes = [
     path: 'comments/:id',
     loadChildren: () => import('./views/comments/comments.module').then( m => m.CommentsPageModule)
   },
+  {
+    path: 'erasmusInfo/:id',
+    loadChildren: () => import('./views/datos-erasmus-register/datos-erasmus-register.module').then( m => m.DatosErasmusRegisterPageModule)
+  },
+
 ];
 
 @NgModule({

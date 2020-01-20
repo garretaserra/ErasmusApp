@@ -1,0 +1,59 @@
+<ion-app class="mobile">
+  <div class="ion-page" main>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title slot="start">Erasmus Info</ion-title>
+      </ion-toolbar>
+      <ion-text class="toolbar-buttons">Hi! To enjoy the full experience of Erasmus, you should fill these fields to improve people search...</ion-text>
+    </ion-header>
+    <ion-content>
+      <form [formGroup]="erasmusForm">
+        <div>
+          <ion-card class="vertical-margin border-top">
+            <ion-item class="textarea">
+              <ion-textarea name="age" type="text" formControlName="age" placeholder="Edad" required></ion-textarea>
+            </ion-item>
+            <ion-item class="textarea">
+              <ion-textarea name="course" type="text" formControlName="course" placeholder="Curso actual" required></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-label>Home University</ion-label>
+              <ion-select [interfaceOptions]="customAlertHomeOptions" interface="alert" class="ion-text-lg-wrap" formControlName="homeUniversity"
+                          multiple="false" cancelText="Cancel" okText="Okay!" required placeholder="Select One">
+                <ion-select-option *ngFor="let university of universities">{{university.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Destination University</ion-label>
+              <ion-select [interfaceOptions]="customAlertDestOptions" interface="alert" class="ion-text-lg-wrap" formControlName="destUniversity"
+                          multiple="false" cancelText="Cancel" okText="Okay!" placeholder="Select One">
+                <div *ngIf="homeUniversity;else noHomeUniversity">
+                  <div *ngFor="let university of universities">
+                    <ion-select-option *ngIf="university.name!==this.homeUniversity" >
+                      {{university.name}}
+                    </ion-select-option>
+                  </div>
+                </div>
+                <ng-template #noHomeUniversity>
+                  <ion-text>Select first home university</ion-text>
+                </ng-template>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Languages</ion-label>
+              <ion-select formControlName="languages" multiple="true" cancelText="Cancel" okText="Okay!" required>
+                <ion-select-option *ngFor="let language of languages">{{language}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div>
+              <ion-button [disabled]="!erasmusForm.valid" (click)="add()" color="medium" expand="block">Add</ion-button>
+            </div>
+            <div>
+              <ion-button (click)="changePage()" color="medium" expand="block">Do it later</ion-button>
+            </div>
+          </ion-card>
+        </div>
+      </form>
+    </ion-content>
+  </div>
+</ion-app>

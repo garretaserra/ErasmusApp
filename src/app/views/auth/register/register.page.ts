@@ -16,6 +16,7 @@ import {ToastController} from "@ionic/angular";
 export class RegisterPage implements OnInit {
 
   user: User;
+  userTest: User;
   registerForm: FormGroup;
   validation_messages: any;
 
@@ -99,7 +100,9 @@ export class RegisterPage implements OnInit {
       this.registerForm.controls.pass.value, this.registerForm.controls.name.value);
       this.authService.register(user).subscribe(res => {
         console.log(res);
-        this.router.navigateByUrl('/home');
+        const response: any = res;
+        console.log(response);
+        this.router.navigateByUrl('/erasmusInfo/' + `${response.user._id}`);
       },
       async err => {
         console.log(err);
