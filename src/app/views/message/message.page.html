@@ -10,6 +10,14 @@
 <ion-content>
   <ion-list>
     <ion-list-header>
+      Global Chat
+    </ion-list-header>
+    <ion-item (click)="viewConversation('everyone')">
+      <ion-label>
+        <h2>Global Chat</h2>
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
       Online
     </ion-list-header>
     <ion-item *ngFor="let userItem of userList" (click)="viewConversation(userItem[0])">
