@@ -45,6 +45,18 @@ export class ChatService {
     this.http.post(`${this.url}/user/message/`, body).toPromise().catch((err) => console.log(err));
   }
 
+  public sendPostNotification(postId: string) {
+    this.socket.emit('postnoti', postId);
+  }
+
+  public getPostNotification = () => {
+      return new Observable((observer) => {
+        this.socket.on('postnoti', (data) => {
+        observer.next(data);
+      });
+    });
+  }
+
   public ackMsg(sender: string) {
     this.socket.emit('ACK', sender);
     this.http.put(`${this.url}/user/message/${sender}/${this.email}`, null).toPromise().catch((err) => console.log(err));
