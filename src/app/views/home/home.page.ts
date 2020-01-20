@@ -149,7 +149,7 @@ export class HomePage implements OnInit {
     postMessage: string;
     async publishPost(){
         let postSend = new PostSend(this.user._id, 'Post', this.postMessage);
-        this.homeService.sendPost(postSend, this.followers).subscribe(res => {
+        this.homeService.sendPost(postSend).subscribe(res => {
             this.getActivity();
             this.chatService.sendPostNotification(res.post._id);
         });
