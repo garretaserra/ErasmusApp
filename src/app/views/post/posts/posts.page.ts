@@ -51,4 +51,7 @@ export class PostsPage implements OnInit {
   async openHomePage() {
     await this.router.navigateByUrl('/home');
   }
+  async changePageComments(idPost) {
+    await this.router.navigateByUrl('/comments/' + `${idPost}`);
+  }
 }

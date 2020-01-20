@@ -1,0 +1,25 @@
+.text-center{
+  text-align: center;
+}
+ion-toolbar{
+  margin-left: 5%;
+}
+.toolbar-buttons{
+  display: flex;
+  text-align: center;
+  margin-right: 20px;
+}
+.toolbar-container{
+  margin-right: auto;
+  margin-left: auto;
+}
+.middle-card{
+  display: flex;
+}
+
+ion-item{
+  display: flex;
+}
+ion-button.align-content-center{
+  margin: auto;
+}

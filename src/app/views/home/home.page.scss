@@ -18,10 +18,13 @@
 
 ion-item.main-content{
   text-align: center;
-  img{
-    display:block;
-    margin:auto;
-  }
+  display:flex;
+}
+img{
+  margin:auto;
+}
+ion-avatar{
+  margin:auto;
 }
 ion-toolbar.main-content{
   margin-bottom: 5%;
