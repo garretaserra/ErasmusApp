@@ -23,6 +23,7 @@ export class OtherProfilePage implements OnInit {
   followcheck: string;
   _id: string;
   photo: string;
+  erasmusInfo: any;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -47,6 +48,10 @@ export class OtherProfilePage implements OnInit {
         this.userProfile = response.profile;
         this.otherUserProfile = this.userProfile;
         this.photo = (await this.userService.getPhoto(this.otherUserProfile._id).toPromise()).photo;
+        await this.profileService.getErasmusInfo(this._id).subscribe(res=>{
+          this.erasmusInfo = res.info;
+          console.log(this.erasmusInfo);
+        });
     }, error => {console.log('error'); });
     await this.profileService.getFollowers(this._id).subscribe(res => {
       const response: any = res;

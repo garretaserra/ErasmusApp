@@ -9,7 +9,7 @@
           </ion-toolbar>
         </ion-header>
         <ion-content fullscreen="">
-            <ion-card class="vertical-margin" style="height: 90vh">
+            <ion-card class="vertical-margin" style="height: fit-content">
                 <div style="display: flex; height: 200px">
                     <div style="width: 100%">
                         <img *ngIf="photo" class="image-contain" src="{{photo}}"/>
@@ -28,6 +28,32 @@
                   <ion-card-title class="text-center">{{userTest.name}}</ion-card-title>
                   <ion-card-subtitle class="text-center" style="text-transform: inherit; font-size: 18px" (click)="sendEmail(userTest.email)">{{userTest.email}}</ion-card-subtitle>
                 </ion-card-header>
+                <ion-card *ngIf="erasmusInfo">
+                    <ion-item>
+                        <ion-label>
+                            <h2>{{'Course:'}}</h2>
+                            <h5>{{erasmusInfo.course}}</h5>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <h2>{{'Home University:'}}</h2>
+                            <h5>{{erasmusInfo.homeUniversity}}</h5>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <h2>{{'Destination University:'}}</h2>
+                            <h5>{{erasmusInfo.destUniversity}}</h5>
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <h2>{{'Languages:'}}</h2>
+                            <h5 *ngFor="let language of erasmusInfo.languages">{{language.name}}</h5>
+                        </ion-label>
+                    </ion-item>
+                </ion-card>
                 <div *ngIf="userTest" class="vertical-margin">
                     <div style="width: 100%">
                         <ion-button class="square-button" (click)="seeMyPosts()">

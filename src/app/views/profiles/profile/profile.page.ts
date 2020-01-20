@@ -19,6 +19,8 @@ export class ProfilePage implements OnInit {
   photo: string;
   userTest: UserProfile;
   _id: string;
+  erasmusInfo: any;
+
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
@@ -41,6 +43,10 @@ export class ProfilePage implements OnInit {
       const response: any = res;
       this.userTest = response.profile;
       this.photo = (await this.userService.getPhoto(this.userTest._id).toPromise()).photo;
+      await this.profileService.getErasmusInfo(this._id).subscribe(res=>{
+        this.erasmusInfo = res.info;
+        console.log(this.erasmusInfo);
+      });
     }, error => {console.log('error'); });
   }
   async seeMyPosts() {

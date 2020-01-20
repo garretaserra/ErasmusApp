@@ -53,4 +53,8 @@ export class ProfileService {
         console.log('this.val:', this.val);
         return this.val;
     }
+
+    getErasmusInfo(id: string) {
+        return this.httpClient.get<any>(`${this.PROFILE_SERVER_ADDRESS}/erasmusInfo/` + `${id}`);
+    }
 }
