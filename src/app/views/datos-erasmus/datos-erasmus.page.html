@@ -17,13 +17,13 @@
                 <ion-textarea name="age" type="text" formControlName="age" placeholder="Edad" required></ion-textarea>
               </ion-item>
               <ion-item class="textarea">
-                <ion-textarea name="course" type="text" formControlName="course" placeholder="Curso actua." required></ion-textarea>
+                <ion-textarea name="course" type="text" formControlName="course" placeholder="Curso actual" required></ion-textarea>
               </ion-item>
               <ion-item>
                 <ion-label>Home University</ion-label>
                 <ion-select [interfaceOptions]="customAlertHomeOptions" interface="alert" class="ion-text-lg-wrap" formControlName="homeUniversity"
                             multiple="false" cancelText="Cancel" okText="Okay!" required placeholder="Select One">
-                  <ion-select-option *ngFor="let university of universities">{{university.name+','+university.country}}</ion-select-option>
+                  <ion-select-option *ngFor="let university of universities">{{university.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-item>
