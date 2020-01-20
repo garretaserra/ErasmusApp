@@ -5,35 +5,51 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title slot="start">Datos erasmus</ion-title>
+        <ion-title slot="start">Erasmus Info</ion-title>
       </ion-toolbar>
+        <ion-text class="toolbar-buttons">Hi! To enjoy the full experience of Erasmus, you should fill these fields to improve people search...</ion-text>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content>
       <form [formGroup]="erasmusForm">
-      <div>
+        <div>
           <ion-card class="vertical-margin border-top">
+              <ion-item class="textarea">
+                <ion-textarea name="age" type="text" formControlName="age" placeholder="Edad" required></ion-textarea>
+              </ion-item>
+              <ion-item class="textarea">
+                <ion-textarea name="course" type="text" formControlName="course" placeholder="Curso actual" required></ion-textarea>
+              </ion-item>
+              <ion-item>
+                <ion-label>Home University</ion-label>
+                <ion-select [interfaceOptions]="customAlertHomeOptions" interface="alert" class="ion-text-lg-wrap" formControlName="homeUniversity"
+                            multiple="false" cancelText="Cancel" okText="Okay!" required placeholder="Select One">
+                  <ion-select-option *ngFor="let university of universities">{{university.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Destination University</ion-label>
+                  <ion-select [interfaceOptions]="customAlertDestOptions" interface="alert" class="ion-text-lg-wrap" formControlName="destUniversity"
+                              multiple="false" cancelText="Cancel" okText="Okay!" placeholder="Select One">
+                      <div *ngIf="homeUniversity;else noHomeUniversity">
+                          <div *ngFor="let university of universities">
+                              <ion-select-option *ngIf="university.name!==this.homeUniversity" >
+                                  {{university.name}}
+                              </ion-select-option>
+                          </div>
+                      </div>
+                      <ng-template #noHomeUniversity>
+                          <ion-text>Select first home university</ion-text>
+                      </ng-template>
+                  </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label>Languages</ion-label>
+                <ion-select formControlName="languages" multiple="true" cancelText="Cancel" okText="Okay!" required>
+                  <ion-select-option *ngFor="let language of languages">{{language}}</ion-select-option>
+                </ion-select>
+              </ion-item>
             <div>
-              <ion-item class="textarea">
-                <ion-textarea name="age" type="age" formControlName="age" placeholder="Edad" required></ion-textarea>
-              </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="procedencia" type="procedencia" formControlName="procedencia" placeholder="Lugar de procedencia." required></ion-textarea>
-              </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="universidad" type="universidad" formControlName="universidad" placeholder="Universidad actual." required></ion-textarea>
-              </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="curso" type="curso" formControlName="curso" placeholder="Curso actual." required></ion-textarea>
-              </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="destino" type="destino" formControlName="destino" placeholder="Lugar de destino." required></ion-textarea>
-              </ion-item>
-              <ion-item class="textarea">
-                <ion-textarea name="universidadDestino" type="universidadDestino" formControlName="universidadDestino" placeholder="Universidad de destino." required></ion-textarea>
-              </ion-item>
-            </div>
-            <div>
-                  <ion-button (click)="add()" color="medium" expand="block">Add</ion-button>
+              <ion-button [disabled]="!erasmusForm.valid" (click)="add()" color="medium" expand="block">Add</ion-button>
             </div>
           </ion-card>
         </div>

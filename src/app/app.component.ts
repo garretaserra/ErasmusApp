@@ -37,6 +37,11 @@ export class AppComponent {
       title: 'Globe',
       url: '/globe',
       icon: 'globe'
+    },
+    {
+      title: 'Erasmus Info',
+      url: '/erasmus-info',
+      icon: 'information-circle'
     }
   ];
   constructor(
