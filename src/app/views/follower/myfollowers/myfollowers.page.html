@@ -10,10 +10,17 @@
     </ion-header>
 
     <ion-content>
-      <ion-card class="vertical-margin" *ngFor="let userName of this.followers">
-        <ion-toolbar>
-          <ion-button size="large" color="tertiary" (click)="change(userName._id)" expand="block">{{userName.name}}</ion-button>
-        </ion-toolbar>
+      <ion-card class="vertical-margin">
+        <ion-list>
+          <ion-item *ngFor="let user of followers">
+            <ion-avatar slot="start">
+              <img *ngIf="user.profilePhoto" (click)="change(user._id)" src="{{user.profilePhoto}}"/>
+            </ion-avatar>
+            <ion-label>
+              <h2 (click)="change(user._id)">{{user.name}}</h2>
+            </ion-label>
+          </ion-item>
+        </ion-list>
       </ion-card>
     </ion-content>
   </div>

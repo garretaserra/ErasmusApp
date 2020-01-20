@@ -46,6 +46,9 @@ export class ProfilePage implements OnInit {
   async seeMyPosts() {
     await this.router.navigateByUrl('/myposts');
   }
+  async seeMyEvents(){
+    await this.router.navigateByUrl('/list-events/' + `${this._id}`);
+  }
   async seeMyFollowers() {
     await this.router.navigateByUrl('/myfollowers');
   }

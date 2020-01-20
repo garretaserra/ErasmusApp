@@ -96,6 +96,11 @@ const routes: Routes = [
     path: 'erasmusInfo/:id',
     loadChildren: () => import('./views/datos-erasmus-register/datos-erasmus-register.module').then( m => m.DatosErasmusRegisterPageModule)
   },
+  {
+    path: 'list-events/:id',
+    loadChildren: () => import('./views/list-events/list-events.module').then( m => m.ListEventsPageModule)
+  },
+
 
 ];
 

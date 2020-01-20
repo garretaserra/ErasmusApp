@@ -5,6 +5,7 @@ import {MenuController} from '@ionic/angular';
 import {UserName} from '../../../models/User/userName';
 import {FollowingService} from '../following.service';
 import {StorageComponent} from "../../../storage/storage.component";
+import {UserFriend} from '../../../models/User/UserFriend';
 
 @Component({
   selector: 'app-myfollowing',
@@ -14,7 +15,7 @@ import {StorageComponent} from "../../../storage/storage.component";
 export class MyfollowingPage implements OnInit {
 
   _id: string;
-  following: UserName[];
+  following: UserFriend[];
 
   constructor(private userService: UserService,
               private followingService: FollowingService,

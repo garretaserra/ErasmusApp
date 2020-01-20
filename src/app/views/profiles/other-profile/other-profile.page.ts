@@ -72,6 +72,9 @@ export class OtherProfilePage implements OnInit {
   async seeMyFollowing() {
     await this.router.navigateByUrl('/following/' + `${this._id}`);
   }
+  async seeMyEvents(){
+    await this.router.navigateByUrl('/list-events/' + `${this._id}`);
+  }
   checkFol() {
     this.followcheck = this.profileService.checkFollow(this.followers, this.user._id);
     if (this.followcheck === 'not') {

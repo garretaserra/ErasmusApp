@@ -7,6 +7,7 @@ import {UserName} from '../../../models/User/userName';
 import {ProfileService} from '../../profiles/profile.service';
 import {FollowersService} from '../followers.service';
 import {StorageComponent} from "../../../storage/storage.component";
+import {UserFriend} from '../../../models/User/UserFriend';
 
 @Component({
   selector: 'app-followers',
@@ -14,7 +15,7 @@ import {StorageComponent} from "../../../storage/storage.component";
   styleUrls: ['./followers.page.scss'],
 })
 export class FollowersPage implements OnInit {
-  followers: UserName [];
+  followers: UserFriend [];
   _id: string;
   constructor(private userService: UserService,
               private route: ActivatedRoute,
