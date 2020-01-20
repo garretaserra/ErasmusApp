@@ -16,9 +16,12 @@
 <ion-content fullscreen>
   <ion-list>
     <ion-item *ngFor="let userName of users | filtro:textobuscar: 'name'">
-      <ion-row>
-      <ion-button size="large" color="tertiary" (click)="change(userName._id)" expand="block">{{userName.name}}</ion-button>
-      </ion-row>
+          <ion-avatar slot="start">
+            <img *ngIf="userName.profilePhoto"  (click)="change(userName._id)" src="{{userName.profilePhoto}}"/>
+          </ion-avatar>
+          <ion-label>
+            <h2 (click)="change(userName._id)">{{userName.name}}</h2>
+          </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

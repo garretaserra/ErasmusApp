@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {User} from '../../models/User/user';
 import {MenuController} from '@ionic/angular';
 import {StorageComponent} from "../../storage/storage.component";
+import {UserFriend} from '../../models/User/UserFriend';
 
 @Component({
   selector: 'app-friends',
@@ -15,7 +16,7 @@ import {StorageComponent} from "../../storage/storage.component";
 export class FriendsPage implements OnInit {
   myInput: any;
   shouldShowCancel: any;
-  users: UserName [];
+  users: UserFriend [];
   textobuscar = '';
   otherUser: User;
   user: User;
