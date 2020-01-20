@@ -41,7 +41,7 @@ export class MessagePage implements OnInit {
           this.users.forEach( user => {
             this.userService.getPhoto(user._id).toPromise().then(result => {
               user.photo = result.photo;
-            })
+            });
           });
         });
       this.chatService.forceGetList();

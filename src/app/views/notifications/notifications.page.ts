@@ -17,6 +17,7 @@ export class NotificationsPage implements OnInit {
 
   async ngOnInit() {
     this.notifications = await this.notificationsService.getNotifications().toPromise();
+    this.notifications = this.notifications.reverse();
   }
 
   goTo(url: string) {

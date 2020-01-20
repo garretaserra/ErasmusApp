@@ -25,15 +25,6 @@ export class HomeService {
     sendPost(post: PostSend, followers: UserName[]) {
         console.log('followers: ');
         console.log(followers);
-        followers.forEach((follower) => {
-                this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/user/notification`, {
-                    author: post.owner,
-                    destination: follower.name,
-                    text: post.owner + ' ha hecho una publicacion',
-                    type: 'friendpost',
-                    goToUrl: null
-                });
-            });
 
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
             post
