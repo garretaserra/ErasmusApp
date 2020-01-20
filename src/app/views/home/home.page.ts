@@ -89,6 +89,11 @@ export class HomePage implements OnInit {
                     }
                 }
             });
+            this.chatService.getPostNotification().subscribe((data: {postId, author}) => {
+                const goToUrl = '/home';
+                const msg = data.author + ' has made a new post';
+                this.notificationComponent.generateToast(msg, goToUrl).catch((err) => console.log(err));
+            });
         }
     }
 
@@ -119,8 +124,9 @@ export class HomePage implements OnInit {
                 {text: 'Post',  handler: () => {
                     console.log('message: ', this.homeForm.controls.post.value);
                     this.postSend = new PostSend( this.user._id, 'Post', this.homeForm.controls.post.value);
-                    this.homeService.sendPost(this.postSend, this.followers).subscribe(res => {
-                        this.router.navigateByUrl('/profile');
+                    this.homeService.sendPost(this.postSend).subscribe(res => {
+                        // this.router.navigateByUrl('/profile');
+                        this.chatService.sendPostNotification(res.post._id);
                     }); }}]
         }).then(alert => {
             alert.present();
@@ -145,6 +151,7 @@ export class HomePage implements OnInit {
         let postSend = new PostSend(this.user._id, 'Post', this.postMessage);
         this.homeService.sendPost(postSend, this.followers).subscribe(res => {
             this.getActivity();
+            this.chatService.sendPostNotification(res.post._id);
         });
     }
 
