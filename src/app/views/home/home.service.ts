@@ -8,7 +8,8 @@ import {User} from '../../models/User/user';
 import {posix} from 'path';
 import {resolve} from '@angular-devkit/core';
 import {PostSend} from '../../models/Posts/postSend';
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
+import {UserName} from '../../models/User/userName';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,10 @@ export class HomeService {
 
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
-    sendPost(post: PostSend) {
+    sendPost(post: PostSend, followers: UserName[]) {
+        console.log('followers: ');
+        console.log(followers);
+
         return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
             post
         });
@@ -54,11 +58,11 @@ export class HomeService {
         return this.httpClient.get<any>(`${this.HOME_SERVER_ADDRESS}/user/following/` + `${_id}`);
     }
 
-    comment(comment:string,postId:string,owner:string) {
-        return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/post/comment`,{
-            postId: postId,
-            owner: owner,
-            message:comment
+    comment(comment: string, postId: string, owner: string) {
+        return this.httpClient.put<any>(`${this.HOME_SERVER_ADDRESS}/post/comment`, {
+            postId,
+            owner,
+            message: comment
         });
     }
 }

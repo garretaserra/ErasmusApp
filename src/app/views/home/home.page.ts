@@ -119,7 +119,7 @@ export class HomePage implements OnInit {
                 {text: 'Post',  handler: () => {
                     console.log('message: ', this.homeForm.controls.post.value);
                     this.postSend = new PostSend( this.user._id, 'Post', this.homeForm.controls.post.value);
-                    this.homeService.sendPost(this.postSend).subscribe(res => {
+                    this.homeService.sendPost(this.postSend, this.followers).subscribe(res => {
                         this.router.navigateByUrl('/profile');
                     }); }}]
         }).then(alert => {
@@ -143,7 +143,7 @@ export class HomePage implements OnInit {
     postMessage: string;
     async publishPost(){
         let postSend = new PostSend(this.user._id, 'Post', this.postMessage);
-        this.homeService.sendPost(postSend).subscribe(res => {
+        this.homeService.sendPost(postSend, this.followers).subscribe(res => {
             this.getActivity();
         });
     }

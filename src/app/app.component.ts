@@ -42,6 +42,11 @@ export class AppComponent {
       title: 'Erasmus Info',
       url: '/erasmus-info',
       icon: 'information-circle'
+    },
+    {
+      title: 'Notifications',
+      url: '/notifications',
+      icon: 'notifications'
     }
   ];
   constructor(

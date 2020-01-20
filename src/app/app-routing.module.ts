@@ -69,6 +69,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/conversation/conversation.module').then( m => m.ConversationPageModule)
   },
   {
+    path: 'notifications',
+    loadChildren: () => import('./views/notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
     path: 'event',
     loadChildren: () => import('./views/event/event.module').then( m => m.EventPageModule)
   },
