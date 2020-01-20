@@ -242,4 +242,12 @@ export class HomePage implements OnInit {
             });
         }
     }
+
+  goToProfile(_id: any) {
+    this.router.navigateByUrl('/other-profile/' + _id);
+  }
+
+  startChat(name: any) {
+    this.router.navigateByUrl('/conversation/' + name);
+  }
 }

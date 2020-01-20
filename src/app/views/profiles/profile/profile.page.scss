@@ -1,6 +1,7 @@
 .image-contain{
-  object-fit: contain;
-  width: 50%;
+  object-fit: cover;
+  width: 50vw;
+  height: 50vw;
   border-radius: 50%;
   margin: 15px auto auto;
   border: solid #0cd1e8;

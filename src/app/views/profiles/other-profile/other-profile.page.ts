@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/User/user';
-import {FormGroup} from '@angular/forms';
 import {UserService} from '../../../models/User/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MenuController} from '@ionic/angular';
@@ -62,7 +61,7 @@ export class OtherProfilePage implements OnInit {
   }
   async unfollow() {
     this.profileService.unfollow(this.user._id, this.userProfile._id).toPromise();
-    await this.router.navigateByUrl('/profile');
+    this.following = false;
   }
   async seeMyPosts() {
     await this.router.navigateByUrl('/posts/' + `${this._id}`);
@@ -75,9 +74,14 @@ export class OtherProfilePage implements OnInit {
   }
   checkFol() {
     this.followcheck = this.profileService.checkFollow(this.followers, this.user._id);
-    console.log('followcheck: ', this.followcheck);
     if (this.followcheck === 'not') {
       this.following = false;
     } else { this.following = true; }
+  }
+
+  sendEmail(email: string) {
+    if(confirm('Estas seguro que quieres enviar un mensaje a '+email)){
+      window.open("mailto:"+email, "_blank");
+    }
   }
 }
