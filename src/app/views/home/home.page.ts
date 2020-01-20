@@ -64,8 +64,8 @@ export class HomePage implements OnInit {
 
         //If user is not present redirect to login
         if(!storageUser){
-            console.log('goto login');
-            await this.router.navigateByUrl('/login');
+            console.log('goto front');
+            await this.router.navigateByUrl('/front');
         } else {
             this.user = JSON.parse(storageUser);
             await this.storage.saveUser(storageUser);
