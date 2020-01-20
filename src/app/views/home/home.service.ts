@@ -22,7 +22,7 @@ export class HomeService {
     constructor(private httpClient: HttpClient, private storage: Storage) {}
 
     sendPost(post: PostSend) {
-        return this.httpClient.post(`${this.HOME_SERVER_ADDRESS}/post`, {
+        return this.httpClient.post<any>(`${this.HOME_SERVER_ADDRESS}/post`, {
             post
         });
     }
