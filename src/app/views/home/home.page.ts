@@ -76,16 +76,18 @@ export class HomePage implements OnInit {
             await this.getActivity().then();
             this.following = (await this.homeService.getFollowing(this.user._id).toPromise()).following;
             this.chatService.connectSocket(this.user.name);
-            this.chatService.getMessage().subscribe((data: {message, email}) => {
-                console.log(data);
-                const goToUrl = '/conversation/' + data.email;
-                const msg = data.email + ' says: ' + data.message;
-                if (this.router.url !== goToUrl) {
-                    this.notificationComponent.generateToast(msg, goToUrl).catch((err) => console.log(err));
-                } else {
-                    this.notificationComponent.playInnerSound();
+            this.chatService.getMessage().subscribe((data: {message, email, everyone}) => {
+                console.log('true?', data.everyone);
+                if (data.everyone !== true) {
+                    console.log(data);
+                    const goToUrl = '/conversation/' + data.email;
+                    const msg = data.email + ' says: ' + data.message;
+                    if (this.router.url !== goToUrl) {
+                        this.notificationComponent.generateToast(msg, goToUrl).catch((err) => console.log(err));
+                    } else {
+                        this.notificationComponent.playInnerSound();
+                    }
                 }
-                console.log(this.router.url);
             });
         }
     }

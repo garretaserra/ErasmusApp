@@ -10,6 +10,14 @@
 <ion-content>
   <ion-list>
     <ion-list-header>
+      Global Chat
+    </ion-list-header>
+    <ion-item (click)="viewConversation('everyone')">
+      <ion-label>
+        <h2>Global Chat</h2>
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
       Online
     </ion-list-header>
     <ion-item *ngFor="let userItem of userList" (click)="viewConversation(userItem[0])">
@@ -18,7 +26,7 @@
         </ion-avatar>
         <ion-label>
           <h2>{{ userItem[0] }}</h2>
-          <h3>
+          <h3 *ngIf="filterLast(userItem[0]) !== undefined">
             <span *ngIf="filterLast(userItem[0]).author === user.name">
               <b>You: </b>
             </span>
@@ -39,7 +47,7 @@
       </ion-avatar>
       <ion-label>
         <h2>{{ userItem.name }}</h2>
-        <h3 *ngIf="filterLast(userItem.name)">
+        <h3 *ngIf="filterLast(userItem.name) !== undefined">
             <span *ngIf="filterLast(userItem.name).author === user.name">
               <b>You: </b>
             </span>

@@ -32,17 +32,30 @@ export class ConversationPage implements OnInit {
 
   async ngOnInit() {
     this.user = JSON.parse(this.storage.getUser());
-    await this.chatService.getStoredMessages().toPromise().then((data) => {
-       this.messages = data.filter((item) => item.author === this.name || item.destination === this.name);
-       this.chatService.ackMsg(this.name);
-    });
+    if (this.name !== 'everyone') {
+      await this.chatService.getStoredMessages().toPromise().then((data) => {
+        // tslint:disable-next-line:max-line-length
+        this.messages = data.filter((item) => (item.author === this.name || item.destination === this.name) && item.destination !== 'everyone');
+        this.chatService.ackMsg(this.name);
+      });
+    } else if (this.name === 'everyone') {
+      await this.chatService.getStoredMessages().toPromise().then((data) => {
+        this.messages = data.filter((item) => item.destination === 'everyone');
+      });
+    }
     this.chatService.getMessage().subscribe((data: {message, email}) => {
-      if (data.email === this.name) {
-        this.messages.push(new Message('', data.email, this.name, data.message, new Date(), true, 0));
-        setTimeout(() => this.scrollToBottom(), 50);
-        if (this.router.url === ('/conversation/' + this.name)) {
-          this.chatService.ackMsg(this.name);
+      if (this.name !== 'everyone') {
+        if (data.email === this.name) {
+          this.messages.push(new Message('', data.email, this.name, data.message, new Date(), true, 0));
+          setTimeout(() => this.scrollToBottom(), 50);
+          if (this.router.url === ('/conversation/' + this.name)) {
+            this.chatService.ackMsg(this.name);
+          }
         }
+      } else if (this.name === 'everyone') {
+        this.messages.push(new Message('', data.email, 'everyone', data.message, new Date(), true, 0))
+        setTimeout(() => this.scrollToBottom(), 50);
+        // TODO: ack everyone
       }
     });
     this.chatService.getACK().subscribe((data) => {
@@ -58,9 +71,15 @@ export class ConversationPage implements OnInit {
 
   sendMessage() {
     if (this.message.replace(/\s/g, '').length) {
-      this.messages.push(new Message('', this.user.name, this.name, this.message, new Date(), false, 0));
-      this.chatService.sendMessage(this.message, this.name);
-      setTimeout(() => this.scrollToBottom(), 50);
+      if (this.name !== 'everyone') {
+        this.messages.push(new Message('', this.user.name, this.name, this.message, new Date(), false, 0));
+        this.chatService.sendMessage(this.message, this.name);
+        setTimeout(() => this.scrollToBottom(), 50);
+      } else if (this.name === 'everyone') {
+        this.messages.push(new Message('', this.user.name, 'everyone', this.message, new Date(), false, 0));
+        this.chatService.sendMessage(this.message, 'everyone');
+        setTimeout(() => this.scrollToBottom(), 50);
+      }
     }
   }
 

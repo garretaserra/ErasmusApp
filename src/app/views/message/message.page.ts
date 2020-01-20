@@ -45,17 +45,22 @@ export class MessagePage implements OnInit {
           });
         });
       this.chatService.forceGetList();
-      this.chatService.getMessage().subscribe((data: { email, message }) => {
-          this.storedMessages.push(new Message('', data.email, this.user.name, data.message, new Date(), false, 0));
+      this.chatService.getMessage().subscribe((data: { email, message, everyone }) => {
+          if (data.everyone === true) {
+              this.storedMessages.push(new Message('', data.email, 'everyone', data.message, new Date(), false, 0));
+          } else {
+              this.storedMessages.push(new Message('', data.email, this.user.name, data.message, new Date(), false, 0));
+          }
       });
   }
 
   filterAndCount(name: string) {
-      return this.storedMessages.filter((item) => item.author === name && item.read === false).length;
+      return this.storedMessages.filter((item) => item.author === name && item.read === false && item.destination !== 'everyone').length;
   }
 
   filterLast(name: string) {
-      const tmp = this.storedMessages.filter((item) => item.author === name || item.destination === name);
+      // tslint:disable-next-line:max-line-length
+      const tmp = this.storedMessages.filter((item) => (item.author === name || item.destination === name) && item.destination !== 'everyone');
       return tmp[tmp.length - 1];
   }
 

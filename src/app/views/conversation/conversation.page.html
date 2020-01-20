@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{name}} - Conversation</ion-title>
+    <ion-title *ngIf="name != 'everyone'">{{name}} - Conversation</ion-title>
+    <ion-title *ngIf="name === 'everyone'">Global Conversation</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,7 +23,7 @@
       </div>
       <div *ngIf="msg.author !== user.name" class="message_bubble mine">
         <span class="message">
-          <span class="faded">{{name}}: </span>
+          <span class="faded">{{msg.author}}: </span>
           {{msg.text}}
           <br>
           <span class="faded" style="font-size: x-small">{{formatDate(msg.timestamp)}}</span>
